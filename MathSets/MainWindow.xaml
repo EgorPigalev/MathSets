@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MathSets"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" Style="{StaticResource WindowMainStyle}"
+        Title="MainWindow" Height="650" Width="1000" MinHeight="650" MinWidth="1000">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Название приложения" FontSize="28" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" FontWeight="Bold" Background="#F0A17A" Grid.Row="0"/>
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1">
+            
+        </Frame>
     </Grid>
 </Window>

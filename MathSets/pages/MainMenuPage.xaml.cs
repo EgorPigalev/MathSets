@@ -16,15 +16,23 @@ using System.Windows.Shapes;
 namespace MathSets
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для MainMenuPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainMenuPage : Page
     {
-        public MainWindow()
+        public MainMenuPage()
         {
             InitializeComponent();
-            FrameClass.mainFrame = MainFrame;
-            FrameClass.mainFrame.Navigate(new MainMenuPage());
+        }
+
+        private void LBIntersectionSets_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

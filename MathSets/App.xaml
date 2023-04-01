@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:MathSets"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="PageMainStyle" TargetType="Page">
+            <Setter Property="FontFamily" Value=" Comic Sans MS"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style x:Key="WindowMainStyle" TargetType="Window">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Comic Sans MS"/>
+                <Setter Property="FontSize" Value="24"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>
