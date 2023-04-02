@@ -88,6 +88,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\FrameClass.cs" />
+    <Compile Include="classes\EllipseGeneration.cs" />
     <Compile Include="windows\ResultOneTaskIntersectionSetsWindow.xaml.cs">
       <DependentUpon>ResultOneTaskIntersectionSetsWindow.xaml</DependentUpon>
     </Compile>
@@ -137,7 +138,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="resources\ResultCorrect.png" />
   </ItemGroup>

@@ -45,7 +45,7 @@ namespace MathSets
             Grid grid = new Grid(); // Добавления grid для вывода формулировки задания
             ColumnDefinition oneColumn = new ColumnDefinition();
             ColumnDefinition twoColumn = new ColumnDefinition();
-            twoColumn.Width = new GridLength(50);
+            twoColumn.Width = new GridLength(50); // Столбце под кнопку подсказка
             grid.ColumnDefinitions.Add(oneColumn);
             grid.ColumnDefinitions.Add(twoColumn);
             TextBlock taskStatement = new TextBlock() // Формулировка задания
@@ -65,7 +65,10 @@ namespace MathSets
             BtnHint.Click += BtnHint_Click;
             Grid.SetColumn(BtnHint, 1);
             grid.Children.Add(BtnHint);
-            WrapPanel wrapPanel = new WrapPanel();
+            WrapPanel wrapPanel = new WrapPanel()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
             SpTasks.Children.Add(wrapPanel);
             Random random = new Random();
             for (int i = 0; i < 4; i++)
@@ -76,51 +79,19 @@ namespace MathSets
                     Height = 250,
                 };
                 wrapPanel.Children.Add(canvas);
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
                 Label label = new Label()
                 {
                     Content = (Char)(65 + i) + ")",
                 };
                 canvas.Children.Add(label);
-                int xOneEllipse = random.Next(40, 100); // На сколько отступить для первого эллипса по горизонтале (40 - это для вывода подпункта)
-                int yOneEllipse = random.Next(0, 50); // На сколько отступить для первого эллипса по вертикале
-                Ellipse ellipseOne = new Ellipse(); // Создание 1 эллипса
-                ellipseOne.Width = random.Next(50, 200);
-                ellipseOne.Height = random.Next(50, 200);
-                ellipseOne.Stroke = Brushes.Black;
-                ellipseOne.StrokeThickness = 2;
-                ellipseOne.Margin = new Thickness(xOneEllipse, yOneEllipse, 0, 0);
-                ellipseOne.Fill = Brushes.White;
+                Ellipse ellipseOne = ellipseGeneration.getEllipse(random.Next(50, 200), random.Next(50, 200), random.Next(40, 100), random.Next(0, 50)); // Создание первого эллипса
                 ellipseOne.MouseDown += ellipse_MouseDown;
                 canvas.Children.Add(ellipseOne);
-                int xTwoEllipse = random.Next(40, 100);
-                int yTwoEllipse = random.Next(0, 50);
-                Ellipse ellipseTwo = new Ellipse(); // Создание второго эллипса
-                ellipseTwo.Width = random.Next(100, 200);
-                ellipseTwo.Height = random.Next(100, 200);
-                ellipseTwo.Stroke = Brushes.Black;
-                ellipseTwo.StrokeThickness = 2;
-                ellipseTwo.Margin = new Thickness(xTwoEllipse, yTwoEllipse, 0, 0);
-                ellipseTwo.Fill = Brushes.White;
+                Ellipse ellipseTwo = ellipseGeneration.getEllipse(random.Next(50, 200), random.Next(50, 200), random.Next(40, 100), random.Next(0, 50)); // Создание второго эллипса
                 ellipseTwo.MouseDown += ellipse_MouseDown;
                 canvas.Children.Add(ellipseTwo);
-                EllipseGeometry pathGeometryOne = new EllipseGeometry() // Создание EllipseGeometry, который равен первому эллипсу (он нужен для нахождения объединения)
-                {
-                    RadiusX = ellipseOne.Width / 2,
-                    RadiusY = ellipseOne.Height / 2,
-                    Center = new Point(xOneEllipse + (ellipseOne.Width / 2), yOneEllipse + (ellipseOne.Height / 2)),
-                };
-                EllipseGeometry pathGeometryTwo = new EllipseGeometry() // Создание EllipseGeometry, который равен второму эллипсу 
-                {
-                    RadiusX = ellipseTwo.Width / 2,
-                    RadiusY = ellipseTwo.Height / 2,
-                    Center = new Point(xTwoEllipse + (ellipseTwo.Width / 2), yTwoEllipse + (ellipseTwo.Height / 2)),
-                };
-                CombinedGeometry combinedGeometry = new CombinedGeometry(GeometryCombineMode.Intersect, pathGeometryOne, pathGeometryTwo); // Объединение двух эллипсов
-                Path combinedPath = new Path();
-                combinedPath.Data = combinedGeometry;
-                combinedPath.Fill = Brushes.White;
-                combinedPath.Stroke = Brushes.Black;
-                combinedPath.StrokeThickness = 2;
+                Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
                 combinedPath.MouseDown += ellipse_MouseDown;
                 canvas.Children.Add(combinedPath);
             }
@@ -175,6 +146,7 @@ namespace MathSets
 
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
+            EllipseGeneration ellipseGeneration = new EllipseGeneration();
             List<int[]> errors = new List<int[]>(); // Массив ошибок
             WrapPanel wrapPanel = (WrapPanel)SpTasks.Children[1]; // Получение области, где хранятся Canvas
             for (int i = 0; i < wrapPanel.Children.Count; i++) // Проверка каждого пункта
@@ -187,36 +159,18 @@ namespace MathSets
                 {
                     if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White) // Если выделено лишнее
                     {
-                        int[] massive = new int[9]; // Информация для вывода верного ответа
-                        massive[0] = i;
-                        massive[1] = Convert.ToInt32(ellipseOne.Width);
-                        massive[2] = Convert.ToInt32(ellipseOne.Height);
-                        massive[3] = Convert.ToInt32(ellipseOne.Margin.Left);
-                        massive[4] = Convert.ToInt32(ellipseOne.Margin.Top);
-                        massive[5] = Convert.ToInt32(ellipseTwo.Width);
-                        massive[6] = Convert.ToInt32(ellipseTwo.Height);
-                        massive[7] = Convert.ToInt32(ellipseTwo.Margin.Left);
-                        massive[8] = Convert.ToInt32(ellipseTwo.Margin.Top);
-                        errors.Add(massive);
+                        errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
                     }
                 }
                 else if(ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || path.Fill != Brushes.Yellow) // Если выделено не только пересечение
                 {
-                    int[] massive = new int[9]; // Информация для вывода верного ответа
-                    massive[0] = i;
-                    massive[1] = Convert.ToInt32(ellipseOne.Width);
-                    massive[2] = Convert.ToInt32(ellipseOne.Height);
-                    massive[3] = Convert.ToInt32(ellipseOne.Margin.Left);
-                    massive[4] = Convert.ToInt32(ellipseOne.Margin.Top);
-                    massive[5] = Convert.ToInt32(ellipseTwo.Width);
-                    massive[6] = Convert.ToInt32(ellipseTwo.Height);
-                    massive[7] = Convert.ToInt32(ellipseTwo.Margin.Left);
-                    massive[8] = Convert.ToInt32(ellipseTwo.Margin.Top);
-                    errors.Add(massive);
+                    errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
                 }
             }
             ResultOneTaskIntersectionSetsWindow resultOneTaskIntersectionSetsWindow = new ResultOneTaskIntersectionSetsWindow(errors); // Показ результата
             resultOneTaskIntersectionSetsWindow.ShowDialog();
         }
+
+        
     }
 }

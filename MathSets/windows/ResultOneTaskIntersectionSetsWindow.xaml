@@ -15,7 +15,7 @@
         <Label Name="LBResult" Content="Результат верный. Ты молодец" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" FontWeight="Bold" Grid.Row="0"/>
         <Image Name="IMCorrectResult" Source="../resources/ResultCorrect.png" Grid.Row="1"/>
         <ScrollViewer Grid.Row="1">
-            <StackPanel Name="SpTasks" Visibility="Collapsed">
+            <StackPanel Name="SpTasks" Visibility="Collapsed" VerticalAlignment="Center">
                 
             </StackPanel>
         </ScrollViewer>

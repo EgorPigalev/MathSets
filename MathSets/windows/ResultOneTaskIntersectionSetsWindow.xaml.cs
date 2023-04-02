@@ -52,7 +52,11 @@ namespace MathSets
                     HorizontalAlignment = HorizontalAlignment.Center,
                 };
                 SpTasks.Children.Add(header);
-                WrapPanel wrapPanel = new WrapPanel(); // Вывод верного результата
+                WrapPanel wrapPanel = new WrapPanel()
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };// Вывод верного результата
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
                 SpTasks.Children.Add(wrapPanel);
                 for (int i = 0; i < errors.Count; i++)
                 {
@@ -67,44 +71,12 @@ namespace MathSets
                         Content = (Char)(65 + errors[i][0]) + ")",
                     };
                     canvas.Children.Add(label);
-                    int xOneEllipse = errors[i][3];
-                    int yOneEllipse = errors[i][4];
-                    Ellipse ellipseOne = new Ellipse();
-                    ellipseOne.Width = errors[i][1];
-                    ellipseOne.Height = errors[i][2];
-                    ellipseOne.Stroke = Brushes.Black;
-                    ellipseOne.StrokeThickness = 2;
-                    ellipseOne.Margin = new Thickness(xOneEllipse, yOneEllipse, 0, 0);
-                    ellipseOne.Fill = Brushes.White;
+                    Ellipse ellipseOne = ellipseGeneration.getEllipse(errors[i][1], errors[i][2], errors[i][3], errors[i][4]);
                     canvas.Children.Add(ellipseOne);
-                    int xTwoEllipse = errors[i][7];
-                    int yTwoEllipse = errors[i][8];
-                    Ellipse ellipseTwo = new Ellipse();
-                    ellipseTwo.Width = errors[i][5];
-                    ellipseTwo.Height = errors[i][6];
-                    ellipseTwo.Stroke = Brushes.Black;
-                    ellipseTwo.StrokeThickness = 2;
-                    ellipseTwo.Margin = new Thickness(xTwoEllipse, yTwoEllipse, 0, 0);
-                    ellipseTwo.Fill = Brushes.White;
+                    Ellipse ellipseTwo = ellipseGeneration.getEllipse(errors[i][5], errors[i][6], errors[i][7], errors[i][8]);
                     canvas.Children.Add(ellipseTwo);
-                    EllipseGeometry pathGeometryOne = new EllipseGeometry()
-                    {
-                        RadiusX = ellipseOne.Width / 2,
-                        RadiusY = ellipseOne.Height / 2,
-                        Center = new Point(xOneEllipse + (ellipseOne.Width / 2), yOneEllipse + (ellipseOne.Height / 2)),
-                    };
-                    EllipseGeometry pathGeometryTwo = new EllipseGeometry()
-                    {
-                        RadiusX = ellipseTwo.Width / 2,
-                        RadiusY = ellipseTwo.Height / 2,
-                        Center = new Point(xTwoEllipse + (ellipseTwo.Width / 2), yTwoEllipse + (ellipseTwo.Height / 2)),
-                    };
-                    CombinedGeometry combinedGeometry = new CombinedGeometry(GeometryCombineMode.Intersect, pathGeometryOne, pathGeometryTwo);
-                    Path combinedPath = new Path();
-                    combinedPath.Data = combinedGeometry;
+                    Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
                     combinedPath.Fill = Brushes.Yellow;
-                    combinedPath.Stroke = Brushes.Black;
-                    combinedPath.StrokeThickness = 2;
                     canvas.Children.Add(combinedPath);
                 }
             }
