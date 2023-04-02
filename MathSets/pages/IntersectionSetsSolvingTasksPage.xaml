@@ -23,7 +23,6 @@
 
                     </StackPanel>
                 </ScrollViewer>
-                
             </Border>
         </Grid>
         <Grid Grid.Row="2">

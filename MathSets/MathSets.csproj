@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="windows\ResultOneTaskIntersectionSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\HintIntersectionSetsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +88,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\FrameClass.cs" />
+    <Compile Include="windows\ResultOneTaskIntersectionSetsWindow.xaml.cs">
+      <DependentUpon>ResultOneTaskIntersectionSetsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\HintIntersectionSetsWindow.xaml.cs">
       <DependentUpon>HintIntersectionSetsWindow.xaml</DependentUpon>
     </Compile>
@@ -130,8 +137,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="resources\" />
+    <Resource Include="resources\ResultCorrect.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
