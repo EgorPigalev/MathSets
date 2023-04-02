@@ -1,0 +1,50 @@
+﻿<Window x:Class="MathSets.HintSetAndElementsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathSets"
+        mc:Ignorable="d"
+        Title="Множество и его элементы." Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Label Content="Теорический материал по теме &quot;Множество и его элементы&quot;" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Center" Grid.Row="0" Margin="20, 0, 20, 0"/>
+            <Grid Grid.Row="1">
+                <Border BorderBrush="#F14C18" BorderThickness="1" Margin="20, 10, 20, 0">
+                    <StackPanel Name="SpTasks" Margin="10">
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                            <Run Text="Когда какие-нибудь объекты собирают вместе, а математике используют для их названия общее слово - " />
+                            <Run Text="множество." FontWeight="Bold"/>
+                             <Run Text="Предметы или живые существа, входящие в множество, называют " />
+                            <Run Text="элементами " FontWeight="Bold"/>
+                             <Run Text="этого множества." />
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                            <Run Text="Множество задано, " FontWeight="Bold" />
+                            <Run Text="если определены его элементы, то есть о любом объекте можно точно сказать, является он элементом этого множества или нет." />
+                          <Run Text="Множество иногда задают " />
+                            <Run Text="перечислением " FontWeight="Bold" />
+                            <Run Text="его элементов." />
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                            <Run Text="Если в множестве много элементов, то их трудно или даже невозможно перечислить. " />
+                            <Run Text="Такое множество можно задать " />
+                            <Run Text="общим свойством его элементов." FontWeight="Bold"/>
+                         
+                        </TextBlock>
+                        
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
