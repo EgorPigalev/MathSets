@@ -24,5 +24,20 @@ namespace MathSets.pages
         {
             InitializeComponent();
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSolvingTasks_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSavedTasks_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

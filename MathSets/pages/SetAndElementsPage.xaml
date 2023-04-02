@@ -9,6 +9,20 @@
       Title="SetAndElementsPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Решение задач по теме &quot;Множество и его элементы&quot;" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="BtnSolvingTasks" Content="Решение заданий" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnSolvingTasks_Click"/>
+            <Button Name="BtnSavedTasks" Content="Сохраненные задания" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnSavedTasks_Click"/>
+        </Grid>
+        <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
     </Grid>
 </Page>
