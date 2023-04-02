@@ -16,28 +16,18 @@ using System.Windows.Shapes;
 namespace MathSets.pages
 {
     /// <summary>
-    /// Логика взаимодействия для SetAndElementsPage.xaml
+    /// Логика взаимодействия для SetAndElementsSolvingTasksPage.xaml
     /// </summary>
-    public partial class SetAndElementsPage : Page
+    public partial class SetAndElementsSolvingTasksPage : Page
     {
-        public SetAndElementsPage()
+        public SetAndElementsSolvingTasksPage()
         {
             InitializeComponent();
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new MainMenuPage());
-        }
-
-        private void BtnSolvingTasks_Click(object sender, RoutedEventArgs e)
-        {
-            FrameClass.mainFrame.Navigate(new SetAndElementsSolvingTasksPage());
-        }
-
-        private void BtnSavedTasks_Click(object sender, RoutedEventArgs e)
-        {
-            FrameClass.mainFrame.Navigate(new SetAndElementsSavedTasksPage());
+            FrameClass.mainFrame.Navigate(new SetAndElementsPage());
         }
     }
 }

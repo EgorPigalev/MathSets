@@ -79,10 +79,24 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\SetAndElementsSavedTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\SetAndElementsSolvingTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="pages\SetAndElementsPage.xaml.cs">
       <DependentUpon>SetAndElementsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SetAndElementsSavedTasksPage.xaml.cs">
+      <DependentUpon>SetAndElementsSavedTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SetAndElementsSolvingTasksPage.xaml.cs">
+      <DependentUpon>SetAndElementsSolvingTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
