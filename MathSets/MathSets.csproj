@@ -55,6 +55,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="windows\HintIntersectionSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\IntersectionSetsSavedTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\IntersectionSetsSolvingTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\IntersectionSetsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -68,6 +84,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\FrameClass.cs" />
+    <Compile Include="windows\HintIntersectionSetsWindow.xaml.cs">
+      <DependentUpon>HintIntersectionSetsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\IntersectionSetsSavedTasksPage.xaml.cs">
+      <DependentUpon>IntersectionSetsSavedTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\IntersectionSetsSolvingTasksPage.xaml.cs">
+      <DependentUpon>IntersectionSetsSolvingTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\IntersectionSetsPage.xaml.cs">
+      <DependentUpon>IntersectionSetsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
@@ -104,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\" />
-    <Folder Include="windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

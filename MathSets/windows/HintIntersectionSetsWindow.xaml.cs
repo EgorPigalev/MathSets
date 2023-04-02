@@ -10,29 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MathSets
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenuPage.xaml
+    /// Логика взаимодействия для HintIntersectionSetsWindow.xaml
     /// </summary>
-    public partial class MainMenuPage : Page
+    public partial class HintIntersectionSetsWindow : Window
     {
-        public MainMenuPage()
+        public HintIntersectionSetsWindow()
         {
             InitializeComponent();
         }
 
-        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
-        }
-
-        private void SPIntersectionSets_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            FrameClass.mainFrame.Navigate(new IntersectionSetsPage());
+            this.Close();
         }
     }
 }

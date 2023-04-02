@@ -9,11 +9,11 @@
       Title="MainMenuPage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Label Content="Учебный материал" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Top" Grid.Row="0" Margin="50, 0, 50, 0"/>
+        <Label Content="Учебный материал" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
         <ScrollViewer Grid.Row="1" Margin="50, 0, 50, 0">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="10">
@@ -44,12 +44,12 @@
                     </Grid>
                     <Label Content="Тема 4" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Name="SPIntersectionSets" Orientation="Horizontal" Margin="10" MouseDown="SPIntersectionSets_MouseDown">
                     <Grid>
                         <Ellipse Fill="#F0A17A" Width="50" Height="50" />
                         <Label Content="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
-                    <Label Name="LBIntersectionSets" Content="Пересечение множеств. Свойства пересечения" Margin="10, 0, 0, 0" MouseDown="LBIntersectionSets_MouseDown"/>
+                    <Label Content="Пересечение множеств. Свойства пересечения" Margin="10, 0, 0, 0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <Grid>
