@@ -37,13 +37,12 @@
                             <Run Text="общим свойством его элементов." FontWeight="Bold"/>
                          
                         </TextBlock>
-                        
-
+                       
                     </StackPanel>
                 </Border>
             </Grid>
             <Grid Grid.Row="2">
-                <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
+                <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Grid>
         </Grid>
     </Grid>
