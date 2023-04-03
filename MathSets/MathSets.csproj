@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="HintSetAndElementsWindow.xaml">
+    <Page Include="windows\HintSetAndElementsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -72,7 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="classes\FrameClass.cs" />
-    <Compile Include="HintSetAndElementsWindow.xaml.cs">
+    <Compile Include="windows\HintSetAndElementsWindow.xaml.cs">
       <DependentUpon>HintSetAndElementsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\MainMenuPage.xaml.cs">
@@ -132,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\" />
-    <Folder Include="windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
