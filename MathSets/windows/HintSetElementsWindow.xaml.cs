@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MathSets
+namespace MathSets.windows
 {
     /// <summary>
-    /// Логика взаимодействия для HintSetAndElementsWindow.xaml
+    /// Логика взаимодействия для HintSetElementsWindow.xaml
     /// </summary>
-    public partial class HintSetAndElementsWindow : Window
+    public partial class HintSetElementsWindow : Window
     {
-        public HintSetAndElementsWindow()
+        public HintSetElementsWindow()
         {
             InitializeComponent();
         }

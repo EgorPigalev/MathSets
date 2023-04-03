@@ -34,5 +34,10 @@ namespace MathSets
         {
             FrameClass.mainFrame.Navigate(new IntersectionSetsPage());
         }
+
+        private void SPSetAndElements_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameClass.mainFrame.Navigate(new pages.SetAndElementsSolvingTasksPage());
+        }
     }
 }

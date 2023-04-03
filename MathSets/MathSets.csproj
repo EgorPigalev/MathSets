@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="windows\HintSetElementsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\ResultOneTaskIntersectionSetsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,10 +79,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="windows\HintSetAndElementsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="pages\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +93,9 @@
     </Compile>
     <Compile Include="classes\FrameClass.cs" />
     <Compile Include="classes\EllipseGeneration.cs" />
+    <Compile Include="windows\HintSetElementsWindow.xaml.cs">
+      <DependentUpon>HintSetElementsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ResultOneTaskIntersectionSetsWindow.xaml.cs">
       <DependentUpon>ResultOneTaskIntersectionSetsWindow.xaml</DependentUpon>
     </Compile>
@@ -115,10 +118,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="pages\SetAndElementsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="pages\SetAndElementsSavedTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,9 +128,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pages\SetAndElementsPage.xaml.cs">
-      <DependentUpon>SetAndElementsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="pages\SetAndElementsSavedTasksPage.xaml.cs">
       <DependentUpon>SetAndElementsSavedTasksPage.xaml</DependentUpon>
     </Compile>
