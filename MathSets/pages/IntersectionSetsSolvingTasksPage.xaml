@@ -11,13 +11,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderBrush="#F14C18" BorderThickness="1" Margin="20, 0, 20, 0">
-            <Label Content="Пересечение множеств. Свойства пересечения" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
+        <Border Grid.Row="0" Style="{StaticResource BorderHeader}">
+            <Label Content="Пересечение множеств. Свойства пересечения" Style="{StaticResource LabelHeaderText}" Grid.Row="0"/>
         </Border>
         <Grid Grid.Row="1" >
-            <Border BorderBrush="#F14C18" BorderThickness="1" Margin="20, 10, 20, 0">
+            <Border Style="{StaticResource BorderMain}">
                 <ScrollViewer>
                     <StackPanel Name="SpTasks" Margin="5">
 
@@ -26,7 +26,7 @@
             </Border>
         </Grid>
         <Grid Grid.Row="2">
-            <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
+            <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnBack_Click"/>
         </Grid>
     </Grid>
 </Page>

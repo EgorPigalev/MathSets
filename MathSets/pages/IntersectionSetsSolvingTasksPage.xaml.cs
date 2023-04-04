@@ -61,6 +61,7 @@ namespace MathSets
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 Content = "?",
+                Style = (Style)FindResource("ButtonMainStyle"),
             };
             BtnHint.Click += BtnHint_Click;
             Grid.SetColumn(BtnHint, 1);
@@ -86,13 +87,13 @@ namespace MathSets
                 };
                 canvas.Children.Add(label);
                 Ellipse ellipseOne = ellipseGeneration.getEllipse(random.Next(50, 200), random.Next(50, 200), random.Next(40, 100), random.Next(0, 50)); // Создание первого эллипса
-                ellipseOne.MouseDown += ellipse_MouseDown;
+                ellipseOne.MouseDown += Ellipse_MouseDown;
                 canvas.Children.Add(ellipseOne);
                 Ellipse ellipseTwo = ellipseGeneration.getEllipse(random.Next(50, 200), random.Next(50, 200), random.Next(40, 100), random.Next(0, 50)); // Создание второго эллипса
-                ellipseTwo.MouseDown += ellipse_MouseDown;
+                ellipseTwo.MouseDown += Ellipse_MouseDown;
                 canvas.Children.Add(ellipseTwo);
                 Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
-                combinedPath.MouseDown += ellipse_MouseDown;
+                combinedPath.MouseDown += Ellipse_MouseDown;
                 canvas.Children.Add(combinedPath);
             }
             Button BtnResult = new Button() // Кнопка для проверки результата
@@ -100,12 +101,13 @@ namespace MathSets
                 Content = "Проверить",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
+                Style = (Style)FindResource("ButtonMainStyle"),
             };
             BtnResult.Click += BtnResult_Click;
             SpTasks.Children.Add(BtnResult);
         }
 
-        private void ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (typeof(Ellipse) == sender.GetType()) // Если нажали на эллипс, то его закрашиваем
             {
@@ -135,7 +137,7 @@ namespace MathSets
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            Base.MainFrame.Navigate(new IntersectionSetsPage());
+            Base.MainFrame.Navigate(new MainMenuPage());
         }
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)
@@ -170,7 +172,5 @@ namespace MathSets
             ResultOneTaskIntersectionSetsWindow resultOneTaskIntersectionSetsWindow = new ResultOneTaskIntersectionSetsWindow(errors); // Показ результата
             resultOneTaskIntersectionSetsWindow.ShowDialog();
         }
-
-        
     }
 }
