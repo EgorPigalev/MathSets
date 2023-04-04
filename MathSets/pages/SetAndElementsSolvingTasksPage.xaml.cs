@@ -66,7 +66,7 @@ namespace MathSets.pages
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new MainMenuPage());
+            Base.MainFrame.Navigate(new MainMenuPage());
         }
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)
