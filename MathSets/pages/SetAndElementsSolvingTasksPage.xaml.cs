@@ -23,10 +23,10 @@ namespace MathSets.pages
         public SetAndElementsSolvingTasksPage()
         {
             InitializeComponent();
-            RandomButton();
+            ShowRandomButton();
         }
 
-        private void RandomButton()
+        private void ShowRandomButton()
         {
             Random random = new Random();
 
@@ -36,7 +36,7 @@ namespace MathSets.pages
                     "Тапочки", "Трактор", "Собака", "Кошка", "Кот", "Велосипед", "Колесо" };
             string[] noRightOptions2 = { "Огурец", "Дом", "Мышка", "Губка", "Кукла", "Веник",// массив с неверными значениями
                     "Ведро", "Коньки", "Торт", "Утюг", "Хомяк", "Велосипед", "Колесо" };
-            if (v == 0)
+            if (v == 0) // присвоение кнопкам рандомных значений
             {
                 int rightOptionsIndex = random.Next(rightOptions.Length);
                 int noRightOptionsIndex = random.Next(noRightOptions.Length);
@@ -74,6 +74,49 @@ namespace MathSets.pages
         {
             windows.HintSetElementsWindow hint = new windows.HintSetElementsWindow();
             hint.ShowDialog();
+        }
+
+        private void BtnResult_Click(object sender, RoutedEventArgs e)
+        {
+          
+            List<string[]> errors = new List<string[]>(); // Массив ошибок
+            //if(Option1.IsEnabled == false)
+            //for (int i = 0; i < wrapPanel.Children.Count; i++) // Проверка каждого пункта
+            //{
+            //    Canvas canvas = (Canvas)wrapPanel.Children[i];
+            //    Ellipse ellipseOne = (Ellipse)canvas.Children[1];
+            //    Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
+            //    Path path = (Path)canvas.Children[3];
+            //    if (path.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
+            //    {
+            //        if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White) // Если выделено лишнее
+            //        {
+            //            errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
+            //        }
+            //    }
+            //    else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || path.Fill != Brushes.Yellow) // Если выделено не только пересечение
+            //    {
+            //        errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
+            //    }
+            //}
+
+            //ResultOneTaskIntersectionSetsWindow resultOneTaskIntersectionSetsWindow = new ResultOneTaskIntersectionSetsWindow(); // Показ результата
+            //resultOneTaskIntersectionSetsWindow.ShowDialog();
+        }
+
+        private void Option3_Click(object sender, RoutedEventArgs e)
+        {
+            Option3.IsEnabled = false;
+        }
+
+        private void Option2_Click(object sender, RoutedEventArgs e)
+        {
+            Option2.IsEnabled = false;
+        }
+
+        private void Option1_Click(object sender, RoutedEventArgs e)
+        {
+            Option1.IsEnabled = false;
         }
     }
 }
