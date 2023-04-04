@@ -86,10 +86,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pages\IntersectionSetsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="pages\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,9 +114,6 @@
     </Compile>
     <Compile Include="pages\IntersectionSetsSolvingTasksPage.xaml.cs">
       <DependentUpon>IntersectionSetsSolvingTasksPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="pages\IntersectionSetsPage.xaml.cs">
-      <DependentUpon>IntersectionSetsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>

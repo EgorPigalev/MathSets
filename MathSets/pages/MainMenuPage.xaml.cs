@@ -32,7 +32,7 @@ namespace MathSets
 
         private void SPIntersectionSets_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Base.MainFrame.Navigate(new IntersectionSetsPage());
+            Base.MainFrame.Navigate(new IntersectionSetsSolvingTasksPage());
         }
 
         private void SPSetAndElements_MouseDown(object sender, MouseButtonEventArgs e)
