@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathSets.pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,11 @@ namespace MathSets.windows
         public HintSplittingSetsWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Base.MainFrame.Navigate(new SplittingSetsSolvingTasks());
         }
     }
 }

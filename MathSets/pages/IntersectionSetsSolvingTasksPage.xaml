@@ -27,8 +27,6 @@
         </Grid>
         <Grid Grid.Row="2">
             <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnBack_Click"/>
-            <Button Name="BtnHint" Content="?" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnHint_Click_1"/>
-
         </Grid>
     </Grid>
 </Page>
