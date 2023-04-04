@@ -29,11 +29,11 @@
 
                     <StackPanel Name="SpFirstQuestion">
                         <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <TextBlock Text="1) Дано множество {" FontSize="20"/>
+                            <TextBlock Name="TbQuestionFirst" Text="1) Дано множество {"/>
                             <StackPanel Name="SpFigures" Orientation="Horizontal"/>
-                            <TextBlock Text="}. Изобрази данное множество на рисунке." FontSize="20"/>
+                            <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
-                        <Canvas Name="CnvFigure" Background="Aqua" Height="200"/>
+                        <Canvas Name="CnvQuestionFirst" Background="Aqua" Height="200" Width="800"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
