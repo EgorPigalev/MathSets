@@ -25,7 +25,7 @@ namespace MathSets
             ellipse.Width = widht;
             ellipse.Height = height;
             ellipse.Stroke = Brushes.Black;
-            ellipse.StrokeThickness = 2;
+            ellipse.StrokeThickness = Base.StrokeThickness;
             ellipse.Margin = new Thickness(x, y, 0, 0);
             ellipse.Fill = Brushes.White;
             return ellipse;
@@ -57,7 +57,7 @@ namespace MathSets
             combinedPath.Data = combinedGeometry;
             combinedPath.Fill = Brushes.White;
             combinedPath.Stroke = Brushes.Black;
-            combinedPath.StrokeThickness = 2;
+            combinedPath.StrokeThickness = Base.StrokeThickness;
             return combinedPath;
         }
 
