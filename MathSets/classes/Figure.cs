@@ -77,7 +77,7 @@ namespace MathSets
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
         /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
-        public Geometry CreateEllipse(int x, bool isUp)
+        public Geometry CreateCircle(int x, bool isUp)
         {
             int y = GetCoordinateY(isUp);
 
@@ -89,6 +89,52 @@ namespace MathSets
                     y - _sizeFigures / 2
                 ),
                 _sizeFigures / 2,
+                _sizeFigures / 2
+            );
+        }
+
+        /// <summary>
+        /// Создаёт вытянутый по оси Х эллипс с заданными параметрами
+        /// </summary>
+        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
+        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
+        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateEllipseTransformY(int x, bool isUp)
+        {
+            int transformY = 3;
+            int y = GetCoordinateY(isUp) - _sizeFigures / transformY;
+
+            return new EllipseGeometry
+            (
+                new Point
+                (
+                    x + _sizeFigures / 2,
+                    y - _sizeFigures / transformY
+                ),
+                _sizeFigures / 2,
+                _sizeFigures / transformY
+            );
+        }
+
+        /// <summary>
+        /// Создаёт вытянутый по оси Y эллипс с заданными параметрами
+        /// </summary>
+        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
+        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
+        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateEllipseTransformX(int x, bool isUp)
+        {
+            int transformX = 3;
+            int y = GetCoordinateY(isUp);
+
+            return new EllipseGeometry
+            (
+                new Point
+                (
+                    x + _sizeFigures / transformX,
+                    y - _sizeFigures / 2
+                ),
+                _sizeFigures / transformX,
                 _sizeFigures / 2
             );
         }
@@ -260,7 +306,7 @@ namespace MathSets
             {
                 CreateTriangle,
                 CreateSquare,
-                CreateEllipse,
+                CreateCircle,
                 CreateRhomb,
                 CreateFlame,
                 CreatePentagon,

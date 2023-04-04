@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MathSets.pages
@@ -20,8 +12,11 @@ namespace MathSets.pages
     /// </summary>
     public partial class LessonFourAndFive : Page
     {
-        private List<KeyFigure> _answers = new List<KeyFigure>();
-        private List<KeyFigure> _figures;
+        private List<KeyFigure> _keysAnswers = new List<KeyFigure>();
+        private List<KeyFigure> _keysFigures;
+        private List<Geometry> _figures;
+        private Geometry _set;
+        List<Point> _points = new List<Point>();
 
         public LessonFourAndFive()
         {
@@ -39,6 +34,8 @@ namespace MathSets.pages
         {
             ShowFigures(CreateAnswersQuestionFirst(), SpFigures);
             ShowFigures(CreateFiguresQuestionFirst(), CnvQuestionFirst);
+            ShowSet(CnvQuestionFirst);
+            SetHandlers(CnvQuestionFirst);
         }
 
         /// <summary>
@@ -54,7 +51,7 @@ namespace MathSets.pages
             {
                 panel.Children.Add(new Path()
                 {
-                    StrokeThickness = 3,
+                    StrokeThickness = Base.StrokeThickness,
                     Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
                     Data = item
                 });
@@ -72,10 +69,10 @@ namespace MathSets.pages
             List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
             List<KeyFigure> tempKeys = Figure.ShuffleMethods(createFiguresMethods);
 
-            _answers.Clear();
+            _keysAnswers.Clear();
             for (int i = 0; i < 3; i++)
             {
-                _answers.Add(tempKeys[i]);
+                _keysAnswers.Add(tempKeys[i]);
             }
 
             List<Geometry> listFigures = new List<Geometry>();
@@ -83,46 +80,84 @@ namespace MathSets.pages
 
             for (int i = 0; i < 3; i++)
             {
-                listFigures.Add(_answers[i].Method(x, true));
+                listFigures.Add(_keysAnswers[i].Method(x, true));
             }
 
-            SpFigures.Width = listFigures.Count * sizeFigures + (listFigures.Count + 2) * x;
+            SpFigures.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
 
             return listFigures;
         }
 
         /// <summary>
-        /// Генерирует фигуры.
+        /// Генерирует фигуры
         /// </summary>
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresQuestionFirst()
         {
-            int sizeFigures = 40;
+            int sizeFigures = 50;
             Figure figures = new Figure(sizeFigures, CnvQuestionFirst.Height, CnvQuestionFirst.Width / 2);
             List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
-            _figures = Figure.ShuffleMethods(createFiguresMethods);
+            _keysFigures = Figure.ShuffleMethods(createFiguresMethods);
 
-            List<Geometry> listFigures = new List<Geometry>();
+            _figures = new List<Geometry>();
             int offset = figures.GetOffset(createFiguresMethods.Count);
             int x = 0;
 
             for (int i = 0; i < createFiguresMethods.Count; i++)
-            { 
+            {
                 if (i % 2 == 0)
                 {
-                    listFigures.Add(createFiguresMethods[i](x, true)); // Положение фигуры по вертикали вверху.
+                    _figures.Add(createFiguresMethods[i](x, true)); // Положение фигуры по вертикали сверху.
                 }
                 else
                 {
-                    listFigures.Add(createFiguresMethods[i](x, false)); // Положение фигуры по вертикали внизу.
+                    _figures.Add(createFiguresMethods[i](x, false)); // Положение фигуры по вертикали снизу.
                     x += offset;
                 }
             }
 
-            return listFigures;
+            return _figures;
         }
 
+        /// <summary>
+        /// Генерирует множество в виде эллипса
+        /// </summary>
+        /// <param name="panel">контейнер</param>
+        private void ShowSet(Panel panel)
+        {
+            double sizeFigure = CnvQuestionFirst.Height * 1.5;
+            double xStart = (CnvQuestionFirst.Width / 2) + (CnvQuestionFirst.Width / 2 - sizeFigure) / 2;
+            //double xStart = 0;
+            _set = new Figure((int)sizeFigure, (sizeFigure + 2) * 2, CnvQuestionFirst.Width / 2).
+                CreateEllipseTransformY((int)xStart, true);
 
+            panel.Children.Add(new Path()
+            {
+                StrokeThickness = Base.StrokeThickness,
+                Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                Data = _set
+            });
+        }
+
+        private void SetHandlers(Panel panel)
+        {
+            for (int i = 0; i < panel.Children.Count; i++)
+            {
+                panel.Children[i].MouseMove += OnMouseMove;
+            }
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Path path = (Path)sender;
+                Point point = e.GetPosition(CnvQuestionFirst);
+                path.Data.Transform = new TranslateTransform(point.X, point.Y);
+
+                //MessageBox.Show(_figures[0].FillContainsWithDetail(_set).ToString());
+            }
+        }
 
 
 
@@ -166,7 +201,7 @@ namespace MathSets.pages
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new MainMenuPage());
+            Base.MainFrame.Navigate(new MainMenuPage());
         }
     }
 }

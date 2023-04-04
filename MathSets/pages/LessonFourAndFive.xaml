@@ -33,7 +33,7 @@
                             <StackPanel Name="SpFigures" Orientation="Horizontal"/>
                             <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
-                        <Canvas Name="CnvQuestionFirst" Background="Aqua" Height="200" Width="800"/>
+                        <Canvas Name="CnvQuestionFirst" Height="200" Width="800"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
