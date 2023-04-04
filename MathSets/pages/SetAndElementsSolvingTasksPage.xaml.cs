@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Drawing;
 
 
 namespace MathSets.pages
@@ -37,12 +26,15 @@ namespace MathSets.pages
             ShowRandomButton();
         }
 
+        /// <summary>
+        /// метод для генерации рандомных ответов на задание
+        /// </summary>
         private void ShowRandomButton()
         {
             Random random = new Random();
 
             int v = random.Next(3); // рандом для кнопок
-      
+
             if (v == 0) // присвоение кнопкам рандомных значений
             {
                 rightOptionsIndex = random.Next(rightOptions.Length);
@@ -52,20 +44,20 @@ namespace MathSets.pages
                 BtnOption2.Content = noRightOptions[noRightOptionsIndex];
                 BtnOption3.Content = noRightOptions2[noRightOptionsIndex2];
             }
-            else if(v == 1)
+            else if (v == 1)
             {
-                 rightOptionsIndex = random.Next(rightOptions.Length);
-                 noRightOptionsIndex = random.Next(noRightOptions.Length);
-                 noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
+                rightOptionsIndex = random.Next(rightOptions.Length);
+                noRightOptionsIndex = random.Next(noRightOptions.Length);
+                noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
                 BtnOption3.Content = rightOptions[rightOptionsIndex];
                 BtnOption1.Content = noRightOptions[noRightOptionsIndex];
                 BtnOption2.Content = noRightOptions2[noRightOptionsIndex2];
             }
-            else if(v == 2)
+            else if (v == 2)
             {
-                 rightOptionsIndex = random.Next(rightOptions.Length);
-                 noRightOptionsIndex = random.Next(noRightOptions.Length);
-                 noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
+                rightOptionsIndex = random.Next(rightOptions.Length);
+                noRightOptionsIndex = random.Next(noRightOptions.Length);
+                noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
                 BtnOption2.Content = rightOptions[rightOptionsIndex];
                 BtnOption3.Content = noRightOptions[noRightOptionsIndex];
                 BtnOption1.Content = noRightOptions2[noRightOptionsIndex2];
@@ -85,42 +77,56 @@ namespace MathSets.pages
 
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
-            if (Convert.ToString(BtnOption3.Content) == rightOptions[rightOptionsIndex])
+            string str = ""; 
+            if (BtnOption3.Background == colorButton)
+            {
+                str = Convert.ToString(BtnOption3.Content);
+            }
+            else if (BtnOption2.Background == colorButton)
+            {
+                str = Convert.ToString(BtnOption2.Content);
+            }
+            else if (BtnOption1.Background == colorButton)
+            {
+                str = Convert.ToString(BtnOption1.Content);
+            }
+            else
+            {
+                MessageBox.Show($"Выбери ответ");
+            }
+
+            if (str == rightOptions[rightOptionsIndex])
             {
                 windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(); // Показ результата
                 resultSetAndElementsTasks.ShowDialog();
             }
-            else if ( Convert.ToString(BtnOption2.Content) == rightOptions[rightOptionsIndex])
+            else
             {
-                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(); // Показ результата
-                resultSetAndElementsTasks.ShowDialog();
-            }
-            else if (Convert.ToString(BtnOption1.Content) == rightOptions[rightOptionsIndex])
-            {
-                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(); // Показ результата
+                str = rightOptions[rightOptionsIndex];
+                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(str); // Показ результата
                 resultSetAndElementsTasks.ShowDialog();
             }
         }
-        SolidColorBrush colorButton = new SolidColorBrush(Color.FromRgb(241, 76, 24)); // цвет для кнопок, в который они перекрасятся при нажатии
 
+        SolidColorBrush colorButton = new SolidColorBrush(Color.FromRgb(241, 76, 24)); // цвет для кнопок, в который они перекрасятся при нажатии
         private void Option3_Click(object sender, RoutedEventArgs e)
         {
-            BtnOption3.Background = colorButton;
-            BtnOption2.ClearValue(Button.BackgroundProperty);
+            BtnOption3.Background = colorButton; // красим кнопку
+            BtnOption2.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             BtnOption1.ClearValue(Button.BackgroundProperty);
         }
 
         private void Option2_Click(object sender, RoutedEventArgs e)
         {
-            BtnOption2.Background = colorButton;
-            BtnOption3.ClearValue(Button.BackgroundProperty);
+            BtnOption2.Background = colorButton; // красим кнопку
+            BtnOption3.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             BtnOption1.ClearValue(Button.BackgroundProperty);
         }
 
         private void Option1_Click(object sender, RoutedEventArgs e)
         {
-            BtnOption1.Background = colorButton;
-            BtnOption3.ClearValue(Button.BackgroundProperty);
+            BtnOption1.Background = colorButton; // красим кнопку
+            BtnOption3.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             BtnOption2.ClearValue(Button.BackgroundProperty);
         }
     }
