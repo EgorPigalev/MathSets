@@ -39,5 +39,10 @@ namespace MathSets
         {
             FrameClass.mainFrame.Navigate(new pages.SetAndElementsSolvingTasksPage());
         }
+
+        private void SpLessonFourAndFive_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameClass.mainFrame.Navigate(new pages.LessonFourAndFive());
+        }
     }
 }
