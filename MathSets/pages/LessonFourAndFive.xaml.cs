@@ -24,5 +24,10 @@ namespace MathSets.pages
         {
             InitializeComponent();
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
