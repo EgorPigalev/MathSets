@@ -55,9 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="pages\LessonFourAndFive.xaml.cs">
+      <DependentUpon>LessonFourAndFive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ResultSetAndElementsTasksWindow.xaml.cs">
       <DependentUpon>ResultSetAndElementsTasksWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="pages\LessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\HintSetElementsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
