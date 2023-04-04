@@ -172,5 +172,10 @@ namespace MathSets
             ResultOneTaskIntersectionSetsWindow resultOneTaskIntersectionSetsWindow = new ResultOneTaskIntersectionSetsWindow(errors); // Показ результата
             resultOneTaskIntersectionSetsWindow.ShowDialog();
         }
+
+        private void BtnHint_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
