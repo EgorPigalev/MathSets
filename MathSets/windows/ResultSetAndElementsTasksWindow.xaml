@@ -1,0 +1,25 @@
+﻿<Window x:Class="MathSets.windows.ResultSetAndElementsTasksWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathSets.windows"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowMainStyle}"
+        Title="Результат выполнения задания" Height="650" Width="1000" MinHeight="650" MinWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Name="LBResult" Content="Результат верный. Ты молодец" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" FontWeight="Bold" Grid.Row="0"/>
+        <Image Name="IMCorrectResult" Source="../resources/ResultCorrect.png" Grid.Row="1"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Name="SpTasks" Visibility="Collapsed" VerticalAlignment="Center">
+
+            </StackPanel>
+        </ScrollViewer>
+        <Button Name="BtnExit" Content="Закрыть" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnExit_Click"/>
+    </Grid>
+</Window>

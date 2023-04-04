@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+
 
 namespace MathSets.pages
 {
@@ -20,6 +22,15 @@ namespace MathSets.pages
     /// </summary>
     public partial class SetAndElementsSolvingTasksPage : Page
     {
+        string[] rightOptions = { "Ручка", "Тетрадь", "Дневник", "Карандаш", "Ластик", "Точилка" }; // массив с верными значениями
+        string[] noRightOptions = { "Самолет", "Стул", "Стол", "Машина", "Птица", "Медведь",// массив с неверными значениями
+                    "Тапочки", "Трактор", "Собака", "Кошка", "Кот", "Велосипед", "Колесо" };
+        string[] noRightOptions2 = { "Огурец", "Дом", "Мышка", "Губка", "Кукла", "Веник",// массив с неверными значениями
+                    "Ведро", "Коньки", "Торт", "Утюг", "Хомяк", "Велосипед", "Колесо" };
+        int rightOptionsIndex; // индекс верного значения
+        int noRightOptionsIndex; // индекс неверного первого значения
+        int noRightOptionsIndex2; // индекс неверного второго значения
+
         public SetAndElementsSolvingTasksPage()
         {
             InitializeComponent();
@@ -31,37 +42,33 @@ namespace MathSets.pages
             Random random = new Random();
 
             int v = random.Next(3); // рандом для кнопок
-            string[] rightOptions = { "Ручка", "Тетрадь", "Дневник", "Карандаш", "Ластик", "Точилка" }; // массив с верными значениями
-            string[] noRightOptions = { "Самолет", "Стул", "Стол", "Машина", "Птица", "Медведь",// массив с неверными значениями
-                    "Тапочки", "Трактор", "Собака", "Кошка", "Кот", "Велосипед", "Колесо" };
-            string[] noRightOptions2 = { "Огурец", "Дом", "Мышка", "Губка", "Кукла", "Веник",// массив с неверными значениями
-                    "Ведро", "Коньки", "Торт", "Утюг", "Хомяк", "Велосипед", "Колесо" };
+      
             if (v == 0) // присвоение кнопкам рандомных значений
             {
-                int rightOptionsIndex = random.Next(rightOptions.Length);
-                int noRightOptionsIndex = random.Next(noRightOptions.Length);
-                int noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
-                Option1.Content = rightOptions[rightOptionsIndex];
-                Option2.Content = noRightOptions[noRightOptionsIndex];
-                Option3.Content = noRightOptions2[noRightOptionsIndex2];
+                rightOptionsIndex = random.Next(rightOptions.Length);
+                noRightOptionsIndex = random.Next(noRightOptions.Length);
+                noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
+                BtnOption1.Content = rightOptions[rightOptionsIndex];
+                BtnOption2.Content = noRightOptions[noRightOptionsIndex];
+                BtnOption3.Content = noRightOptions2[noRightOptionsIndex2];
             }
             else if(v == 1)
             {
-                int rightOptionsIndex = random.Next(rightOptions.Length);
-                int noRightOptionsIndex = random.Next(noRightOptions.Length);
-                int noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
-                Option3.Content = rightOptions[rightOptionsIndex];
-                Option1.Content = noRightOptions[noRightOptionsIndex];
-                Option2.Content = noRightOptions2[noRightOptionsIndex2];
+                 rightOptionsIndex = random.Next(rightOptions.Length);
+                 noRightOptionsIndex = random.Next(noRightOptions.Length);
+                 noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
+                BtnOption3.Content = rightOptions[rightOptionsIndex];
+                BtnOption1.Content = noRightOptions[noRightOptionsIndex];
+                BtnOption2.Content = noRightOptions2[noRightOptionsIndex2];
             }
             else if(v == 2)
             {
-                int rightOptionsIndex = random.Next(rightOptions.Length);
-                int noRightOptionsIndex = random.Next(noRightOptions.Length);
-                int noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
-                Option2.Content = rightOptions[rightOptionsIndex];
-                Option3.Content = noRightOptions[noRightOptionsIndex];
-                Option1.Content = noRightOptions2[noRightOptionsIndex2];
+                 rightOptionsIndex = random.Next(rightOptions.Length);
+                 noRightOptionsIndex = random.Next(noRightOptions.Length);
+                 noRightOptionsIndex2 = random.Next(noRightOptions2.Length);
+                BtnOption2.Content = rightOptions[rightOptionsIndex];
+                BtnOption3.Content = noRightOptions[noRightOptionsIndex];
+                BtnOption1.Content = noRightOptions2[noRightOptionsIndex2];
             }
         }
 
@@ -78,45 +85,43 @@ namespace MathSets.pages
 
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
-          
-            List<string[]> errors = new List<string[]>(); // Массив ошибок
-            //if(Option1.IsEnabled == false)
-            //for (int i = 0; i < wrapPanel.Children.Count; i++) // Проверка каждого пункта
-            //{
-            //    Canvas canvas = (Canvas)wrapPanel.Children[i];
-            //    Ellipse ellipseOne = (Ellipse)canvas.Children[1];
-            //    Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
-            //    Path path = (Path)canvas.Children[3];
-            //    if (path.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
-            //    {
-            //        if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White) // Если выделено лишнее
-            //        {
-            //            errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
-            //        }
-            //    }
-            //    else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || path.Fill != Brushes.Yellow) // Если выделено не только пересечение
-            //    {
-            //        errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
-            //    }
-            //}
-
-            //ResultOneTaskIntersectionSetsWindow resultOneTaskIntersectionSetsWindow = new ResultOneTaskIntersectionSetsWindow(); // Показ результата
-            //resultOneTaskIntersectionSetsWindow.ShowDialog();
+            if (Convert.ToString(BtnOption3.Content) == rightOptions[rightOptionsIndex])
+            {
+                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(); // Показ результата
+                resultSetAndElementsTasks.ShowDialog();
+            }
+            else if ( Convert.ToString(BtnOption2.Content) == rightOptions[rightOptionsIndex])
+            {
+                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(); // Показ результата
+                resultSetAndElementsTasks.ShowDialog();
+            }
+            else if (Convert.ToString(BtnOption1.Content) == rightOptions[rightOptionsIndex])
+            {
+                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(); // Показ результата
+                resultSetAndElementsTasks.ShowDialog();
+            }
         }
+        SolidColorBrush colorButton = new SolidColorBrush(Color.FromRgb(241, 76, 24)); // цвет для кнопок, в который они перекрасятся при нажатии
 
         private void Option3_Click(object sender, RoutedEventArgs e)
         {
-            Option3.IsEnabled = false;
+            BtnOption3.Background = colorButton;
+            BtnOption2.ClearValue(Button.BackgroundProperty);
+            BtnOption1.ClearValue(Button.BackgroundProperty);
         }
 
         private void Option2_Click(object sender, RoutedEventArgs e)
         {
-            Option2.IsEnabled = false;
+            BtnOption2.Background = colorButton;
+            BtnOption3.ClearValue(Button.BackgroundProperty);
+            BtnOption1.ClearValue(Button.BackgroundProperty);
         }
 
         private void Option1_Click(object sender, RoutedEventArgs e)
         {
-            Option1.IsEnabled = false;
+            BtnOption1.Background = colorButton;
+            BtnOption3.ClearValue(Button.BackgroundProperty);
+            BtnOption2.ClearValue(Button.BackgroundProperty);
         }
     }
 }
