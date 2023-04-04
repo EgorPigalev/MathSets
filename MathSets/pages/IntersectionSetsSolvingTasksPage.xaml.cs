@@ -135,7 +135,7 @@ namespace MathSets
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new IntersectionSetsPage());
+            Base.MainFrame.Navigate(new IntersectionSetsPage());
         }
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)

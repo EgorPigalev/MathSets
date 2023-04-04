@@ -102,7 +102,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="classes\FrameClass.cs" />
+    <Compile Include="classes\Base.cs" />
     <Compile Include="classes\EllipseGeneration.cs" />
     <Compile Include="windows\HintSetElementsWindow.xaml.cs">
       <DependentUpon>HintSetElementsWindow.xaml</DependentUpon>

@@ -23,8 +23,8 @@ namespace MathSets
         public MainWindow()
         {
             InitializeComponent();
-            FrameClass.mainFrame = MainFrame;
-            FrameClass.mainFrame.Navigate(new MainMenuPage());
+            Base.MainFrame = MainFrame;
+            Base.MainFrame.Navigate(new MainMenuPage());
         }
     }
 }

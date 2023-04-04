@@ -27,17 +27,17 @@ namespace MathSets
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new MainMenuPage());
+            Base.MainFrame.Navigate(new MainMenuPage());
         }
 
         private void BtnSolvingTasks_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new IntersectionSetsSolvingTasksPage());
+            Base.MainFrame.Navigate(new IntersectionSetsSolvingTasksPage());
         }
 
         private void BtnSavedTasks_Click(object sender, RoutedEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new IntersectionSetsSavedTasksPage());
+            Base.MainFrame.Navigate(new IntersectionSetsSavedTasksPage());
         }
     }
 }

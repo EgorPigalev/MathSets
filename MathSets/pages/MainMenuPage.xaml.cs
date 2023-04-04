@@ -32,17 +32,17 @@ namespace MathSets
 
         private void SPIntersectionSets_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new IntersectionSetsPage());
+            Base.MainFrame.Navigate(new IntersectionSetsPage());
         }
 
         private void SPSetAndElements_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new pages.SetAndElementsSolvingTasksPage());
+            Base.MainFrame.Navigate(new pages.SetAndElementsSolvingTasksPage());
         }
 
         private void SpLessonFourAndFive_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            FrameClass.mainFrame.Navigate(new pages.LessonFourAndFive());
+            Base.MainFrame.Navigate(new pages.LessonFourAndFive());
         }
     }
 }
