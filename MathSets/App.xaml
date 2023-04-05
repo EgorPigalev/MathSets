@@ -106,5 +106,13 @@
                 <Setter Property="Margin" Value="20, 10, 20, 0"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="LabelHeaderResult" TargetType="Label">
+            <Style.Setters>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="32"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>

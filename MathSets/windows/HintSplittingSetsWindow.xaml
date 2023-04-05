@@ -57,7 +57,7 @@
                 </Border>
             </Grid>
             <Grid Grid.Row="2">
-                <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnBack_Click" Cursor="Hand"/>
+                <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnBack_Click"/>
             </Grid>
         </Grid>
     </Grid>
