@@ -14,11 +14,11 @@
             <RowDefinition/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" BorderBrush="#F14C18" BorderThickness="1" Margin="20, 0, 20, 0">
-            <Label Content="Множество и его элементы." HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
+        <Border Grid.Row="0" Style="{StaticResource BorderHeader}">
+            <Label Content="Множество и его элементы." Grid.Row="0" Style="{StaticResource LabelHeaderText}" />
         </Border>
         <Grid Grid.Row="1" >
-            <Border BorderBrush="#F14C18" BorderThickness="1" Margin="20, 10, 20, 0">
+            <Border Style="{StaticResource BorderMain}">
                 <ScrollViewer>
                     <StackPanel>
                     <Grid Margin="5">
@@ -35,18 +35,18 @@
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"  Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="0,0,0,0">Какой из объектов принадлежит множеству предметов, которые лежат в портфеле ?
                             </TextBlock>
-                            <Button  Name="BtnHint" Click="BtnHint_Click" Grid.Row="0" Width="20" HorizontalAlignment="Right" Grid.Column="2" Margin="0,0,10,0">?</Button>
-                            <Button Click="Option1_Click" Margin="0,10,0,0" Name="BtnOption1" Grid.Column="0" Grid.Row="1"></Button>
-                            <Button Click="Option2_Click" Grid.Column="1" Name="BtnOption2" Grid.Row="1" Margin="0,10,0,0"></Button>
-                            <Button Click="Option3_Click"  Grid.ColumnSpan="2" Name="BtnOption3" Grid.Row="2" Margin="0,10,0,10"></Button>
-                            <Button Grid.ColumnSpan="2" Name="BtnResult" Click="BtnResult_Click"  Grid.Row="3" Margin="0,10,0,10">Проверить</Button>
+                            <Button  Style="{StaticResource ButtonMainStyle}" Name="BtnHint" Click="BtnHint_Click" Grid.Row="0"  HorizontalAlignment="Right" Grid.Column="2" Margin="0,0,10,0" Content="?"></Button>
+                            <Button Style="{StaticResource ButtonMainStyle}"  Click="Option1_Click" Margin="0,10,0,0" Name="BtnOption1" Grid.Column="0" Grid.Row="1"></Button>
+                            <Button Style="{StaticResource ButtonMainStyle}" Click="Option2_Click" Grid.Column="1" Name="BtnOption2" Grid.Row="1" Margin="0,10,0,0"></Button>
+                            <Button Style="{StaticResource ButtonMainStyle}" Click="Option3_Click"  Grid.ColumnSpan="2" Name="BtnOption3" Grid.Row="2" Margin="0,10,0,10"></Button>
+                            <Button Style="{StaticResource ButtonMainStyle}" Grid.ColumnSpan="2" Name="BtnResult" Click="BtnResult_Click"  Grid.Row="3" Margin="0,10,0,10">Проверить</Button>
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
             </Border>
         </Grid>
         <Grid Grid.Row="2">
-            <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
+            <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Style="{StaticResource ButtonMainStyle}" Margin="15 0 0 0"  VerticalAlignment="Center" Click="BtnBack_Click"/>
         </Grid>
     </Grid>
 </Page>
