@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,6 +18,9 @@ namespace MathSets.pages
         private List<Geometry> _figures;
         private Geometry _set;
         List<Point> _points = new List<Point>();
+        private bool _isMouseDown;
+        private Path _pathToMoved;
+        private Point _oldMouseCoordinate;
 
         public LessonFourAndFive()
         {
@@ -32,9 +36,9 @@ namespace MathSets.pages
         /// </summary>
         private void ShowExerciseFirst()
         {
+            ShowSet(CnvQuestionFirst);
             ShowFigures(CreateAnswersQuestionFirst(), SpFigures);
             ShowFigures(CreateFiguresQuestionFirst(), CnvQuestionFirst);
-            ShowSet(CnvQuestionFirst);
             SetHandlers(CnvQuestionFirst);
         }
 
@@ -45,15 +49,15 @@ namespace MathSets.pages
         /// <param name="panel">контейнер</param>
         private void ShowFigures(List<Geometry> figures, Panel panel)
         {
-            panel.Children.Clear();
-
-            foreach (Geometry item in figures)
+            for (int i = 0; i < figures.Count; i++)
             {
                 panel.Children.Add(new Path()
                 {
                     StrokeThickness = Base.StrokeThickness,
                     Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                    Data = item
+                    Data = figures[i],
+                    Fill = Brushes.White,
+                    Uid = i.ToString()
                 });
             }
         }
@@ -116,6 +120,11 @@ namespace MathSets.pages
                 }
             }
 
+            for (int i = 0; i < _figures.Count; i++)
+            {
+                _points.Add(new Point(0, 0));
+            }
+
             return _figures;
         }
 
@@ -127,9 +136,11 @@ namespace MathSets.pages
         {
             double sizeFigure = CnvQuestionFirst.Height * 1.5;
             double xStart = (CnvQuestionFirst.Width / 2) + (CnvQuestionFirst.Width / 2 - sizeFigure) / 2;
-            //double xStart = 0;
+
             _set = new Figure((int)sizeFigure, (sizeFigure + 2) * 2, CnvQuestionFirst.Width / 2).
                 CreateEllipseTransformY((int)xStart, true);
+
+            panel.Children.Clear();
 
             panel.Children.Add(new Path()
             {
@@ -144,19 +155,75 @@ namespace MathSets.pages
             for (int i = 0; i < panel.Children.Count; i++)
             {
                 panel.Children[i].MouseMove += OnMouseMove;
+                panel.Children[i].MouseDown += OnMouseDown;
+            }
+            SpFirstQuestion.MouseUp += OnMouseUp;
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Path path = (Path)sender;
+
+            if (path.Uid != "")
+            {
+                path.Fill = Brushes.Gray;
+                _isMouseDown = true;
+                _pathToMoved = path;
+                _oldMouseCoordinate = e.GetPosition(CnvQuestionFirst);
+            }
+        }
+
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            for (int i = 0; i < CnvQuestionFirst.Children.Count; i++)
+            {
+                Path p = (Path)CnvQuestionFirst.Children[i];
+                p.Fill = Brushes.White;
+                _isMouseDown = false;
             }
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (_isMouseDown)
             {
-                Path path = (Path)sender;
-                Point point = e.GetPosition(CnvQuestionFirst);
-                path.Data.Transform = new TranslateTransform(point.X, point.Y);
 
-                //MessageBox.Show(_figures[0].FillContainsWithDetail(_set).ToString());
+                if (_pathToMoved.Uid != "")
+                {
+                    int id = Convert.ToInt32(_pathToMoved.Uid);
+
+                    SetOffsetFigure(id, e.GetPosition(CnvQuestionFirst));
+
+                    _pathToMoved.Data.Transform = new TranslateTransform(_points[id].X, _points[id].Y);
+                }
             }
+        }
+
+        private void SetOffsetFigure(int id, Point actualCoordinate)
+        {
+            Point tempPoint = _points[id];
+
+            if (actualCoordinate.Y > _oldMouseCoordinate.Y)
+            {
+                tempPoint.Y++;
+            }
+            else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
+            {
+                tempPoint.Y--;
+            }
+
+            if (actualCoordinate.X > _oldMouseCoordinate.X)
+            {
+                tempPoint.X++;
+            }
+            else if (actualCoordinate.X < _oldMouseCoordinate.X)
+            {
+                tempPoint.X--;
+            }
+
+            _points[id] = tempPoint;
+
+            _oldMouseCoordinate = actualCoordinate;
         }
 
 
