@@ -1,5 +1,4 @@
-﻿using MathSets.pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,16 +15,16 @@ using System.Windows.Shapes;
 namespace MathSets.windows
 {
     /// <summary>
-    /// Логика взаимодействия для HintSplittingSetsWindow.xaml
+    /// Логика взаимодействия для CorrectResult.xaml
     /// </summary>
-    public partial class HintSplittingSetsWindow : Window
+    public partial class CorrectResult : Window
     {
-        public HintSplittingSetsWindow()
+        public CorrectResult()
         {
             InitializeComponent();
         }
 
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

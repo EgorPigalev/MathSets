@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathSets.windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -169,8 +170,16 @@ namespace MathSets
                     errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
                 }
             }
-            ResultOneTaskIntersectionSetsWindow resultOneTaskIntersectionSetsWindow = new ResultOneTaskIntersectionSetsWindow(errors); // Показ результата
-            resultOneTaskIntersectionSetsWindow.ShowDialog();
+            if(errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
+            {
+                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(errors);
+                resultIntersectionSetsWindow.ShowDialog();
+            }
+            else
+            {
+                CorrectResult correctResult = new CorrectResult();
+                correctResult.ShowDialog();
+            }
         }
     }
 }
