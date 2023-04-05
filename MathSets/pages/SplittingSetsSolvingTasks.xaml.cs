@@ -35,11 +35,11 @@ namespace MathSets.pages
             int n = 1; // Номер задания
             NewOneTask(n);
             n++;
-
+            NewTwoTask(n);
         }
 
         /// <summary>
-        /// Генерация задания 1 типа (выделить пересечение множеств)
+        /// Генерация задания 1 типа (вставка пропущенных букв)
         /// </summary>
         /// <param name="n">Номер задания</param>
         private void NewOneTask(int n)
@@ -99,31 +99,32 @@ namespace MathSets.pages
             ColumnDefinition oneColumnMain = new ColumnDefinition();
             ColumnDefinition twoColumnMain = new ColumnDefinition();
             ColumnDefinition threeColumnMain = new ColumnDefinition();
-            threeColumnMain.Width = new GridLength(420);
+            threeColumnMain.Width = new GridLength(400);
             gridMain.ColumnDefinitions.Add(oneColumnMain);
             gridMain.ColumnDefinitions.Add(twoColumnMain);
             gridMain.ColumnDefinitions.Add(threeColumnMain);
-            Image image = new Image()
+            Image image = new Image() // Добавление картинки в правый угол
             {
                 Source = new BitmapImage(new Uri("../resources/PictureForTaskSplittingSets.png", UriKind.Relative)),
-                Height = 80,
+                Width = 60,
                 HorizontalAlignment = HorizontalAlignment.Right,
+                Margin = new Thickness(0, 60, 0, 0),
             };
             gridMain.Children.Add(image);
             Grid.SetColumn(image, 2);
-            Canvas canvas = new Canvas()
+            Canvas canvas = new Canvas() // Место куда будет помещен рисунок с множеством
             {
-                Width = 330,
+                Width = 320,
                 Height = 200,
             };
             gridMain.Children.Add(canvas);
             Grid.SetColumn(canvas, 2);
             EllipseGeneration ellipseGeneration = new EllipseGeneration();
-            int height = random.Next(100, 150);
-            int width = random.Next(300, 300);
-            Ellipse ellipseOne = ellipseGeneration.getEllipse(width, height, 0, 40);
+            int height = random.Next(100, 150); // Высота множества
+            int width = 300; // Ширина множества
+            Ellipse ellipseOne = ellipseGeneration.getEllipse(width, height, 0, 40); // Главный эллипс
             canvas.Children.Add(ellipseOne);
-            TextBlock textNamePlenty = new TextBlock()
+            TextBlock textNamePlenty = new TextBlock() // Название множества
             {
                 Text = GetTypeSumbol(type),
                 Margin = new Thickness(width, 40, 0, 0),
@@ -139,7 +140,7 @@ namespace MathSets.pages
             pathTwo.Fill = Brushes.LightGray;
             canvas.Children.Add(pathTwo);
             int b = width / 6;
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 3; i++) // Генерация названий подмножеств
             {
                 int a = random.Next(list.Count);
                 TextBlock textBlock = new TextBlock()
@@ -336,6 +337,11 @@ namespace MathSets.pages
             Grid.SetColumn(twoColumnText, 1);
         }
 
+        /// <summary>
+        /// Определяет название множества по индексу в массиве
+        /// </summary>
+        /// <param name="i">индекс в массиве</param>
+        /// <returns></returns>
         private string GetTypeSumbol(int i)
         {
             switch(i)
@@ -355,6 +361,10 @@ namespace MathSets.pages
             }
         }
 
+        /// <summary>
+        /// Создания comboBox для выбора ответа
+        /// </summary>
+        /// <returns></returns>
         private ComboBox CreateComboBox()
         {
             ComboBox comboBox = new ComboBox()
@@ -473,6 +483,39 @@ namespace MathSets.pages
                 CorrectResult correctResult = new CorrectResult();
                 correctResult.ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// Генерация задания 2 типа (Разбить множество на части)
+        /// </summary>
+        /// <param name="n">Номер задания</param>
+        private void NewTwoTask(int n)
+        {
+            Grid grid = new Grid(); // Добавления grid для вывода формулировки задания
+            ColumnDefinition oneColumn = new ColumnDefinition();
+            ColumnDefinition twoColumn = new ColumnDefinition();
+            twoColumn.Width = new GridLength(50); // Столбце под кнопку подсказка
+            grid.ColumnDefinitions.Add(oneColumn);
+            grid.ColumnDefinitions.Add(twoColumn);
+            TextBlock taskStatement = new TextBlock() // Формулировка задания
+            {
+                Text = "\n" + n + ") Разбей множество фигур на части: a) по форме; б) по цвету; в) по размеру.\nСколько частей получилось?",
+                TextWrapping = TextWrapping.Wrap,
+            };
+            SpTasks.Children.Add(grid);
+            grid.Children.Add(taskStatement);
+            Grid.SetColumn(taskStatement, 0);
+            Button BtnHint = new Button() // Кнопка для подсказки
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Content = "?",
+                Style = (Style)FindResource("ButtonMainStyle"),
+            };
+            BtnHint.Click += BtnHint_Click;
+            Grid.SetColumn(BtnHint, 1);
+            grid.Children.Add(BtnHint);
+            
         }
     }
 }
