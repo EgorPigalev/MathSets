@@ -20,6 +20,6 @@
 
             </StackPanel>
         </ScrollViewer>
-        <Button Name="BtnExit" Content="Закрыть" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnExit_Click"/>
+        <Button Style="{StaticResource ButtonMainStyle}"  Name="BtnExit" Content="Закрыть" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnExit_Click"/>
     </Grid>
 </Window>
