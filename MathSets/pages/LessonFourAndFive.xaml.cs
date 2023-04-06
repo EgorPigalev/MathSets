@@ -37,6 +37,7 @@ namespace MathSets.pages
         private void ShowExerciseFirst()
         {
             CnvQuestionFirst.Children.Clear();
+            SpFiguresQuestionFirst.Children.Clear();
 
             _setQuestionFirst = Figure.CreateSet(CnvQuestionFirst);
             _figuresQuestionFirst = CreateFiguresQuestionFirst();
@@ -126,6 +127,7 @@ namespace MathSets.pages
                 }
             }
 
+            _points.Clear();
             for (int i = 0; i < figures.Count; i++)
             {
                 _points.Add(new Point(0, 0));
@@ -254,6 +256,43 @@ namespace MathSets.pages
         private void BtnHint_Click(object sender, RoutedEventArgs e)
         {
             new HintLessonFourAndFive().ShowDialog();
+        }
+
+        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+
+        }
+
+        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+
+        }
+
+        private void MenuRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    ShowExerciseFirst();
+                    break;
+                case 2:
+                    ShowExerciseSecond();
+                    break;
+                case 3:
+                    ShowExerciseThree();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

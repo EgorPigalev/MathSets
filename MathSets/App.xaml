@@ -52,11 +52,25 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="MenuStyle" TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="6 3 6 3"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
         <Style x:Key="PageMainStyle" TargetType="Page">
             <Setter Property="FontFamily" Value=" Comic Sans MS"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Background" Value="White"/>
         </Style>
+        
         <Style x:Key="WindowMainStyle" TargetType="Window">
             <Style.Setters>
                 <Setter Property="FontFamily" Value="Comic Sans MS"/>
@@ -71,12 +85,14 @@
                 <Setter Property="Width" Value="50"/>
             </Style.Setters>
         </Style>
+        
         <Style x:Key="LabelTopicNumber" TargetType="Label">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style.Setters>
         </Style>
+        
         <Style x:Key="SPTopics" TargetType="StackPanel">
             <Style.Setters>
                 <Setter Property="Orientation" Value="Horizontal"/>
@@ -84,6 +100,7 @@
                 <Setter Property="Cursor" Value="Hand"/>
             </Style.Setters>
         </Style>
+        
         <Style x:Key="BorderHeader" TargetType="Border">
             <Style.Setters>
                 <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
@@ -91,6 +108,7 @@
                 <Setter Property="Margin" Value="20, 0, 20, 0"/>
             </Style.Setters>
         </Style>
+        
         <Style x:Key="LabelHeaderText" TargetType="Label">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -99,6 +117,7 @@
                 <Setter Property="Margin" Value="50, 0, 50, 0"/>
             </Style.Setters>
         </Style>
+        
         <Style x:Key="BorderMain" TargetType="Border">
             <Style.Setters>
                 <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
@@ -106,6 +125,7 @@
                 <Setter Property="Margin" Value="20, 10, 20, 0"/>
             </Style.Setters>
         </Style>
+
         <Style x:Key="LabelHeaderResult" TargetType="Label">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Center"/>

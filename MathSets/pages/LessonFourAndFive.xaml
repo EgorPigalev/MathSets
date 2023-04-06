@@ -50,9 +50,12 @@
                         <Button Name="BtnCheckQuestionFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFirst_Click"/>
                     </StackPanel>
 
-                    <Menu Grid.Column="1">
-                        <MenuItem Header="test1"/>
-                        <MenuItem Header="test2"/>
+                    <Menu Grid.Column="1" Name="MenuQuestionFirst" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                        </MenuItem>
                     </Menu>
 
                     <StackPanel Grid.Row="1" Name="SpQuestionSecond" Background="White" Margin="0 20 0 0">
