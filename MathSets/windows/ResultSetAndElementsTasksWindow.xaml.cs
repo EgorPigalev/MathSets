@@ -24,27 +24,7 @@ namespace MathSets.windows
             InitializeComponent();
             if (str.Length > 0) // Если есть ошибки
             {
-                //if (errors.Count == 1)
-                //{
-                //    LBResult.Content = "В пункте ";
-                //}
-                //else
-                //{
-                //    LBResult.Content = "В пунктах ";
-                //}
-                //for (int i = 0; i < errors.Count; i++) // Добавление букв под которыми сделаны ошибки
-                //{
-                //    if (i == errors.Count - 1)
-                //    {
-                //        LBResult.Content = "" + LBResult.Content + (Char)(65 + errors[i][0]);
-                //    }
-                //    else
-                //    {
-                //        LBResult.Content = "" + LBResult.Content + (Char)(65 + errors[i][0]) + ", ";
-                //    }
-                //}
                 LBResult.Content = "Ты допустил ошибку";
-                IMCorrectResult.Visibility = Visibility.Collapsed;
                 SpTasks.Visibility = Visibility.Visible;
                 TextBlock header = new TextBlock() // Заголовок
                 {
@@ -52,7 +32,6 @@ namespace MathSets.windows
                     HorizontalAlignment = HorizontalAlignment.Center,
                 };
                 SpTasks.Children.Add(header);
-              
             }
         }
 

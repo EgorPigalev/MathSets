@@ -13,8 +13,8 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Name="LBResult" Content="Результат верный. Ты молодец" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" FontWeight="Bold" Grid.Row="0"/>
-        <Image Name="IMCorrectResult" Source="../resources/ResultCorrect.png" Grid.Row="1"/>
+        <Label Name="LBResult"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" FontWeight="Bold" Grid.Row="0"/>
+    
         <ScrollViewer Grid.Row="1">
             <StackPanel Name="SpTasks" Visibility="Collapsed" VerticalAlignment="Center">
 
