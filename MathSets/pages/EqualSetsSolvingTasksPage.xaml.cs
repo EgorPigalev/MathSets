@@ -85,9 +85,7 @@ namespace MathSets.pages
 
             for (int i = 0; i < createFiguresMethods.Count; i++)
             {
-                    listFigures.Add(createFiguresMethods[i](x, true)); // Положение фигуры по вертикали вверху.
-                
-                //ellipse.Fill = Brushes.Yellow;
+                listFigures.Add(createFiguresMethods[i](x, true)); // Положение фигуры по вертикали вверху.
                 x += 50;
             }
 
