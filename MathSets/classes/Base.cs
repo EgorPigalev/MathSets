@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MathSets
 {
@@ -6,5 +7,6 @@ namespace MathSets
     {
         public static Frame MainFrame;
         public static double StrokeThickness = 2;
+        public static SolidColorBrush ColorDraggableElement = Brushes.Gray;
     }
 }
