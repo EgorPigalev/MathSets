@@ -32,28 +32,50 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0">
-                                    <TextBlock Text="Дана диаграмма. Выберите верные равенства."/>
+                                    <TextBlock Name="TbCondition"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">
                                     <Button  Style="{StaticResource ButtonMainStyle}" Name="BtnHint" Click="BtnHint_Click"  HorizontalAlignment="Right" Margin="0,10,10,0" Content="?"></Button>
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Name="SpAnswerOptions" Grid.Column="0">
-                                    
-                                </StackPanel>
-                                <StackPanel Grid.Column="1">
-                                    <Canvas Name="Cnv" Width="325" Height="120" Background="AliceBlue">
+                                <StackPanel>
+                                    <Canvas Name="Cnv" Width="450" Height="200">
                                     </Canvas>
+                                    <Button Name="BtnCheck" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck_Click"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>
-
-                        
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Name="TbCondition2"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <Button  Style="{StaticResource ButtonMainStyle}" Name="BtnHint2" Click="BtnHint_Click"  HorizontalAlignment="Right" Margin="0,10,10,0" Content="?"></Button>
+                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Canvas Name="Cnv2"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </StackPanel>
                 </ScrollViewer>
             </Border>
