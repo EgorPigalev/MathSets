@@ -9,64 +9,64 @@
       Title="MainMenuPage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        <Label Content="Учебный материал" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Top" Grid.Row="0" Margin="50, 0, 50, 0"/>
-        <ScrollViewer Grid.Row="1" Margin="50, 0, 50, 0">
+        <Label Content="Учебный материал" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="{StaticResource PrimaryColor}" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
+        <ScrollViewer Grid.Row="1" Margin="50, 0, 50, 0" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel MouseDown="SPSetAndElements_MouseDown" Name="SPSetAndElements" Style="{StaticResource SPTopics}">
                     <Grid>
-                        <Ellipse Fill="#F0A17A" Width="50" Height="50" />
-                        <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
+                        <Label Content="1" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
-                    <Label Content="Тема 1" Margin="10, 0, 0, 0"/>
+                    <Label Content="Множество и его элементы" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Style="{StaticResource SPTopics}">
                     <Grid>
-                        <Ellipse Fill="#F0A17A" Width="50" Height="50" />
-                        <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
+                        <Label Content="2" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
                     <Label Content="Тема 2" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Name="SpLessonFourAndFive" Style="{StaticResource SPTopics}" MouseDown="SpLessonFourAndFive_MouseDown">
                     <Grid>
-                        <Ellipse Fill="#F0A17A" Width="50" Height="50" />
-                        <Label Content="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
+                        <Label Content="3" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
-                    <Label Content="Тема 3" Margin="10, 0, 0, 0"/>
+                    <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Style="{StaticResource SPTopics}">
                     <Grid>
-                        <Ellipse Fill="#F0A17A" Width="50" Height="50" />
-                        <Label Content="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
+                        <Label Content="4" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
                     <Label Content="Тема 4" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Name="SPIntersectionSets" Style="{StaticResource SPTopics}" MouseDown="SPIntersectionSets_MouseDown">
                     <Grid>
-                        <Ellipse Fill="#F0A17A" Width="50" Height="50" />
-                        <Label Content="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
+                        <Label Content="5" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
-                    <Label Name="LBIntersectionSets" Content="Пересечение множеств. Свойства пересечения" Margin="10, 0, 0, 0" MouseDown="LBIntersectionSets_MouseDown"/>
+                    <Label Content="Пересечение множеств. Свойства пересечения" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Style="{StaticResource SPTopics}">
                     <Grid>
-                        <Ellipse Fill="#F0A17A" Width="50" Height="50" />
-                        <Label Content="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
+                        <Label Content="6" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
                     <Label Content="Тема 6" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Name="SPSplittingSets" Style="{StaticResource SPTopics}" MouseDown="SPSplittingSets_MouseDown">
                     <Grid>
-                        <Ellipse Fill="#F0A17A" Width="50" Height="50" />
-                        <Label Content="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
+                        <Label Content="7" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
-                    <Label Content="Тема 7" Margin="10, 0, 0, 0"/>
+                    <Label Content="Разбиение множеств на части по свойствам" Margin="10, 0, 0, 0"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <Button Name="BtnExit" Content="Выйти" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnExit_Click"/>
+        <Button Name="BtnExit" Content="Выйти" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnExit_Click" Cursor="Hand"/>
     </Grid>
 </Page>

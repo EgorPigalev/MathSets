@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MathSets
+namespace MathSets.pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для SetAndElementsSavedTasksPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SetAndElementsSavedTasksPage : Page
     {
-        public MainWindow()
+        public SetAndElementsSavedTasksPage()
         {
             InitializeComponent();
-            Base.MainFrame = MainFrame;
-            Base.MainFrame.Navigate(new MainMenuPage());
         }
     }
 }

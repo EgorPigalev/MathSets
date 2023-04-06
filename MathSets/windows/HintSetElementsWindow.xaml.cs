@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MathSets
+namespace MathSets.windows
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для HintSetElementsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HintSetElementsWindow : Window
     {
-        public MainWindow()
+        public HintSetElementsWindow()
         {
             InitializeComponent();
-            Base.MainFrame = MainFrame;
-            Base.MainFrame.Navigate(new MainMenuPage());
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

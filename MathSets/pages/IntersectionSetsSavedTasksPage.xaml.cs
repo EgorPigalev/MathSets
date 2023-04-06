@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace MathSets
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для IntersectionSetsSavedTasksPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class IntersectionSetsSavedTasksPage : Page
     {
-        public MainWindow()
+        public IntersectionSetsSavedTasksPage()
         {
             InitializeComponent();
-            Base.MainFrame = MainFrame;
-            Base.MainFrame.Navigate(new MainMenuPage());
         }
     }
 }

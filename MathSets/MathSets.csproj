@@ -55,6 +55,60 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="pages\LessonFourAndFive.xaml.cs">
+      <DependentUpon>LessonFourAndFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SplittingSetsSolvingTasks.xaml.cs">
+      <DependentUpon>SplittingSetsSolvingTasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\CorrectResult.xaml.cs">
+      <DependentUpon>CorrectResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\HintSplittingSetsWindow.xaml.cs">
+      <DependentUpon>HintSplittingSetsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\ResultSetAndElementsTasksWindow.xaml.cs">
+      <DependentUpon>ResultSetAndElementsTasksWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\ResultSplittingSetsWindows.xaml.cs">
+      <DependentUpon>ResultSplittingSetsWindows.xaml</DependentUpon>
+    </Compile>
+    <Page Include="pages\LessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\SplittingSetsSolvingTasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\CorrectResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\HintSetElementsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\HintSplittingSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultIntersectionSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\HintIntersectionSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\IntersectionSetsSavedTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\IntersectionSetsSolvingTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,7 +121,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="classes\FrameClass.cs" />
+    <Compile Include="classes\Base.cs" />
+    <Compile Include="classes\EllipseGeneration.cs" />
+    <Compile Include="windows\HintSetElementsWindow.xaml.cs">
+      <DependentUpon>HintSetElementsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\ResultIntersectionSetsWindow.xaml.cs">
+      <DependentUpon>ResultIntersectionSetsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\HintIntersectionSetsWindow.xaml.cs">
+      <DependentUpon>HintIntersectionSetsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\IntersectionSetsSavedTasksPage.xaml.cs">
+      <DependentUpon>IntersectionSetsSavedTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\IntersectionSetsSolvingTasksPage.xaml.cs">
+      <DependentUpon>IntersectionSetsSolvingTasksPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
@@ -75,14 +145,29 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="pages\PageCombiningSets.xaml">
+    <Page Include="pages\SetAndElementsSavedTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\SetAndElementsSolvingTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultSetAndElementsTasksWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultSplittingSetsWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pages\PageCombiningSets.xaml.cs">
-      <DependentUpon>PageCombiningSets.xaml</DependentUpon>
+    <Compile Include="pages\SetAndElementsSavedTasksPage.xaml.cs">
+      <DependentUpon>SetAndElementsSavedTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SetAndElementsSolvingTasksPage.xaml.cs">
+      <DependentUpon>SetAndElementsSolvingTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -110,8 +195,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="resources\" />
-    <Folder Include="windows\" />
+    <Resource Include="resources\PictureForTaskSplittingSets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\ResultCorrect.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

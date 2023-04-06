@@ -11,7 +11,7 @@
             <RowDefinition Height="80"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Content="Название приложения" FontSize="28" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" FontWeight="Bold" Background="#F0A17A" Grid.Row="0"/>
+        <Label Content="Название приложения" FontSize="28" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" FontWeight="Bold" Background="{StaticResource PrimaryColor}" Grid.Row="0"/>
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1">
             
         </Frame>

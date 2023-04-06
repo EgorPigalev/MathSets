@@ -25,14 +25,29 @@ namespace MathSets
             InitializeComponent();
         }
 
-        private void LBIntersectionSets_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void SPIntersectionSets_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Base.MainFrame.Navigate(new IntersectionSetsSolvingTasksPage());
+        }
+
+        private void SPSetAndElements_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Base.MainFrame.Navigate(new pages.SetAndElementsSolvingTasksPage());
+        }
+
+        private void SpLessonFourAndFive_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Base.MainFrame.Navigate(new pages.LessonFourAndFive());
+        }
+
+        private void SPSplittingSets_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Base.MainFrame.Navigate(new pages.SplittingSetsSolvingTasks());
         }
     }
 }

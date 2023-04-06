@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MathSets
+namespace MathSets.windows
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для CorrectResult.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CorrectResult : Window
     {
-        public MainWindow()
+        public CorrectResult()
         {
             InitializeComponent();
-            Base.MainFrame = MainFrame;
-            Base.MainFrame.Navigate(new MainMenuPage());
+        }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

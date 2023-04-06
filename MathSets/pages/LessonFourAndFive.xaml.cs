@@ -13,18 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MathSets
+namespace MathSets.pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для LessonFourAndFive.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LessonFourAndFive : Page
     {
-        public MainWindow()
+        public LessonFourAndFive()
         {
             InitializeComponent();
-            Base.MainFrame = MainFrame;
-            Base.MainFrame.Navigate(new MainMenuPage());
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
