@@ -9,7 +9,6 @@ using System.Windows.Shapes;
 namespace MathSets
 {
     delegate Geometry CreateFiguresDelegate(int x, bool isUp); // Чтобы можно было сделать массив из функций для создания фигур.
-    delegate Geometry CreateFiguresFromTextDelegate(string text, int x, bool isUp); // Чтобы можно было сделать массив из функций для создания фигур из текста.
 
     internal class Figure
     {
@@ -238,20 +237,6 @@ namespace MathSets
         }
 
         /// <summary>
-        /// Генерирует множество в виде эллипса
-        /// </summary>
-        /// <param name="panel">контейнер</param>
-        /// <returns>Эллипс (множество)</returns>
-        public static Geometry CreateSet(Panel panel)
-        {
-            double sizeFigure = panel.Height * 1.5 - Base.StrokeThickness * 2;
-            double xStart = (panel.Width / 2) + (panel.Width / 2 - sizeFigure) / 2;
-
-            return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).
-                CreateEllipseTransformY((int)xStart, true);
-        }
-
-        /// <summary>
         /// Генерирует случайную координату Y для фигуры в зависимости от её вертикального расположения
         /// </summary>
         /// <param name="IsUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
@@ -367,10 +352,8 @@ namespace MathSets
         /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
         /// </summary>
         /// <param name="text">текст для преобразования в фигуру</param>
-        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
-        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
         /// <returns>Фигура, созданная на основании заданного текста</returns>
-        public Geometry GetGeometryFromText(string text, int x, bool isUp)
+        public Geometry GetGeometryFromText(string text)
         {
 #pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
             FormattedText formattedText = new FormattedText
@@ -384,7 +367,11 @@ namespace MathSets
             );
 #pragma warning restore CS0618 // Для возобновления предупреждений об устаревших конструкциях
 
-            return formattedText.BuildGeometry(new Point(x, GetCoordinateY(isUp) - _sizeFigures));
+            return formattedText.BuildGeometry(new Point
+                (
+                    s_random.Next(Base.StrokeThickness, _widthContainer - _sizeFigures),
+                    s_random.Next(Base.StrokeThickness + 1, _heightContainer - _sizeFigures - Base.StrokeThickness)
+                ));
         }
 
         /// <summary>

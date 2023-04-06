@@ -14,13 +14,16 @@ namespace MathSets.pages
     /// </summary>
     public partial class LessonFourAndFive : Page
     {
-        private int _countRigthAnswers = 3;
-        private List<int> _indexesAnswersQuestionFirst = new List<int>();
-        private List<Geometry> _figuresQuestionFirst;
-        private Geometry _setQuestionFirst;
-        List<Point> _points = new List<Point>();
-        private Path _pathToMoved;
-        private Point _oldMouseCoordinate;
+        private int _countRigthAnswers = 3; // Количество элементов в изначально заданном множестве, которое нужно изобразить.
+        private List<int> _indexesAnswersQuestionFirst = new List<int>(); // Индексы верных ответов (верных фигур) для первого задания.
+        private List<Geometry> _figuresQuestionFirst; // Фигуры для первого задания.
+        private Geometry _setQuestionFirst; // Множество для первого задания.
+        List<Point> _pointsQuestionFirst = new List<Point>(); // Точки для первого задания.
+        private Path _pathToMoved; // Фигура для перемещения.
+        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
+
+        private List<Geometry> _figuresQuestionSecond; // Фигуры для второго задания.
+        private List<Geometry> _setsQuestionSecond; // Множества для второго задания.
 
         public LessonFourAndFive()
         {
@@ -39,7 +42,7 @@ namespace MathSets.pages
             CnvQuestionFirst.Children.Clear();
             SpFiguresQuestionFirst.Children.Clear();
 
-            _setQuestionFirst = Figure.CreateSet(CnvQuestionFirst);
+            _setQuestionFirst = CreateSetQuestionFirst(CnvQuestionFirst);
             _figuresQuestionFirst = CreateFiguresQuestionFirst();
 
 
@@ -48,6 +51,150 @@ namespace MathSets.pages
             ShowFigures(_figuresQuestionFirst, CnvQuestionFirst);
 
             SetHandlers(CnvQuestionFirst);
+        }
+
+        /// <summary>
+        /// Отображает на экране второе упражнение.
+        /// </summary>
+        private void ShowExerciseSecond()
+        {
+            CnvQuestionSecond.Children.Clear();
+
+            _setsQuestionSecond = CreateSetsQuestionSecond(CnvQuestionSecond);
+            _figuresQuestionSecond = CreateFiguresQuestionSecond();
+
+            ShowFigures(_setsQuestionSecond, CnvQuestionSecond);
+            ShowFigures(_figuresQuestionSecond, CnvQuestionSecond);
+        }
+
+        /// <summary>
+        /// Генерирует множества в виде эллипсов для второго задания
+        /// </summary>
+        /// <param name="panel">контейнер</param>
+        /// <returns>Список множеств</returns>
+        public static List<Geometry> CreateSetsQuestionSecond(Panel panel)
+        {
+            double sizeFigure = panel.Height * 0.7 * 1.5 - Base.StrokeThickness * 2; // 1.5, потому что одна ось меньше другой в 1.5 раза,
+            double xStart = Base.StrokeThickness + 100;                              // 0.7 - для уменьшения размеров множества, придуманное число.
+                                                                                     // 100 - для смещения эллипса вправо, придуманное число.
+            List<Geometry> sets = new List<Geometry>
+            {
+                new Figure((int)sizeFigure, (sizeFigure + Base.StrokeThickness) * 2, panel.Width / 2).
+                CreateEllipseTransformY((int)xStart, true),
+                new Figure((int)sizeFigure, (sizeFigure + Base.StrokeThickness) * 2, panel.Width / 2).
+                CreateEllipseTransformY((int)xStart + 100, true)
+            };
+
+            for (int i = 0; i < sets.Count; i++)
+            {
+                sets[i].Transform = new TranslateTransform(0, (panel.Height - sizeFigure / 1.5) / 2); // 1.5, потому что одна ось меньше другой в 1.5 раза,
+            }
+
+            sets.Add(new CombinedGeometry(GeometryCombineMode.Intersect, sets[0], sets[1]));
+
+            return sets;
+        }
+
+        /// <summary>
+        /// Генерирует фигуры из цифр для второго задания
+        /// </summary>
+        /// <returns>Коллекция фигур</returns>
+        private List<Geometry> CreateFiguresQuestionSecond()
+        {
+            int sizeFigures = 30;
+            Figure figure = new Figure(sizeFigures, CnvQuestionSecond.Height, CnvQuestionSecond.Width);
+
+            int countFigures = 5;
+            List<Geometry> figures = new List<Geometry>();
+
+            for (int i = 0; i < countFigures; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    figures.Add(figure.GetGeometryFromText((i + 1).ToString())); // Положение фигуры по вертикали сверху.
+                }
+                else
+                {
+                    figures.Add(figure.GetGeometryFromText((i + 1).ToString())); // Положение фигуры по вертикали снизу.
+                }
+            }
+
+            while(CheckIntersectionsFiguresAndSets(figures, _setsQuestionSecond))
+            {
+                figures.Clear();
+
+                for (int i = 0; i < countFigures; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
+                    }
+                    else
+                    {
+                        figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
+                    }
+                }
+            }
+
+            return figures;
+        }
+
+        /// <summary>
+        /// Проверяет пересечение множеств и фигур
+        /// </summary>
+        /// <param name="figures">список фигур</param>
+        /// <param name="sets">список множеств</param>
+        /// <returns>true, если пересечения множеств и фигур найдены, в противном случае - false</returns>
+        private bool CheckIntersectionsFiguresAndSets(List<Geometry> figures, List<Geometry> sets)
+        {
+            for (int i = 0; i < figures.Count; i++)
+            {
+                for (int j = i + 1; j < figures.Count; j++)
+                {
+                    if (figures[i].FillContainsWithDetail(figures[j]) == IntersectionDetail.Intersects)
+                    {
+                        return true;
+                    }
+                }
+
+                foreach (Geometry set in sets)
+                {
+                    if (figures[i].FillContainsWithDetail(set) == IntersectionDetail.Intersects)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+
+
+
+
+
+        /// <summary>
+        /// Отображает на экране третье упражнение.
+        /// </summary>
+        private void ShowExerciseThree()
+        {
+
+        }
+
+        /// <summary>
+        /// Генерирует множество в виде эллипса для первого задания
+        /// </summary>
+        /// <param name="panel">контейнер</param>
+        /// <returns>Эллипс (множество)</returns>
+        public static Geometry CreateSetQuestionFirst(Panel panel)
+        {
+            double sizeFigure = panel.Height * 1.5 - Base.StrokeThickness * 2; // 1.5, потому что одна ось больше другой в 1.5 раза.
+            double xStart = panel.Width / 2 + (panel.Width / 2 - sizeFigure) / 2;
+
+            return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).
+                CreateEllipseTransformY((int)xStart, true);
         }
 
         /// <summary>
@@ -101,7 +248,7 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// Генерирует фигуры
+        /// Генерирует фигуры для первого задания
         /// </summary>
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresQuestionFirst()
@@ -127,10 +274,10 @@ namespace MathSets.pages
                 }
             }
 
-            _points.Clear();
+            _pointsQuestionFirst.Clear();
             for (int i = 0; i < figures.Count; i++)
             {
-                _points.Add(new Point(0, 0));
+                _pointsQuestionFirst.Add(new Point(0, 0));
             }
 
             return figures;
@@ -183,7 +330,7 @@ namespace MathSets.pages
 
                     SetOffsetFigure(id, e.GetPosition(CnvQuestionFirst));
 
-                    _pathToMoved.Data.Transform = new TranslateTransform(_points[id].X, _points[id].Y);
+                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsQuestionFirst[id].X, _pointsQuestionFirst[id].Y);
                 }
             }
         }
@@ -195,7 +342,7 @@ namespace MathSets.pages
         /// <param name="actualCoordinate">Актуальные координаты курсора</param>
         private void SetOffsetFigure(int id, Point actualCoordinate)
         {
-            Point tempPoint = _points[id];
+            Point tempPoint = _pointsQuestionFirst[id];
 
             if (actualCoordinate.Y > _oldMouseCoordinate.Y)
             {
@@ -215,7 +362,7 @@ namespace MathSets.pages
                 tempPoint.X--;
             }
 
-            _points[id] = tempPoint;
+            _pointsQuestionFirst[id] = tempPoint;
 
             _oldMouseCoordinate = actualCoordinate;
         }
@@ -230,22 +377,6 @@ namespace MathSets.pages
             {
                 new ResultLessonFourAndFive(CnvQuestionFirst, _indexesAnswersQuestionFirst).ShowDialog();
             }
-        }
-
-        /// <summary>
-        /// Отображает на экране второе упражнение.
-        /// </summary>
-        private void ShowExerciseSecond()
-        {
-
-        }
-
-        /// <summary>
-        /// Отображает на экране третье упражнение.
-        /// </summary>
-        private void ShowExerciseThree()
-        {
-
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
