@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\Figures.cs" />
     <Compile Include="pages\EqualSetsSolvingTasksPage.xaml.cs">
       <DependentUpon>EqualSetsSolvingTasksPage.xaml</DependentUpon>
     </Compile>
