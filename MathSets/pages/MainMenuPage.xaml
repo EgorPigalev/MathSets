@@ -51,7 +51,7 @@
                     </Grid>
                     <Label Content="Пересечение множеств. Свойства пересечения" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Style="{StaticResource SPTopics}">
+                <StackPanel Style="{StaticResource SPTopics}" MouseDown="StackPanel_MouseDown">
                     <Grid>
                         <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
                         <Label Content="6" Style="{StaticResource LabelTopicNumber}"/>

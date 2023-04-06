@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="pages\CombiningSetsPage.xaml.cs">
+      <DependentUpon>CombiningSetsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\LessonFourAndFive.xaml.cs">
       <DependentUpon>LessonFourAndFive.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,10 @@
     <Compile Include="windows\ResultSplittingSetsWindows.xaml.cs">
       <DependentUpon>ResultSplittingSetsWindows.xaml</DependentUpon>
     </Compile>
+    <Page Include="pages\CombiningSetsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\LessonFourAndFive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
