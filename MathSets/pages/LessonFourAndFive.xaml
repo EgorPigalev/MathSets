@@ -12,14 +12,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
-        <Border BorderBrush="#F14C18" BorderThickness="1" Margin="20, 0, 20, 0">
-            <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
+        <Border Style="{StaticResource BorderHeader}">
+            <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" Style="{StaticResource LabelHeaderText}"/>
         </Border>
 
-        <Border Grid.Row="1" BorderBrush="#F14C18" BorderThickness="1" Margin="20, 10, 20, 0">
+        <Border Grid.Row="1" Style="{StaticResource BorderMain}">
             <ScrollViewer>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
@@ -27,20 +27,21 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Name="SpFirstQuestion">
+                    <StackPanel Name="SpFirstQuestion" Background="White">
                         <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <TextBlock Text="1) Дано множество {" FontSize="20"/>
+                            <TextBlock Name="TbQuestionFirst" Text="1) Дано множество {"/>
                             <StackPanel Name="SpFigures" Orientation="Horizontal"/>
-                            <TextBlock Text="}. Изобрази данное множество на рисунке." FontSize="20"/>
+                            <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
-                        <Canvas Name="CnvFigure" Background="Aqua" Height="200"/>
+                        <Canvas Name="CnvQuestionFirst" Height="200" Width="800"/>
+                        <Button Name="BtnCheck" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck_Click"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
         </Border>
 
         <Grid Grid.Row="2">
-            <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
+            <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnBack_Click"/>
         </Grid>
     </Grid>
 </Page>
