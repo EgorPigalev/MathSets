@@ -18,7 +18,6 @@ namespace MathSets.pages
         private List<Geometry> _figures;
         private Geometry _set;
         List<Point> _points = new List<Point>();
-        private bool _isMouseDown;
         private Path _pathToMoved;
         private Point _oldMouseCoordinate;
 
@@ -40,6 +39,28 @@ namespace MathSets.pages
             ShowFigures(CreateAnswersQuestionFirst(), SpFigures);
             ShowFigures(CreateFiguresQuestionFirst(), CnvQuestionFirst);
             SetHandlers(CnvQuestionFirst);
+        }
+
+        /// <summary>
+        /// Генерирует множество в виде эллипса
+        /// </summary>
+        /// <param name="panel">контейнер</param>
+        private void ShowSet(Panel panel)
+        {
+            double sizeFigure = CnvQuestionFirst.Height * 1.5;
+            double xStart = (CnvQuestionFirst.Width / 2) + (CnvQuestionFirst.Width / 2 - sizeFigure) / 2;
+
+            _set = new Figure((int)sizeFigure, (sizeFigure + 2) * 2, CnvQuestionFirst.Width / 2).
+                CreateEllipseTransformY((int)xStart, true);
+
+            panel.Children.Clear();
+
+            panel.Children.Add(new Path()
+            {
+                StrokeThickness = Base.StrokeThickness,
+                Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                Data = _set
+            });
         }
 
         /// <summary>
@@ -128,48 +149,14 @@ namespace MathSets.pages
             return _figures;
         }
 
-        /// <summary>
-        /// Генерирует множество в виде эллипса
-        /// </summary>
-        /// <param name="panel">контейнер</param>
-        private void ShowSet(Panel panel)
-        {
-            double sizeFigure = CnvQuestionFirst.Height * 1.5;
-            double xStart = (CnvQuestionFirst.Width / 2) + (CnvQuestionFirst.Width / 2 - sizeFigure) / 2;
-
-            _set = new Figure((int)sizeFigure, (sizeFigure + 2) * 2, CnvQuestionFirst.Width / 2).
-                CreateEllipseTransformY((int)xStart, true);
-
-            panel.Children.Clear();
-
-            panel.Children.Add(new Path()
-            {
-                StrokeThickness = Base.StrokeThickness,
-                Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                Data = _set
-            });
-        }
-
         private void SetHandlers(Panel panel)
         {
+            SpFirstQuestion.MouseUp += OnMouseUp;
+
             for (int i = 0; i < panel.Children.Count; i++)
             {
                 panel.Children[i].MouseMove += OnMouseMove;
                 panel.Children[i].MouseDown += OnMouseDown;
-            }
-            SpFirstQuestion.MouseUp += OnMouseUp;
-        }
-
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Path path = (Path)sender;
-
-            if (path.Uid != "")
-            {
-                path.Fill = Brushes.Gray;
-                _isMouseDown = true;
-                _pathToMoved = path;
-                _oldMouseCoordinate = e.GetPosition(CnvQuestionFirst);
             }
         }
 
@@ -179,13 +166,25 @@ namespace MathSets.pages
             {
                 Path p = (Path)CnvQuestionFirst.Children[i];
                 p.Fill = Brushes.White;
-                _isMouseDown = false;
+                _pathToMoved = null;
+            }
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Path path = (Path)sender;
+
+            if (path.Uid != string.Empty)
+            {
+                path.Fill = Brushes.Gray;
+                _pathToMoved = path;
+                _oldMouseCoordinate = e.GetPosition(CnvQuestionFirst);
             }
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (_isMouseDown)
+            if (_pathToMoved != null)
             {
 
                 if (_pathToMoved.Uid != "")

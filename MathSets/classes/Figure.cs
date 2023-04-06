@@ -282,18 +282,23 @@ namespace MathSets
         /// <returns></returns>
         public int GetOffset(int countFigures)
         {
-            int offset;
 
-            if (countFigures % 2 == 0)
+            if (countFigures >= 3)
             {
-                offset = (_widthContainer - countFigures / 2 * _sizeFigures) / (countFigures / 2 - 1);
-            }
-            else
-            {
-                offset = (_widthContainer - (countFigures / 2 + 1) * _sizeFigures) / (countFigures / 2);
-            }
+                int offset;
 
-            return offset + _sizeFigures;
+                if (countFigures % 2 == 0)
+                {
+                    offset = (_widthContainer - countFigures / 2 * _sizeFigures) / (countFigures / 2 - 1);
+                }
+                else
+                {
+                    offset = (_widthContainer - (countFigures / 2 + 1) * _sizeFigures) / (countFigures / 2);
+                }
+
+                return offset + _sizeFigures;
+            }
+            return 0;
         }
 
         /// <summary>
