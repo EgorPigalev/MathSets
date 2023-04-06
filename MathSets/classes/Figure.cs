@@ -9,6 +9,7 @@ using System.Windows.Shapes;
 namespace MathSets
 {
     delegate Geometry CreateFiguresDelegate(int x, bool isUp); // Чтобы можно было сделать массив из функций для создания фигур.
+    delegate Geometry CreateFiguresFromTextDelegate(string text, int x, bool isUp); // Чтобы можно было сделать массив из функций для создания фигур из текста.
 
     internal class Figure
     {
@@ -243,7 +244,7 @@ namespace MathSets
         /// <returns>Эллипс (множество)</returns>
         public static Geometry CreateSet(Panel panel)
         {
-            double sizeFigure = panel.Height * 1.5;
+            double sizeFigure = panel.Height * 1.5 - Base.StrokeThickness * 2;
             double xStart = (panel.Width / 2) + (panel.Width / 2 - sizeFigure) / 2;
 
             return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).

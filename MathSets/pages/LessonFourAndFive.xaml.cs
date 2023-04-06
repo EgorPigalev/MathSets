@@ -42,7 +42,7 @@ namespace MathSets.pages
             _figuresQuestionFirst = CreateFiguresQuestionFirst();
 
 
-            ShowFigures(CreateAnswersQuestionFirst(), SpFigures);
+            ShowFigures(CreateAnswersQuestionFirst(), SpFiguresQuestionFirst);
             ShowFigures(new List<Geometry>() { _setQuestionFirst }, CnvQuestionFirst);
             ShowFigures(_figuresQuestionFirst, CnvQuestionFirst);
 
@@ -76,7 +76,7 @@ namespace MathSets.pages
         private List<Geometry> CreateAnswersQuestionFirst()
         {
             int sizeFigures = (int)TbQuestionFirst.FontSize;
-            Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, SpFigures.Width);
+            Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, SpFiguresQuestionFirst.Width);
             List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
             List<int> tempIndexesFigures = Figure.ShuffleMethods(createFiguresMethods);
 
@@ -94,7 +94,7 @@ namespace MathSets.pages
                 listFigures.Add(createFiguresMethods[i](x, true));
             }
 
-            SpFigures.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
+            SpFiguresQuestionFirst.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
 
             return listFigures;
         }
@@ -140,7 +140,7 @@ namespace MathSets.pages
         /// <param name="panel">Контейнер</param>
         private void SetHandlers(Panel panel)
         {
-            SpFirstQuestion.MouseUp += OnMouseUp;
+            SpQuestionFirst.MouseUp += OnMouseUp;
 
             for (int i = 1; i < panel.Children.Count; i++) // i = 1, так как первым элементом списка является само множество.
             {
@@ -175,7 +175,6 @@ namespace MathSets.pages
         {
             if (_pathToMoved != null)
             {
-
                 if (_pathToMoved.Uid != "")
                 {
                     int id = Convert.ToInt32(_pathToMoved.Uid);
@@ -219,17 +218,7 @@ namespace MathSets.pages
             _oldMouseCoordinate = actualCoordinate;
         }
 
-        private void ShowExerciseSecond()
-        {
-
-        }
-
-        private void ShowExerciseThree()
-        {
-
-        }
-
-        private void BtnCheck_Click(object sender, RoutedEventArgs e)
+        private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
         {
             if (Figure.CheckOccurrencesFigures(_indexesAnswersQuestionFirst, CnvQuestionFirst))
             {
@@ -239,6 +228,22 @@ namespace MathSets.pages
             {
                 new ResultLessonFourAndFive(CnvQuestionFirst, _indexesAnswersQuestionFirst).ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// Отображает на экране второе упражнение.
+        /// </summary>
+        private void ShowExerciseSecond()
+        {
+
+        }
+
+        /// <summary>
+        /// Отображает на экране третье упражнение.
+        /// </summary>
+        private void ShowExerciseThree()
+        {
+
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

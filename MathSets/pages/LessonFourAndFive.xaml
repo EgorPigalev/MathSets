@@ -50,6 +50,18 @@
                         <Button Name="BtnCheckQuestionFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFirst_Click"/>
                     </StackPanel>
 
+                    <Menu Grid.Column="1">
+                        <MenuItem Header="test1"/>
+                        <MenuItem Header="test2"/>
+                    </Menu>
+
+                    <StackPanel Grid.Row="1" Name="SpQuestionSecond" Background="White" Margin="0 20 0 0">
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <TextBlock Name="TbQuestionSecond" Text="2) Дана диаграмма. Выбери нужные знаки."/>
+                        </StackPanel>
+                        <Canvas Name="CnvQuestionSecond" Height="200" Width="800" ClipToBounds="True"/>
+                        <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10"/>
+                    </StackPanel>
                     <StackPanel Grid.Row="1" Name="SpQuestionSecond" Background="White" Margin="0 20 0 0">
                         <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                             <TextBlock Name="TbQuestionSecond" Text="2) Дана диаграмма. Выбери нужные знаки."/>
