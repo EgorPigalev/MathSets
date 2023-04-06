@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathSets.windows;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,10 +14,10 @@ namespace MathSets.pages
     /// </summary>
     public partial class LessonFourAndFive : Page
     {
-        private List<KeyFigure> _keysAnswers = new List<KeyFigure>();
-        private List<KeyFigure> _keysFigures;
-        private List<Geometry> _figures;
-        private Geometry _set;
+        private int _countRigthAnswers = 3;
+        private List<int> _indexesAnswersQuestionFirst = new List<int>();
+        private List<Geometry> _figuresQuestionFirst;
+        private Geometry _setQuestionFirst;
         List<Point> _points = new List<Point>();
         private Path _pathToMoved;
         private Point _oldMouseCoordinate;
@@ -35,32 +36,17 @@ namespace MathSets.pages
         /// </summary>
         private void ShowExerciseFirst()
         {
-            ShowSet(CnvQuestionFirst);
+            CnvQuestionFirst.Children.Clear();
+
+            _setQuestionFirst = Figure.CreateSet(CnvQuestionFirst);
+            _figuresQuestionFirst = CreateFiguresQuestionFirst();
+
+
             ShowFigures(CreateAnswersQuestionFirst(), SpFigures);
-            ShowFigures(CreateFiguresQuestionFirst(), CnvQuestionFirst);
+            ShowFigures(new List<Geometry>() { _setQuestionFirst }, CnvQuestionFirst);
+            ShowFigures(_figuresQuestionFirst, CnvQuestionFirst);
+
             SetHandlers(CnvQuestionFirst);
-        }
-
-        /// <summary>
-        /// Генерирует множество в виде эллипса
-        /// </summary>
-        /// <param name="panel">контейнер</param>
-        private void ShowSet(Panel panel)
-        {
-            double sizeFigure = CnvQuestionFirst.Height * 1.5;
-            double xStart = (CnvQuestionFirst.Width / 2) + (CnvQuestionFirst.Width / 2 - sizeFigure) / 2;
-
-            _set = new Figure((int)sizeFigure, (sizeFigure + 2) * 2, CnvQuestionFirst.Width / 2).
-                CreateEllipseTransformY((int)xStart, true);
-
-            panel.Children.Clear();
-
-            panel.Children.Add(new Path()
-            {
-                StrokeThickness = Base.StrokeThickness,
-                Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                Data = _set
-            });
         }
 
         /// <summary>
@@ -92,20 +78,20 @@ namespace MathSets.pages
             int sizeFigures = (int)TbQuestionFirst.FontSize;
             Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, SpFigures.Width);
             List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
-            List<KeyFigure> tempKeys = Figure.ShuffleMethods(createFiguresMethods);
+            List<int> tempIndexesFigures = Figure.ShuffleMethods(createFiguresMethods);
 
-            _keysAnswers.Clear();
-            for (int i = 0; i < 3; i++)
+            _indexesAnswersQuestionFirst.Clear();
+            for (int i = 0; i < _countRigthAnswers; i++)
             {
-                _keysAnswers.Add(tempKeys[i]);
+                _indexesAnswersQuestionFirst.Add(tempIndexesFigures[i]);
             }
 
             List<Geometry> listFigures = new List<Geometry>();
             int x = 10;
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < _countRigthAnswers; i++)
             {
-                listFigures.Add(_keysAnswers[i].Method(x, true));
+                listFigures.Add(createFiguresMethods[i](x, true));
             }
 
             SpFigures.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
@@ -120,40 +106,43 @@ namespace MathSets.pages
         private List<Geometry> CreateFiguresQuestionFirst()
         {
             int sizeFigures = 50;
-            Figure figures = new Figure(sizeFigures, CnvQuestionFirst.Height, CnvQuestionFirst.Width / 2);
-            List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
-            _keysFigures = Figure.ShuffleMethods(createFiguresMethods);
+            Figure figure = new Figure(sizeFigures, CnvQuestionFirst.Height, CnvQuestionFirst.Width / 2);
+            List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
 
-            _figures = new List<Geometry>();
-            int offset = figures.GetOffset(createFiguresMethods.Count);
-            int x = 0;
+            List<Geometry> figures = new List<Geometry>();
+            int offset = figure.GetOffset(createFiguresMethods.Count);
+            int xStart = 0;
 
             for (int i = 0; i < createFiguresMethods.Count; i++)
             {
                 if (i % 2 == 0)
                 {
-                    _figures.Add(createFiguresMethods[i](x, true)); // Положение фигуры по вертикали сверху.
+                    figures.Add(createFiguresMethods[i](xStart, true)); // Положение фигуры по вертикали сверху.
                 }
                 else
                 {
-                    _figures.Add(createFiguresMethods[i](x, false)); // Положение фигуры по вертикали снизу.
-                    x += offset;
+                    figures.Add(createFiguresMethods[i](xStart, false)); // Положение фигуры по вертикали снизу.
+                    xStart += offset;
                 }
             }
 
-            for (int i = 0; i < _figures.Count; i++)
+            for (int i = 0; i < figures.Count; i++)
             {
                 _points.Add(new Point(0, 0));
             }
 
-            return _figures;
+            return figures;
         }
 
+        /// <summary>
+        /// Устанавливает события для panel, необходимые для перемещения фигур
+        /// </summary>
+        /// <param name="panel">Контейнер</param>
         private void SetHandlers(Panel panel)
         {
             SpFirstQuestion.MouseUp += OnMouseUp;
 
-            for (int i = 0; i < panel.Children.Count; i++)
+            for (int i = 1; i < panel.Children.Count; i++) // i = 1, так как первым элементом списка является само множество.
             {
                 panel.Children[i].MouseMove += OnMouseMove;
                 panel.Children[i].MouseDown += OnMouseDown;
@@ -198,6 +187,11 @@ namespace MathSets.pages
             }
         }
 
+        /// <summary>
+        /// Вычисляет новые координаты для перемещения фигуры
+        /// </summary>
+        /// <param name="id">Id фигуры</param>
+        /// <param name="actualCoordinate">Актуальные координаты курсора</param>
         private void SetOffsetFigure(int id, Point actualCoordinate)
         {
             Point tempPoint = _points[id];
@@ -225,36 +219,6 @@ namespace MathSets.pages
             _oldMouseCoordinate = actualCoordinate;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void ShowExerciseSecond()
         {
 
@@ -263,6 +227,18 @@ namespace MathSets.pages
         private void ShowExerciseThree()
         {
 
+        }
+
+        private void BtnCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (Figure.CheckOccurrencesFigures(_indexesAnswersQuestionFirst, CnvQuestionFirst))
+            {
+                new CorrectResult().ShowDialog();
+            }
+            else
+            {
+                new ResultLessonFourAndFive(CnvQuestionFirst, _indexesAnswersQuestionFirst).ShowDialog();
+            }
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

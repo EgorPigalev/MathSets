@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace MathSets
 {
-    struct KeyFigure // Для хранения постоянного индекса фигуры, чтобы можно было отследить "правильные" (фигуры-ответы).
-    {
-        public int Index;
-        public CreateFiguresDelegate Method;
-    }
-
     delegate Geometry CreateFiguresDelegate(int x, bool isUp); // Чтобы можно было сделать массив из функций для создания фигур.
 
     internal class Figure
@@ -241,6 +237,20 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Генерирует множество в виде эллипса
+        /// </summary>
+        /// <param name="panel">контейнер</param>
+        /// <returns>Эллипс (множество)</returns>
+        public static Geometry CreateSet(Panel panel)
+        {
+            double sizeFigure = panel.Height * 1.5;
+            double xStart = (panel.Width / 2) + (panel.Width / 2 - sizeFigure) / 2;
+
+            return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).
+                CreateEllipseTransformY((int)xStart, true);
+        }
+
+        /// <summary>
         /// Генерирует случайную координату Y для фигуры в зависимости от её вертикального расположения
         /// </summary>
         /// <param name="IsUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
@@ -323,15 +333,15 @@ namespace MathSets
         /// Перемешивает методы создания фигур в списке
         /// </summary>
         /// <param name="methods">список методов для создания фигур</param>
-        /// <returns>Список структур, представляющий из себя пару: ключ - фигура, где ключ - целочисленный индекс из первоначального списка методов</returns>
-        public static List<KeyFigure> ShuffleMethods(List<CreateFiguresDelegate> methods)
+        /// <returns>Список индексов методов создания фигур из первоначального списка методов</returns>
+        public static List<int> ShuffleMethods(List<CreateFiguresDelegate> methods)
         {
             List<CreateFiguresDelegate> tempMethods = new List<CreateFiguresDelegate>();
             tempMethods.AddRange(methods);
             methods.Clear();
 
             List<int> indexsesAddedMethods = new List<int>();
-            List<KeyFigure> keysFigures = new List<KeyFigure>();
+            List<int> indexesFigures = new List<int>();
 
             for (int i = 0; i < tempMethods.Count; i++)
             {
@@ -343,17 +353,13 @@ namespace MathSets
                     {
                         methods.Add(tempMethods[index]);
                         indexsesAddedMethods.Add(index);
-                        keysFigures.Add(new KeyFigure
-                        {
-                            Index = index,
-                            Method = tempMethods[index]
-                        });
+                        indexesFigures.Add(index);
                         break;
                     }
                 }
             }
 
-            return keysFigures;
+            return indexesFigures;
         }
 
         /// <summary>
@@ -378,6 +384,88 @@ namespace MathSets
 #pragma warning restore CS0618 // Для возобновления предупреждений об устаревших конструкциях
 
             return formattedText.BuildGeometry(new Point(x, GetCoordinateY(isUp) - _sizeFigures));
+        }
+
+        /// <summary>
+        /// Проверяет вхождение переданных фигур в заданную фигуру (множество)
+        /// </summary>
+        /// <param name="indexesAnswers">список индектов "верных" фигур</param>
+        /// <param name="figures">фигуры для перемещения</param>
+        /// <param name="set">фигура (множество), в которую перемещают прочие фигуры</param>
+        /// <returns>true - перемещение выполнено верно, в противном случае - false</returns>
+        public static bool CheckOccurrencesFigures(List<int> indexesAnswers, List<Geometry> figures, Geometry set)
+        {
+            int countRightAnswer = 0;
+
+            for (int i = 0; i < figures.Count; i++)
+            {
+                foreach (int item in indexesAnswers)
+                {
+                    if (set.FillContainsWithDetail(figures[i]) == IntersectionDetail.FullyContains)
+                    {
+                        if (indexesAnswers.Contains(i))
+                        {
+                            countRightAnswer++;
+                            break;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            if (countRightAnswer == indexesAnswers.Count)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Проверяет вхождение переданных фигур в заданную фигуру (множество)
+        /// </summary>
+        /// <param name="indexesAnswers">список индектов "верных" фигур</param>
+        /// <param name="canvas">контейнер</param>
+        /// <returns>true - перемещение выполнено верно, в противном случае - false</returns>
+        public static bool CheckOccurrencesFigures(List<int> indexesAnswers, Canvas canvas)
+        {
+            int countRightAnswer = 0;
+            List<Geometry> figures = new List<Geometry>();
+
+            for (int i = 0; i < canvas.Children.Count; i++)
+            {
+                Path p = (Path)canvas.Children[i];
+                figures.Add(p.Data);
+            }
+
+            for (int i = 1; i < figures.Count; i++)
+            {
+                foreach (int item in indexesAnswers)
+                {
+                    if (figures[0].FillContainsWithDetail(figures[i]) == IntersectionDetail.FullyContains)
+                    {
+                        if (indexesAnswers.Contains(i - 1)) // i - 1, так как первым элементом списка является само множество.
+                        {
+                            countRightAnswer++;
+                            break;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            if (countRightAnswer == indexesAnswers.Count)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

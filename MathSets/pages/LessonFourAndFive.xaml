@@ -34,6 +34,7 @@
                             <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
                         <Canvas Name="CnvQuestionFirst" Height="200" Width="800"/>
+                        <Button Name="BtnCheck" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck_Click"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
