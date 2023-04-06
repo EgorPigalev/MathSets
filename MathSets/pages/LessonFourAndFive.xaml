@@ -10,13 +10,21 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
         <Border Style="{StaticResource BorderHeader}">
-            <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" Style="{StaticResource LabelHeaderText}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" Style="{StaticResource LabelHeaderText}"/>
+                <Button Grid.Column="1" Name="BtnHint" Content="?" Style="{StaticResource ButtonMainStyle}" Margin="0 2 20 2" Click="BtnHint_Click"/>
+            </Grid>
         </Border>
 
         <Border Grid.Row="1" Style="{StaticResource BorderMain}">
@@ -36,6 +44,7 @@
                         <Canvas Name="CnvQuestionFirst" Height="200" Width="800"/>
                         <Button Name="BtnCheck" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck_Click"/>
                     </StackPanel>
+
                 </Grid>
             </ScrollViewer>
         </Border>

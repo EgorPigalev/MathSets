@@ -94,7 +94,7 @@ namespace MathSets
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        /// <returns>Эллипс с заданными начальной позицией и вертикальным положением</returns>
         public Geometry CreateEllipseTransformY(int x, bool isUp)
         {
             int transformY = 3;
@@ -117,7 +117,7 @@ namespace MathSets
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        /// <returns>Эллипс с заданными начальной позицией и вертикальным положением</returns>
         public Geometry CreateEllipseTransformX(int x, bool isUp)
         {
             int transformX = 3;
@@ -377,7 +377,7 @@ namespace MathSets
                 text,
                 CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface("Arial"),
+                new Typeface("Comic Sans MS"),
                 _sizeFigures,
                 (Brush)new BrushConverter().ConvertFrom("#F14C18")
             );
