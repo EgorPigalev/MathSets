@@ -35,59 +35,84 @@ namespace MathSets.pages
         "66", "68", "70", "72", "74", "76", "78", "80", "82", "84", "86", "88", "90", "92", "94", "96", "98"}; // массив четных чисел
         string[] vowelLetters = { "а", "о", "у", "ы", "э", "е", "ё", "и", "ю", "я" }; // массив гласный букв
         int index;
+        string strTask = "";
+        int verificationLabel;
+        public static Random random = new Random();
+        int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
 
         /// <summary>
         /// метод для генерации задания 2
         /// </summary>
         private void ShowSecondRandomTask()
         {
-            Random random = new Random();
-            string str = "";
-            int countTask = random.Next(3, 6); // рандом значений в задание
+
+            int countTask = random.Next(3, 6); // рандомное количество значений в задании
             int v = random.Next(3);
-            for (int i = 0; i <= countTask; i++)
+            for (int i = 0; i <= countTask; i++) // цикл для вывода формулировки задания
             {
                 if(v == 0)
                 {
-                    if(i == 0)
+                    verificationLabel = 0;
+                    if (i == 0)
                     {
-                        str += "{ ";
+                        strTask += "{ ";
                     }
                     index = random.Next(singleDigits.Length);
-                    str +=  singleDigits[index] + "; ";
+                    strTask +=  singleDigits[index] + "; ";
                     if (i == countTask)
                     {
-                        str += "}";
+                        strTask += "}";
                     }
                 }
                 else if (v == 1)
                 {
+                    verificationLabel = 1;
                     if (i == 0)
                     {
-                        str += "{ ";
+                        strTask += "{ ";
                     }
                     index = random.Next(evenNumbers.Length);
-                    str +=  evenNumbers[index] + "; ";
+                    strTask +=  evenNumbers[index] + "; ";
                     if (i == countTask)
                     {
-                        str += "}";
+                        strTask += "}";
                     }
                 }
                 else if (v == 2)
                 {
+                    verificationLabel = 2;
                     if (i == 0)
                     {
-                        str += "{ ";
+                        strTask += "{ ";
                     }
                     index = random.Next(vowelLetters.Length);
-                    str +=  vowelLetters[index] + "; ";
+                    strTask +=  vowelLetters[index] + "; ";
                     if (i == countTask)
                     {
-                        str += "}";
+                        strTask += "}";
                     }
                 }
             }
-            TextBlockTask.Text = " Задайте множество общим свойством его элементов " + str;
+            TextBlockTask.Text = "Задайте множество общим свойством его элементов " + strTask; // вывод формулировки задания
+            
+            if (randomAnswerOptions == 0)
+            {
+                OptionOne.Content = answerOptions[0];
+                OptionTwo.Content = answerOptions[1];
+                OptionThree.Content = answerOptions[2];
+            }
+            else if(randomAnswerOptions == 1)
+            {
+                OptionOne.Content = answerOptions[1];
+                OptionTwo.Content = answerOptions[2];
+                OptionThree.Content = answerOptions[0];
+            }
+            else if (randomAnswerOptions == 2)
+            {
+                OptionOne.Content = answerOptions[2];
+                OptionTwo.Content = answerOptions[0];
+                OptionThree.Content = answerOptions[1];
+            }
         }
 
         /// <summary>
@@ -141,25 +166,25 @@ namespace MathSets.pages
 
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
-            string str = ""; // переменна для записи ответа, который выбрал пользователь
+            string strAnswer = ""; // переменна для записи ответа, который выбрал пользователь
             if (BtnOption3.Background == colorButton)
             {
-                str = Convert.ToString(BtnOption3.Content);
+                strAnswer = Convert.ToString(BtnOption3.Content);
             }
             else if (BtnOption2.Background == colorButton)
             {
-                str = Convert.ToString(BtnOption2.Content);
+                strAnswer = Convert.ToString(BtnOption2.Content);
             }
             else if (BtnOption1.Background == colorButton)
             {
-                str = Convert.ToString(BtnOption1.Content);
+                strAnswer = Convert.ToString(BtnOption1.Content);
             }
             else
             {
                 MessageBox.Show($"Выбери ответ");
             }
 
-            if (str == rightOptions[rightOptionsIndex]) // если пользователь выбрал правильный ответ
+            if (strAnswer == rightOptions[rightOptionsIndex]) // если пользователь выбрал правильный ответ
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
@@ -167,8 +192,8 @@ namespace MathSets.pages
             }
             else // если пользователь выбрал неверный ответ
             {
-                str = rightOptions[rightOptionsIndex]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
-                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(str); 
+                strAnswer = rightOptions[rightOptionsIndex]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer); 
                 resultSetAndElementsTasks.ShowDialog();
             }
         }
@@ -193,6 +218,73 @@ namespace MathSets.pages
             BtnOption1.Background = colorButton; // красим кнопку
             BtnOption3.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             BtnOption2.ClearValue(Button.BackgroundProperty);
+        }
+
+        private void OptionOne_Click(object sender, RoutedEventArgs e)
+        {
+            OptionOne.Background = colorButton; // красим кнопку
+            OptionTwo.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
+            OptionThree.ClearValue(Button.BackgroundProperty);
+        }
+
+        private void OptionTwo_Click(object sender, RoutedEventArgs e)
+        {
+            OptionTwo.Background = colorButton; // красим кнопку
+            OptionOne.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
+            OptionThree.ClearValue(Button.BackgroundProperty);
+        }
+
+        private void OptionThree_Click(object sender, RoutedEventArgs e)
+        {
+            OptionThree.Background = colorButton; // красим кнопку
+            OptionOne.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
+            OptionTwo.ClearValue(Button.BackgroundProperty);
+        }
+
+        private void BtnCheck_Click(object sender, RoutedEventArgs e)
+        {
+            string strAnswer = ""; // переменна для записи ответа, который выбрал пользователь
+            if (OptionOne.Background == colorButton)
+            {
+                strAnswer = Convert.ToString(OptionOne.Content);
+            }
+            else if (OptionTwo.Background == colorButton)
+            {
+                strAnswer = Convert.ToString(OptionTwo.Content);
+            }
+            else if (OptionThree.Background == colorButton)
+            {
+                strAnswer = Convert.ToString(OptionThree.Content);
+            }
+            else
+            {
+                MessageBox.Show($"Выбери ответ");
+            }
+
+            if (strAnswer == answerOptions[0] && verificationLabel == 0) // если пользователь выбрал правильный ответ
+            {
+                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                correctResult.ShowDialog();
+                Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
+            }
+            else if (strAnswer == answerOptions[1] && verificationLabel == 1) // если пользователь выбрал правильный ответ
+            {
+                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                correctResult.ShowDialog();
+                Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
+            }
+            else if (strAnswer == answerOptions[2] && verificationLabel == 2) // если пользователь выбрал правильный ответ
+            {
+                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                correctResult.ShowDialog();
+                Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
+            }
+            else // если пользователь выбрал неверный ответ
+            {
+                strAnswer = answerOptions[verificationLabel]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                resultSetAndElementsTasks.ShowDialog();
+            }
         }
     }
 }
