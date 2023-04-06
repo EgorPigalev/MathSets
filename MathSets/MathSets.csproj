@@ -59,10 +59,30 @@
     <Compile Include="pages\LessonFourAndFive.xaml.cs">
       <DependentUpon>LessonFourAndFive.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\SplittingSetsSolvingTasks.xaml.cs">
+      <DependentUpon>SplittingSetsSolvingTasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\CorrectResult.xaml.cs">
+      <DependentUpon>CorrectResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\HintSplittingSetsWindow.xaml.cs">
+      <DependentUpon>HintSplittingSetsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ResultSetAndElementsTasksWindow.xaml.cs">
       <DependentUpon>ResultSetAndElementsTasksWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\ResultSplittingSetsWindows.xaml.cs">
+      <DependentUpon>ResultSplittingSetsWindows.xaml</DependentUpon>
+    </Compile>
     <Page Include="pages\LessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\SplittingSetsSolvingTasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\CorrectResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,7 +90,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="windows\ResultOneTaskIntersectionSetsWindow.xaml">
+    <Page Include="windows\HintSplittingSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultIntersectionSetsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,8 +127,8 @@
     <Compile Include="windows\HintSetElementsWindow.xaml.cs">
       <DependentUpon>HintSetElementsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="windows\ResultOneTaskIntersectionSetsWindow.xaml.cs">
-      <DependentUpon>ResultOneTaskIntersectionSetsWindow.xaml</DependentUpon>
+    <Compile Include="windows\ResultIntersectionSetsWindow.xaml.cs">
+      <DependentUpon>ResultIntersectionSetsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\HintIntersectionSetsWindow.xaml.cs">
       <DependentUpon>HintIntersectionSetsWindow.xaml</DependentUpon>
@@ -131,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\ResultSetAndElementsTasksWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultSplittingSetsWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,6 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\PictureForTaskSplittingSets.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\ResultCorrect.png" />

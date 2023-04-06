@@ -11,23 +11,105 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            <Label Content="Теорический материал по теме &quot;Пересечение множеств. Свойства пересечения&quot;" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Center" Grid.Row="0" Margin="20, 0, 20, 0"/>
+            <Label Content="Теорический материал по теме &quot;Пересечение множеств&quot;" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Center" Grid.Row="0" Margin="20, 0, 20, 0"/>
             <Grid Grid.Row="1">
-                <Border BorderBrush="#F14C18" BorderThickness="1" Margin="20, 10, 20, 0">
-                    <StackPanel Name="SpTasks" Margin="10">
-                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                <Border Style="{StaticResource BorderMain}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="SpTasks" Margin="10">
+                            <TextBlock Text="Пересечение множеств" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Margin="5"/>
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
                             <Run Text="Пересечение" FontWeight="Bold"/>
                             <Run Text="множеств A и B - это их общая часть, то есть множество, состоящее из всех элементов, принадлежащих одновременно как A, так и B."/>
-                        </TextBlock>
-                        <TextBlock Text="Пересечением множеств обозначается знаком."/>
-                        
-                    </StackPanel>
+                            </TextBlock>
+                            <TextBlock Text="Пересечением множеств обозначается знаком ∩."/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Пример:" FontWeight="Bold" FontStyle="Italic"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="A = {"/>
+                                        <Polygon Margin="5" Points="0,11, 30,11 5,25 15,0, 24,25 " Fill="Yellow" FillRule="Nonzero"/>
+                                        <TextBlock Text="; "/>
+                                        <Polygon Margin="5" Points="0, 25, 15, 0, 30, 25" Stroke="Black" />
+                                        <TextBlock Text="; 5; d};"/>
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="B = {"/>
+                                        <Polygon Margin="5" Points="0,11, 30,11 5,25 15,0, 24,25 " Fill="Yellow" FillRule="Nonzero"/>
+                                        <TextBlock Text="; 5; k}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="A ∩ B = {"/>
+                                        <Polygon Margin="5" Points="0,11, 30,11 5,25 15,0, 24,25 " Fill="Yellow" FillRule="Nonzero"/>
+                                        <TextBlock Text="; 5}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                                    <TextBlock Text="A ∩ B" HorizontalAlignment="Center" Foreground="{StaticResource SecondaryColor}"/>
+                                    <Canvas Width="400" Height="200">
+                                        <TextBlock Text="B" Margin="30 10"/>
+                                        <TextBlock Text="A" Margin="370 5"/>
+                                        <Ellipse Width="180" Height="120" StrokeThickness="2" Stroke="Black" Margin="20 20"/>
+                                        <Ellipse Width="250" Height="150" StrokeThickness="2" Stroke="Black" Margin="140 10"/>
+                                        <Path Grid.Row="2" Stroke="{StaticResource SecondaryColor}" StrokeThickness="2">
+                                            <Path.Data>
+                                                <CombinedGeometry GeometryCombineMode="Intersect">
+                                                    <CombinedGeometry.Geometry1>
+                                                        <EllipseGeometry Center="110,80" RadiusX="87" RadiusY="57" />
+                                                    </CombinedGeometry.Geometry1>
+                                                    <CombinedGeometry.Geometry2>
+                                                        <EllipseGeometry Center="265,85" RadiusX="122" RadiusY="72" />
+                                                    </CombinedGeometry.Geometry2>
+                                                </CombinedGeometry>
+                                            </Path.Data>
+                                        </Path>
+                                        <StackPanel Margin="50 80">
+                                            <TextBlock Text="k" FontSize="16" FontStyle="Italic"/>
+                                            <Ellipse Width="5" Height="5" Fill="Black" />
+                                        </StackPanel>
+                                        <StackPanel Margin="170 80">
+                                            <TextBlock Text="5" FontSize="16" FontStyle="Italic"/>
+                                            <Ellipse Width="5" Height="5" Fill="Black" />
+                                        </StackPanel>
+                                        <StackPanel Margin="300 90">
+                                            <TextBlock Text="d" FontSize="16" FontStyle="Italic"/>
+                                            <Ellipse Width="5" Height="5" Fill="Black" />
+                                        </StackPanel>
+                                        <StackPanel Margin="250 50" Orientation="Horizontal">
+                                            <Ellipse Width="5" Height="5" Fill="Black"/>
+                                            <Polygon Margin="5" Points="0, 15, 10, 0, 20, 15" Stroke="Black" />
+                                        </StackPanel>
+                                        <StackPanel Margin="150 50" Orientation="Horizontal">
+                                            <Ellipse Width="5" Height="5" Fill="Black"/>
+                                            <Polygon Margin="5" Points="0,11, 30,11 5,25 15,0, 24,25 " Fill="Yellow" FillRule="Nonzero"/>
+                                        </StackPanel>
+                                    </Canvas>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock Text="Свойства операции пересечения множеств" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Margin="5"/>
+                            <TextBlock Text="Операция пересечения множеств обладает переместительным и сочетательным свойствами." TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Переместительное свойство: " FontWeight="Bold"/>
+                                <TextBlock Text="A ∩ B = B ∩ A"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Сочетательное свойство: " FontWeight="Bold"/>
+                                <TextBlock Text="(A ∩ B) ∩ C = A ∩ (B ∩ C)"/>
+                            </StackPanel>
+                            <TextBlock Text="Значит, результат пересечения множеств не зависит от порядка множеств и от порядка действий." TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                    
                 </Border>
             </Grid>
             <Grid Grid.Row="2">
-                <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
+                <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnBack_Click"/>
             </Grid>
         </Grid>
     </Grid>

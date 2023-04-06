@@ -14,7 +14,7 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Label Content="Учебный материал" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="{StaticResource PrimaryColor}" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
-        <ScrollViewer Grid.Row="1" Margin="50, 0, 50, 0">
+        <ScrollViewer Grid.Row="1" Margin="50, 0, 50, 0" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <StackPanel MouseDown="SPSetAndElements_MouseDown" Name="SPSetAndElements" Style="{StaticResource SPTopics}">
                     <Grid>
@@ -58,15 +58,15 @@
                     </Grid>
                     <Label Content="Тема 6" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Style="{StaticResource SPTopics}">
+                <StackPanel Name="SPSplittingSets" Style="{StaticResource SPTopics}" MouseDown="SPSplittingSets_MouseDown">
                     <Grid>
                         <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
                         <Label Content="7" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
-                    <Label Content="Тема 7" Margin="10, 0, 0, 0"/>
+                    <Label Content="Разбиение множеств на части по свойствам" Margin="10, 0, 0, 0"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <Button Name="BtnExit" Content="Выйти" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnExit_Click"/>
+        <Button Name="BtnExit" Content="Выйти" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnExit_Click" Cursor="Hand"/>
     </Grid>
 </Page>

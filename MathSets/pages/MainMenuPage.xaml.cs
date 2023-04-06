@@ -44,5 +44,10 @@ namespace MathSets
         {
             Base.MainFrame.Navigate(new pages.LessonFourAndFive());
         }
+
+        private void SPSplittingSets_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Base.MainFrame.Navigate(new pages.SplittingSetsSolvingTasks());
+        }
     }
 }
