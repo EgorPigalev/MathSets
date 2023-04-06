@@ -23,12 +23,12 @@
                     </Grid>
                     <Label Content="Множество и его элементы" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Style="{StaticResource SPTopics}">
+                <StackPanel Name="SPEqualSets" MouseDown="SPEqualSets_MouseDown" Style="{StaticResource SPTopics}">
                     <Grid>
                         <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
                         <Label Content="2" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
-                    <Label Content="Тема 2" Margin="10, 0, 0, 0"/>
+                    <Label Content="Равные множества. Пустое множество" Margin="10, 0, 0, 0"/>
                 </StackPanel>
                 <StackPanel Name="SpLessonFourAndFive" Style="{StaticResource SPTopics}" MouseDown="SpLessonFourAndFive_MouseDown">
                     <Grid>

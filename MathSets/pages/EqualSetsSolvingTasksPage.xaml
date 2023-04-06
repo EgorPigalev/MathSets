@@ -1,0 +1,33 @@
+﻿<Page x:Class="MathSets.pages.EqualSetsSolvingTasksPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MathSets.pages"
+      mc:Ignorable="d" 
+      Style="{StaticResource PageMainStyle}"
+      d:DesignHeight="550" d:DesignWidth="1000"
+      Title="EqualSetsSolvingTasksPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Style="{StaticResource BorderHeader}">
+            <Label Content="Равные множества. Пустое множество" Grid.Row="0" Style="{StaticResource LabelHeaderText}" />
+        </Border>
+        <Grid Grid.Row="1" >
+            <Border Style="{StaticResource BorderMain}">
+                <ScrollViewer>
+                    
+                </ScrollViewer>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Style="{StaticResource ButtonMainStyle}" Margin="15 0 0 0"  VerticalAlignment="Center" Click="BtnBack_Click"/>
+        </Grid>
+
+    </Grid>
+</Page>

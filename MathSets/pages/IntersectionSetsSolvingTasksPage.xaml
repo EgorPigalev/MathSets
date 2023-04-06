@@ -20,7 +20,21 @@
             <Border Style="{StaticResource BorderMain}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Name="SpTasks" Margin="5">
-
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*" ></ColumnDefinition>
+                                <ColumnDefinition Width="6*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition ></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                                <RowDefinition ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"  Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="0,0,0,0">Верно ли записаны равенства? 
+                            </TextBlock>
+                        </Grid>
                     </StackPanel>
                 </ScrollViewer>
             </Border>
