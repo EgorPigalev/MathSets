@@ -42,11 +42,11 @@
 
                     <StackPanel Name="SpQuestionFirst" Background="White">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="TbQuestionFirst" Text="1) Дано множество {"/>
+                            <TextBlock Name="TbQuestionFirst" Text="1) Дано множество А {"/>
                             <StackPanel Name="SpFiguresQuestionFirst" Orientation="Horizontal"/>
                             <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
-                        <Canvas Name="CnvQuestionFirst" Height="200" Width="800" ClipToBounds="True" Margin="10"/>
+                        <Canvas Name="CnvQuestionFirst" Height="280" Width="870" ClipToBounds="True" Margin="10"/>
                         <Button Name="BtnCheckQuestionFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFirst_Click"/>
                     </StackPanel>
 
@@ -59,11 +59,18 @@
                     </Menu>
 
                     <StackPanel Grid.Row="1" Name="SpQuestionSecond" Background="White" Margin="0 20 0 0">
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <TextBlock Name="TbQuestionSecond" Text="2) Дана диаграмма. Выбери нужные знаки."/>
+                        <TextBlock Name="TbQuestionSecond" Text="2) Дана диаграмма. Выбери нужные знаки." Margin="0 0 0 10"/>
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Width="300">
+                                <StackPanel Name="SpQuestionSecondSetA" Margin="0 0 30 0"/>
+                                <StackPanel Name="SpQuestionSecondSetB"/>
+                            </StackPanel>
+
+                            <Canvas Name="CnvQuestionSecond" Height="280" Width="600" HorizontalAlignment="Right"/>
                         </StackPanel>
-                        <Canvas Name="CnvQuestionSecond" Height="200" Width="500" HorizontalAlignment="Right" ClipToBounds="True" Background="Aqua"/>
-                        <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10"/>
+                        
+                        <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionSecond_Click"/>
                     </StackPanel>
 
                     <Menu Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">

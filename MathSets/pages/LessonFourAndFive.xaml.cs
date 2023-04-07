@@ -14,13 +14,13 @@ namespace MathSets.pages
     /// </summary>
     public partial class LessonFourAndFive : Page
     {
-        private int _countRigthAnswers = 3; // Количество элементов в изначально заданном множестве, которое нужно изобразить.
+        private Path _pathToMoved; // Фигура для перемещения.
+        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
+
         private List<int> _indexesAnswersQuestionFirst = new List<int>(); // Индексы верных ответов (верных фигур) для первого задания.
         private List<Geometry> _figuresQuestionFirst; // Фигуры для первого задания.
         private Geometry _setQuestionFirst; // Множество для первого задания.
         List<Point> _pointsQuestionFirst = new List<Point>(); // Точки для первого задания.
-        private Path _pathToMoved; // Фигура для перемещения.
-        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
 
         private List<Geometry> _figuresQuestionSecond; // Фигуры для второго задания.
         private List<Geometry> _setsQuestionSecond; // Множества для второго задания.
@@ -41,12 +41,13 @@ namespace MathSets.pages
         {
             CnvQuestionFirst.Children.Clear();
             SpFiguresQuestionFirst.Children.Clear();
+            int countRigthAnswers = 3; // Количество элементов в изначально заданном множестве, которое нужно отобразить (множестве по заданию).
 
             _setQuestionFirst = CreateSetQuestionFirst(CnvQuestionFirst);
             _figuresQuestionFirst = CreateFiguresQuestionFirst();
 
 
-            ShowFigures(CreateAnswersQuestionFirst(), SpFiguresQuestionFirst);
+            ShowFigures(CreateAnswersQuestionFirst(countRigthAnswers), SpFiguresQuestionFirst);
             ShowFigures(new List<Geometry>() { _setQuestionFirst }, CnvQuestionFirst);
             ShowFigures(_figuresQuestionFirst, CnvQuestionFirst);
 
@@ -59,12 +60,73 @@ namespace MathSets.pages
         private void ShowExerciseSecond()
         {
             CnvQuestionSecond.Children.Clear();
+            SpQuestionSecondSetA.Children.Clear();
+            SpQuestionSecondSetB.Children.Clear();
+            int countNumbers = 5; // Количество элементов множества.
 
             _setsQuestionSecond = CreateSetsQuestionSecond(CnvQuestionSecond);
             _figuresQuestionSecond = CreateFiguresQuestionSecond();
 
             ShowFigures(_setsQuestionSecond, CnvQuestionSecond);
             ShowFigures(_figuresQuestionSecond, CnvQuestionSecond);
+
+            ShowStackPanelAnswersQuestionSecond(SpQuestionSecondSetA, 'A', countNumbers);
+            ShowStackPanelAnswersQuestionSecond(SpQuestionSecondSetB, 'B', countNumbers);
+        }
+
+        /// <summary>
+        /// Создаёт элементы для выбора ответа у второго задания
+        /// </summary>
+        /// <param name="panel">контейнер</param>
+        /// <param name="set">название множества</param>
+        /// <param name="count">общее количество элементов множеств</param>
+        private void ShowStackPanelAnswersQuestionSecond(StackPanel panel, char set, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                StackPanel sp = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal,
+                    Margin = new Thickness(0, 10, 0, 10)
+                };
+
+                sp.Children.Add(new TextBlock() // Цифра.
+                {
+                    Text = (i + 1).ToString(),
+                    FontFamily = new FontFamily(Base.FontFamily),
+                    Width = 20,
+                    Margin = new Thickness(0, 0, 10, 0),
+                    VerticalAlignment = VerticalAlignment.Center
+                });
+
+                ComboBox cb = new ComboBox() // Знаки "принадлежит" и "не принадлежит".
+                {
+                    Margin = new Thickness(0, 0, 10, 0),
+                    MinWidth = 50,
+                    MinHeight = 35,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Top
+                };
+                cb.Items.Add(new ComboBoxItem()
+                {
+                    Content = "∈"
+                });
+                cb.Items.Add(new ComboBoxItem()
+                {
+                    Content = "∉"
+                });
+                sp.Children.Add(cb);
+
+                sp.Children.Add(new TextBlock() // Наименование множества.
+                {
+                    Text = set.ToString(),
+                    FontFamily = new FontFamily(Base.FontFamily),
+                    Margin = new Thickness(0, 0, 10, 0),
+                    VerticalAlignment = VerticalAlignment.Center
+                });
+
+                panel.Children.Add(sp);
+            }
         }
 
         /// <summary>
@@ -72,7 +134,7 @@ namespace MathSets.pages
         /// </summary>
         /// <param name="panel">контейнер</param>
         /// <returns>Список множеств</returns>
-        public static List<Geometry> CreateSetsQuestionSecond(Panel panel)
+        private List<Geometry> CreateSetsQuestionSecond(Panel panel)
         {
             double sizeFigure = panel.Height * 0.7 * 1.5 - Base.StrokeThickness * 2; // 1.5, потому что одна ось меньше другой в 1.5 раза,
             double xStart = Base.StrokeThickness + 100;                              // 0.7 - для уменьшения размеров множества, придуманное число.
@@ -87,10 +149,21 @@ namespace MathSets.pages
 
             for (int i = 0; i < sets.Count; i++)
             {
-                sets[i].Transform = new TranslateTransform(0, (panel.Height - sizeFigure / 1.5) / 2); // 1.5, потому что одна ось меньше другой в 1.5 раза,
+                sets[i].Transform = new TranslateTransform(0, (panel.Height - sizeFigure / 1.5) / 2); // 1.5, потому что одна ось меньше другой в 1.5 раза.
             }
 
             sets.Add(new CombinedGeometry(GeometryCombineMode.Intersect, sets[0], sets[1]));
+
+            Figure figure = new Figure(60, 0, 0); // 0, потому что эти параметры не пригодятся для объекта в данной ситуации.
+
+            ShowFigures(new List<Geometry>()
+            {
+                figure.GetGeometryFromText("A", 80, 20),
+                figure.GetGeometryFromText("B", 470, 20)
+            },
+            CnvQuestionSecond,
+            Brushes.Black,
+            Brushes.Black);
 
             return sets;
         }
@@ -101,7 +174,7 @@ namespace MathSets.pages
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresQuestionSecond()
         {
-            int sizeFigures = 30;
+            int sizeFigures = 50;
             Figure figure = new Figure(sizeFigures, CnvQuestionSecond.Height, CnvQuestionSecond.Width);
 
             int countFigures = 5;
@@ -111,62 +184,31 @@ namespace MathSets.pages
             {
                 if (i % 2 == 0)
                 {
-                    figures.Add(figure.GetGeometryFromText((i + 1).ToString())); // Положение фигуры по вертикали сверху.
+                    figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
                 }
                 else
                 {
-                    figures.Add(figure.GetGeometryFromText((i + 1).ToString())); // Положение фигуры по вертикали снизу.
+                    figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
                 }
             }
 
-            while(CheckIntersectionsFiguresAndSets(figures, _setsQuestionSecond))
+            _setsQuestionSecond.Add(((Path)CnvQuestionSecond.Children[0]).Data); // Добавление названий множеств, чтобы цифры их не перекрывали.
+            _setsQuestionSecond.Add(((Path)CnvQuestionSecond.Children[1]).Data);
+
+            while (Figure.CheckIntersectionsFiguresAndSets(figures, _setsQuestionSecond))
             {
                 figures.Clear();
 
                 for (int i = 0; i < countFigures; i++)
                 {
-                    if (i % 2 == 0)
-                    {
-                        figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
-                    }
-                    else
-                    {
-                        figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
-                    }
+                    figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
                 }
             }
+
+            _setsQuestionSecond.Remove(((Path)CnvQuestionSecond.Children[0]).Data); // Удаление добавленных названий множеств
+            _setsQuestionSecond.Remove(((Path)CnvQuestionSecond.Children[1]).Data);
 
             return figures;
-        }
-
-        /// <summary>
-        /// Проверяет пересечение множеств и фигур
-        /// </summary>
-        /// <param name="figures">список фигур</param>
-        /// <param name="sets">список множеств</param>
-        /// <returns>true, если пересечения множеств и фигур найдены, в противном случае - false</returns>
-        private bool CheckIntersectionsFiguresAndSets(List<Geometry> figures, List<Geometry> sets)
-        {
-            for (int i = 0; i < figures.Count; i++)
-            {
-                for (int j = i + 1; j < figures.Count; j++)
-                {
-                    if (figures[i].FillContainsWithDetail(figures[j]) == IntersectionDetail.Intersects)
-                    {
-                        return true;
-                    }
-                }
-
-                foreach (Geometry set in sets)
-                {
-                    if (figures[i].FillContainsWithDetail(set) == IntersectionDetail.Intersects)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
 
@@ -188,10 +230,18 @@ namespace MathSets.pages
         /// </summary>
         /// <param name="panel">контейнер</param>
         /// <returns>Эллипс (множество)</returns>
-        public static Geometry CreateSetQuestionFirst(Panel panel)
+        private Geometry CreateSetQuestionFirst(Panel panel)
         {
             double sizeFigure = panel.Height * 1.5 - Base.StrokeThickness * 2; // 1.5, потому что одна ось больше другой в 1.5 раза.
             double xStart = panel.Width / 2 + (panel.Width / 2 - sizeFigure) / 2;
+
+            ShowFigures(new List<Geometry>()
+            {
+                new Figure(60, 0, 0).GetGeometryFromText("A", (int)panel.Width - 60, -20)
+            },
+            CnvQuestionFirst,
+            Brushes.Black,
+            Brushes.Black);
 
             return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).
                 CreateEllipseTransformY((int)xStart, true);
@@ -218,10 +268,32 @@ namespace MathSets.pages
         }
 
         /// <summary>
+        /// Добавляет созданные фигуры в контейнер
+        /// </summary>
+        /// <param name="figures">коллекция фигур</param>
+        /// <param name="panel">контейнер</param>
+        /// <param name="colorFill">цвет заливки</param>
+        /// <param name="colorStroke">цвет обводки</param>
+        private void ShowFigures(List<Geometry> figures, Panel panel, SolidColorBrush colorFill, SolidColorBrush colorStroke)
+        {
+            for (int i = 0; i < figures.Count; i++)
+            {
+                panel.Children.Add(new Path()
+                {
+                    StrokeThickness = Base.StrokeThickness,
+                    Stroke = colorStroke,
+                    Data = figures[i],
+                    Fill = colorFill,
+                    Uid = i.ToString()
+                });
+            }
+        }
+
+        /// <summary>
         /// Генерирует ответы (3 фигуры) для первого вопроса
         /// </summary>
         /// <returns>Список структур, представляющий из себя пару: ключ - фигура, где ключ - целочисленный индекс из первоначального списка методов</returns>
-        private List<Geometry> CreateAnswersQuestionFirst()
+        private List<Geometry> CreateAnswersQuestionFirst(int count)
         {
             int sizeFigures = (int)TbQuestionFirst.FontSize;
             Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, SpFiguresQuestionFirst.Width);
@@ -229,7 +301,7 @@ namespace MathSets.pages
             List<int> tempIndexesFigures = Figure.ShuffleMethods(createFiguresMethods);
 
             _indexesAnswersQuestionFirst.Clear();
-            for (int i = 0; i < _countRigthAnswers; i++)
+            for (int i = 0; i < count; i++)
             {
                 _indexesAnswersQuestionFirst.Add(tempIndexesFigures[i]);
             }
@@ -237,7 +309,7 @@ namespace MathSets.pages
             List<Geometry> listFigures = new List<Geometry>();
             int x = 10;
 
-            for (int i = 0; i < _countRigthAnswers; i++)
+            for (int i = 0; i < count; i++)
             {
                 listFigures.Add(createFiguresMethods[i](x, true));
             }
@@ -253,13 +325,13 @@ namespace MathSets.pages
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresQuestionFirst()
         {
-            int sizeFigures = 50;
+            int sizeFigures = 70;
             Figure figure = new Figure(sizeFigures, CnvQuestionFirst.Height, CnvQuestionFirst.Width / 2);
             List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
 
             List<Geometry> figures = new List<Geometry>();
             int offset = figure.GetOffset(createFiguresMethods.Count);
-            int xStart = 0;
+            int xStart = Base.StrokeThickness;
 
             for (int i = 0; i < createFiguresMethods.Count; i++)
             {
@@ -291,7 +363,7 @@ namespace MathSets.pages
         {
             SpQuestionFirst.MouseUp += OnMouseUp;
 
-            for (int i = 1; i < panel.Children.Count; i++) // i = 1, так как первым элементом списка является само множество.
+            for (int i = 2; i < panel.Children.Count; i++) // i = 2, так как вторым элементом списка является само множество, а первым - его название.
             {
                 panel.Children[i].MouseMove += OnMouseMove;
                 panel.Children[i].MouseDown += OnMouseDown;
@@ -369,7 +441,7 @@ namespace MathSets.pages
 
         private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
         {
-            if (Figure.CheckOccurrencesFigures(_indexesAnswersQuestionFirst, CnvQuestionFirst))
+            if (Figure.CheckOccurrencesFiguresInSet(_indexesAnswersQuestionFirst, CnvQuestionFirst))
             {
                 new CorrectResult().ShowDialog();
             }
@@ -377,6 +449,46 @@ namespace MathSets.pages
             {
                 new ResultLessonFourAndFive(CnvQuestionFirst, _indexesAnswersQuestionFirst).ShowDialog();
             }
+        }
+
+        private void BtnCheckQuestionSecond_Click(object sender, RoutedEventArgs e)
+        {
+            List<List<int>> indexesErrors = new List<List<int>>()
+            {
+                GetErrorsQuestionSecond(SpQuestionSecondSetA, 0),
+                GetErrorsQuestionSecond(SpQuestionSecondSetB, 1)
+            };
+
+            if (indexesErrors[0].Count == 0 && indexesErrors[1].Count == 0)
+            {
+                new CorrectResult().ShowDialog();
+            }
+            else
+            {
+                //new ResultLessonFourAndFive(CnvQuestionFirst, _indexesAnswersQuestionFirst).ShowDialog();
+            }
+        }
+
+        private List<int> GetErrorsQuestionSecond(Panel panel, int indexSet)
+        {
+            List<int> indexesErrors = new List<int>();
+
+            for (int i = 0; i < panel.Children.Count; i++)
+            {
+                StackPanel sp = (StackPanel)panel.Children[i];
+                ComboBox cb = (ComboBox)sp.Children[1];
+
+                if (cb.SelectedIndex == 0 && _setsQuestionSecond[indexSet].FillContainsWithDetail(_figuresQuestionSecond[i]) == IntersectionDetail.Empty)
+                {
+                    indexesErrors.Add(i);
+                }
+                else if (cb.SelectedIndex == 1 && _setsQuestionSecond[indexSet].FillContainsWithDetail(_figuresQuestionSecond[i]) == IntersectionDetail.FullyContains)
+                {
+                    indexesErrors.Add(i);
+                }
+            }
+
+            return indexesErrors;
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
