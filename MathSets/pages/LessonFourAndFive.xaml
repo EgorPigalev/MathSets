@@ -46,7 +46,7 @@
                             <StackPanel Name="SpFiguresQuestionFirst" Orientation="Horizontal"/>
                             <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
-                        <Canvas Name="CnvQuestionFirst" Height="280" Width="870" ClipToBounds="True" Margin="10"/>
+                        <Canvas Name="CnvQuestionFirst" Height="280" Width="870" ClipToBounds="True" Margin="0 10 0 10"/>
                         <Button Name="BtnCheckQuestionFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFirst_Click"/>
                     </StackPanel>
 
@@ -62,12 +62,12 @@
                         <TextBlock Name="TbQuestionSecond" Text="2) Дана диаграмма. Выбери нужные знаки." Margin="0 0 0 10"/>
                         
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" Width="300">
+                            <StackPanel Orientation="Horizontal" Width="310">
                                 <StackPanel Name="SpQuestionSecondSetA" Margin="0 0 30 0"/>
                                 <StackPanel Name="SpQuestionSecondSetB"/>
                             </StackPanel>
 
-                            <Canvas Name="CnvQuestionSecond" Height="280" Width="600" HorizontalAlignment="Right"/>
+                            <Canvas Name="CnvQuestionSecond" Height="280" Width="550" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionSecond_Click"/>
