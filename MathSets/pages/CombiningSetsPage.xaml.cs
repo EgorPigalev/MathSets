@@ -98,16 +98,16 @@ namespace MathSets.pages
             switch (n)
             {
                 case 0:
-                    TbCondition.Text = "Закрась A ∩ B.";
+                    TbCondition.Text = "1) Даны два множества. Закрась A ∩ B (нажми на нужные области).";
                     break;
                 case 1:
-                    TbCondition.Text = "Закрась A ∪ B.";
+                    TbCondition.Text = "1) Даны два множества. Закрась A ∪ B (нажми на нужные области).";
                     break;
                 case 2:
-                    TbCondition.Text = "Закрась множество А.";
+                    TbCondition.Text = "1) Даны два множества. Закрась множество А (нажми на нужные области).";
                     break;
                 case 3:
-                    TbCondition.Text = "Закрась множество В.";
+                    TbCondition.Text = "1) Даны два множества. Закрась множество В (нажми на нужные области).";
                     break;
             }
         }
@@ -151,7 +151,7 @@ namespace MathSets.pages
             }
             strElementsB = strElementsB.Substring(0, strElementsB.Length - 2);
 
-            TbCondition2.Text = "Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
+            TbCondition2.Text = "2) Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
 
             Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 430, 10);
             Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 580, 10);
@@ -173,10 +173,6 @@ namespace MathSets.pages
                 Margin = new Thickness(850, 10, 0, 0)
             };
             Canvas2.Children.Add(tbB);
-
-
-
-
 
             int[] masElements = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
             for (int i = 0; i < 4; i++)
@@ -200,18 +196,6 @@ namespace MathSets.pages
                     n++;
                 }
             }
-
-            for(int i=0;i<masElements.Length;i++)
-            {
-                if(masElements[i]!=0)
-                {
-                    Ellipse ellipse = ellipseGeneration.getEllipse(30, 30, random.Next(5,390), random.Next(5, 170));
-                    ellipse.Stroke = Brushes.Black;
-                    
-                    Canvas2.Children.Add(ellipse);
-                }
-            }
-
         }
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
@@ -276,6 +260,27 @@ namespace MathSets.pages
         }
 
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    GenerationCondition();
+                    break;
+                case 2:
+                    GenerationCondition2();
+                    break;
+                case 3:
+                    
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void BtnCheck2_Click(object sender, RoutedEventArgs e)
         {
 
         }

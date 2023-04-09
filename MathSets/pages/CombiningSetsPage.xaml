@@ -23,13 +23,13 @@
                 <Label Content="Объединение множеств. Свойства объединения." Style="{StaticResource LabelHeaderText}" Grid.Row="0"/>
                 <Button Grid.Column="1" Name="BtnHint" Content="?" Style="{StaticResource ButtonMainStyle}" Margin="0 2 20 2" Click="BtnHint_Click"/>
             </Grid>
-           
+
         </Border>
         <Grid Grid.Row="1" >
             <Border Style="{StaticResource BorderMain}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <Grid>
+                        <Grid Margin="5,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="4*"/>
@@ -39,7 +39,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="0 5 0 0">
+                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
                                     <TextBlock Name="TbCondition"/>
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
@@ -58,29 +58,32 @@
                                 </StackPanel>
                             </Grid>
                         </Grid>
-                        
-                        <Grid>
+
+                        <Grid Margin="5,20,5,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="4*"/>
+                                <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0">
+                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
                                     <TextBlock TextWrapping="Wrap" Name="TbCondition2"/>
                                 </StackPanel>
-                                <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                    <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                                <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="14.8,0,14.6,0">
+                                    <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}">
                                         <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
                                         <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
                                         <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                     </MenuItem>
                                 </Menu>
                             </Grid>
-                            <Canvas Grid.Row="1" Name="Canvas2" Width="900" Height="200" Background="AliceBlue"/>
+                            <Canvas Grid.Row="1" Name="Canvas2" Width="900" Height="200">
+                            </Canvas>
+                            <Button Grid.Row="2" Name="BtnCheck2" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck2_Click"/>
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
