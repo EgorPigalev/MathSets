@@ -286,5 +286,20 @@ namespace MathSets.pages
             windows.HintSetElementsWindow hint = new windows.HintSetElementsWindow();
             hint.ShowDialog();
         }
+
+        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuRefresh_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
