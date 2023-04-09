@@ -93,7 +93,8 @@ namespace MathSets.pages
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)
         {
-
+            windows.HintCombiningSetsWindow hintCombiningSetsWindow = new windows.HintCombiningSetsWindow();
+            hintCombiningSetsWindow.ShowDialog();
         }
 
         public void GenerationCondition()
@@ -171,6 +172,21 @@ namespace MathSets.pages
                     }
                     break;
             }
+        }
+
+        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuRefresh_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

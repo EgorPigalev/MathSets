@@ -1,0 +1,86 @@
+﻿<Window x:Class="MathSets.windows.HintCombiningSetsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathSets.windows"
+        mc:Ignorable="d" Style="{StaticResource WindowMainStyle}"
+        Title="HintCombiningSetsWindow" Height="650" Width="1000">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Label Content="Теорический материал по теме &quot;Объединение множеств&quot;" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#F0A17A" VerticalAlignment="Center" Grid.Row="0" Margin="20, 0, 20, 0"/>
+            <Grid Grid.Row="1">
+                <Border Style="{StaticResource BorderMain}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="SpTasks" Margin="10">
+                            <TextBlock Text="Объединение множеств" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Margin="5"/>
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                            <Run Text="Все элементы множеств А и В, взятые вместе, образуют новое множество, называемое " />
+                            <Run Text="объединением" FontWeight="Bold"/>
+                            <Run Text=" множеств А и В. Объединение множеств обозначается символом ∪."/>
+                            </TextBlock>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Пример:" FontWeight="Bold" FontStyle="Italic"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="A = { m; "/>
+                                        <Polygon Margin="5" Points="0,11, 30,11 5,25 15,0, 24,25 " Fill="Yellow" FillRule="Nonzero"/>
+                                        <TextBlock Text="; 7}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="B = {"/>
+                                        <Polygon Margin="5" Points="0,11, 30,11 5,25 15,0, 24,25 " Fill="Yellow" FillRule="Nonzero"/>
+                                        <TextBlock Text="; "/>
+                                        <Polygon Margin="5" Points="0, 25, 15, 0, 30, 25" Stroke="Black" />
+                                        <TextBlock Text="; 7; b}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="A ∪ B = { m; "/>
+                                        <Polygon Margin="5" Points="0,11, 30,11 5,25 15,0, 24,25 " Fill="Yellow" FillRule="Nonzero"/>
+                                        <TextBlock Text="; 7; "/>
+                                        <Polygon Margin="5" Points="0, 25, 15, 0, 30, 25" Stroke="Black" />
+                                        <TextBlock Text="; b}"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock TextWrapping="Wrap" Text="По риснку видно, что для того, чтобы найти объединение множеств А и В, можно взять все элементы множества А и добавить к ним те элементы множества В, которые не принадлежат А. "/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                                    <TextBlock Text="A ∪ B" HorizontalAlignment="Center" Foreground="{StaticResource SecondaryColor}"/>
+                                    <Canvas Name="Cnv" Width="400" Height="200">
+                                        <TextBlock Text="A" Margin="30 10"/>
+                                        <TextBlock Text="B" Margin="370 5"/>
+                                        <Ellipse Name="EllipseOne" Width="190" Height="130" StrokeThickness="2" Stroke="Red" Margin="15 15"/>
+                                        <Ellipse Name="EllipseTwo" Width="260" Height="160" StrokeThickness="2" Stroke="Red" Margin="135 5"/>
+                                    </Canvas>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock Text="Свойства операции объединения множеств" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Margin="5"/>
+                            <TextBlock Text="Операция объединения множеств обладает переместительным и сочетательным свойствами." TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Переместительное свойство: " FontWeight="Bold"/>
+                                <TextBlock Text="A ∪ B = B ∪ A"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Сочетательное свойство: " FontWeight="Bold"/>
+                                <TextBlock Text="(A ∪ B) ∪ C = A ∪ (B ∪ C)"/>
+                            </StackPanel>
+                            <TextBlock Text="Значит, результат объединения множеств не зависит от порядка множеств и от порядка действий." TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</Window>
