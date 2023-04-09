@@ -27,6 +27,7 @@ namespace MathSets
         List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
         private Path _pathToMoved; // Фигура для перемещения
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
+        private List<string> correctResultFourTask = new List<string>();
 
         public IntersectionSetsSolvingTasksPage()
         {
@@ -660,6 +661,8 @@ namespace MathSets
         private void NewFourTask()
         {
             Random random = new Random();
+            correctResultFourTask.Clear();
+            SPMainPlaceQuestionFour.Children.Clear();
             Grid grid = new Grid();
             ColumnDefinition oneColumn = new ColumnDefinition();
             ColumnDefinition twoColumn = new ColumnDefinition();
@@ -668,18 +671,105 @@ namespace MathSets
             SPMainPlaceQuestionFour.Children.Add(grid);
             List<char> listChar = new List<char> { 'A', 'B', 'C', 'D', 'M', 'K', 'T'};
             List<char> chars = new List<char>();
-            for(int i = 0; i < 2; i++)
+            for(int i = 0; i < 3; i++)
             {
                 int j = random.Next(listChar.Count);
                 chars.Add(listChar[j]);
                 listChar.Remove(listChar[j]);    
             }
+            List<string> movingProperty = new List<string>() { chars[1] + " ∩ " + chars[0], chars[1] + " ∩ " + chars[1], chars[0] + " ∩ " + chars[0], chars[0] + " ∩ " + chars[1]};
+            correctResultFourTask.Add(chars[0] + " ∩ " + chars[1] + " = " + movingProperty[0]);
+            StackPanel primerFirst = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+            Label labelFirst = new Label()
+            {
+                Content = chars[0] + " ∩ " + chars[1] + " = "
+            };
+            primerFirst.Children.Add(labelFirst);
+            ComboBox comboBoxFirst = new ComboBox()
+            {
+                Width = 100
+            };
+            for(int i = 0; i < 4; i++)
+            {
+                int j = random.Next(movingProperty.Count);
+                ComboBoxItem comboBoxItem = new ComboBoxItem();
+                comboBoxItem.Content = movingProperty[j];
+                comboBoxFirst.Items.Add(comboBoxItem);
+                movingProperty.Remove(movingProperty[j]);
+            }
+            primerFirst.Children.Add(comboBoxFirst);
+            grid.Children.Add(primerFirst);
+            Grid.SetColumn(primerFirst, 0);
 
+            List<string> combinationProperty = new List<string>() { chars[0] + " ∩ (" + chars[1] + " ∩ " + chars[2] + ")", "(" + chars[2] + " ∩ " + chars[1] + " ∩ " + chars[0] + ")", chars[0] + " ∩ (2 * " + chars[1] + ")", chars[0] + " ∩ " + chars[1] + " ∩ " + chars[2] };
+            correctResultFourTask.Add("(" + chars[0] + " ∩ " + chars[1] + ") ∩ " + chars[2] + " = " + combinationProperty[0]);
+            StackPanel primerSecond = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+            Label labelSecond = new Label()
+            {
+                Content = "(" + chars[0] + " ∩ " + chars[1] + ") ∩ " + chars[2] + " = "
+            };
+            primerSecond.Children.Add(labelSecond);
+            ComboBox comboBoxSecond = new ComboBox()
+            {
+                Width = 160
+            };
+            for (int i = 0; i < 4; i++)
+            {
+                int j = random.Next(combinationProperty.Count);
+                ComboBoxItem comboBoxItem = new ComboBoxItem();
+                comboBoxItem.Content = combinationProperty[j];
+                comboBoxSecond.Items.Add(comboBoxItem);
+                combinationProperty.Remove(combinationProperty[j]);
+            }
+            primerSecond.Children.Add(comboBoxSecond);
+            grid.Children.Add(primerSecond);
+            Grid.SetColumn(primerSecond, 1);
         }
 
         private void BtnCheckQuestionFour_Click(object sender, RoutedEventArgs e)
         {
-
+            List<int> errors = new List<int>();
+            Grid grid = (Grid)SPMainPlaceQuestionFour.Children[0];
+            for(int i = 0; i < grid.Children.Count; i++)
+            {
+                StackPanel stackPanel = (StackPanel)grid.Children[i];
+                string text = "";
+                for (int j = 0; j < stackPanel.Children.Count; j++)
+                {
+                    if (typeof(Label) == stackPanel.Children[j].GetType())
+                    {
+                        Label label = (Label)stackPanel.Children[j];
+                        text += label.Content;
+                    }
+                    else if (typeof(ComboBox) == stackPanel.Children[j].GetType())
+                    {
+                        ComboBox comboBox = (ComboBox)stackPanel.Children[j];
+                        text += comboBox.SelectionBoxItem;
+                    }
+                }
+                if (correctResultFourTask[i] != text)
+                {
+                    errors.Add(i);
+                }
+            }
+            if(errors.Count == 0)
+            {
+                CorrectResult correctResult = new CorrectResult();
+                correctResult.ShowDialog();
+            }
+            else
+            {
+                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(errors, correctResultFourTask);
+                resultIntersectionSetsWindow.ShowDialog();
+            }
         }
     }
 }

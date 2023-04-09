@@ -120,6 +120,44 @@ namespace MathSets
 
         }
 
+        public ResultIntersectionSetsWindow(List<int> errors, List<string> correctResult)
+        {
+            InitializeComponent();
+            if (errors.Count == 1)
+            {
+                LBResult.Content = "Ты допустил одну ошибку ";
+            }
+            else
+            {
+                LBResult.Content = "Ты допустил две ошибки ";
+            }
+            TextBlock header = new TextBlock() // Заголовок
+            {
+                Text = "Верный результат",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(10),
+            };
+            SpTasks.Children.Add(header);
+            for (int i = 0; i < errors.Count; i++)
+            {
+                string text;
+                if(errors[i] == 1)
+                {
+                    text = "Переместительное свойство: ";
+                }
+                else
+                {
+                    text = "Сочетательное свойство: ";
+                }
+                TextBlock textBlock = new TextBlock()
+                {
+                    Text = text + correctResult[errors[i]],
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                };
+                SpTasks.Children.Add(textBlock);
+            }
+        }
+
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
