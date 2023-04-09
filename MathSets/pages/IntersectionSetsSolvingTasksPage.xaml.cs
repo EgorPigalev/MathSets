@@ -21,6 +21,7 @@ namespace MathSets
     /// </summary>
     public partial class IntersectionSetsSolvingTasksPage : Page
     {
+        Random random = new Random();
         public IntersectionSetsSolvingTasksPage()
         {
             InitializeComponent();
@@ -32,47 +33,18 @@ namespace MathSets
         /// </summary>
         private void NewTasks()
         {
-            int n = 1; // Номер задания
-            NewOneTask(n);
-            n++;
+
+            NewOneTask();
+            NewTwoTask();
+            NewThreeTask();
 
         }
         /// <summary>
         /// Генерация задания 1 типа (выделить пересечение множеств)
         /// </summary>
-        /// <param name="n">Номер задания</param>
-        private void NewOneTask(int n)
+        private void NewOneTask()
         {
-            Grid grid = new Grid(); // Добавления grid для вывода формулировки задания
-            ColumnDefinition oneColumn = new ColumnDefinition();
-            ColumnDefinition twoColumn = new ColumnDefinition();
-            twoColumn.Width = new GridLength(50); // Столбце под кнопку подсказка
-            grid.ColumnDefinitions.Add(oneColumn);
-            grid.ColumnDefinitions.Add(twoColumn);
-            TextBlock taskStatement = new TextBlock() // Формулировка задания
-            {
-                Text = n + ") На каждом рисунке закрась пересечение множеств (если пересечение отсутствует, то ничего закрашивать не нужно).",
-                TextWrapping = TextWrapping.Wrap,
-            };
-            SpTasks.Children.Add(grid);
-            grid.Children.Add(taskStatement);
-            Grid.SetColumn(taskStatement, 0);
-            Button BtnHint = new Button() // Кнопка для подсказки
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Content = "?",
-                Style = (Style)FindResource("ButtonMainStyle"),
-            };
-            BtnHint.Click += BtnHint_Click;
-            Grid.SetColumn(BtnHint, 1);
-            grid.Children.Add(BtnHint);
-            WrapPanel wrapPanel = new WrapPanel()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
-            SpTasks.Children.Add(wrapPanel);
-            Random random = new Random();
+            WPMainPlaceQuestionFirst.Children.Clear();
             for (int i = 0; i < 4; i++)
             {
                 Canvas canvas = new Canvas()
@@ -80,7 +52,7 @@ namespace MathSets
                     Width = 350,
                     Height = 250,
                 };
-                wrapPanel.Children.Add(canvas);
+                WPMainPlaceQuestionFirst.Children.Add(canvas);
                 EllipseGeneration ellipseGeneration = new EllipseGeneration();
                 Label label = new Label()
                 {
@@ -97,15 +69,6 @@ namespace MathSets
                 combinedPath.MouseDown += Ellipse_MouseDown;
                 canvas.Children.Add(combinedPath);
             }
-            Button BtnResult = new Button() // Кнопка для проверки результата
-            {
-                Content = "Проверить",
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Style = (Style)FindResource("ButtonMainStyle"),
-            };
-            BtnResult.Click += BtnResult_Click;
-            SpTasks.Children.Add(BtnResult);
         }
 
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
@@ -147,14 +110,13 @@ namespace MathSets
             hint.ShowDialog();
         }
 
-        private void BtnResult_Click(object sender, RoutedEventArgs e)
+        private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
         {
             EllipseGeneration ellipseGeneration = new EllipseGeneration();
             List<int[]> errors = new List<int[]>(); // Массив ошибок
-            WrapPanel wrapPanel = (WrapPanel)SpTasks.Children[1]; // Получение области, где хранятся Canvas
-            for (int i = 0; i < wrapPanel.Children.Count; i++) // Проверка каждого пункта
+            for (int i = 0; i < WPMainPlaceQuestionFirst.Children.Count; i++) // Проверка каждого пункта
             {
-                Canvas canvas = (Canvas)wrapPanel.Children[i];
+                Canvas canvas = (Canvas)WPMainPlaceQuestionFirst.Children[i];
                 Ellipse ellipseOne = (Ellipse)canvas.Children[1];
                 Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
                 Path path = (Path)canvas.Children[3];
@@ -172,7 +134,204 @@ namespace MathSets
             }
             if(errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
             {
-                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(errors);
+                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(1, errors);
+                resultIntersectionSetsWindow.ShowDialog();
+            }
+            else
+            {
+                CorrectResult correctResult = new CorrectResult();
+                correctResult.ShowDialog();
+            }
+        }
+
+        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+        }
+
+        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+        }
+
+        private void MenuRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    NewOneTask();
+                    break;
+                case 2:
+                    NewTwoTask();
+                    break;
+                case 3:
+                    NewThreeTask();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Генерация задания 2 типа (Нахождение пересечения двух множеств)
+        /// </summary>
+        private void NewTwoTask()
+        {
+            /*
+            WPMainPlaceQuestionSecond.Children.Clear();
+            for(int i = 0; i < 2; i++)
+            {
+                StackPanel stackPanel = new StackPanel();
+                WPMainPlaceQuestionSecond.Children.Add(stackPanel);
+                List<String> firstSets;
+                List<String> secondSets;
+                while (true)
+                {
+                    firstSets = getSets(); // Первое множество
+                    secondSets = getSets(); // Второе множество
+                    foreach(string set in firstSets) // Проверка на то, что в двух множествах есть хотя бы одно пересечение
+                    {
+                        foreach(string set2 in secondSets)
+                        {
+                            if(set.Equals(set2))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                StackPanel setsM = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal
+                };
+                stackPanel.Children.Add(setsM);
+                int sizeFigures = (int)TBHeader.FontSize;
+                Figure figure = new Figure(sizeFigures, (sizeFigures + 2) * 2, setsM.Width);
+                Label textSetsM = new Label()
+                {
+                    Content = "M = {"
+                };
+                setsM.Children.Add(textSetsM);
+                foreach(string set in firstSets)
+                {
+                    if(set.Equals("треугольник"))
+                    {
+                        //figure.CreateTriangle()
+                    }
+                }
+
+                Label label = new Label()
+                {
+                    Content = (Char)(65 + i) + ")",
+                };
+
+            }
+            */
+        }
+
+        List<String> list = new List<string> { "a", "б", "в", "г", "д", "е", "ж", "з", "звезда", "треугольник", "круг" }; // Допустимые символы из которых могут состоять множества
+        /// <summary>
+        /// Рандомно генерирует множество
+        /// </summary>
+        /// <returns></returns>
+        private List<String> getSets()
+        {
+            List<String> sets = new List<String>();
+            int count = random.Next(2,5);
+            int index = 0;
+            for (int i = 0; i < count; i++)
+            {
+                index = random.Next(12);
+                sets.Add(list[index]);
+            }
+            return sets;
+        }
+
+        private void BtnCheckQuestionSecond_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Генерация задания 3 типа (Нахождение пересечения двух множеств)
+        /// </summary>
+        private void NewThreeTask()
+        {
+            WPMainPlaceQuestionThree.Children.Clear();
+            for (int i = 0; i < 4; i++)
+            {
+                Canvas canvas = new Canvas()
+                {
+                    Width = 350,
+                    Height = 250,
+                };
+                WPMainPlaceQuestionThree.Children.Add(canvas);
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
+                Label label = new Label()
+                {
+                    Content = (Char)(65 + i) + ")",
+                };
+                canvas.Children.Add(label);
+                Ellipse ellipseOne = ellipseGeneration.getEllipse(random.Next(100, 200), random.Next(100, 125), random.Next(20, 40), random.Next(10, 20)); // Создание первого эллипса
+                ellipseOne.MouseDown += Ellipse_MouseDown;
+                canvas.Children.Add(ellipseOne);
+                Ellipse ellipseTwo = ellipseGeneration.getEllipse(random.Next(100, 200), random.Next(100, 125), random.Next(80, 100), random.Next(0, 10)); // Создание второго эллипса
+                ellipseTwo.MouseDown += Ellipse_MouseDown;
+                canvas.Children.Add(ellipseTwo);
+                Ellipse ellipseThree = ellipseGeneration.getEllipse(random.Next(100, 200), random.Next(100, 125), random.Next(40, 60), random.Next(40, 50)); // Создание третьего эллипса
+                ellipseThree.MouseDown += Ellipse_MouseDown;
+                canvas.Children.Add(ellipseThree);
+                Path combinedPathOne = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание первого пересечения
+                combinedPathOne.MouseDown += Ellipse_MouseDown;
+                canvas.Children.Add(combinedPathOne);
+                Path combinedPathTwo = ellipseGeneration.getUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect); // Создание второго пересечения
+                combinedPathTwo.MouseDown += Ellipse_MouseDown;
+                canvas.Children.Add(combinedPathTwo);
+                Path combinedPathThree = ellipseGeneration.getUnification(ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание третьего пересечения
+                combinedPathThree.MouseDown += Ellipse_MouseDown;
+                canvas.Children.Add(combinedPathThree);
+                Path combinedPathFour = ellipseGeneration.getUnificationThree(ellipseOne, ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание общего пересечения
+                combinedPathFour.MouseDown += Ellipse_MouseDown;
+                canvas.Children.Add(combinedPathFour);
+            }
+        }
+
+        private void BtnCheckQuestionThree_Click(object sender, RoutedEventArgs e)
+        {
+            EllipseGeneration ellipseGeneration = new EllipseGeneration();
+            List<int[]> errors = new List<int[]>(); // Массив ошибок
+            for (int i = 0; i < WPMainPlaceQuestionThree.Children.Count; i++) // Проверка каждого пункта
+            {
+                Canvas canvas = (Canvas)WPMainPlaceQuestionThree.Children[i];
+                Ellipse ellipseOne = (Ellipse)canvas.Children[1];
+                Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
+                Ellipse ellipseThree= (Ellipse)canvas.Children[3];
+                Path pathOne = (Path)canvas.Children[4];
+                Path pathTwo = (Path)canvas.Children[5];
+                Path pathThree = (Path)canvas.Children[6];
+                Path pathFour = (Path)canvas.Children[7];
+                if (pathFour.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
+                {
+                    if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White) // Если выделено лишнее
+                    {
+                        errors.Add(ellipseGeneration.getDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
+                    }
+                }
+                else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White || pathFour.Fill != Brushes.Yellow) // Если выделено не только пересечение
+                {
+                    errors.Add(ellipseGeneration.getDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
+                }
+            }
+            if (errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
+            {
+                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(3, errors);
                 resultIntersectionSetsWindow.ShowDialog();
             }
             else
