@@ -94,7 +94,7 @@ namespace MathSets
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        /// <returns>Эллипс с заданными начальной позицией и вертикальным положением</returns>
         public Geometry CreateEllipseTransformY(int x, bool isUp)
         {
             int transformY = 3;
@@ -117,7 +117,7 @@ namespace MathSets
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        /// <returns>Эллипс с заданными начальной позицией и вертикальным положением</returns>
         public Geometry CreateEllipseTransformX(int x, bool isUp)
         {
             int transformX = 3;
@@ -237,20 +237,6 @@ namespace MathSets
         }
 
         /// <summary>
-        /// Генерирует множество в виде эллипса
-        /// </summary>
-        /// <param name="panel">контейнер</param>
-        /// <returns>Эллипс (множество)</returns>
-        public static Geometry CreateSet(Panel panel)
-        {
-            double sizeFigure = panel.Height * 1.5;
-            double xStart = (panel.Width / 2) + (panel.Width / 2 - sizeFigure) / 2;
-
-            return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).
-                CreateEllipseTransformY((int)xStart, true);
-        }
-
-        /// <summary>
         /// Генерирует случайную координату Y для фигуры в зависимости от её вертикального расположения
         /// </summary>
         /// <param name="IsUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
@@ -362,29 +348,53 @@ namespace MathSets
             return indexesFigures;
         }
 
+#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
         /// <summary>
         /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
         /// </summary>
         /// <param name="text">текст для преобразования в фигуру</param>
-        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
-        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
         /// <returns>Фигура, созданная на основании заданного текста</returns>
-        public Geometry GetGeometryFromText(string text, int x, bool isUp)
+        public Geometry GetGeometryFromText(string text)
         {
-#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
             FormattedText formattedText = new FormattedText
             (
                 text,
                 CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface("Arial"),
+                new Typeface("Comic Sans MS"),
                 _sizeFigures,
-                (Brush)new BrushConverter().ConvertFrom("#F14C18")
+                (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
             );
-#pragma warning restore CS0618 // Для возобновления предупреждений об устаревших конструкциях
 
-            return formattedText.BuildGeometry(new Point(x, GetCoordinateY(isUp) - _sizeFigures));
+            return formattedText.BuildGeometry(new Point
+                (
+                    s_random.Next(Base.StrokeThickness, _widthContainer - _sizeFigures),
+                    s_random.Next(Base.StrokeThickness + 1, _heightContainer - _sizeFigures - Base.StrokeThickness)
+                ));
         }
+
+        /// <summary>
+        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
+        /// </summary>
+        /// <param name="text">текст для преобразования в фигуру</param>
+        /// <param name="x">позиция на оси Х</param>
+        /// <param name="y">позиция на оси Y</param>
+        /// <returns>Фигура, созданная на основании заданного текста</returns>
+        public Geometry GetGeometryFromText(string text, int x, int y)
+        {
+            FormattedText formattedText = new FormattedText
+            (
+                text,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Comic Sans MS"),
+                _sizeFigures,
+                Brushes.Black // Данное поле изменяется при создании объекта Path.
+            );
+
+            return formattedText.BuildGeometry(new Point(x, y));
+        }
+#pragma warning restore CS0618 // Для возобновления предупреждений об устаревших конструкциях
 
         /// <summary>
         /// Проверяет вхождение переданных фигур в заданную фигуру (множество)
@@ -393,7 +403,7 @@ namespace MathSets
         /// <param name="figures">фигуры для перемещения</param>
         /// <param name="set">фигура (множество), в которую перемещают прочие фигуры</param>
         /// <returns>true - перемещение выполнено верно, в противном случае - false</returns>
-        public static bool CheckOccurrencesFigures(List<int> indexesAnswers, List<Geometry> figures, Geometry set)
+        public static bool CheckOccurrencesFiguresInSet(List<int> indexesAnswers, List<Geometry> figures, Geometry set)
         {
             int countRightAnswer = 0;
 
@@ -430,12 +440,12 @@ namespace MathSets
         /// <param name="indexesAnswers">список индектов "верных" фигур</param>
         /// <param name="canvas">контейнер</param>
         /// <returns>true - перемещение выполнено верно, в противном случае - false</returns>
-        public static bool CheckOccurrencesFigures(List<int> indexesAnswers, Canvas canvas)
+        public static bool CheckOccurrencesFiguresInSet(List<int> indexesAnswers, Canvas canvas)
         {
             int countRightAnswer = 0;
             List<Geometry> figures = new List<Geometry>();
 
-            for (int i = 0; i < canvas.Children.Count; i++)
+            for (int i = 1; i < canvas.Children.Count; i++)
             {
                 Path p = (Path)canvas.Children[i];
                 figures.Add(p.Data);
@@ -463,6 +473,36 @@ namespace MathSets
             if (countRightAnswer == indexesAnswers.Count)
             {
                 return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Проверяет пересечение множеств и фигур между собой и друг с другом.
+        /// </summary>
+        /// <param name="figures">список фигур</param>
+        /// <param name="sets">список множеств</param>
+        /// <returns>true, если пересечения множеств и фигур найдены, в противном случае - false</returns>
+        public static bool CheckIntersectionsFiguresAndSets(List<Geometry> figures, List<Geometry> sets)
+        {
+            for (int i = 0; i < figures.Count; i++)
+            {
+                for (int j = i + 1; j < figures.Count; j++)
+                {
+                    if (figures[i].FillContainsWithDetail(figures[j]) == IntersectionDetail.Intersects)
+                    {
+                        return true;
+                    }
+                }
+
+                foreach (Geometry set in sets)
+                {
+                    if (figures[i].FillContainsWithDetail(set) == IntersectionDetail.Intersects)
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;

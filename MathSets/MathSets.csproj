@@ -68,6 +68,9 @@
     <Compile Include="windows\CorrectResult.xaml.cs">
       <DependentUpon>CorrectResult.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\HintLessonFourAndFive.xaml.cs">
+      <DependentUpon>HintLessonFourAndFive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\HintSplittingSetsWindow.xaml.cs">
       <DependentUpon>HintSplittingSetsWindow.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\CorrectResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\HintLessonFourAndFive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
