@@ -62,6 +62,9 @@
     <Compile Include="pages\LessonFourAndFive.xaml.cs">
       <DependentUpon>LessonFourAndFive.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\LessonSix.xaml.cs">
+      <DependentUpon>LessonSix.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\SplittingSetsSolvingTasks.xaml.cs">
       <DependentUpon>SplittingSetsSolvingTasks.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\LessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\LessonSix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
