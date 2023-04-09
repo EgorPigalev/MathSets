@@ -289,17 +289,33 @@ namespace MathSets.pages
 
         private void MenuSaved_Click(object sender, RoutedEventArgs e)
         {
-
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
         }
 
         private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
         {
-
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
         }
 
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
         {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
 
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    ShowFirstRandomTask();
+                   
+                    break;
+                case 2:
+                    ShowSecondRandomTask();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

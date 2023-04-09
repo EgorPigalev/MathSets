@@ -34,7 +34,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="6*" ></ColumnDefinition>
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
-                                
+                                <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition ></RowDefinition>
@@ -44,7 +44,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"  Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="0,0,0,0">Какой из объектов принадлежит множеству предметов, которые лежат в портфеле ?
                             </TextBlock>
-                            <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
                                 <MenuItem Uid="1" Header="..." >
                                     <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
                                     <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
@@ -61,7 +61,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="6*" ></ColumnDefinition>
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
-
+                                <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition ></RowDefinition>
@@ -72,7 +72,7 @@
                             <TextBlock Name="TextBlockTask" Grid.Row="0"  Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="0,0,0,0">
                             </TextBlock>
 
-                            <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
                                 <MenuItem Uid="1" Header="..." >
                                     <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
                                     <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
