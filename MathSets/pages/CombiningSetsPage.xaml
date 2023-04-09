@@ -1,0 +1,103 @@
+﻿<Page x:Class="MathSets.pages.CombiningSetsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MathSets.pages"
+      mc:Ignorable="d" Style="{StaticResource PageMainStyle}"
+      d:DesignHeight="550" d:DesignWidth="1000"
+      Title="CombiningSetsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Style="{StaticResource BorderHeader}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Объединение множеств. Свойства объединения." Style="{StaticResource LabelHeaderText}" Grid.Row="0"/>
+                <Button Grid.Column="1" Name="BtnHint" Content="?" Style="{StaticResource ButtonMainStyle}" Margin="0 2 20 2" Click="BtnHint_Click"/>
+            </Grid>
+           
+        </Border>
+        <Grid Grid.Row="1" >
+            <Border Style="{StaticResource BorderMain}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="0 5 0 0">
+                                    <TextBlock Name="TbCondition"/>
+                                </StackPanel>
+                                <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
+                                    <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                                        <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                                        <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                                    </MenuItem>
+                                </Menu>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <StackPanel>
+                                    <Canvas Name="Cnv" Width="450" Height="200">
+                                    </Canvas>
+                                    <Button Name="BtnCheck" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Name="TbCondition2"/>
+                                </StackPanel>
+                                <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                                        <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                                        <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                                    </MenuItem>
+                                </Menu>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Canvas Name="Cnv2"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15 0 0 0" Click="BtnBack_Click"/>
+        </Grid>
+    </Grid>
+</Page>
