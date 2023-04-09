@@ -14,21 +14,24 @@ namespace MathSets.pages
     /// </summary>
     public partial class LessonFourAndFive : Page
     {
-        Random _random = new Random();
+        private Random _random = new Random();
         private Path _pathToMoved; // Фигура для перемещения.
-        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
+        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры).
 
-        private List<int> _indexesAnswersQuestionFirst = new List<int>(); // Индексы верных ответов (верных фигур) для первого задания.
-        private List<Geometry> _figuresQuestionFirst; // Фигуры для первого задания.
-        private Geometry _setQuestionFirst; // Множество для первого задания.
-        List<Point> _pointsQuestionFirst = new List<Point>(); // Точки для первого задания (для перемещения фигур).
+        // Поля для первого задания
+        private List<int> _indexesAnswersQuestionFirst = new List<int>(); // Индексы верных ответов (верных фигур).
+        private List<Geometry> _figuresQuestionFirst; // Фигуры.
+        private Geometry _setQuestionFirst; // Множество.
+        private List<Point> _pointsToMovedQuestionFirst = new List<Point>(); // Точки для перемещения фигур.
 
-        private List<Geometry> _figuresQuestionSecond; // Фигуры для второго задания.
-        private List<Geometry> _setsQuestionSecond; // Множества для второго задания.
+        // Поля для второго задания
+        private List<Geometry> _figuresQuestionSecond; // Фигуры.
+        private List<Geometry> _setsQuestionSecond; // Множества.
 
-        private List<Geometry> _figuresQuestionThree; // Фигуры для третьего задания.
-        private List<Geometry> _setsQuestionThree; // Множества для третьего задания.
-        List<Point> _pointsQuestionThree = new List<Point>(); // Точки для третьего задания (для перемещения фигур).
+        // Поля для третьего задания
+        private List<Geometry> _figuresQuestionThree; // Фигуры.
+        private List<Geometry> _setsQuestionThree; // Множества.
+        private List<Point> _pointsToMovedQuestionThree = new List<Point>(); // Точки для перемещения фигур.
 
         public LessonFourAndFive()
         {
@@ -46,11 +49,11 @@ namespace MathSets.pages
         {
             CnvQuestionFirst.Children.Clear();
             SpFiguresQuestionFirst.Children.Clear();
+
             int countRigthAnswers = 3; // Количество элементов в изначально заданном множестве, которое нужно отобразить (множестве по заданию).
 
             _setQuestionFirst = CreateSet(CnvQuestionFirst);
             _figuresQuestionFirst = CreateFiguresQuestionFirst();
-
 
             ShowFigures(CreateAnswersQuestionFirst(countRigthAnswers), SpFiguresQuestionFirst);
             ShowFigures(new List<Geometry>() { _setQuestionFirst }, CnvQuestionFirst);
@@ -67,6 +70,7 @@ namespace MathSets.pages
             CnvQuestionSecond.Children.Clear();
             SpQuestionSecondSetA.Children.Clear();
             SpQuestionSecondSetB.Children.Clear();
+
             int countNumbers = 5; // Количество элементов множества.
 
             _setsQuestionSecond = CreateSets(CnvQuestionSecond);
@@ -87,6 +91,7 @@ namespace MathSets.pages
             CnvQuestionThree.Children.Clear();
             SpQuestionThreeSetA.Children.Clear();
             SpQuestionThreeSetB.Children.Clear();
+
             int countNumbers = 5; // Количество элементов множества.
 
             _setsQuestionThree = CreateSets(CnvQuestionThree);
@@ -95,8 +100,8 @@ namespace MathSets.pages
             ShowFigures(_setsQuestionThree, CnvQuestionThree);
             ShowFigures(_figuresQuestionThree, CnvQuestionThree);
 
-            ShowStackPanelConditionsQuestionThree(SpQuestionThreeSetA, 'A', countNumbers);
-            ShowStackPanelConditionsQuestionThree(SpQuestionThreeSetB, 'B', countNumbers);
+            ShowConditionsQuestionThree(SpQuestionThreeSetA, 'A', countNumbers);
+            ShowConditionsQuestionThree(SpQuestionThreeSetB, 'B', countNumbers);
 
             SetHandlersQuestionThree();
         }
@@ -223,10 +228,10 @@ namespace MathSets.pages
                 }
             }
 
-            _pointsQuestionFirst.Clear();
+            _pointsToMovedQuestionFirst.Clear();
             for (int i = 0; i < figures.Count; i++)
             {
-                _pointsQuestionFirst.Add(new Point(0, 0));
+                _pointsToMovedQuestionFirst.Add(new Point(0, 0));
             }
 
             SortForDefaultPosition(figures, indexesFigures);
@@ -298,9 +303,9 @@ namespace MathSets.pages
                 {
                     int id = Convert.ToInt32(_pathToMoved.Uid);
 
-                    _pointsQuestionFirst[id] = GetOffsetFigure(_pointsQuestionFirst[id], e.GetPosition(CnvQuestionFirst));
+                    _pointsToMovedQuestionFirst[id] = GetOffsetFigure(_pointsToMovedQuestionFirst[id], e.GetPosition(CnvQuestionFirst));
 
-                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsQuestionFirst[id].X, _pointsQuestionFirst[id].Y);
+                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedQuestionFirst[id].X, _pointsToMovedQuestionFirst[id].Y);
                 }
             }
         }
@@ -545,10 +550,10 @@ namespace MathSets.pages
                 x += offset;
             }
 
-            _pointsQuestionThree.Clear();
+            _pointsToMovedQuestionThree.Clear();
             for (int i = 0; i < figures.Count; i++)
             {
-                _pointsQuestionThree.Add(new Point(0, 0));
+                _pointsToMovedQuestionThree.Add(new Point(0, 0));
             }
 
             return figures;
@@ -560,7 +565,7 @@ namespace MathSets.pages
         /// <param name="panel">контейнер</param>
         /// <param name="set">название множества</param>
         /// <param name="count">общее количество элементов множеств</param>
-        private void ShowStackPanelConditionsQuestionThree(StackPanel panel, char set, int count)
+        private void ShowConditionsQuestionThree(StackPanel panel, char set, int count)
         {
             for (int i = 0; i < count; i++)
             {
@@ -645,9 +650,9 @@ namespace MathSets.pages
                 {
                     int id = Convert.ToInt32(_pathToMoved.Uid);
 
-                    _pointsQuestionThree[id] = GetOffsetFigure(_pointsQuestionThree[id], e.GetPosition(CnvQuestionThree));
+                    _pointsToMovedQuestionThree[id] = GetOffsetFigure(_pointsToMovedQuestionThree[id], e.GetPosition(CnvQuestionThree));
 
-                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsQuestionThree[id].X, _pointsQuestionThree[id].Y);
+                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedQuestionThree[id].X, _pointsToMovedQuestionThree[id].Y);
                 }
             }
         }
