@@ -116,7 +116,7 @@ namespace MathSets.pages
                 new Figure(60, 0, 0).GetGeometryFromText("A", (int)panel.Width - 60, -20)
             },
             CnvQuestionFirst,
-            Brushes.Black,
+            Brushes.White,
             Brushes.Black);
 
             return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).
@@ -204,6 +204,7 @@ namespace MathSets.pages
             int sizeFigures = 70;
             Figure figure = new Figure(sizeFigures, CnvQuestionFirst.Height, CnvQuestionFirst.Width / 2);
             List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
+            List<int> indexesFigures = Figure.ShuffleMethods(createFiguresMethods);
 
             List<Geometry> figures = new List<Geometry>();
             int offset = figure.GetOffset(createFiguresMethods.Count);
@@ -228,7 +229,28 @@ namespace MathSets.pages
                 _pointsQuestionFirst.Add(new Point(0, 0));
             }
 
+            SortForDefaultPosition(figures, indexesFigures);
+
             return figures;
+        }
+
+        /// <summary>
+        /// Сортирует список фигур в соответствии с первоначальным списком методов их создания
+        /// </summary>
+        /// <param name="figures">списико фигур</param>
+        /// <param name="currentIndexes">индексы фигур в соответствии с первоначальным списком методов их создания</param>
+        private void SortForDefaultPosition(List<Geometry> figures, List<int> currentIndexes)
+        {
+            List<Geometry> tempList = new List<Geometry>();
+            tempList.AddRange(figures);
+            figures.Clear();
+
+            int count = tempList.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                figures.Add(tempList[currentIndexes.IndexOf(i)]);
+            }
         }
 
         /// <summary>
@@ -414,7 +436,7 @@ namespace MathSets.pages
                 figure.GetGeometryFromText("B", 470, 0)
             },
             panel,
-            Brushes.Black,
+            Brushes.White,
             Brushes.Black);
 
             return sets;
