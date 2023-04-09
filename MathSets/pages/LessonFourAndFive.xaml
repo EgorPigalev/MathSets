@@ -67,7 +67,7 @@
                                 <StackPanel Name="SpQuestionSecondSetB"/>
                             </StackPanel>
 
-                            <Canvas Name="CnvQuestionSecond" Height="280" Width="550" HorizontalAlignment="Right"/>
+                            <Canvas Name="CnvQuestionSecond" Height="280" Width="550"/>
                         </StackPanel>
                         
                         <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionSecond_Click"/>
@@ -75,6 +75,29 @@
 
                     <Menu Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
                         <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}">
+                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                        </MenuItem>
+                    </Menu>
+
+                    <StackPanel Grid.Row="2" Name="SpQuestionThree" Background="White" Margin="0 20 0 0">
+                        <TextBlock Name="TbQuestionThree" Text="3) Отметь элементы на диаграмме, если известно, что:" Margin="0 0 0 10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Width="310">
+                                <StackPanel Name="SpQuestionThreeSetA" Margin="0 0 30 0"/>
+                                <StackPanel Name="SpQuestionThreeSetB"/>
+                            </StackPanel>
+
+                            <Canvas Name="CnvQuestionThree" Height="280" Width="550"/>
+                        </StackPanel>
+
+                        <Button Name="BtnCheckQuestionThree" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionThree_Click"/>
+                    </StackPanel>
+
+                    <Menu Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
+                        <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}">
                             <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
                             <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
                             <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
