@@ -19,19 +19,19 @@ namespace MathSets.pages
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры).
 
         // Поля для первого задания
-        private List<int> _indexesAnswersQuestionFirst = new List<int>(); // Индексы верных ответов (верных фигур).
-        private List<Geometry> _figuresQuestionFirst; // Фигуры.
-        private Geometry _setQuestionFirst; // Множество.
-        private List<Point> _pointsToMovedQuestionFirst = new List<Point>(); // Точки для перемещения фигур.
+        private List<int> _indexesAnswersTaskFirst = new List<int>(); // Индексы верных ответов (верных фигур).
+        private List<Geometry> _figuresTaskFirst; // Фигуры.
+        private Geometry _setTaskFirst; // Множество.
+        private List<Point> _pointsToMovedTaskFirst = new List<Point>(); // Точки для перемещения фигур.
 
         // Поля для второго задания
-        private List<Geometry> _figuresQuestionSecond; // Фигуры.
-        private List<Geometry> _setsQuestionSecond; // Множества.
+        private List<Geometry> _figuresTaskSecond; // Фигуры.
+        private List<Geometry> _setsTaskSecond; // Множества.
 
         // Поля для третьего задания
-        private List<Geometry> _figuresQuestionThree; // Фигуры.
-        private List<Geometry> _setsQuestionThree; // Множества.
-        private List<Point> _pointsToMovedQuestionThree = new List<Point>(); // Точки для перемещения фигур.
+        private List<Geometry> _figuresTaskThree; // Фигуры.
+        private List<Geometry> _setsTaskThree; // Множества.
+        private List<Point> _pointsToMovedTaskThree = new List<Point>(); // Точки для перемещения фигур.
 
         public LessonFourAndFive()
         {
@@ -47,19 +47,19 @@ namespace MathSets.pages
         /// </summary>
         private void ShowExerciseFirst()
         {
-            CnvQuestionFirst.Children.Clear();
-            SpFiguresQuestionFirst.Children.Clear();
+            CnvTaskFirst.Children.Clear();
+            SpFiguresTaskFirst.Children.Clear();
 
             int countRigthAnswers = 3; // Количество элементов в изначально заданном множестве, которое нужно отобразить (множестве по заданию).
 
-            _setQuestionFirst = CreateSet(CnvQuestionFirst);
-            _figuresQuestionFirst = CreateFiguresQuestionFirst();
+            _setTaskFirst = CreateSet(CnvTaskFirst);
+            _figuresTaskFirst = CreateFiguresTaskFirst();
 
-            ShowFigures(CreateAnswersQuestionFirst(countRigthAnswers), SpFiguresQuestionFirst);
-            ShowFigures(new List<Geometry>() { _setQuestionFirst }, CnvQuestionFirst);
-            ShowFigures(_figuresQuestionFirst, CnvQuestionFirst);
+            ShowFigures(CreateAnswersTaskFirst(countRigthAnswers), SpFiguresTaskFirst);
+            ShowFigures(new List<Geometry>() { _setTaskFirst }, CnvTaskFirst);
+            ShowFigures(_figuresTaskFirst, CnvTaskFirst);
 
-            SetHandlersQuestionFirst();
+            SetHandlersTaskFirst();
         }
 
         /// <summary>
@@ -67,20 +67,20 @@ namespace MathSets.pages
         /// </summary>
         private void ShowExerciseSecond()
         {
-            CnvQuestionSecond.Children.Clear();
-            SpQuestionSecondSetA.Children.Clear();
-            SpQuestionSecondSetB.Children.Clear();
+            CnvTaskSecond.Children.Clear();
+            SpTaskSecondSetA.Children.Clear();
+            SpTaskSecondSetB.Children.Clear();
 
             int countNumbers = 5; // Количество элементов множества.
 
-            _setsQuestionSecond = CreateSets(CnvQuestionSecond);
-            _figuresQuestionSecond = CreateFiguresQuestionSecond(countNumbers);
+            _setsTaskSecond = CreateSets(CnvTaskSecond);
+            _figuresTaskSecond = CreateFiguresTaskSecond(countNumbers);
 
-            ShowFigures(_setsQuestionSecond, CnvQuestionSecond);
-            ShowFigures(_figuresQuestionSecond, CnvQuestionSecond);
+            ShowFigures(_setsTaskSecond, CnvTaskSecond);
+            ShowFigures(_figuresTaskSecond, CnvTaskSecond);
 
-            ShowStackPanelAnswersQuestionSecond(SpQuestionSecondSetA, 'A', countNumbers);
-            ShowStackPanelAnswersQuestionSecond(SpQuestionSecondSetB, 'B', countNumbers);
+            ShowStackPanelAnswersTaskSecond(SpTaskSecondSetA, 'A', countNumbers);
+            ShowStackPanelAnswersTaskSecond(SpTaskSecondSetB, 'B', countNumbers);
         }
 
         /// <summary>
@@ -88,22 +88,22 @@ namespace MathSets.pages
         /// </summary>
         private void ShowExerciseThree()
         {
-            CnvQuestionThree.Children.Clear();
-            SpQuestionThreeSetA.Children.Clear();
-            SpQuestionThreeSetB.Children.Clear();
+            CnvTaskThree.Children.Clear();
+            SpTaskThreeSetA.Children.Clear();
+            SpTaskThreeSetB.Children.Clear();
 
             int countNumbers = 5; // Количество элементов множества.
 
-            _setsQuestionThree = CreateSets(CnvQuestionThree);
-            _figuresQuestionThree = CreateFiguresQuestionThree(countNumbers);
+            _setsTaskThree = CreateSets(CnvTaskThree);
+            _figuresTaskThree = CreateFiguresTaskThree(countNumbers);
 
-            ShowFigures(_setsQuestionThree, CnvQuestionThree);
-            ShowFigures(_figuresQuestionThree, CnvQuestionThree);
+            ShowFigures(_setsTaskThree, CnvTaskThree);
+            ShowFigures(_figuresTaskThree, CnvTaskThree);
 
-            ShowConditionsQuestionThree(SpQuestionThreeSetA, 'A', countNumbers);
-            ShowConditionsQuestionThree(SpQuestionThreeSetB, 'B', countNumbers);
+            ShowConditionsTaskThree(SpTaskThreeSetA, 'A', countNumbers);
+            ShowConditionsTaskThree(SpTaskThreeSetB, 'B', countNumbers);
 
-            SetHandlersQuestionThree();
+            SetHandlersTaskThree();
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace MathSets.pages
             {
                 new Figure(60, 0, 0).GetGeometryFromText("A", (int)panel.Width - 60, -20)
             },
-            CnvQuestionFirst,
+            CnvTaskFirst,
             Brushes.White,
             Brushes.Black);
 
@@ -174,17 +174,17 @@ namespace MathSets.pages
         /// Генерирует ответы (3 фигуры) для первого задания
         /// </summary>
         /// <returns>Список структур, представляющий из себя пару: ключ - фигура, где ключ - целочисленный индекс из первоначального списка методов</returns>
-        private List<Geometry> CreateAnswersQuestionFirst(int count)
+        private List<Geometry> CreateAnswersTaskFirst(int count)
         {
-            int sizeFigures = (int)TbQuestionFirst.FontSize;
-            Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, SpFiguresQuestionFirst.Width);
+            int sizeFigures = (int)TbTaskFirst.FontSize;
+            Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, SpFiguresTaskFirst.Width);
             List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
             List<int> tempIndexesFigures = Figure.ShuffleMethods(createFiguresMethods);
 
-            _indexesAnswersQuestionFirst.Clear();
+            _indexesAnswersTaskFirst.Clear();
             for (int i = 0; i < count; i++)
             {
-                _indexesAnswersQuestionFirst.Add(tempIndexesFigures[i]);
+                _indexesAnswersTaskFirst.Add(tempIndexesFigures[i]);
             }
 
             List<Geometry> listFigures = new List<Geometry>();
@@ -195,7 +195,7 @@ namespace MathSets.pages
                 listFigures.Add(createFiguresMethods[i](x, true));
             }
 
-            SpFiguresQuestionFirst.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
+            SpFiguresTaskFirst.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
 
             return listFigures;
         }
@@ -204,10 +204,10 @@ namespace MathSets.pages
         /// Генерирует фигуры для первого задания
         /// </summary>
         /// <returns>Коллекция фигур</returns>
-        private List<Geometry> CreateFiguresQuestionFirst()
+        private List<Geometry> CreateFiguresTaskFirst()
         {
             int sizeFigures = 70;
-            Figure figure = new Figure(sizeFigures, CnvQuestionFirst.Height, CnvQuestionFirst.Width / 2);
+            Figure figure = new Figure(sizeFigures, CnvTaskFirst.Height, CnvTaskFirst.Width / 2);
             List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
             List<int> indexesFigures = Figure.ShuffleMethods(createFiguresMethods);
 
@@ -228,10 +228,10 @@ namespace MathSets.pages
                 }
             }
 
-            _pointsToMovedQuestionFirst.Clear();
+            _pointsToMovedTaskFirst.Clear();
             for (int i = 0; i < figures.Count; i++)
             {
-                _pointsToMovedQuestionFirst.Add(new Point(0, 0));
+                _pointsToMovedTaskFirst.Add(new Point(0, 0));
             }
 
             SortForDefaultPosition(figures, indexesFigures);
@@ -262,28 +262,28 @@ namespace MathSets.pages
         /// Устанавливает события для panel, необходимые для перемещения фигур, для первого задания
         /// </summary>
         /// <param name="panel">Контейнер</param>
-        private void SetHandlersQuestionFirst() // 2, так как вторым элементом списка является само множество, а первым - его название.
+        private void SetHandlersTaskFirst() // 2, так как вторым элементом списка является само множество, а первым - его название.
         {
-            SpQuestionFirst.MouseUp += OnMouseUpQuestionFirst;
+            SpTaskFirst.MouseUp += OnMouseUpTaskFirst;
 
-            for (int i = 2; i < CnvQuestionFirst.Children.Count; i++)
+            for (int i = 2; i < CnvTaskFirst.Children.Count; i++)
             {
-                CnvQuestionFirst.Children[i].MouseMove += OnMouseMoveQuestionFirst;
-                CnvQuestionFirst.Children[i].MouseDown += OnMouseDownQuestionFirst;
+                CnvTaskFirst.Children[i].MouseMove += OnMouseMoveTaskFirst;
+                CnvTaskFirst.Children[i].MouseDown += OnMouseDownTaskFirst;
             }
         }
 
-        private void OnMouseUpQuestionFirst(object sender, MouseButtonEventArgs e)
+        private void OnMouseUpTaskFirst(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 0; i < CnvQuestionFirst.Children.Count; i++)
+            for (int i = 0; i < CnvTaskFirst.Children.Count; i++)
             {
-                Path p = (Path)CnvQuestionFirst.Children[i];
+                Path p = (Path)CnvTaskFirst.Children[i];
                 p.Fill = Brushes.White;
                 _pathToMoved = null;
             }
         }
 
-        private void OnMouseDownQuestionFirst(object sender, MouseButtonEventArgs e)
+        private void OnMouseDownTaskFirst(object sender, MouseButtonEventArgs e)
         {
             Path path = (Path)sender;
 
@@ -291,11 +291,11 @@ namespace MathSets.pages
             {
                 path.Fill = Brushes.Gray;
                 _pathToMoved = path;
-                _oldMouseCoordinate = e.GetPosition(CnvQuestionFirst);
+                _oldMouseCoordinate = e.GetPosition(CnvTaskFirst);
             }
         }
 
-        private void OnMouseMoveQuestionFirst(object sender, MouseEventArgs e)
+        private void OnMouseMoveTaskFirst(object sender, MouseEventArgs e)
         {
             if (_pathToMoved != null)
             {
@@ -303,9 +303,9 @@ namespace MathSets.pages
                 {
                     int id = Convert.ToInt32(_pathToMoved.Uid);
 
-                    _pointsToMovedQuestionFirst[id] = GetOffsetFigure(_pointsToMovedQuestionFirst[id], e.GetPosition(CnvQuestionFirst));
+                    _pointsToMovedTaskFirst[id] = GetOffsetFigure(_pointsToMovedTaskFirst[id], e.GetPosition(CnvTaskFirst));
 
-                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedQuestionFirst[id].X, _pointsToMovedQuestionFirst[id].Y);
+                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedTaskFirst[id].X, _pointsToMovedTaskFirst[id].Y);
                 }
             }
         }
@@ -341,15 +341,15 @@ namespace MathSets.pages
             return point;
         }
 
-        private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
+        private void BtnCheckTaskFirst_Click(object sender, RoutedEventArgs e)
         {
-            if (Figure.CheckOccurrencesFiguresInSet(_indexesAnswersQuestionFirst, CnvQuestionFirst))
+            if (Figure.CheckOccurrencesFiguresInSet(_indexesAnswersTaskFirst, CnvTaskFirst))
             {
                 new CorrectResult().ShowDialog();
             }
             else
             {
-                new ResultLessonFourAndFive(CnvQuestionFirst, _indexesAnswersQuestionFirst).ShowDialog();
+                new ResultLessonFourAndFive(CnvTaskFirst, _indexesAnswersTaskFirst).ShowDialog();
             }
         }
 
@@ -359,7 +359,7 @@ namespace MathSets.pages
         /// <param name="panel">контейнер</param>
         /// <param name="set">название множества</param>
         /// <param name="count">общее количество элементов множеств</param>
-        private void ShowStackPanelAnswersQuestionSecond(StackPanel panel, char set, int count)
+        private void ShowStackPanelAnswersTaskSecond(StackPanel panel, char set, int count)
         {
             for (int i = 0; i < count; i++)
             {
@@ -451,10 +451,10 @@ namespace MathSets.pages
         /// Генерирует фигуры из цифр для второго задания
         /// </summary>
         /// <returns>Коллекция фигур</returns>
-        private List<Geometry> CreateFiguresQuestionSecond(int countFigures)
+        private List<Geometry> CreateFiguresTaskSecond(int countFigures)
         {
             int sizeFigures = 50;
-            Figure figure = new Figure(sizeFigures, CnvQuestionSecond.Height, CnvQuestionSecond.Width);
+            Figure figure = new Figure(sizeFigures, CnvTaskSecond.Height, CnvTaskSecond.Width);
 
             List<Geometry> figures = new List<Geometry>();
 
@@ -463,10 +463,10 @@ namespace MathSets.pages
                 figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
             }
 
-            _setsQuestionSecond.Add(((Path)CnvQuestionSecond.Children[0]).Data); // Добавление названий множеств, чтобы цифры их не перекрывали.
-            _setsQuestionSecond.Add(((Path)CnvQuestionSecond.Children[1]).Data);
+            _setsTaskSecond.Add(((Path)CnvTaskSecond.Children[0]).Data); // Добавление названий множеств, чтобы цифры их не перекрывали.
+            _setsTaskSecond.Add(((Path)CnvTaskSecond.Children[1]).Data);
 
-            while (Figure.CheckIntersectionsFiguresAndSets(figures, _setsQuestionSecond))
+            while (Figure.CheckIntersectionsFiguresAndSets(figures, _setsTaskSecond))
             {
                 figures.Clear();
 
@@ -476,18 +476,18 @@ namespace MathSets.pages
                 }
             }
 
-            _setsQuestionSecond.Remove(((Path)CnvQuestionSecond.Children[0]).Data); // Удаление добавленных названий множеств
-            _setsQuestionSecond.Remove(((Path)CnvQuestionSecond.Children[1]).Data);
+            _setsTaskSecond.Remove(((Path)CnvTaskSecond.Children[0]).Data); // Удаление добавленных названий множеств
+            _setsTaskSecond.Remove(((Path)CnvTaskSecond.Children[1]).Data);
 
             return figures;
         }
 
-        private void BtnCheckQuestionSecond_Click(object sender, RoutedEventArgs e)
+        private void BtnCheckTaskSecond_Click(object sender, RoutedEventArgs e)
         {
             List<List<int>> indexesErrors = new List<List<int>>()
             {
-                GetErrorsQuestionSecond(SpQuestionSecondSetA, _setsQuestionSecond[0]),
-                GetErrorsQuestionSecond(SpQuestionSecondSetB, _setsQuestionSecond[1])
+                GetErrorsTaskSecond(SpTaskSecondSetA, _setsTaskSecond[0]),
+                GetErrorsTaskSecond(SpTaskSecondSetB, _setsTaskSecond[1])
             };
 
             if (indexesErrors[0].Count == 0 && indexesErrors[1].Count == 0)
@@ -496,7 +496,7 @@ namespace MathSets.pages
             }
             else
             {
-                //new ResultLessonFourAndFive(CnvQuestionSecond, indexesErrors).ShowDialog();
+                //new ResultLessonFourAndFive(CnvTaskSecond, indexesErrors).ShowDialog();
             }
         }
 
@@ -506,7 +506,7 @@ namespace MathSets.pages
         /// <param name="panel">контейнер</param>
         /// <param name="set">множество</param>
         /// <returns>Список неверных индексов</returns>
-        private List<int> GetErrorsQuestionSecond(Panel panel, Geometry set)
+        private List<int> GetErrorsTaskSecond(Panel panel, Geometry set)
         {
             List<int> indexesErrors = new List<int>();
 
@@ -515,11 +515,11 @@ namespace MathSets.pages
                 StackPanel sp = (StackPanel)panel.Children[i];
                 ComboBox cb = (ComboBox)sp.Children[1];
 
-                if (cb.SelectedIndex == 0 && set.FillContainsWithDetail(_figuresQuestionSecond[i]) != IntersectionDetail.FullyContains)
+                if (cb.SelectedIndex == 0 && set.FillContainsWithDetail(_figuresTaskSecond[i]) != IntersectionDetail.FullyContains)
                 {
                     indexesErrors.Add(i);
                 }
-                else if (cb.SelectedIndex == 1 && set.FillContainsWithDetail(_figuresQuestionSecond[i]) != IntersectionDetail.Empty)
+                else if (cb.SelectedIndex == 1 && set.FillContainsWithDetail(_figuresTaskSecond[i]) != IntersectionDetail.Empty)
                 {
                     indexesErrors.Add(i);
                 }
@@ -536,7 +536,7 @@ namespace MathSets.pages
         /// Генерирует фигуры из цифр для третьего задания
         /// </summary>
         /// <returns>Коллекция фигур</returns>
-        private List<Geometry> CreateFiguresQuestionThree(int countFigures)
+        private List<Geometry> CreateFiguresTaskThree(int countFigures)
         {
             int sizeFigures = 50;
             int x = Base.StrokeThickness + 200;
@@ -546,14 +546,14 @@ namespace MathSets.pages
 
             for (int i = 0; i < countFigures; i++)
             {
-                figures.Add(figure.GetGeometryFromText((i + 1).ToString(), x, (int)CnvQuestionThree.Height - sizeFigures - Base.StrokeThickness * 4));
+                figures.Add(figure.GetGeometryFromText((i + 1).ToString(), x, (int)CnvTaskThree.Height - sizeFigures - Base.StrokeThickness * 4));
                 x += offset;
             }
 
-            _pointsToMovedQuestionThree.Clear();
+            _pointsToMovedTaskThree.Clear();
             for (int i = 0; i < figures.Count; i++)
             {
-                _pointsToMovedQuestionThree.Add(new Point(0, 0));
+                _pointsToMovedTaskThree.Add(new Point(0, 0));
             }
 
             return figures;
@@ -565,7 +565,7 @@ namespace MathSets.pages
         /// <param name="panel">контейнер</param>
         /// <param name="set">название множества</param>
         /// <param name="count">общее количество элементов множеств</param>
-        private void ShowConditionsQuestionThree(StackPanel panel, char set, int count)
+        private void ShowConditionsTaskThree(StackPanel panel, char set, int count)
         {
             for (int i = 0; i < count; i++)
             {
@@ -609,28 +609,28 @@ namespace MathSets.pages
          /// Устанавливает события для panel, необходимые для перемещения фигур, для третьего задания
          /// </summary>
          /// <param name="panel">Контейнер</param>
-        private void SetHandlersQuestionThree() // 2, так как вторым элементом списка является само множество, а первым - его название.
+        private void SetHandlersTaskThree() // 2, так как вторым элементом списка является само множество, а первым - его название.
         {
-            SpQuestionThree.MouseUp += OnMouseUpQuestionThree;
+            SpTaskThree.MouseUp += OnMouseUpTaskThree;
 
-            for (int i = 5; i < CnvQuestionThree.Children.Count; i++) // i = 5, так как сами фигуры начинаются с 5-й позиции.
+            for (int i = 5; i < CnvTaskThree.Children.Count; i++) // i = 5, так как сами фигуры начинаются с 5-й позиции.
             {
-                CnvQuestionThree.Children[i].MouseMove += OnMouseMoveQuestionThree;
-                CnvQuestionThree.Children[i].MouseDown += OnMouseDownQuestionThree;
+                CnvTaskThree.Children[i].MouseMove += OnMouseMoveTaskThree;
+                CnvTaskThree.Children[i].MouseDown += OnMouseDownTaskThree;
             }
         }
 
-        private void OnMouseUpQuestionThree(object sender, MouseButtonEventArgs e)
+        private void OnMouseUpTaskThree(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 0; i < CnvQuestionThree.Children.Count; i++)
+            for (int i = 0; i < CnvTaskThree.Children.Count; i++)
             {
-                Path p = (Path)CnvQuestionThree.Children[i];
+                Path p = (Path)CnvTaskThree.Children[i];
                 p.Fill = Brushes.White;
                 _pathToMoved = null;
             }
         }
 
-        private void OnMouseDownQuestionThree(object sender, MouseButtonEventArgs e)
+        private void OnMouseDownTaskThree(object sender, MouseButtonEventArgs e)
         {
             Path path = (Path)sender;
 
@@ -638,11 +638,11 @@ namespace MathSets.pages
             {
                 path.Fill = Brushes.Gray;
                 _pathToMoved = path;
-                _oldMouseCoordinate = e.GetPosition(CnvQuestionThree);
+                _oldMouseCoordinate = e.GetPosition(CnvTaskThree);
             }
         }
 
-        private void OnMouseMoveQuestionThree(object sender, MouseEventArgs e)
+        private void OnMouseMoveTaskThree(object sender, MouseEventArgs e)
         {
             if (_pathToMoved != null)
             {
@@ -650,19 +650,19 @@ namespace MathSets.pages
                 {
                     int id = Convert.ToInt32(_pathToMoved.Uid);
 
-                    _pointsToMovedQuestionThree[id] = GetOffsetFigure(_pointsToMovedQuestionThree[id], e.GetPosition(CnvQuestionThree));
+                    _pointsToMovedTaskThree[id] = GetOffsetFigure(_pointsToMovedTaskThree[id], e.GetPosition(CnvTaskThree));
 
-                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedQuestionThree[id].X, _pointsToMovedQuestionThree[id].Y);
+                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedTaskThree[id].X, _pointsToMovedTaskThree[id].Y);
                 }
             }
         }
 
-        private void BtnCheckQuestionThree_Click(object sender, RoutedEventArgs e)
+        private void BtnCheckTaskThree_Click(object sender, RoutedEventArgs e)
         {
             List<List<int>> indexesErrors = new List<List<int>>()
             {
-                GetErrorsQuestionThree(SpQuestionThreeSetA, _setsQuestionThree[0]),
-                GetErrorsQuestionThree(SpQuestionThreeSetB, _setsQuestionThree[1])
+                GetErrorsTaskThree(SpTaskThreeSetA, _setsTaskThree[0]),
+                GetErrorsTaskThree(SpTaskThreeSetB, _setsTaskThree[1])
             };
 
             if (indexesErrors[0].Count == 0 && indexesErrors[1].Count == 0)
@@ -681,7 +681,7 @@ namespace MathSets.pages
         /// <param name="panel">контейнер</param>
         /// <param name="set">множество</param>
         /// <returns>Список неверных индексов</returns>
-        private List<int> GetErrorsQuestionThree(Panel panel, Geometry set)
+        private List<int> GetErrorsTaskThree(Panel panel, Geometry set)
         {
             List<int> indexesErrors = new List<int>();
 
@@ -690,11 +690,11 @@ namespace MathSets.pages
                 StackPanel sp = (StackPanel)panel.Children[i];
                 TextBlock tb = (TextBlock)sp.Children[1];
 
-                if (tb.Text == "∈" && set.FillContainsWithDetail(_figuresQuestionThree[i]) != IntersectionDetail.FullyContains)
+                if (tb.Text == "∈" && set.FillContainsWithDetail(_figuresTaskThree[i]) != IntersectionDetail.FullyContains)
                 {
                     indexesErrors.Add(i);
                 }
-                else if (tb.Text == "∉" && set.FillContainsWithDetail(_figuresQuestionThree[i]) != IntersectionDetail.Empty)
+                else if (tb.Text == "∉" && set.FillContainsWithDetail(_figuresTaskThree[i]) != IntersectionDetail.Empty)
                 {
                     indexesErrors.Add(i);
                 }
