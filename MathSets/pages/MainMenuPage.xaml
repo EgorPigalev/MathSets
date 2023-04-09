@@ -37,12 +37,12 @@
                     </Grid>
                     <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" Margin="10, 0, 0, 0"/>
                 </StackPanel>
-                <StackPanel Style="{StaticResource SPTopics}">
+                <StackPanel Name="SpLessonSix" Style="{StaticResource SPTopics}" MouseDown="SpLessonSix_MouseDown">
                     <Grid>
                         <Ellipse Style="{StaticResource EllipseTopicNumber}"/>
                         <Label Content="4" Style="{StaticResource LabelTopicNumber}"/>
                     </Grid>
-                    <Label Content="Тема 4" Margin="10, 0, 0, 0"/>
+                    <Label Content="Подмножество. Знаки ⊂ и ⊄" Margin="10, 0, 0, 0"/>
                 </StackPanel>
                 <StackPanel Name="SPIntersectionSets" Style="{StaticResource SPTopics}" MouseDown="SPIntersectionSets_MouseDown">
                     <Grid>

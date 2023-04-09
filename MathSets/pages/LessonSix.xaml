@@ -42,9 +42,9 @@
 
                     <StackPanel Name="SpTaskFirst" Background="White">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="TbTaskFirst" Text="1) Укажи, есть ли подмножества на приведённых ниже рисунках."/>
+                            <TextBlock Name="TbTaskFirst" Text="1) Укажи, есть ли подмножества на приведённых ниже рисунках. Принимай каждый эллипс за отдельное множество."/>
                         </StackPanel>
-                        <Canvas Name="CnvTaskFirst" Height="600" Width="870" Margin="0 10 0 10" Background="AntiqueWhite"/>
+                        <Grid Name="GridTaskFirst" Height="600" Width="870" Margin="0 10 0 10"/>
                         <Button Name="BtnCheckTaskFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckTaskFirst_Click"/>
                     </StackPanel>
 
