@@ -58,7 +58,7 @@
                                 <StackPanel Grid.Column="1" HorizontalAlignment="Left">
                                     <TextBlock Text="A ∪ B" HorizontalAlignment="Center" Foreground="{StaticResource SecondaryColor}"/>
                                     <Canvas Name="Cnv" Width="400" Height="200">
-                                        <TextBlock Text="A" Margin="30 10"/>
+                                        <TextBlock Text="A" Margin="20 10"/>
                                         <TextBlock Text="B" Margin="370 5"/>
                                         <Ellipse Name="EllipseOne" Width="190" Height="130" StrokeThickness="2" Stroke="Red" Margin="15 15"/>
                                         <Ellipse Name="EllipseTwo" Width="260" Height="160" StrokeThickness="2" Stroke="Red" Margin="135 5"/>
