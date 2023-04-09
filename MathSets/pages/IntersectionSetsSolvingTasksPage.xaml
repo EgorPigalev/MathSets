@@ -35,6 +35,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <StackPanel Name="SpQuestionFirst" Background="White" Grid.Row="0">
                             <TextBlock Text="1) На каждом рисунке закрась пересечение двух множеств (если пересечение отсутствует, то ничего закрашивать не нужно)." TextWrapping="Wrap" Margin="0 0 0 10"/>
@@ -50,10 +51,15 @@
                                 <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                             </MenuItem>
                         </Menu>
-                        <StackPanel Name="SpQuestionSecond" Background="White" Grid.Row="1" Margin="0 20 0 0">
-                            <TextBlock Name="TBHeader" Text="2) Даны множества M и K. Запиши с помощью фигурных скобок множество M ∩ K. Отметь элементы множеств M ∩ K на диаграмме Эйлера-Венна." TextWrapping="Wrap" Margin="0 0 0 10"/>
-                            <WrapPanel Name="WPMainPlaceQuestionSecond" HorizontalAlignment="Center" Margin="0 10 0 10">
+                        <StackPanel Name="SpQuestionSecond" Background="White" Grid.Row="1" Margin="0 20 0 0" MouseUp="OnMouseUp">
+                            <TextBlock Name="TBHeader" Text="2) Даны множества M и K. Отметь элементы множеств M ∩ K на диаграмме Эйлера-Венна." TextWrapping="Wrap" Margin="0 0 0 10"/>
+                            <StackPanel Name="SPPrimer">
                                 
+                            </StackPanel>
+                            <WrapPanel HorizontalAlignment="Center" Margin="0 10 0 10">
+                                <Canvas Name="CVMainPlaceQuestionSecond" HorizontalAlignment="Center" Height="300" Width="800">
+
+                                </Canvas>
                             </WrapPanel>
                             <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionSecond_Click"/>
                         </StackPanel>
@@ -73,6 +79,21 @@
                         </StackPanel>
                         <Menu Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
                             <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}" Cursor="Hand">
+                                <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                                <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                                <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                            </MenuItem>
+                        </Menu>
+
+                        <StackPanel Name="SpQuestionFour" Background="White" Grid.Row="3" Margin="0 20 0 0">
+                            <TextBlock Text="4) Допиши равенства, выражающие переместительное и сочетательное свойство операции пересечения множеств" TextWrapping="Wrap" Margin="0 0 0 10"/>
+                            <StackPanel Name="SPMainPlaceQuestionFour" HorizontalAlignment="Center" Margin="0 10 0 10">
+                                
+                            </StackPanel>
+                            <Button Name="BtnCheckQuestionFour" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFour_Click"/>
+                        </StackPanel>
+                        <Menu Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
+                            <MenuItem Uid="4" Header="..." Style="{StaticResource MenuStyle}" Cursor="Hand">
                                 <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
                                 <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
                                 <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>

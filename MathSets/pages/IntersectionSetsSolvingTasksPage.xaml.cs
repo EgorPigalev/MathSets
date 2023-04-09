@@ -1,6 +1,7 @@
 ﻿using MathSets.windows;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -22,6 +24,10 @@ namespace MathSets
     public partial class IntersectionSetsSolvingTasksPage : Page
     {
         Random random = new Random();
+        List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
+        private Path _pathToMoved; // Фигура для перемещения
+        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
+
         public IntersectionSetsSolvingTasksPage()
         {
             InitializeComponent();
@@ -33,11 +39,10 @@ namespace MathSets
         /// </summary>
         private void NewTasks()
         {
-
             NewOneTask();
             NewTwoTask();
             NewThreeTask();
-
+            NewFourTask();
         }
         /// <summary>
         /// Генерация задания 1 типа (выделить пересечение множеств)
@@ -173,10 +178,10 @@ namespace MathSets
                     NewThreeTask();
                     break;
                 default:
+                    NewFourTask();
                     break;
             }
         }
-
 
 
         /// <summary>
@@ -184,59 +189,346 @@ namespace MathSets
         /// </summary>
         private void NewTwoTask()
         {
-            /*
-            WPMainPlaceQuestionSecond.Children.Clear();
-            for(int i = 0; i < 2; i++)
+            CVMainPlaceQuestionSecond.Children.Clear();
+            CreateSetsQuestionSecond();
+            List<String> firstSets = new List<string>(); // Первое множество
+            List<String> secondSets = new List<string>(); // Второе множество
+            bool b = true;
+            while (b)
             {
-                StackPanel stackPanel = new StackPanel();
-                WPMainPlaceQuestionSecond.Children.Add(stackPanel);
-                List<String> firstSets;
-                List<String> secondSets;
-                while (true)
+                firstSets = getSets(); // Первое множество
+                secondSets = getSets(); // Второе множество
+                foreach (string set in firstSets) // Проверка на то, что в двух множествах есть хотя бы одно пересечение
                 {
-                    firstSets = getSets(); // Первое множество
-                    secondSets = getSets(); // Второе множество
-                    foreach(string set in firstSets) // Проверка на то, что в двух множествах есть хотя бы одно пересечение
+                    foreach (string set2 in secondSets)
                     {
-                        foreach(string set2 in secondSets)
+                        if (set.Equals(set2))
                         {
-                            if(set.Equals(set2))
-                            {
-                                break;
-                            }
+                            b = false;
                         }
                     }
                 }
-                StackPanel setsM = new StackPanel()
-                {
-                    Orientation = Orientation.Horizontal
-                };
-                stackPanel.Children.Add(setsM);
-                int sizeFigures = (int)TBHeader.FontSize;
-                Figure figure = new Figure(sizeFigures, (sizeFigures + 2) * 2, setsM.Width);
-                Label textSetsM = new Label()
-                {
-                    Content = "M = {"
-                };
-                setsM.Children.Add(textSetsM);
-                foreach(string set in firstSets)
-                {
-                    if(set.Equals("треугольник"))
-                    {
-                        //figure.CreateTriangle()
-                    }
-                }
-
-                Label label = new Label()
-                {
-                    Content = (Char)(65 + i) + ")",
-                };
-
             }
-            */
+            SPPrimer.Children.Clear();
+            ShowPrimer(firstSets, 'M');
+            ShowPrimer(secondSets, 'K');
+
+            List<string> intersectionSets = GetIntersectionSets(firstSets, secondSets);
+            List<string> combiningSets = GetCombiningSets(firstSets, secondSets);
+
+            int s = 0;
+            int j = 1;
+            for (int i = 0; i < combiningSets.Count; i++)
+            {
+                Figure figure = new Figure(28, 0, 0);
+                Geometry geometry = null;
+                if(i >= 9)
+                {
+                    s = 0;
+                    j = 2;
+                }
+                switch (combiningSets[i])
+                {
+                    case ("круг"):
+                        geometry = figure.CreateCircle(40 * s, 25 + (70 * j));
+                        break;
+                    case ("треугольник"):
+                        geometry = figure.CreateTriangle(40 * s, 25 +(70 * j));
+                        break;
+                    case ("квадрат"):
+                        geometry = figure.CreateSquare(40 * s, 25 + (70 * j));
+                        break;
+                    case ("ромб"):
+                        geometry = figure.CreateRhomb(40 * s, 25 + (70 * j));
+                        break;
+                    default:
+                        geometry = GetGeometryFromText(combiningSets[i], 50, 40 * s, -30 + (70 * j));
+                        break;
+                }
+                s++;
+                Path path = new Path()
+                {
+                    StrokeThickness = Base.StrokeThickness,
+                    Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                    Data = geometry,
+                    Fill = Brushes.White,
+                };
+                path.MouseDown += OnMouseDown;
+                path.MouseMove += OnMouseMove;
+                path.Uid = i.ToString();
+                CVMainPlaceQuestionSecond.Children.Add(path);
+            }
+
+            _pointsQuestionFirst.Clear();
+            for (int i = 0; i < combiningSets.Count; i++) // Заполнение точек смещения
+            {
+                _pointsQuestionFirst.Add(new Point(0, 0));
+            }
         }
 
-        List<String> list = new List<string> { "a", "б", "в", "г", "д", "е", "ж", "з", "звезда", "треугольник", "круг" }; // Допустимые символы из которых могут состоять множества
+        /// <summary>
+        /// Получения пересечения двух множеств
+        /// </summary>
+        /// <param name="firstSets">Первое множество</param>
+        /// <param name="secondSets">Второе множество</param>
+        /// <returns>Множество полученное в результате пересечения</returns>
+        private List<string> GetIntersectionSets(List<string> firstSets, List<string> secondSets)
+        {
+            List<string> intersectionSets = new List<string>();
+            foreach (string set in firstSets)
+            {
+                foreach (string set2 in secondSets)
+                {
+                    if (set.Equals(set2))
+                    {
+                        intersectionSets.Add(set2);
+                    }
+                }
+            }
+            return intersectionSets;
+        }
+
+        /// <summary>
+        /// Получения объединения двух множеств
+        /// </summary>
+        /// <param name="firstSets">Первое множество</param>
+        /// <param name="secondSets">Второе множество</param>
+        /// <returns>Множество полученное в результате объединения</returns>
+        private List<string> GetCombiningSets(List<string> firstSets, List<string> secondSets)
+        {
+            List<string> combiningSets = new List<string>();
+            foreach (string set in firstSets)
+            {
+                combiningSets.Add(set);
+            }
+            foreach(string set2 in secondSets)
+            {
+                combiningSets.Add(set2);
+            }
+            combiningSets = combiningSets.Distinct().ToList();
+            return combiningSets;
+        }
+
+        private void ShowPrimer(List<string> sets, char textSet)
+        {
+            StackPanel setsM = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal
+            };
+            SPPrimer.Children.Add(setsM);
+            Label textSetsMOne = new Label()
+            {
+                Content = textSet + " = {"
+            };
+            setsM.Children.Add(textSetsMOne);
+            for (int i = 0; i < sets.Count; i++)
+            {
+                ShowSets(sets, i, setsM, 35);
+            }
+            Label textSetsMTwo = new Label()
+            {
+                Content = "}"
+            };
+            setsM.Children.Add(textSetsMTwo);
+        }
+
+        private void ShowFigures(StackPanel setsM, Geometry geometry)
+        {
+            Path pathFigure = new Path()
+            {
+                StrokeThickness = Base.StrokeThickness,
+                Stroke = Brushes.Black,
+                Data = geometry,
+                Fill = Brushes.White,
+            };
+            setsM.Children.Add(pathFigure);
+        }
+
+        private void ShowComma(StackPanel stackPanel)
+        {
+            Label label = new Label()
+            {
+                Content = ";",
+            };
+            stackPanel.Children.Add(label);
+        }
+
+        private void ShowSets(List<String> sets, int i, StackPanel stackPanel, int height)
+        {
+            Figure figure = new Figure(28, 0, 0);
+            Geometry geometry = null;
+            switch (sets[i])
+            {
+                case ("круг"):
+                    geometry = figure.CreateCircle(10, height);
+                    ShowFigures(stackPanel, geometry);
+                    if (i != sets.Count - 1)
+                    {
+                        ShowComma(stackPanel);
+                    }
+                    break;
+                case ("треугольник"):
+                    geometry = figure.CreateTriangle(10, height);
+                    ShowFigures(stackPanel, geometry);
+                    if (i != sets.Count - 1)
+                    {
+                        ShowComma(stackPanel);
+                    }
+                    break;
+                case ("квадрат"):
+                    geometry = figure.CreateSquare(10, height);
+                    ShowFigures(stackPanel, geometry);
+                    if (i != sets.Count - 1)
+                    {
+                        ShowComma(stackPanel);
+                    }
+                    break;
+                case ("ромб"):
+                    geometry = figure.CreateRhomb(10, height);
+                    ShowFigures(stackPanel, geometry);
+                    if (i != sets.Count - 1)
+                    {
+                        ShowComma(stackPanel);
+                    }
+                    break;
+                default:
+                    if (i == sets.Count - 1)
+                    {
+                        geometry = GetGeometryFromText(sets[i], 28, 10, 0);
+
+                    }
+                    else
+                    {
+                        geometry = GetGeometryFromText(sets[i] + ";", 28, 10, 0);
+                    }
+                    Path path = new Path()
+                    {
+                        StrokeThickness = Base.StrokeThickness,
+                        Data = geometry,
+                        Fill = Brushes.Black,
+                    };
+                    stackPanel.Children.Add(path);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Создаёт множество для второго задания
+        /// </summary>
+        private void CreateSetsQuestionSecond()
+        {
+            EllipseGeneration ellipseGeneration = new EllipseGeneration();
+            Ellipse ellipseOne = ellipseGeneration.getEllipse(250, 200, 400, 20); // Создание первого эллипса
+            ellipseOne.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+            CVMainPlaceQuestionSecond.Children.Add(ellipseOne);
+            Ellipse ellipseTwo = ellipseGeneration.getEllipse(250, 200, 500, 20); // Создание второго эллипса
+            ellipseTwo.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+            CVMainPlaceQuestionSecond.Children.Add(ellipseTwo);
+            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
+            combinedPath.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+            CVMainPlaceQuestionSecond.Children.Add(combinedPath);
+            Label firstPlenty = new Label()
+            {
+                Content = "M",
+                Margin = new Thickness(400, 10, 0, 0),
+            };
+            CVMainPlaceQuestionSecond.Children.Add(firstPlenty);
+            Label secondPlenty = new Label()
+            {
+                Content = "K",
+                Margin = new Thickness(730, 10, 0, 0),
+            };
+            CVMainPlaceQuestionSecond.Children.Add(secondPlenty);
+        }
+
+
+#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
+        /// <summary>
+        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
+        /// </summary>
+        /// <param name="text">текст для преобразования в фигуру</param>
+        /// <returns>Фигура, созданная на основании заданного текста</returns>
+        public Geometry GetGeometryFromText(string text, int _sizeFigures, int x, int y)
+        {
+            FormattedText formattedText = new FormattedText
+            (
+                text,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Comic Sans MS"),
+                _sizeFigures,
+                (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
+            );
+
+            return formattedText.BuildGeometry(new Point(x, y));
+        }
+
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            for (int i = 5; i < CVMainPlaceQuestionSecond.Children.Count; i++)
+            {
+                Path p = (Path)CVMainPlaceQuestionSecond.Children[i];
+                p.Fill = Brushes.White;
+                _pathToMoved = null;
+                p.ReleaseMouseCapture();
+            }
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Path path = (Path)sender;
+
+            if (path.Uid != string.Empty)
+            {
+                path.Fill = Brushes.Gray;
+                _pathToMoved = path;
+                _oldMouseCoordinate = e.GetPosition(CVMainPlaceQuestionSecond);
+                path.CaptureMouse(); // Захватывание мыши
+            }
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_pathToMoved != null)
+            {
+                if (_pathToMoved.Uid != "")
+                {
+                    int id = Convert.ToInt32(_pathToMoved.Uid);
+                    SetOffsetFigure(id, e.GetPosition(CVMainPlaceQuestionSecond));
+                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsQuestionFirst[id].X, _pointsQuestionFirst[id].Y);
+                }
+            }
+        }
+
+        private void SetOffsetFigure(int id, Point actualCoordinate)
+        {
+            Point tempPoint = _pointsQuestionFirst[id];
+
+            if (actualCoordinate.Y > _oldMouseCoordinate.Y)
+            {
+                tempPoint.Y++;
+            }
+            else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
+            {
+                tempPoint.Y--;
+            }
+
+            if (actualCoordinate.X > _oldMouseCoordinate.X)
+            {
+                tempPoint.X++;
+            }
+            else if (actualCoordinate.X < _oldMouseCoordinate.X)
+            {
+                tempPoint.X--;
+            }
+
+            _pointsQuestionFirst[id] = tempPoint;
+
+            _oldMouseCoordinate = actualCoordinate;
+        }
+
+        
+        List<String> list = new List<string> { "a", "б", "в", "г", "д", "е", "ж", "з", "треугольник", "квадрат", "круг", "ромб"}; // Допустимые символы из которых могут состоять множества
         /// <summary>
         /// Рандомно генерирует множество
         /// </summary>
@@ -244,19 +536,40 @@ namespace MathSets
         private List<String> getSets()
         {
             List<String> sets = new List<String>();
-            int count = random.Next(2,5);
+            int count = random.Next(4,8);
+            List<String> listChoice = getCopy(list);
             int index = 0;
             for (int i = 0; i < count; i++)
             {
-                index = random.Next(12);
-                sets.Add(list[index]);
+                index = random.Next(listChoice.Count);
+                sets.Add(listChoice[index]);
+                listChoice.RemoveAt(index);
             }
             return sets;
         }
 
         private void BtnCheckQuestionSecond_Click(object sender, RoutedEventArgs e)
         {
+            Path path = (Path)CVMainPlaceQuestionSecond.Children[2];
+            for(int i = 5; i < CVMainPlaceQuestionSecond.Children.Count; i++)
+            {
+                Path path1 = (Path)CVMainPlaceQuestionSecond.Children[i];
+                if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
+                {
+                    MessageBox.Show("dfdf");
+                }              
+            }
+            
+        }
 
+        private List<String> getCopy(List<String> list)
+        {
+            List<String> newList = new List<string>();
+            foreach (string str in list)
+            {
+                newList.Add(str);
+            }
+            return newList;
         }
 
         /// <summary>
@@ -339,6 +652,34 @@ namespace MathSets
                 CorrectResult correctResult = new CorrectResult();
                 correctResult.ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// Генерация задания 4 типа (Выбор ответа)
+        /// </summary>
+        private void NewFourTask()
+        {
+            Random random = new Random();
+            Grid grid = new Grid();
+            ColumnDefinition oneColumn = new ColumnDefinition();
+            ColumnDefinition twoColumn = new ColumnDefinition();
+            grid.ColumnDefinitions.Add(oneColumn);
+            grid.ColumnDefinitions.Add(twoColumn);
+            SPMainPlaceQuestionFour.Children.Add(grid);
+            List<char> listChar = new List<char> { 'A', 'B', 'C', 'D', 'M', 'K', 'T'};
+            List<char> chars = new List<char>();
+            for(int i = 0; i < 2; i++)
+            {
+                int j = random.Next(listChar.Count);
+                chars.Add(listChar[j]);
+                listChar.Remove(listChar[j]);    
+            }
+
+        }
+
+        private void BtnCheckQuestionFour_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
