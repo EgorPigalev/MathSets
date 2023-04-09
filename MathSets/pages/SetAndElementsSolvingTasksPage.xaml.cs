@@ -158,12 +158,6 @@ namespace MathSets.pages
             Base.MainFrame.Navigate(new MainMenuPage());
         }
 
-        private void BtnHint_Click(object sender, RoutedEventArgs e)
-        {
-            windows.HintSetElementsWindow hint = new windows.HintSetElementsWindow();
-            hint.ShowDialog();
-        }
-
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
             string strAnswer = ""; // переменна для записи ответа, который выбрал пользователь
@@ -285,6 +279,12 @@ namespace MathSets.pages
                 windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
                 resultSetAndElementsTasks.ShowDialog();
             }
+        }
+
+        private void BtnHint_Click_1(object sender, RoutedEventArgs e)
+        {
+            windows.HintSetElementsWindow hint = new windows.HintSetElementsWindow();
+            hint.ShowDialog();
         }
     }
 }
