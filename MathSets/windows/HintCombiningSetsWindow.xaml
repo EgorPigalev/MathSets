@@ -80,7 +80,7 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
+            <Button Grid.Row="2" Name="BtnBack" Content="Назад" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15" Click="BtnBack_Click"/>
         </Grid>
-        
     </Grid>
 </Window>

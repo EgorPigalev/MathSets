@@ -98,5 +98,10 @@ namespace MathSets.windows
             Cnv.Children.Add(star);
 
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
