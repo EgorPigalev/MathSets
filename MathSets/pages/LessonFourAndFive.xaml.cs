@@ -19,6 +19,7 @@ namespace MathSets.pages
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры).
 
         // Поля для первого задания
+        private int _sizeFiguresTaskFirst = 70;
         private List<int> _indexesAnswersTaskFirst = new List<int>(); // Индексы верных ответов (верных фигур).
         private List<Geometry> _figuresTaskFirst; // Фигуры.
         private Geometry _setTaskFirst; // Множество.
@@ -55,9 +56,9 @@ namespace MathSets.pages
             _setTaskFirst = CreateSet(CnvTaskFirst);
             _figuresTaskFirst = CreateFiguresTaskFirst();
 
-            ShowFigures(CreateAnswersTaskFirst(countRigthAnswers), SpFiguresTaskFirst);
-            ShowFigures(new List<Geometry>() { _setTaskFirst }, CnvTaskFirst);
-            ShowFigures(_figuresTaskFirst, CnvTaskFirst);
+            Figure.ShowFigures(CreateAnswersTaskFirst(countRigthAnswers), SpFiguresTaskFirst);
+            Figure.ShowFigures(new List<Geometry>() { _setTaskFirst }, CnvTaskFirst);
+            Figure.ShowFigures(_figuresTaskFirst, CnvTaskFirst);
 
             SetHandlersTaskFirst();
         }
@@ -76,8 +77,8 @@ namespace MathSets.pages
             _setsTaskSecond = CreateSets(CnvTaskSecond);
             _figuresTaskSecond = CreateFiguresTaskSecond(countNumbers);
 
-            ShowFigures(_setsTaskSecond, CnvTaskSecond);
-            ShowFigures(_figuresTaskSecond, CnvTaskSecond);
+            Figure.ShowFigures(_setsTaskSecond, CnvTaskSecond);
+            Figure.ShowFigures(_figuresTaskSecond, CnvTaskSecond);
 
             ShowStackPanelAnswersTaskSecond(SpTaskSecondSetA, 'A', countNumbers);
             ShowStackPanelAnswersTaskSecond(SpTaskSecondSetB, 'B', countNumbers);
@@ -97,8 +98,8 @@ namespace MathSets.pages
             _setsTaskThree = CreateSets(CnvTaskThree);
             _figuresTaskThree = CreateFiguresTaskThree(countNumbers);
 
-            ShowFigures(_setsTaskThree, CnvTaskThree);
-            ShowFigures(_figuresTaskThree, CnvTaskThree);
+            Figure.ShowFigures(_setsTaskThree, CnvTaskThree);
+            Figure.ShowFigures(_figuresTaskThree, CnvTaskThree);
 
             ShowConditionsTaskThree(SpTaskThreeSetA, 'A', countNumbers);
             ShowConditionsTaskThree(SpTaskThreeSetB, 'B', countNumbers);
@@ -116,7 +117,7 @@ namespace MathSets.pages
             double sizeFigure = panel.Height * 1.5 - Base.StrokeThickness * 2; // 1.5, потому что одна ось больше другой в 1.5 раза.
             double xStart = panel.Width / 2 + (panel.Width / 2 - sizeFigure) / 2;
 
-            ShowFigures(new List<Geometry>()
+            Figure.ShowFigures(new List<Geometry>()
             {
                 new Figure(60, 0, 0).GetGeometryFromText("A", (int)panel.Width - 60, -20)
             },
@@ -126,48 +127,6 @@ namespace MathSets.pages
 
             return new Figure((int)sizeFigure, (sizeFigure + 2) * 2, panel.Width / 2).
                 CreateEllipseTransformY((int)xStart, true);
-        }
-
-        /// <summary>
-        /// Добавляет созданные фигуры в контейнер
-        /// </summary>
-        /// <param name="figures">коллекция фигур</param>
-        /// <param name="panel">контейнер</param>
-        private void ShowFigures(List<Geometry> figures, Panel panel)
-        {
-            for (int i = 0; i < figures.Count; i++)
-            {
-                panel.Children.Add(new Path()
-                {
-                    StrokeThickness = Base.StrokeThickness,
-                    Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                    Data = figures[i],
-                    Fill = Brushes.White,
-                    Uid = i.ToString()
-                });
-            }
-        }
-
-        /// <summary>
-        /// Добавляет созданные фигуры в контейнер
-        /// </summary>
-        /// <param name="figures">коллекция фигур</param>
-        /// <param name="panel">контейнер</param>
-        /// <param name="colorFill">цвет заливки</param>
-        /// <param name="colorStroke">цвет обводки</param>
-        private void ShowFigures(List<Geometry> figures, Panel panel, SolidColorBrush colorFill, SolidColorBrush colorStroke)
-        {
-            for (int i = 0; i < figures.Count; i++)
-            {
-                panel.Children.Add(new Path()
-                {
-                    StrokeThickness = Base.StrokeThickness,
-                    Stroke = colorStroke,
-                    Data = figures[i],
-                    Fill = colorFill,
-                    Uid = i.ToString()
-                });
-            }
         }
 
         /// <summary>
@@ -206,8 +165,7 @@ namespace MathSets.pages
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresTaskFirst()
         {
-            int sizeFigures = 70;
-            Figure figure = new Figure(sizeFigures, CnvTaskFirst.Height, CnvTaskFirst.Width / 2);
+            Figure figure = new Figure(_sizeFiguresTaskFirst, CnvTaskFirst.Height, CnvTaskFirst.Width / 2);
             List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
             List<int> indexesFigures = Figure.ShuffleMethods(createFiguresMethods);
 
@@ -264,35 +222,35 @@ namespace MathSets.pages
         /// <param name="panel">Контейнер</param>
         private void SetHandlersTaskFirst()
         {
-            SpTaskFirst.MouseUp += OnMouseUpTaskFirst;
+            SpTaskFirst.MouseUp += OnMouseUp;
 
             for (int i = 2; i < CnvTaskFirst.Children.Count; i++) // i = 2, так как вторым элементом списка является само множество, а первым - его название.
             {
                 CnvTaskFirst.Children[i].MouseMove += OnMouseMoveTaskFirst;
-                CnvTaskFirst.Children[i].MouseDown += OnMouseDownTaskFirst;
+                CnvTaskFirst.Children[i].MouseDown += OnMouseDown;
             }
         }
 
-        private void OnMouseUpTaskFirst(object sender, MouseButtonEventArgs e)
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 0; i < CnvTaskFirst.Children.Count; i++)
+            if (_pathToMoved != null)
             {
-                Path p = (Path)CnvTaskFirst.Children[i];
-                p.Fill = Brushes.White;
+                _pathToMoved.Fill = Brushes.White;
+                _pathToMoved.ReleaseMouseCapture();
                 _pathToMoved = null;
-                _pathToMoved.capturem
             }
         }
 
-        private void OnMouseDownTaskFirst(object sender, MouseButtonEventArgs e)
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             Path path = (Path)sender;
 
             if (path.Uid != string.Empty)
             {
-                path.Fill = Brushes.Gray;
+                path.Fill = Base.ColorDraggableElement;
                 _pathToMoved = path;
                 _oldMouseCoordinate = e.GetPosition(CnvTaskFirst);
+                _pathToMoved.CaptureMouse();
             }
         }
 
@@ -300,14 +258,11 @@ namespace MathSets.pages
         {
             if (_pathToMoved != null)
             {
-                if (_pathToMoved.Uid != "")
-                {
-                    int id = Convert.ToInt32(_pathToMoved.Uid);
+                int id = Convert.ToInt32(_pathToMoved.Uid);
 
-                    _pointsToMovedTaskFirst[id] = GetOffsetFigure(_pointsToMovedTaskFirst[id], e.GetPosition(CnvTaskFirst));
+                _pointsToMovedTaskFirst[id] = GetOffsetFigure(_pointsToMovedTaskFirst[id], e.GetPosition(CnvTaskFirst));
 
-                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedTaskFirst[id].X, _pointsToMovedTaskFirst[id].Y);
-                }
+                _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedTaskFirst[id].X, _pointsToMovedTaskFirst[id].Y);
             }
         }
 
@@ -350,7 +305,7 @@ namespace MathSets.pages
             }
             else
             {
-                new ResultLessonFourAndFive(CnvTaskFirst, _indexesAnswersTaskFirst).ShowDialog();
+                new ResultLessonFourAndFive(CnvTaskFirst, _indexesAnswersTaskFirst, _sizeFiguresTaskFirst).ShowDialog();
             }
         }
 
@@ -436,7 +391,7 @@ namespace MathSets.pages
 
             Figure figure = new Figure(60, 0, 0); // 0, потому что эти параметры не пригодятся для объекта в данной ситуации.
 
-            ShowFigures(new List<Geometry>()
+            Figure.ShowFigures(new List<Geometry>()
             {
                 figure.GetGeometryFromText("A", 80, 0),
                 figure.GetGeometryFromText("B", 470, 0)
@@ -605,41 +560,19 @@ namespace MathSets.pages
                 panel.Children.Add(sp);
             }
         }
-        
+
         /// <summary>
-         /// Устанавливает события для panel, необходимые для перемещения фигур, для третьего задания
-         /// </summary>
-         /// <param name="panel">Контейнер</param>
+        /// Устанавливает события для panel, необходимые для перемещения фигур, для третьего задания
+        /// </summary>
+        /// <param name="panel">Контейнер</param>
         private void SetHandlersTaskThree() // 2, так как вторым элементом списка является само множество, а первым - его название.
         {
-            SpTaskThree.MouseUp += OnMouseUpTaskThree;
+            SpTaskThree.MouseUp += OnMouseUp;
 
             for (int i = 5; i < CnvTaskThree.Children.Count; i++) // i = 5, так как сами фигуры начинаются с 5-й позиции.
             {
                 CnvTaskThree.Children[i].MouseMove += OnMouseMoveTaskThree;
-                CnvTaskThree.Children[i].MouseDown += OnMouseDownTaskThree;
-            }
-        }
-
-        private void OnMouseUpTaskThree(object sender, MouseButtonEventArgs e)
-        {
-            for (int i = 0; i < CnvTaskThree.Children.Count; i++)
-            {
-                Path p = (Path)CnvTaskThree.Children[i];
-                p.Fill = Brushes.White;
-                _pathToMoved = null;
-            }
-        }
-
-        private void OnMouseDownTaskThree(object sender, MouseButtonEventArgs e)
-        {
-            Path path = (Path)sender;
-
-            if (path.Uid != string.Empty)
-            {
-                path.Fill = Brushes.Gray;
-                _pathToMoved = path;
-                _oldMouseCoordinate = e.GetPosition(CnvTaskThree);
+                CnvTaskThree.Children[i].MouseDown += OnMouseDown;
             }
         }
 
@@ -714,20 +647,25 @@ namespace MathSets.pages
             new HintLessonFourAndFive().ShowDialog();
         }
 
-        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
         {
             MenuItem childMenuItem = (MenuItem)sender;
             MenuItem menuItem = (MenuItem)childMenuItem.Parent;
 
-
-        }
-
-        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem childMenuItem = (MenuItem)sender;
-            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-
-
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)

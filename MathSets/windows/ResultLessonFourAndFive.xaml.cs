@@ -11,17 +11,9 @@ namespace MathSets.windows
     /// </summary>
     public partial class ResultLessonFourAndFive : Window
     {
-        public ResultLessonFourAndFive(Canvas canvas, List<int> indexesAndwers)
+        public ResultLessonFourAndFive(Canvas canvas, List<int> indexesAndwers, int sizeFigures)
         {
-            InitializeComponent();
-
-            LbResult.Content = "Ты допустил ошибку. Окно не готово пока";
-
-            SpResult.Children.Add(new TextBlock()
-            {
-                Text = "Верный ответ.",
-                HorizontalAlignment = HorizontalAlignment.Center,
-            });
+            Upload();
 
             Canvas cnv = new Canvas
             {
@@ -36,17 +28,64 @@ namespace MathSets.windows
                 tempList.Add((Path)item);
             }
 
-            foreach (var item in tempList)
+            for (int i = 0; i < tempList.Count; i++)
             {
-                cnv.Children.Add(new Path()
+                if (!indexesAndwers.Contains(i))
                 {
-                    StrokeThickness = Base.StrokeThickness,
-                    Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                    Data = item.Data.Clone()
-                });
+                    cnv.Children.Add(new Path()
+                    {
+                        StrokeThickness = Base.StrokeThickness,
+                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                        Data = tempList[i].Data.Clone()
+                    });
+                }
             }
 
+            Figure figure = new Figure(sizeFigures, cnv.Height, cnv.Width / 2);
+            List<CreateFiguresDelegate> tempCreateFiguresMethods = figure.GetAllCreateFiguresMethods();
+            List<CreateFiguresDelegate> createFiguresMethods = new List<CreateFiguresDelegate>();
+
+            for (int i = 0; i < tempCreateFiguresMethods.Count; i++)
+            {
+                if (indexesAndwers.Contains(i))
+                {
+                    createFiguresMethods.Add(tempCreateFiguresMethods[i]);
+                }
+            }
+
+            List<Geometry> figures = new List<Geometry>();
+            int offset = figure.GetOffset(createFiguresMethods.Count);
+            int xStart = Base.StrokeThickness + (int)cnv.Width / 2;
+
+            for (int i = 0; i < createFiguresMethods.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    figures.Add(createFiguresMethods[i](xStart, true));
+                }
+                else
+                {
+                    figures.Add(createFiguresMethods[i](xStart, false));
+                    xStart += offset;
+                }
+            }
+
+            Figure.ShowFigures(figures, cnv);
+
             SpResult.Children.Add(cnv);
+        }
+
+        private void Upload()
+        {
+            InitializeComponent();
+
+            LbResult.Content = "Ты допустил ошибку.";
+
+            SpResult.Children.Add(new TextBlock()
+            {
+                Text = "Верный ответ.",
+                HorizontalAlignment = HorizontalAlignment.Center,
+            });
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
