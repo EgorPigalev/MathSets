@@ -50,7 +50,7 @@ namespace MathSets.pages
             int v = random.Next(3);
             for (int i = 0; i <= countTask; i++) // цикл для вывода формулировки задания
             {
-                if(v == 0)
+                if (v == 0)
                 {
                     verificationLabel = 0;
                     if (i == 0)
@@ -58,7 +58,15 @@ namespace MathSets.pages
                         strTask += "{ ";
                     }
                     index = random.Next(singleDigits.Length);
-                    strTask +=  singleDigits[index] + "; ";
+                    if(i == countTask)
+                    {
+                        strTask += singleDigits[index] + "";
+                    }
+                    else
+                    {
+                        strTask += singleDigits[index] + "; ";
+                    }
+                 
                     if (i == countTask)
                     {
                         strTask += "}";
@@ -72,7 +80,15 @@ namespace MathSets.pages
                         strTask += "{ ";
                     }
                     index = random.Next(evenNumbers.Length);
-                    strTask +=  evenNumbers[index] + "; ";
+                    if (i == countTask)
+                    {
+                        strTask += evenNumbers[index] + "";
+                    }
+                    else
+                    {
+                        strTask += evenNumbers[index] + "; ";
+                    }
+
                     if (i == countTask)
                     {
                         strTask += "}";
@@ -86,7 +102,15 @@ namespace MathSets.pages
                         strTask += "{ ";
                     }
                     index = random.Next(vowelLetters.Length);
-                    strTask +=  vowelLetters[index] + "; ";
+                    if (i == countTask)
+                    {
+                        strTask += vowelLetters[index] + "";
+                    }
+                    else
+                    {
+                        strTask += vowelLetters[index] + "; ";
+                    }
+
                     if (i == countTask)
                     {
                         strTask += "}";
@@ -94,14 +118,14 @@ namespace MathSets.pages
                 }
             }
             TextBlockTask.Text = "Задайте множество общим свойством его элементов " + strTask; // вывод формулировки задания
-            
+
             if (randomAnswerOptions == 0)
             {
                 OptionOne.Content = answerOptions[0];
                 OptionTwo.Content = answerOptions[1];
                 OptionThree.Content = answerOptions[2];
             }
-            else if(randomAnswerOptions == 1)
+            else if (randomAnswerOptions == 1)
             {
                 OptionOne.Content = answerOptions[1];
                 OptionTwo.Content = answerOptions[2];
