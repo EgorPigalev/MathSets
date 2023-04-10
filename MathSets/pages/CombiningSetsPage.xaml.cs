@@ -165,10 +165,12 @@ namespace MathSets.pages
             Cb4.IsChecked = false;
             Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 0, 10);
             Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 150, 10);
+            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
             ellipseOne.StrokeThickness = Base.StrokeThickness;
             ellipseTwo.StrokeThickness = Base.StrokeThickness;
             Canvas3.Children.Add(ellipseOne);
             Canvas3.Children.Add(ellipseTwo);
+            Canvas3.Children.Add(combinedPath);
             TextBlock tbA = new TextBlock()
             {
                 Text = "A",
