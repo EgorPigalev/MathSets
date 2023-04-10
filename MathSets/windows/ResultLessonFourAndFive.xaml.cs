@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -44,14 +43,19 @@ namespace MathSets.windows
             Canvas cnv = CreateCanvasWithTwoSets(canvas);
 
             List<Geometry> figures = new List<Geometry>();
-            for (int i = 4; i < cnv.Children.Count; i++)
+            for (int i = 0; i < cnv.Children.Count + 1; i++) // + 1, чтобы захватить индекс 4.
             {
-                figures.Add(((Path)cnv.Children[i]).Data.Clone());
-                cnv.Children.RemoveAt(i);
+                figures.Add(((Path)cnv.Children[4]).Data.Clone()); // 4, так как фигуры начинаются с 3 от 0 позиции.
+                cnv.Children.RemoveAt(4);
             }
 
             SpResult.Orientation = Orientation.Horizontal;
-            StackPanel spSetFirst = CopyStackPanel(stackPanel);
+            StackPanel spCondition = CopyStackPanel(stackPanel);
+            SpResult.Children.Add(spCondition);
+
+            double xStart = Base.StrokeThickness + (canvas.Width - canvas.Width / 2 + 100 - 100 * 2) / 2;
+            CreateFiguresTaskSecond((StackPanel)spCondition.Children[0], cnv, xStart);
+            CreateFiguresTaskSecond((StackPanel)spCondition.Children[1], cnv, xStart);
 
             SpResult.Children.Add(cnv);
         }
@@ -153,9 +157,9 @@ namespace MathSets.windows
 
             List<Path> tempList = new List<Path>();
 
-            foreach (var item in canvas.Children)
+            foreach (Path item in canvas.Children)
             {
-                tempList.Add((Path)item);
+                tempList.Add(item);
             }
 
             for (int i = 0; i < tempList.Count; i++)
@@ -236,13 +240,17 @@ namespace MathSets.windows
 
         private StackPanel CopyStackPanel(StackPanel spSource)
         {
-            StackPanel spParent = new StackPanel();
+            StackPanel sp = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0, 0, 30, 0)
+            };
 
             foreach (StackPanel spSet in spSource.Children)
             {
                 StackPanel newSpSet = new StackPanel();
                 newSpSet.Orientation = spSet.Orientation;
-                spParent.Children.Add(newSpSet);
+                sp.Children.Add(newSpSet);
 
                 foreach (StackPanel spRowSet in spSet.Children)
                 {
@@ -265,7 +273,33 @@ namespace MathSets.windows
                 }
             }
 
-            return spParent;
+            return sp;
+        }
+
+        private List<Geometry> CreateFiguresTaskSecond(StackPanel spParent, Canvas canvas, double x)
+        {
+            //for (int i = 0; i < sets.Count; i++)
+            //{
+            //    sets[i].Transform = new TranslateTransform(0, (panel.Height - sizeFigure / 1.5) / 2); // 1.5, потому что одна ось меньше другой в 1.5 раза.
+            //}
+
+            int sizeFigures = (int)(canvas.Height * 0.7 * 1.5 - Base.StrokeThickness * 2);
+            Figure figure = new Figure(sizeFigures, canvas.Height, canvas.Width);
+            List<Geometry> figures = new List<Geometry>();
+
+            foreach (StackPanel sp in spParent.Children)
+            {
+                if (((TextBlock)sp.Children[1]).Text == "∈")
+                {
+                    figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
+                }
+                else
+                {
+
+                }
+            }
+
+            return figures;
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)

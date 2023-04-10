@@ -372,9 +372,9 @@ namespace MathSets.pages
         /// <returns>Список множеств</returns>
         private List<Geometry> CreateSets(Panel panel)
         {
-            double sizeFigure = panel.Height * 0.7 * 1.5 - Base.StrokeThickness * 2; // 1.5, потому что одна ось меньше другой в 1.5 раза,
-            double xStart = Base.StrokeThickness + 100;                              // 0.7 - для уменьшения размеров множества, придуманное число.
-                                                                                     // 100 - для смещения эллипса вправо, придуманное число.
+            double sizeFigure = panel.Height * 0.7 * 1.5 - Base.StrokeThickness * 2;                    // 1.5, потому что одна ось меньше другой в 1.5 раза,
+            double xStart = Base.StrokeThickness + (panel.Width - panel.Width / 2 + 100 - 100 * 2) / 2; // 0.7 - для уменьшения размеров множества, придуманное число.
+                                                                                                        // 100 - для смещения эллипса вправо, придуманное число.
             List<Geometry> sets = new List<Geometry>
             {
                 new Figure((int)sizeFigure, (sizeFigure + Base.StrokeThickness) * 2, panel.Width / 2).
@@ -394,8 +394,8 @@ namespace MathSets.pages
 
             Figure.ShowFigures(new List<Geometry>()
             {
-                figure.GetGeometryFromText("A", 80, 0),
-                figure.GetGeometryFromText("B", 470, 0)
+                figure.GetGeometryFromText("A", 65, 0),
+                figure.GetGeometryFromText("B", 455, 0)
             },
             panel,
             Brushes.White,
