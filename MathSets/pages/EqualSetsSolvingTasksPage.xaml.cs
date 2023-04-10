@@ -19,7 +19,6 @@ namespace MathSets.pages
         string strButton = ""; // значение для первой кнопки-ответ
         string strButtonTwo = ""; // значение для второй кнопки-ответ
         string strButtonThree = ""; // значение для третьей кнопки-ответ
-        int verificationLabel;
         int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
 
         public EqualSetsSolvingTasksPage()
@@ -39,7 +38,6 @@ namespace MathSets.pages
             int countButtonNumbers = random.Next(1, 7); // рандомное количество значений в ответе
             for (int i = 0; i <= countButtonNumbers; i++) // цикл для вывода формирования ответа для кнопки
             {
-                verificationLabel = 0;
                 if (i == 0)
                 {
                     strButton += "{ ";
@@ -54,7 +52,6 @@ namespace MathSets.pages
             countButtonNumbers = random.Next(1, 7); // рандомное количество значений в ответе
             for (int i = 0; i <= countButtonNumbers; i++) // цикл для вывода формирования ответа для кнопки
             {
-                verificationLabel = 1;
                 if (i == 0)
                 {
                     strButtonTwo += "{ ";
@@ -68,7 +65,6 @@ namespace MathSets.pages
             }
             for (int i = 0; i <= 1; i++) // цикл для вывода формирования ответа для кнопки
             {
-                verificationLabel = 3;
                 if (i == 0)
                 {
                     strButtonThree += "{";
@@ -123,7 +119,14 @@ namespace MathSets.pages
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
-
+            if(cnvFigure == cnvFigureTwo)
+            {
+                MessageBox.Show("xaxa");
+            }
+            else
+            {
+                MessageBox.Show("lllll");
+            }
         }
 
 
@@ -239,7 +242,9 @@ namespace MathSets.pages
                     ShowRandomSign();
 
                     break;
-
+                case 2:
+                    ShowRandomButton();
+                    break;
                 default:
                     break;
             }

@@ -304,10 +304,17 @@ namespace MathSets.pages
             {
                 case 1:
                     ShowFirstRandomTask();
-                   
+                    BtnOption1.ClearValue(Button.BackgroundProperty);
+                    BtnOption3.ClearValue(Button.BackgroundProperty); 
+                    BtnOption2.ClearValue(Button.BackgroundProperty);
                     break;
                 case 2:
+                    strTask = "";
                     ShowSecondRandomTask();
+                 
+                    OptionThree.ClearValue(Button.BackgroundProperty);
+                    OptionOne.ClearValue(Button.BackgroundProperty); 
+                    OptionTwo.ClearValue(Button.BackgroundProperty);
                     break;
                 default:
                     break;

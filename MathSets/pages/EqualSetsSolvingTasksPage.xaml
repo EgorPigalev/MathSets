@@ -84,7 +84,7 @@
 
 
                             <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                <MenuItem Uid="1" Header="..." >
+                                <MenuItem Uid="2" Header="..." >
                                     <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
                                     <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
                                     <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
