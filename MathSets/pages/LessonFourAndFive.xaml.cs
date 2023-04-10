@@ -262,11 +262,11 @@ namespace MathSets.pages
         /// Устанавливает события для panel, необходимые для перемещения фигур, для первого задания
         /// </summary>
         /// <param name="panel">Контейнер</param>
-        private void SetHandlersTaskFirst() // 2, так как вторым элементом списка является само множество, а первым - его название.
+        private void SetHandlersTaskFirst()
         {
             SpTaskFirst.MouseUp += OnMouseUpTaskFirst;
 
-            for (int i = 2; i < CnvTaskFirst.Children.Count; i++)
+            for (int i = 2; i < CnvTaskFirst.Children.Count; i++) // i = 2, так как вторым элементом списка является само множество, а первым - его название.
             {
                 CnvTaskFirst.Children[i].MouseMove += OnMouseMoveTaskFirst;
                 CnvTaskFirst.Children[i].MouseDown += OnMouseDownTaskFirst;
