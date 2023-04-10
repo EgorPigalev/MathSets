@@ -10,37 +10,105 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
             <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
-        <Border BorderBrush="#F14C18" BorderThickness="1" Margin="20, 0, 20, 0">
-            <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Margin="50, 0, 50, 0"/>
+        <Border Style="{StaticResource BorderHeader}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Диаграмма Эйлера-Венна. Знаки ∈ и ∉" Style="{StaticResource LabelHeaderText}"/>
+                <Button Grid.Column="1" Name="BtnHint" Content="?" Style="{StaticResource ButtonMainStyle}" Margin="0 2 20 2" Click="BtnHint_Click"/>
+            </Grid>
         </Border>
 
-        <Border Grid.Row="1" BorderBrush="#F14C18" BorderThickness="1" Margin="20, 10, 20, 0">
+        <Border Grid.Row="1" Style="{StaticResource BorderMain}">
             <ScrollViewer>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-                    <StackPanel Name="SpFirstQuestion">
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <TextBlock Text="1) Дано множество {" FontSize="20"/>
-                            <StackPanel Name="SpFigures" Orientation="Horizontal"/>
-                            <TextBlock Text="}. Изобрази данное множество на рисунке." FontSize="20"/>
+                    <StackPanel Name="SpQuestionFirst" Background="White">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="TbQuestionFirst" Text="1) Дано множество А {"/>
+                            <StackPanel Name="SpFiguresQuestionFirst" Orientation="Horizontal"/>
+                            <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
-                        <Canvas Name="CnvFigure" Background="Aqua" Height="200"/>
+                        <Canvas Name="CnvQuestionFirst" Height="280" Width="870" ClipToBounds="True" Margin="0 10 0 10"/>
+                        <Button Name="BtnCheckQuestionFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFirst_Click"/>
                     </StackPanel>
+
+                    <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                        </MenuItem>
+                    </Menu>
+
+                    <StackPanel Grid.Row="1" Name="SpQuestionSecond" Background="White" Margin="0 20 0 0">
+                        <TextBlock Name="TbQuestionSecond" Text="2) Дана диаграмма. Выбери нужные знаки." Margin="0 0 0 10"/>
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Width="310">
+                                <StackPanel Name="SpQuestionSecondSetA" Margin="0 0 30 0"/>
+                                <StackPanel Name="SpQuestionSecondSetB"/>
+                            </StackPanel>
+
+                            <Canvas Name="CnvQuestionSecond" Height="280" Width="550"/>
+                        </StackPanel>
+                        
+                        <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionSecond_Click"/>
+                    </StackPanel>
+
+                    <Menu Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
+                        <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}">
+                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                        </MenuItem>
+                    </Menu>
+
+                    <StackPanel Grid.Row="2" Name="SpQuestionThree" Background="White" Margin="0 20 0 0">
+                        <TextBlock Name="TbQuestionThree" Text="3) Отметь элементы на диаграмме, если известно, что:" Margin="0 0 0 10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Width="310">
+                                <StackPanel Name="SpQuestionThreeSetA" Margin="0 0 30 0"/>
+                                <StackPanel Name="SpQuestionThreeSetB"/>
+                            </StackPanel>
+
+                            <Canvas Name="CnvQuestionThree" Height="280" Width="550"/>
+                        </StackPanel>
+
+                        <Button Name="BtnCheckQuestionThree" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionThree_Click"/>
+                    </StackPanel>
+
+                    <Menu Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
+                        <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}">
+                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
+                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                        </MenuItem>
+                    </Menu>
                 </Grid>
             </ScrollViewer>
         </Border>
 
         <Grid Grid.Row="2">
-            <Button Name="BtnBack" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnBack_Click"/>
+            <Button Name="BtnBack" Content="Назад" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Left" Margin="15" Click="BtnBack_Click"/>
         </Grid>
     </Grid>
 </Page>
