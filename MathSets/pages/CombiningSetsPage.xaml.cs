@@ -18,12 +18,14 @@ namespace MathSets.pages
         Ellipse ellipseTwo;
         Path combinedPath;
         int n = 0;
+        int[] masAnswerOptions = new int[4] { -1, -1, -1, -1 };
         public CombiningSetsPage()
         {
             InitializeComponent();
 
             GenerationCondition();
             GenerationCondition2();
+            GenerationCondition3();
         }
 
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
@@ -69,7 +71,7 @@ namespace MathSets.pages
         /// Генерация 1 задания
         /// </summary>
         public void GenerationCondition()
-        {           
+        {
             ellipseOne = ellipseGeneration.getEllipse(300, 150, 0, 10);
             ellipseOne.MouseDown += Ellipse_MouseDown;
             Cnv.Children.Add(ellipseOne);
@@ -117,39 +119,11 @@ namespace MathSets.pages
         /// </summary>
         public void GenerationCondition2()
         {
-            int[] setElementsA = new int[4];
-            string strElementsA = "";
-            for (int i = 0; i < 4; i++)
-            {
-            met: int randomElement = random.Next(1, 10);
-                for (int j = 0; j < setElementsA.Length; j++)
-                {
-                    if (randomElement == setElementsA[j])
-                    {
-                        goto met;
-                    }
-                }
-                setElementsA[i] = randomElement;
-                strElementsA += setElementsA[i] + ", ";
-            }
-            strElementsA = strElementsA.Substring(0, strElementsA.Length - 2);
-
-            int[] setElementsB = new int[4];
-            string strElementsB = "";
-            for (int i = 0; i < 4; i++)
-            {
-            met: int randomElement = random.Next(1, 10);
-                for (int j = 0; j < setElementsB.Length; j++)
-                {
-                    if (randomElement == setElementsB[j])
-                    {
-                        goto met;
-                    }
-                }
-                setElementsB[i] = randomElement;
-                strElementsB += setElementsB[i] + ", ";
-            }
-            strElementsB = strElementsB.Substring(0, strElementsB.Length - 2);
+            int[] setElementsA = GenerationElementsSet(4);
+            string strElementsA = ConvertMasInString(setElementsA);
+            
+            int[] setElementsB = GenerationElementsSet(4);
+            string strElementsB = ConvertMasInString(setElementsB);  
 
             TbCondition2.Text = "2) Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
 
@@ -174,28 +148,252 @@ namespace MathSets.pages
             };
             Canvas2.Children.Add(tbB);
 
+            int[] masElements = CombiningElementsSets(setElementsA, setElementsB);
+
+
+        }
+
+        /// <summary>
+        /// Генерация 3 задания
+        /// </summary>
+        public void GenerationCondition3()
+        {
+            Canvas3.Children.Clear();
+            SpAnswerOptions.Children.Clear();
+            Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 0, 10);
+            Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 150, 10);
+            combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+            ellipseOne.StrokeThickness = Base.StrokeThickness;
+            ellipseTwo.StrokeThickness = Base.StrokeThickness;
+            Canvas3.Children.Add(ellipseOne);
+            Canvas3.Children.Add(ellipseTwo);
+            Canvas3.Children.Add(combinedPath);
+            TextBlock tbA = new TextBlock()
+            {
+                Text = "A",
+                Margin = new Thickness(10, 10, 0, 0)
+            };
+            Canvas3.Children.Add(tbA);
+            TextBlock tbB = new TextBlock()
+            {
+                Text = "B",
+                Margin = new Thickness(420, 10, 0, 0)
+            };
+            Canvas3.Children.Add(tbB);
+
+            int[] masElementsSetA = GenerationElementsSet(4);
+            int[] masElementsSetB = GenerationElementsSet(4);
+            int[] masElementsCombining = CombiningElementsSets(masElementsSetA, masElementsSetB);
+            int[] masElementsIntersection = IntersectionElementsSets(masElementsSetA, masElementsSetB);
+    
+            for (int j = 0; j<4;j++)
+            {
+                string str = "";
+                met: int g = random.Next(4);
+                for(int i=0;i< masAnswerOptions.Length;i++)
+                {
+                    if(g== masAnswerOptions[i])
+                    {
+                        goto met;
+                    }
+                }
+                masAnswerOptions[j] = g;
+                switch (g)
+                {
+                    case 0:
+                        str = "A ∪ B = {" + ConvertMasInString(masElementsCombining) + "}";
+                        break;
+                    case 1:
+                        str = "A ∩ B = {" + ConvertMasInString(masElementsIntersection) + "}";
+                        break;
+                    case 2:
+                        str = "A ∩ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1,9))) + "}";
+                        break;
+                    case 3:
+                        str = "A ∪ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1, 9))) + "}";  
+                        break;
+                    default:
+                        break;
+                }
+                CheckBox tb = new CheckBox()
+                {
+                    Content = str,
+                    Margin = new Thickness(5, 0, 0, 0)
+                };
+                
+                SpAnswerOptions.Children.Add(tb);   
+            }
+
+            bool elementFoundA = false;
+            int marginA = 30;
+            for(int i =0; i<masElementsSetA.Length;i++)
+            {
+                for(int j=0;j<masElementsIntersection.Length;j++)
+                {
+                    if(masElementsSetA[i]==masElementsIntersection[j])
+                    {
+                        elementFoundA = true;
+                    }
+                }
+                if(elementFoundA == false)
+                {
+                    TextBlock tb = new TextBlock()
+                    {
+                        Text = masElementsSetA[i].ToString(),
+                        Margin = new Thickness(marginA,random.Next(35,100),0,0)
+                    };
+                    Canvas3.Children.Add(tb);
+                    marginA += random.Next(10,30);
+                }
+                elementFoundA = false;
+            }
+
+            bool elementFoundB = false;
+            for (int i = 0; i < masElementsSetB.Length; i++)
+            {
+                for (int j = 0; j < masElementsIntersection.Length; j++)
+                {
+                    if (masElementsSetB[i] == masElementsIntersection[j])
+                    {
+                        elementFoundB = true;
+                    }
+                }
+                if (elementFoundB == false)
+                {
+                    TextBlock tb = new TextBlock()
+                    {
+                        Text = masElementsSetB[i].ToString(),
+                        Margin = new Thickness(random.Next(300,400), random.Next(30,100), 0, 0)
+                    };
+                    Canvas3.Children.Add(tb);
+                }
+                elementFoundB = false;
+            }
+
+            for (int j = 0; j < masElementsIntersection.Length; j++)
+            {
+                if (masElementsIntersection[j]!=0)
+                {
+                    TextBlock tb = new TextBlock()
+                    {
+                        Text = masElementsIntersection[j].ToString(),
+                        Margin = new Thickness(random.Next(180,260), random.Next(30,100), 0, 0)
+                    };
+                    Canvas3.Children.Add(tb);
+                } 
+            }
+        }
+
+        /// <summary>
+        /// Вывод элементов массива строкой
+        /// </summary>
+        /// <param name="mas">Массив, который нужно показать в виде строки</param>
+        /// <returns></returns>
+        private string ConvertMasInString(int[] mas)
+        {
+            string str = "";
+            if(mas[0]==0)
+            {
+                str = "Ø";
+            }
+            else
+            {
+                for (int i = 0; i < mas.Length; i++)
+                {
+                    if (mas[i] != 0)
+                    {
+                        str += mas[i] + ", ";
+                    }
+                }
+                str = str.Substring(0, str.Length - 2);
+            } 
+            return str;
+        }
+
+        /// <summary>
+        /// Генерация элементов множества
+        /// </summary>
+        /// <param name="size">Количество элементов в множестве</param>
+        /// <returns></returns>
+        private int[] GenerationElementsSet(int size)
+        {
+            int[] masElementsSet = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+            met: int randomElement = random.Next(1, 10);
+                for (int j = 0; j < masElementsSet.Length; j++)
+                {
+                    if (randomElement == masElementsSet[j])
+                    {
+                        goto met;
+                    }
+                }
+                masElementsSet[i] = randomElement;
+            }
+            return masElementsSet;
+        }
+
+        /// <summary>
+        /// Объединение элементов множеств без повторения
+        /// </summary>
+        /// <param name="masA">Множество А</param>
+        /// <param name="masB">Множество В</param>
+        /// <returns></returns>
+        private int[] CombiningElementsSets(int[] masA, int[] masB)
+        {
             int[] masElements = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
             for (int i = 0; i < 4; i++)
             {
-                masElements[i] = setElementsA[i];
+                masElements[i] = masA[i];
             }
             int n = 0;
             for (int i = 4; i < masElements.Length; i++)
             {
             met: if (n != 4)
                 {
-                    masElements[i] = setElementsB[n];
-                    for (int j = 0; j < setElementsA.Length; j++)
+                    
+                    for (int j = 0; j < masA.Length; j++)
                     {
-                        if (masElements[i] == setElementsA[j])
+                        if (masB[n] == masA[j])
                         {
                             n++;
                             goto met;
                         }
                     }
+                    masElements[i] = masB[n];
                     n++;
                 }
             }
+            return masElements;
+        }
+
+        /// <summary>
+        /// Пересечение элементов множеств
+        /// </summary>
+        /// <param name="masA">Множество А</param>
+        /// <param name="masB">Множество В</param>
+        /// <returns></returns>
+        private int[] IntersectionElementsSets(int[] masA, int[] masB)
+        {
+            int[] masElements = new int[4] { 0, 0, 0, 0};
+            int n = 0;
+            for (int i = 0; i < masA.Length; i++)
+            {
+                for (int j = 0; j < masB.Length; j++)
+                {
+                    if (masA[i] == masB[j])
+                    {
+                        masElements[n] = masA[i];
+                        n++;
+                    }
+                }
+            }
+            if(masElements.Length==0)
+            {
+                masElements[0] = 0;
+            }
+
+            return masElements;
         }
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
@@ -273,7 +471,7 @@ namespace MathSets.pages
                     GenerationCondition2();
                     break;
                 case 3:
-                    
+                    GenerationCondition3();
                     break;
                 default:
                     break;
@@ -281,6 +479,11 @@ namespace MathSets.pages
         }
 
         private void BtnCheck2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnCheck3_Click(object sender, RoutedEventArgs e)
         {
 
         }
