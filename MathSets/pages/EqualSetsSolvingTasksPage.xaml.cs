@@ -19,7 +19,7 @@ namespace MathSets.pages
         string strButton = ""; // значение для первой кнопки-ответ
         string strButtonTwo = ""; // значение для второй кнопки-ответ
         string strButtonThree = ""; // значение для третьей кнопки-ответ
-        int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
+        
 
         public EqualSetsSolvingTasksPage()
         {
@@ -35,6 +35,7 @@ namespace MathSets.pages
         /// </summary>
         private void ShowRandomButton()
         {
+            int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
             int countButtonNumbers = random.Next(1, 7); // рандомное количество значений в ответе
             for (int i = 0; i <= countButtonNumbers; i++) // цикл для вывода формирования ответа для кнопки
             {
@@ -243,7 +244,13 @@ namespace MathSets.pages
 
                     break;
                 case 2:
+                     strButton = ""; 
+                     strButtonTwo = ""; 
+                     strButtonThree = "";
                     ShowRandomButton();
+                    OptionThree.ClearValue(Button.BackgroundProperty); 
+                    OptionOne.ClearValue(Button.BackgroundProperty); 
+                    OptionTwo.ClearValue(Button.BackgroundProperty); 
                     break;
                 default:
                     break;

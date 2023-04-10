@@ -38,14 +38,14 @@ namespace MathSets.pages
         string strTask = "";
         int verificationLabel;
         public static Random random = new Random();
-        int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
+        
 
         /// <summary>
         /// метод для генерации задания 2
         /// </summary>
         private void ShowSecondRandomTask()
         {
-
+            int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
             int countTask = random.Next(3, 6); // рандомное количество значений в задании
             int v = random.Next(3);
             for (int i = 0; i <= countTask; i++) // цикл для вывода формулировки задания
