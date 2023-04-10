@@ -182,7 +182,6 @@ namespace MathSets.pages
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else // если пользователь выбрал неверный ответ
             {
@@ -259,19 +258,16 @@ namespace MathSets.pages
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else if (strAnswer == answerOptions[1] && verificationLabel == 1) // если пользователь выбрал правильный ответ
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else if (strAnswer == answerOptions[2] && verificationLabel == 2) // если пользователь выбрал правильный ответ
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else // если пользователь выбрал неверный ответ
             {
