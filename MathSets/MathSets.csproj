@@ -192,10 +192,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="pages\SetAndElementsSavedTasksPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="pages\SetAndElementsSolvingTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,9 +210,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pages\SetAndElementsSavedTasksPage.xaml.cs">
-      <DependentUpon>SetAndElementsSavedTasksPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="pages\SetAndElementsSolvingTasksPage.xaml.cs">
       <DependentUpon>SetAndElementsSolvingTasksPage.xaml</DependentUpon>
     </Compile>
