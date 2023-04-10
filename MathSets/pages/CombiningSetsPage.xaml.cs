@@ -248,13 +248,14 @@ namespace MathSets.pages
                         Text = masElementsSetA[i].ToString(),
                         Margin = new Thickness(marginA,random.Next(35,100),0,0)
                     };
-                    Canvas3.Children.Add(tb);
-                    marginA += random.Next(10,30);
+                    Canvas3.Children.Add(tb);  
                 }
                 elementFoundA = false;
+                marginA += 30;
             }
 
             bool elementFoundB = false;
+            int marginB = 300;
             for (int i = 0; i < masElementsSetB.Length; i++)
             {
                 for (int j = 0; j < masElementsIntersection.Length; j++)
@@ -269,13 +270,15 @@ namespace MathSets.pages
                     TextBlock tb = new TextBlock()
                     {
                         Text = masElementsSetB[i].ToString(),
-                        Margin = new Thickness(random.Next(300,400), random.Next(30,100), 0, 0)
+                        Margin = new Thickness(marginB, random.Next(30,100), 0, 0)
                     };
                     Canvas3.Children.Add(tb);
                 }
                 elementFoundB = false;
+                marginB += 30;
             }
 
+            int marginCenter = 180;
             for (int j = 0; j < masElementsIntersection.Length; j++)
             {
                 if (masElementsIntersection[j]!=0)
@@ -283,10 +286,11 @@ namespace MathSets.pages
                     TextBlock tb = new TextBlock()
                     {
                         Text = masElementsIntersection[j].ToString(),
-                        Margin = new Thickness(random.Next(180,260), random.Next(30,100), 0, 0)
+                        Margin = new Thickness(marginCenter, random.Next(30,100), 0, 0)
                     };
                     Canvas3.Children.Add(tb);
-                } 
+                }
+                marginCenter += 30;
             }
         }
 
