@@ -18,7 +18,7 @@ namespace MathSets.pages
         Ellipse ellipseTwo;
         Path combinedPath;
         int n = 0;
-        int[] masAnswerOptions = new int[4] { -1, -1, -1, -1 };
+        int[] masAnswerOptions = new int[4];
         public CombiningSetsPage()
         {
             InitializeComponent();
@@ -159,7 +159,10 @@ namespace MathSets.pages
         public void GenerationCondition3()
         {
             Canvas3.Children.Clear();
-            SpAnswerOptions.Children.Clear();
+            Cb1.IsChecked = false;
+            Cb2.IsChecked = false;
+            Cb3.IsChecked = false;
+            Cb4.IsChecked = false;
             Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 0, 10);
             Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 150, 10);
             combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
@@ -185,10 +188,15 @@ namespace MathSets.pages
             int[] masElementsSetB = GenerationElementsSet(4);
             int[] masElementsCombining = CombiningElementsSets(masElementsSetA, masElementsSetB);
             int[] masElementsIntersection = IntersectionElementsSets(masElementsSetA, masElementsSetB);
-    
-            for (int j = 0; j<4;j++)
+
+            for(int i=0;i<masAnswerOptions.Length;i++)
             {
-                string str = "";
+                masAnswerOptions[i] = -1;
+            }
+
+            string[] str = new string[4];
+            for (int j = 0; j<4;j++)
+            { 
                 met: int g = random.Next(4);
                 for(int i=0;i< masAnswerOptions.Length;i++)
                 {
@@ -201,28 +209,26 @@ namespace MathSets.pages
                 switch (g)
                 {
                     case 0:
-                        str = "A ∪ B = {" + ConvertMasInString(masElementsCombining) + "}";
+                        str[j] = "A ∪ B = {" + ConvertMasInString(masElementsCombining) + "}";
                         break;
                     case 1:
-                        str = "A ∩ B = {" + ConvertMasInString(masElementsIntersection) + "}";
+                        str[j] = "A ∩ B = {" + ConvertMasInString(masElementsIntersection) + "}";
                         break;
                     case 2:
-                        str = "A ∩ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1,9))) + "}";
+                        str[j] = "A ∩ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1,9))) + "}";
                         break;
                     case 3:
-                        str = "A ∪ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1, 9))) + "}";  
+                        str[j] = "A ∪ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1, 9))) + "}";  
                         break;
                     default:
                         break;
-                }
-                CheckBox tb = new CheckBox()
-                {
-                    Content = str,
-                    Margin = new Thickness(5, 0, 0, 0)
-                };
-                
-                SpAnswerOptions.Children.Add(tb);   
+                }   
             }
+
+            Cb1.Content = str[0];
+            Cb2.Content = str[1];
+            Cb3.Content = str[2];
+            Cb4.Content = str[3];
 
             bool elementFoundA = false;
             int marginA = 30;
@@ -485,7 +491,184 @@ namespace MathSets.pages
 
         private void BtnCheck3_Click(object sender, RoutedEventArgs e)
         {
-
+            int combining=0, intersection=0;
+            for(int i=0;i<masAnswerOptions.Length;i++)
+            {
+                if(masAnswerOptions[i] == 0)
+                {
+                    combining = i+1;
+                }
+                if(masAnswerOptions[i]==1)
+                {
+                    intersection = i+1;
+                }
+            }
+            switch(combining)
+            {
+                case 1:
+                    switch(intersection)
+                    {
+                        case 2:
+                            if(Cb1.IsChecked==true && Cb2.IsChecked==true && Cb3.IsChecked==false && Cb4.IsChecked==false)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 3:
+                            if (Cb1.IsChecked == true && Cb2.IsChecked == false && Cb3.IsChecked == true && Cb4.IsChecked == false)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 4:
+                            if (Cb1.IsChecked == true && Cb2.IsChecked == false && Cb3.IsChecked == false && Cb4.IsChecked == true)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (intersection)
+                    {
+                        case 1:
+                            if (Cb1.IsChecked == true && Cb2.IsChecked == true && Cb3.IsChecked == false && Cb4.IsChecked == false)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 3:
+                            if (Cb1.IsChecked == false && Cb2.IsChecked == true && Cb3.IsChecked == true && Cb4.IsChecked == false)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 4:
+                            if (Cb1.IsChecked == false && Cb2.IsChecked == true && Cb3.IsChecked == false && Cb4.IsChecked == true)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (intersection)
+                    {
+                        case 1:
+                            if (Cb1.IsChecked == true && Cb2.IsChecked == false && Cb3.IsChecked == true && Cb4.IsChecked == false)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 2:
+                            if (Cb1.IsChecked == false && Cb2.IsChecked == true && Cb3.IsChecked == true && Cb4.IsChecked == false)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 4:
+                            if (Cb1.IsChecked == false && Cb2.IsChecked == false && Cb3.IsChecked == true && Cb4.IsChecked == true)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 4:
+                    switch (intersection)
+                    {
+                        case 1:
+                            if (Cb1.IsChecked == true && Cb2.IsChecked == false && Cb3.IsChecked == false && Cb4.IsChecked == true)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 2:
+                            if (Cb1.IsChecked == false && Cb2.IsChecked == true && Cb3.IsChecked == false && Cb4.IsChecked == true)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        case 3:
+                            if (Cb1.IsChecked == false && Cb2.IsChecked == false && Cb3.IsChecked == true && Cb4.IsChecked == true)
+                            {
+                                windows.CorrectResult correctResult = new windows.CorrectResult();
+                                correctResult.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неправильно");
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
         }
     }
 }

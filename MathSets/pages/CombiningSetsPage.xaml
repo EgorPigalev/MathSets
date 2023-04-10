@@ -113,7 +113,11 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="1.1*"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Name="SpAnswerOptions">
+                                <StackPanel Grid.Column="0">
+                                    <CheckBox Name="Cb1"/>
+                                    <CheckBox Name="Cb2"/>
+                                    <CheckBox Name="Cb3"/>
+                                    <CheckBox Name="Cb4"/>
                                 </StackPanel>
                                 <Canvas Height="200" Name="Canvas3" Grid.Column="1" Background="AliceBlue"></Canvas>
                             </Grid>
