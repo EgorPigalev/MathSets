@@ -12,10 +12,13 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Name="LbResult" Style="{StaticResource LabelHeaderResult}" Grid.Row="0"/>
+        <Label Name="LbResult" Style="{StaticResource LabelHeaderResult}"/>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel Name="SpResult" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Верный ответ." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 20"/>
+                <StackPanel Name="SpResult" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
         </ScrollViewer>
-        <Button Name="BtnExit" Content="Закрыть" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnExit_Click"/>
+        <Button Grid.Row="2" Name="BtnExit" Content="Закрыть" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnExit_Click"/>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -15,6 +16,61 @@ namespace MathSets.windows
         {
             Upload();
 
+            Canvas cnv = CreateCanvasWithOneSet(canvas, indexesAndwers);
+
+            List<Geometry> figures = GetAnswersFigures(canvas, sizeFigures, indexesAndwers);
+            Figure.ShowFigures(figures, cnv);
+
+            SpResult.Children.Add(cnv);
+        }
+
+        public ResultLessonFourAndFive(Canvas canvas, List<List<int>> indexesErrors, List<Geometry> figures)
+        {
+            Upload();
+
+            Canvas cnv = CreateCanvasWithTwoSets(canvas);
+
+            SpResult.Orientation = Orientation.Horizontal;
+            SpResult.Children.Add(GetStackPanelTaskSecond(cnv, indexesErrors[0], 'A', figures));
+            SpResult.Children.Add(GetStackPanelTaskSecond(cnv, indexesErrors[1], 'B', figures));
+
+            SpResult.Children.Add(cnv);
+        }
+
+        public ResultLessonFourAndFive(Canvas canvas, StackPanel stackPanel, int sizeFigures)
+        {
+            Upload();
+
+            Canvas cnv = CreateCanvasWithTwoSets(canvas);
+
+            List<Geometry> figures = new List<Geometry>();
+            for (int i = 4; i < cnv.Children.Count; i++)
+            {
+                figures.Add(((Path)cnv.Children[i]).Data.Clone());
+                cnv.Children.RemoveAt(i);
+            }
+
+            SpResult.Orientation = Orientation.Horizontal;
+            StackPanel spSetFirst = CopyStackPanel(stackPanel);
+
+            SpResult.Children.Add(cnv);
+        }
+
+        private void Upload()
+        {
+            InitializeComponent();
+
+            LbResult.Content = "Ты допустил ошибку.";
+        }
+
+        /// <summary>
+        /// Создание и инициализация элемента Canvas с одним множеством
+        /// </summary>
+        /// <param name="canvas">элемент Canvas</param>
+        /// <param name="indexesAndwers">индексы верных фигур-ответов</param>
+        /// <returns>элемент Canvas</returns>
+        private Canvas CreateCanvasWithOneSet(Canvas canvas, List<int> indexesAndwers)
+        {
             Canvas cnv = new Canvas
             {
                 Width = canvas.Width,
@@ -30,7 +86,90 @@ namespace MathSets.windows
 
             for (int i = 0; i < tempList.Count; i++)
             {
-                if (!indexesAndwers.Contains(i))
+                if (!indexesAndwers.Contains(i - 2)) // i - 2, так как фигуры начинаются с 3 элемента.
+                {
+                    if (i == 0)
+                    {
+                        cnv.Children.Add(new Path() // Добавление названия множества
+                        {
+                            StrokeThickness = Base.StrokeThickness,
+                            Stroke = Brushes.Black,
+                            Data = tempList[i].Data.Clone()
+                        });
+                    }
+                    else
+                    {
+                        cnv.Children.Add(new Path()
+                        {
+                            StrokeThickness = Base.StrokeThickness,
+                            Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                            Data = tempList[i].Data.Clone()
+                        });
+                    }
+                }
+            }
+
+            return cnv;
+        }
+
+        private List<Geometry> GetAnswersFigures(Canvas canvas, int size, List<int> indexesAndwers)
+        {
+            Figure figure = new Figure(size, canvas.Height, canvas.Width / 2);
+            List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
+
+            List<Geometry> figures = new List<Geometry>();
+            int xStart = Base.StrokeThickness + (int)canvas.Width / 2 + size * 2;
+
+            for (int i = 0; i < indexesAndwers.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, true));
+                    figures[i].Transform = new TranslateTransform(0, size / 4); // Для смещения немного вниз от верхней границы множества.
+                }
+                else
+                {
+                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, false));
+                    figures[i].Transform = new TranslateTransform(0, -size / 4); // Для смещения немного вверх от нижней границы множества.
+                    xStart += size * 2;
+                }
+            }
+
+            return figures;
+        }
+
+        /// <summary>
+        /// Создание и инициализация элемента Canvas с двумя множествами
+        /// </summary>
+        /// <param name="canvas">элемент Canvas</param>
+        /// <returns>элемент Canvas</returns>
+        private Canvas CreateCanvasWithTwoSets(Canvas canvas)
+        {
+            Canvas cnv = new Canvas
+            {
+                Width = canvas.Width,
+                Height = canvas.Height
+            };
+
+            List<Path> tempList = new List<Path>();
+
+            foreach (var item in canvas.Children)
+            {
+                tempList.Add((Path)item);
+            }
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                if (i == 0 || i == 1)
+                {
+                    cnv.Children.Add(new Path() // Добавление названия множества
+                    {
+                        StrokeThickness = Base.StrokeThickness,
+                        Stroke = Brushes.Black,
+                        Data = tempList[i].Data.Clone()
+                    });
+                }
+                else
                 {
                     cnv.Children.Add(new Path()
                     {
@@ -41,51 +180,92 @@ namespace MathSets.windows
                 }
             }
 
-            Figure figure = new Figure(sizeFigures, cnv.Height, cnv.Width / 2);
-            List<CreateFiguresDelegate> tempCreateFiguresMethods = figure.GetAllCreateFiguresMethods();
-            List<CreateFiguresDelegate> createFiguresMethods = new List<CreateFiguresDelegate>();
-
-            for (int i = 0; i < tempCreateFiguresMethods.Count; i++)
-            {
-                if (indexesAndwers.Contains(i))
-                {
-                    createFiguresMethods.Add(tempCreateFiguresMethods[i]);
-                }
-            }
-
-            List<Geometry> figures = new List<Geometry>();
-            int offset = figure.GetOffset(createFiguresMethods.Count);
-            int xStart = Base.StrokeThickness + (int)cnv.Width / 2;
-
-            for (int i = 0; i < createFiguresMethods.Count; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    figures.Add(createFiguresMethods[i](xStart, true));
-                }
-                else
-                {
-                    figures.Add(createFiguresMethods[i](xStart, false));
-                    xStart += offset;
-                }
-            }
-
-            Figure.ShowFigures(figures, cnv);
-
-            SpResult.Children.Add(cnv);
+            return cnv;
         }
 
-        private void Upload()
+        private StackPanel GetStackPanelTaskSecond(Canvas canvas, List<int> indexesErrors, char set, List<Geometry> figures)
         {
-            InitializeComponent();
+            StackPanel panelParent = new StackPanel();
 
-            LbResult.Content = "Ты допустил ошибку.";
-
-            SpResult.Children.Add(new TextBlock()
+            if (set == 'A')
             {
-                Text = "Верный ответ.",
-                HorizontalAlignment = HorizontalAlignment.Center,
-            });
+                panelParent.Margin = new Thickness(0, 0, 30, 0);
+            }
+
+            for (int i = 0; i < figures.Count; i++)
+            {
+                StackPanel sp = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal,
+                    Margin = new Thickness(0, 10, 0, 10),
+                    Background = indexesErrors.Contains(i) ? Brushes.PaleVioletRed : Brushes.White
+                };
+
+                sp.Children.Add(new TextBlock() // Цифра.
+                {
+                    Text = (i + 1).ToString(),
+                    FontFamily = new FontFamily(Base.FontFamily),
+                    Width = 20,
+                    Margin = new Thickness(0, 0, 10, 0),
+                    VerticalAlignment = VerticalAlignment.Center
+                });
+
+                Path p = (Path)canvas.Children[set == 'A' ? 2 : 3];
+
+                sp.Children.Add(new TextBlock() // Знак "принадлежит" или "не принадлежит",
+                {
+                    Text = p.Data.FillContainsWithDetail(figures[i]) == IntersectionDetail.FullyContains ? "∈" : "∉",
+                    FontFamily = new FontFamily(Base.FontFamily),
+                    Margin = new Thickness(0, 0, 10, 0),
+                    VerticalAlignment = VerticalAlignment.Center
+                });
+
+                sp.Children.Add(new TextBlock() // Наименование множества.
+                {
+                    Text = set.ToString(),
+                    FontFamily = new FontFamily(Base.FontFamily),
+                    Margin = new Thickness(0, 0, 10, 0),
+                    VerticalAlignment = VerticalAlignment.Center
+                });
+
+                panelParent.Children.Add(sp);
+            }
+
+            return panelParent;
+        }
+
+        private StackPanel CopyStackPanel(StackPanel spSource)
+        {
+            StackPanel spParent = new StackPanel();
+
+            foreach (StackPanel spSet in spSource.Children)
+            {
+                StackPanel newSpSet = new StackPanel();
+                newSpSet.Orientation = spSet.Orientation;
+                spParent.Children.Add(newSpSet);
+
+                foreach (StackPanel spRowSet in spSet.Children)
+                {
+                    StackPanel newSpRowSet = new StackPanel();
+                    newSpRowSet.Orientation = spRowSet.Orientation;
+                    newSpSet.Children.Add(newSpRowSet);
+
+                    foreach (TextBlock tb in spRowSet.Children)
+                    {
+                        TextBlock newTb = new TextBlock()
+                        {
+                            Text = tb.Text,
+                            FontFamily = tb.FontFamily,
+                            Width = tb.Width,
+                            Margin = tb.Margin,
+                            VerticalAlignment = tb.VerticalAlignment
+                        };
+                        newSpRowSet.Children.Add(newTb);
+                    }
+                }
+            }
+
+            return spParent;
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)

@@ -19,7 +19,7 @@ namespace MathSets.pages
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры).
 
         // Поля для первого задания
-        private int _sizeFiguresTaskFirst = 70;
+        private int _sizeFiguresTaskFirst = 70; // Размер фигур.
         private List<int> _indexesAnswersTaskFirst = new List<int>(); // Индексы верных ответов (верных фигур).
         private List<Geometry> _figuresTaskFirst; // Фигуры.
         private Geometry _setTaskFirst; // Множество.
@@ -30,6 +30,7 @@ namespace MathSets.pages
         private List<Geometry> _setsTaskSecond; // Множества.
 
         // Поля для третьего задания
+        private int _sizeFiguresTaskThree = 50; // Размер фигур.
         private List<Geometry> _figuresTaskThree; // Фигуры.
         private List<Geometry> _setsTaskThree; // Множества.
         private List<Point> _pointsToMovedTaskThree = new List<Point>(); // Точки для перемещения фигур.
@@ -452,7 +453,7 @@ namespace MathSets.pages
             }
             else
             {
-                //new ResultLessonFourAndFive(CnvTaskSecond, indexesErrors).ShowDialog();
+                new ResultLessonFourAndFive(CnvTaskSecond, indexesErrors, _figuresTaskSecond).ShowDialog();
             }
         }
 
@@ -479,7 +480,7 @@ namespace MathSets.pages
                 {
                     indexesErrors.Add(i);
                 }
-                else
+                else if (cb.SelectedIndex == -1)
                 {
                     indexesErrors.Add(i);
                 }
@@ -494,15 +495,14 @@ namespace MathSets.pages
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresTaskThree(int countFigures)
         {
-            int sizeFigures = 50;
             int x = Base.StrokeThickness + 200;
             int offset = 40;
-            Figure figure = new Figure(sizeFigures, 0, 0);
+            Figure figure = new Figure(_sizeFiguresTaskThree, 0, 0);
             List<Geometry> figures = new List<Geometry>();
 
             for (int i = 0; i < countFigures; i++)
             {
-                figures.Add(figure.GetGeometryFromText((i + 1).ToString(), x, (int)CnvTaskThree.Height - sizeFigures - Base.StrokeThickness * 4));
+                figures.Add(figure.GetGeometryFromText((i + 1).ToString(), x, (int)CnvTaskThree.Height - _sizeFiguresTaskThree - Base.StrokeThickness * 4));
                 x += offset;
             }
 
@@ -593,19 +593,13 @@ namespace MathSets.pages
 
         private void BtnCheckTaskThree_Click(object sender, RoutedEventArgs e)
         {
-            List<List<int>> indexesErrors = new List<List<int>>()
-            {
-                GetErrorsTaskThree(SpTaskThreeSetA, _setsTaskThree[0]),
-                GetErrorsTaskThree(SpTaskThreeSetB, _setsTaskThree[1])
-            };
-
-            if (indexesErrors[0].Count == 0 && indexesErrors[1].Count == 0)
+            if (CheckTaskThree(SpTaskThreeSetA, _setsTaskThree[0]) && CheckTaskThree(SpTaskThreeSetB, _setsTaskThree[1]))
             {
                 new CorrectResult().ShowDialog();
             }
             else
             {
-                //new ResultLessonFourAndFive().ShowDialog();
+                new ResultLessonFourAndFive(CnvTaskThree, SpCondition, _sizeFiguresTaskThree).ShowDialog();
             }
         }
 
@@ -615,10 +609,8 @@ namespace MathSets.pages
         /// <param name="panel">контейнер</param>
         /// <param name="set">множество</param>
         /// <returns>Список неверных индексов</returns>
-        private List<int> GetErrorsTaskThree(Panel panel, Geometry set)
+        private bool CheckTaskThree(Panel panel, Geometry set)
         {
-            List<int> indexesErrors = new List<int>();
-
             for (int i = 0; i < panel.Children.Count; i++)
             {
                 StackPanel sp = (StackPanel)panel.Children[i];
@@ -626,15 +618,15 @@ namespace MathSets.pages
 
                 if (tb.Text == "∈" && set.FillContainsWithDetail(_figuresTaskThree[i]) != IntersectionDetail.FullyContains)
                 {
-                    indexesErrors.Add(i);
+                    return false;
                 }
                 else if (tb.Text == "∉" && set.FillContainsWithDetail(_figuresTaskThree[i]) != IntersectionDetail.Empty)
                 {
-                    indexesErrors.Add(i);
+                    return false;
                 }
             }
 
-            return indexesErrors;
+            return true;
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -655,13 +647,13 @@ namespace MathSets.pages
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
-                    
+
                     break;
                 case 2:
-                    
+
                     break;
                 case 3:
-                    
+
                     break;
                 default:
                     break;
