@@ -86,7 +86,7 @@
                             <Button Grid.Row="2" Name="BtnCheck2" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck2_Click"/>
                         </Grid>
 
-                        <Grid>
+                        <Grid Margin="5,20,5,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="4*"/>
@@ -98,7 +98,7 @@
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
-                                    <TextBlock TextWrapping="Wrap" Text="3. Вам дана диаграмма. Выребире верные равенства."/>
+                                    <TextBlock TextWrapping="Wrap" Text="3) Вам дана диаграмма. Выребире верные равенства."/>
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
                                     <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}">
@@ -119,10 +119,10 @@
                                     <CheckBox Name="Cb3"/>
                                     <CheckBox Name="Cb4"/>
                                 </StackPanel>
-                                <Canvas Height="200" Name="Canvas3" Grid.Column="1" Background="AliceBlue"></Canvas>
+                                <Canvas Height="200" Name="Canvas3" Grid.Column="1"></Canvas>
                             </Grid>
                             
-                            <Button Grid.Row="2" Name="BtnCheck3" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck3_Click"/>
+                            <Button Grid.Row="2" Name="BtnCheck3" Margin="0,0,0,10" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheck3_Click"/>
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
