@@ -19,7 +19,7 @@ namespace MathSets
     /// </summary>
     public partial class ResultIntersectionSetsWindow : Window
     {
-        public ResultIntersectionSetsWindow(List<int[]> errors)
+        public ResultIntersectionSetsWindow(int n, List<int[]> errors)
         {
             InitializeComponent();
             if (errors.Count == 1)
@@ -46,34 +46,115 @@ namespace MathSets
             {
                 Text = "Верный результат",
                 HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(10),
             };
             SpTasks.Children.Add(header);
-            WrapPanel wrapPanel = new WrapPanel()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center
-            };// Вывод верного результата
             EllipseGeneration ellipseGeneration = new EllipseGeneration();
-            SpTasks.Children.Add(wrapPanel);
+            switch (n)
+            {
+                case 1:
+                    WrapPanel wrapPanelOne = new WrapPanel()
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };// Вывод верного результата
+                    SpTasks.Children.Add(wrapPanelOne);
+                    for (int i = 0; i < errors.Count; i++)
+                    {
+                        Canvas canvas = new Canvas()
+                        {
+                            Width = 350,
+                            Height = 250,
+                        };
+                        wrapPanelOne.Children.Add(canvas);
+                        Label label = new Label()
+                        {
+                            Content = (Char)(65 + errors[i][0]) + ")",
+                        };
+                        canvas.Children.Add(label);
+                        Ellipse ellipseOne = ellipseGeneration.getEllipse(errors[i][1], errors[i][2], errors[i][3], errors[i][4]);
+                        canvas.Children.Add(ellipseOne);
+                        Ellipse ellipseTwo = ellipseGeneration.getEllipse(errors[i][5], errors[i][6], errors[i][7], errors[i][8]);
+                        canvas.Children.Add(ellipseTwo);
+                        Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+                        combinedPath.Fill = Brushes.Yellow;
+                        canvas.Children.Add(combinedPath);
+                    }
+                    break;
+                case 3:
+                    WrapPanel wrapPanelThree = new WrapPanel()
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };// Вывод верного результата
+                    SpTasks.Children.Add(wrapPanelThree);
+                    for (int i = 0; i < errors.Count; i++)
+                    {
+                        Canvas canvas = new Canvas()
+                        {
+                            Width = 350,
+                            Height = 250,
+                        };
+                        wrapPanelThree.Children.Add(canvas);
+                        Label label = new Label()
+                        {
+                            Content = (Char)(65 + errors[i][0]) + ")",
+                        };
+                        canvas.Children.Add(label);
+                        Ellipse ellipseOne = ellipseGeneration.getEllipse(errors[i][1], errors[i][2], errors[i][3], errors[i][4]); // Создание первого эллипса
+                        canvas.Children.Add(ellipseOne);
+                        Ellipse ellipseTwo = ellipseGeneration.getEllipse(errors[i][5], errors[i][6], errors[i][7], errors[i][8]); // Создание второго эллипса
+                        canvas.Children.Add(ellipseTwo);
+                        Ellipse ellipseThree = ellipseGeneration.getEllipse(errors[i][9], errors[i][10], errors[i][11], errors[i][12]); // Создание третьего эллипса
+                        canvas.Children.Add(ellipseThree);
+                        Path combinedPathOne = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание первого пересечения
+                        canvas.Children.Add(combinedPathOne);
+                        Path combinedPathTwo = ellipseGeneration.getUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect); // Создание второго пересечения
+                        canvas.Children.Add(combinedPathTwo);
+                        Path combinedPathThree = ellipseGeneration.getUnification(ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание третьего пересечения
+                        canvas.Children.Add(combinedPathThree);
+                        Path combinedPathFour = ellipseGeneration.getUnificationThree(ellipseOne, ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание общего пересечения
+                        combinedPathFour.Fill = Brushes.Yellow;
+                        canvas.Children.Add(combinedPathFour);
+                    }
+                    break;
+            }
+
+        }
+
+        public ResultIntersectionSetsWindow(List<int> errors, List<string> correctResult)
+        {
+            InitializeComponent();
+            if (errors.Count == 1)
+            {
+                LBResult.Content = "Ты допустил одну ошибку ";
+            }
+            else
+            {
+                LBResult.Content = "Ты допустил две ошибки ";
+            }
+            TextBlock header = new TextBlock() // Заголовок
+            {
+                Text = "Верный результат",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(10),
+            };
+            SpTasks.Children.Add(header);
             for (int i = 0; i < errors.Count; i++)
             {
-                Canvas canvas = new Canvas()
+                string text;
+                if(errors[i] == 1)
                 {
-                    Width = 350,
-                    Height = 250,
-                };
-                wrapPanel.Children.Add(canvas);
-                Label label = new Label()
+                    text = "Переместительное свойство: ";
+                }
+                else
                 {
-                    Content = (Char)(65 + errors[i][0]) + ")",
+                    text = "Сочетательное свойство: ";
+                }
+                TextBlock textBlock = new TextBlock()
+                {
+                    Text = text + correctResult[errors[i]],
+                    HorizontalAlignment = HorizontalAlignment.Center,
                 };
-                canvas.Children.Add(label);
-                Ellipse ellipseOne = ellipseGeneration.getEllipse(errors[i][1], errors[i][2], errors[i][3], errors[i][4]);
-                canvas.Children.Add(ellipseOne);
-                Ellipse ellipseTwo = ellipseGeneration.getEllipse(errors[i][5], errors[i][6], errors[i][7], errors[i][8]);
-                canvas.Children.Add(ellipseTwo);
-                Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
-                combinedPath.Fill = Brushes.Yellow;
-                canvas.Children.Add(combinedPath);
+                SpTasks.Children.Add(textBlock);
             }
         }
 

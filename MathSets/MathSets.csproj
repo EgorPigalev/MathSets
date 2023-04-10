@@ -59,6 +59,10 @@
       <DependentUpon>CombiningSetsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\Figure.cs" />
+    <Compile Include="classes\Figures.cs" />
+    <Compile Include="pages\EqualSetsSolvingTasksPage.xaml.cs">
+      <DependentUpon>EqualSetsSolvingTasksPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\LessonFourAndFive.xaml.cs">
       <DependentUpon>LessonFourAndFive.xaml</DependentUpon>
     </Compile>
@@ -70,6 +74,9 @@
     </Compile>
     <Compile Include="windows\CorrectResult.xaml.cs">
       <DependentUpon>CorrectResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\HintEqualSetsWindow.xaml.cs">
+      <DependentUpon>HintEqualSetsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\HintCombiningSetsWindow.xaml.cs">
       <DependentUpon>HintCombiningSetsWindow.xaml</DependentUpon>
@@ -89,6 +96,10 @@
     <Compile Include="windows\ResultSplittingSetsWindows.xaml.cs">
       <DependentUpon>ResultSplittingSetsWindows.xaml</DependentUpon>
     </Compile>
+    <Page Include="pages\EqualSetsSolvingTasksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\CombiningSetsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\CorrectResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\HintEqualSetsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

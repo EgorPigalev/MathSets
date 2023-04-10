@@ -54,5 +54,10 @@ namespace MathSets
         {
             Base.MainFrame.Navigate(new pages.CombiningSetsPage());
         }
+
+        private void SPEqualSets_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Base.MainFrame.Navigate(new pages.EqualSetsSolvingTasksPage());
+        }
     }
 }

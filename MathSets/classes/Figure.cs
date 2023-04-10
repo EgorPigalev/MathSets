@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -49,6 +50,22 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Создаёт треугольник по заданным параметрам (не рандомно)
+        /// </summary>
+        /// <param name="x">Координата по x</param>
+        /// <param name="y">Координата по y</param>
+        /// <returns>Треугольник с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateTriangle(int x, int y)
+        {
+            return GetGeometryFromPoints(new PointCollection()
+            {
+                new Point(x, y),
+                new Point(x + _sizeFigures / 2, y - _sizeFigures),
+                new Point(x + _sizeFigures, y)
+            });
+        }
+
+        /// <summary>
         /// Создаёт квадрат с заданными параметрами
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
@@ -68,6 +85,23 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Создаёт квадрат с заданными параметрами (не рандомно)
+        /// </summary>
+        /// <param name="x">позиция по оси Х</param>
+        /// <param name="y">позиция по оси Y</param>
+        /// <returns>Квадрат по заданным параметрам</returns>
+        public Geometry CreateSquare(int x, int y)
+        {
+            return GetGeometryFromPoints(new PointCollection()
+            {
+                new Point(x, y),
+                new Point(x, y - _sizeFigures),
+                new Point(x + _sizeFigures, y - _sizeFigures),
+                new Point(x + _sizeFigures, y)
+            });
+        }
+
+        /// <summary>
         /// Создаёт круг с заданными параметрами
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
@@ -77,6 +111,26 @@ namespace MathSets
         {
             int y = GetCoordinateY(isUp);
 
+            return new EllipseGeometry
+            (
+                new Point
+                (
+                    x + _sizeFigures / 2,
+                    y - _sizeFigures / 2
+                ),
+                _sizeFigures / 2,
+                _sizeFigures / 2
+            );
+        }
+
+        /// <summary>
+        /// Создаёт круг с заданными параметрами (не рандомно)
+        /// </summary>
+        /// <param name="x">позиция по оси x</param>
+        /// <param name="y">позиция по оси y</param>
+        /// <returns>Возвращает круг с заданными параметрами</returns>
+        public Geometry CreateCircle(int x, int y)
+        {
             return new EllipseGeometry
             (
                 new Point
@@ -169,6 +223,23 @@ namespace MathSets
         {
             int y = GetCoordinateY(isUp);
 
+            return GetGeometryFromPoints(new PointCollection()
+            {
+                new Point(x, y - _sizeFigures / 2),
+                new Point(x + _sizeFigures / 2, y),
+                new Point(x + _sizeFigures, y - _sizeFigures / 2),
+                new Point(x + _sizeFigures / 2, y - _sizeFigures)
+            });
+        }
+
+        /// <summary>
+        /// Создаёт ромб с заданными параметрами (не рандомно)
+        /// </summary>
+        /// <param name="x">позиция по оси Х</param>
+        /// <param name="y">позиция по оси Y</param>
+        /// <returns>Ромб с заданными параметрами</returns>
+        public Geometry CreateRhomb(int x, int y)
+        {
             return GetGeometryFromPoints(new PointCollection()
             {
                 new Point(x, y - _sizeFigures / 2),

@@ -24,7 +24,7 @@
                             <Run Text="множество." FontWeight="Bold"/>
                              
                         </TextBlock>
-                            <TextBlock>
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
                                 <Run Text="Можно сказать:" FontStyle="Italic"/>
                                  <Run Text="множество цветов, множество птиц и т.п." />
                             </TextBlock>
@@ -33,7 +33,7 @@
                             <Run Text="элементами " FontWeight="Bold"/>
                              <Run Text="этого множества." />
                             </TextBlock>
-                            <TextBlock>
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
                                  <Run Text="Например:" FontStyle="Italic"/>
                                  <Run Text=" ласточка - элемент множества птиц." />
                             </TextBlock>
@@ -44,7 +44,7 @@
                             <Run Text="перечислением " FontWeight="Bold" />
                             <Run Text="его элементов." />
                         </TextBlock>
-                            <TextBlock>
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
                                  <Run Text="Например:" FontStyle="Italic"/>
                                  <Run Text=" множество букв в слове &quot;шар&quot; состоит из 3 элементов: ш, а, р." />
                             </TextBlock>
@@ -54,7 +54,7 @@
                             <Run Text="общим свойством его элементов." FontWeight="Bold"/>
 
                         </TextBlock>
-                            <TextBlock>
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch">
                                 <Run Text="Множество обозначают заглавной буквой, "></Run>
                                  <Run Text="например: К " FontStyle="Italic"/>
                                  <Run Text="- множество учеников 3А класса

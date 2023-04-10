@@ -38,14 +38,14 @@ namespace MathSets.pages
         string strTask = "";
         int verificationLabel;
         public static Random random = new Random();
-        int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
+        
 
         /// <summary>
         /// метод для генерации задания 2
         /// </summary>
         private void ShowSecondRandomTask()
         {
-
+            int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
             int countTask = random.Next(3, 6); // рандомное количество значений в задании
             int v = random.Next(3);
             for (int i = 0; i <= countTask; i++) // цикл для вывода формулировки задания
@@ -158,12 +158,6 @@ namespace MathSets.pages
             Base.MainFrame.Navigate(new MainMenuPage());
         }
 
-        private void BtnHint_Click(object sender, RoutedEventArgs e)
-        {
-            windows.HintSetElementsWindow hint = new windows.HintSetElementsWindow();
-            hint.ShowDialog();
-        }
-
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
             string strAnswer = ""; // переменна для записи ответа, который выбрал пользователь
@@ -188,7 +182,6 @@ namespace MathSets.pages
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else // если пользователь выбрал неверный ответ
             {
@@ -265,25 +258,66 @@ namespace MathSets.pages
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else if (strAnswer == answerOptions[1] && verificationLabel == 1) // если пользователь выбрал правильный ответ
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else if (strAnswer == answerOptions[2] && verificationLabel == 2) // если пользователь выбрал правильный ответ
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                 correctResult.ShowDialog();
-                //Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
             }
             else // если пользователь выбрал неверный ответ
             {
                 strAnswer = answerOptions[verificationLabel]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
                 windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
                 resultSetAndElementsTasks.ShowDialog();
+            }
+        }
+
+        private void BtnHint_Click_1(object sender, RoutedEventArgs e)
+        {
+            windows.HintSetElementsWindow hint = new windows.HintSetElementsWindow();
+            hint.ShowDialog();
+        }
+
+        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+        }
+
+        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+        }
+
+        private void MenuRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    ShowFirstRandomTask();
+                    BtnOption1.ClearValue(Button.BackgroundProperty);
+                    BtnOption3.ClearValue(Button.BackgroundProperty); 
+                    BtnOption2.ClearValue(Button.BackgroundProperty);
+                    break;
+                case 2:
+                    strTask = "";
+                    ShowSecondRandomTask();
+                 
+                    OptionThree.ClearValue(Button.BackgroundProperty);
+                    OptionOne.ClearValue(Button.BackgroundProperty); 
+                    OptionTwo.ClearValue(Button.BackgroundProperty);
+                    break;
+                default:
+                    break;
             }
         }
     }
