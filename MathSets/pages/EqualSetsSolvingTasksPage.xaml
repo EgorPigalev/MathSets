@@ -11,9 +11,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
             <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Style="{StaticResource BorderHeader}">
             <Grid>
@@ -30,7 +30,7 @@
             <Border Style="{StaticResource BorderMain}">
                 <ScrollViewer>
                     <StackPanel>
-                        <Grid Margin="5">
+                        <Grid Margin="5,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="6*" ></ColumnDefinition>
                                 <ColumnDefinition Width="6*"></ColumnDefinition>
@@ -43,14 +43,14 @@
                                 <RowDefinition ></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0"  Grid.ColumnSpan="2"  TextWrapping="Wrap" Margin="0,0,0,0">Верно ли записаны равенства и неравенства?
+                            <StackPanel Grid.Row="0"  Grid.ColumnSpan="2" >
+                            <TextBlock  TextWrapping="Wrap" Margin="0,0,0,0">Верно ли записаны равенства и неравенства?
                             </TextBlock>
+                            </StackPanel>
 
-                            <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
-                            <MenuItem Uid="1" Header="..." >
-                                <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                                <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
-                                <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                            <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
+                                <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                                    <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                             </MenuItem>
                             </Menu>
 
@@ -63,9 +63,12 @@
                                 </ComboBox>
                                 <Canvas Margin="20,0,0,0" Name="cnvFigureTwo"  Width="200" Height="100"/>
                             </StackPanel>
-                            <Button Content="ДА" Style="{StaticResource ButtonMainStyle}" Click="BtnOption1_Click"  Margin="0,10,0,0" Name="BtnOption1" Grid.Column="0" Grid.Row="2"></Button>
-                            <Button Content="НЕТ" Style="{StaticResource ButtonMainStyle}" Click="BtnOption2_Click"  Grid.Column="1" Name="BtnOption2" Grid.Row="2" Margin="0,10,0,0"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Click="BtnCheck_Click" Name="BtnCheck" Grid.ColumnSpan="2"   Grid.Row="3" Margin="0,10,0,10">Проверить</Button>
+                            <Button  Content="ДА" Style="{StaticResource ButtonMainStyle}" Click="BtnOption1_Click"  Margin="50,10,50,0" Name="BtnOption1" Grid.Column="0" Grid.Row="2"></Button>
+                            <Button Content="НЕТ" Style="{StaticResource ButtonMainStyle}" Click="BtnOption2_Click"  Grid.Column="1" Name="BtnOption2" Grid.Row="2" Margin="50,10,50,0"></Button>
+
+                            <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+                                <Button  Style="{StaticResource ButtonMainStyle}" Click="BtnCheck_Click" Name="BtnCheck" Margin="0,30,0,10">Проверить</Button>
+                            </StackPanel>
                         </Grid>
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
@@ -83,17 +86,15 @@
                             </TextBlock>
 
 
-                            <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                <MenuItem Uid="2" Header="..." >
-                                    <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                                    <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <Menu  Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                <MenuItem Margin="0 5 0 0" Style="{StaticResource MenuStyle}" Uid="2" Header="..." >
                                     <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                 </MenuItem>
                             </Menu>
-                            <Button Style="{StaticResource ButtonMainStyle}" Click="OptionOne_Click"  Margin="0,10,0,0" Name="OptionOne" Grid.Column="0" Grid.Row="1"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Click="OptionTwo_Click"  Grid.Column="1" Name="OptionTwo" Grid.Row="1" Margin="0,10,0,0"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Click="OptionThree_Click"  Grid.ColumnSpan="2" Name="OptionThree" Grid.Row="2" Margin="0,10,0,10"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Grid.ColumnSpan="2" Name="BtnResultTaskTwo" Click="BtnResultTaskTwo_Click" Grid.Row="3" Margin="0,10,0,10">Проверить</Button>
+                            <Button Style="{StaticResource ButtonMainStyle}" Click="OptionOne_Click"  Margin="50,10,50,0" Name="OptionOne" Grid.Column="0" Grid.Row="1"></Button>
+                            <Button Style="{StaticResource ButtonMainStyle}" Click="OptionTwo_Click"  Grid.Column="1" Name="OptionTwo" Grid.Row="1" Margin="50,10,50,0"></Button>
+                            <Button Style="{StaticResource ButtonMainStyle}" Click="OptionThree_Click"  Grid.ColumnSpan="2" Name="OptionThree" Grid.Row="2" Margin="150,10,150,0"></Button>
+                            <Button Style="{StaticResource ButtonMainStyle}" Grid.ColumnSpan="2" Name="BtnResultTaskTwo" Click="BtnResultTaskTwo_Click" Grid.Row="3" Margin="0,30,0,10">Проверить</Button>
 
                         </Grid>
                     </StackPanel>

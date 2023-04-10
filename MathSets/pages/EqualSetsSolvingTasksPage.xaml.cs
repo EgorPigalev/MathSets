@@ -218,18 +218,7 @@ namespace MathSets.pages
             hint.ShowDialog();
         }
 
-        private void MenuSaved_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem childMenuItem = (MenuItem)sender;
-            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-        }
-
-        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem childMenuItem = (MenuItem)sender;
-            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-        }
-
+  
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
         {
             MenuItem childMenuItem = (MenuItem)sender;
