@@ -280,6 +280,7 @@ namespace MathSets.pages
                 Path p = (Path)CnvTaskFirst.Children[i];
                 p.Fill = Brushes.White;
                 _pathToMoved = null;
+                _pathToMoved.capturem
             }
         }
 
