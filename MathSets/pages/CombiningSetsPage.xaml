@@ -44,8 +44,7 @@
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
                                     <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                                        <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
                                         <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                     </MenuItem>
                                 </Menu>
@@ -75,8 +74,7 @@
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
                                     <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                                        <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
                                         <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                     </MenuItem>
                                 </Menu>
@@ -102,8 +100,7 @@
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
                                     <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                                        <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
                                         <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                     </MenuItem>
                                 </Menu>
