@@ -55,15 +55,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="pages\CombiningSetsPage.xaml.cs">
+      <DependentUpon>CombiningSetsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="classes\Figure.cs" />
     <Compile Include="pages\LessonFourAndFive.xaml.cs">
       <DependentUpon>LessonFourAndFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\LessonSix.xaml.cs">
+      <DependentUpon>LessonSix.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\SplittingSetsSolvingTasks.xaml.cs">
       <DependentUpon>SplittingSetsSolvingTasks.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\CorrectResult.xaml.cs">
       <DependentUpon>CorrectResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\HintCombiningSetsWindow.xaml.cs">
+      <DependentUpon>HintCombiningSetsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\HintLessonFourAndFive.xaml.cs">
       <DependentUpon>HintLessonFourAndFive.xaml</DependentUpon>
@@ -80,7 +89,15 @@
     <Compile Include="windows\ResultSplittingSetsWindows.xaml.cs">
       <DependentUpon>ResultSplittingSetsWindows.xaml</DependentUpon>
     </Compile>
+    <Page Include="pages\CombiningSetsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\LessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\LessonSix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\CorrectResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\HintCombiningSetsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

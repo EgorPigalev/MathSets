@@ -167,6 +167,30 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Создаёт вытянутый по оси Х эллипс
+        /// </summary>
+        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
+        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
+        /// <param name="offsetY">смещение эллипса по оси Y</param>
+        /// <returns>Эллипс с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateEllipseTransformY(int x, bool isUp, int offsetY)
+        {
+            int transformY = 3;
+            int y = GetCoordinateY(isUp) - _sizeFigures / transformY + offsetY;
+
+            return new EllipseGeometry
+            (
+                new Point
+                (
+                    x + _sizeFigures / 2,
+                    y - _sizeFigures / transformY
+                ),
+                _sizeFigures / 2,
+                _sizeFigures / transformY
+            );
+        }
+
+        /// <summary>
         /// Создаёт вытянутый по оси Y эллипс с заданными параметрами
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
