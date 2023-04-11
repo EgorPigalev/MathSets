@@ -389,6 +389,7 @@ namespace MathSets
 
                 return offset + _sizeFigures;
             }
+
             return 0;
         }
 
@@ -601,6 +602,48 @@ namespace MathSets
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Добавляет созданные фигуры в контейнер
+        /// </summary>
+        /// <param name="figures">коллекция фигур</param>
+        /// <param name="panel">контейнер</param>
+        public static void ShowFigures(List<Geometry> figures, Panel panel)
+        {
+            for (int i = 0; i < figures.Count; i++)
+            {
+                panel.Children.Add(new Path()
+                {
+                    StrokeThickness = Base.StrokeThickness,
+                    Stroke = Base.ColorFigures,
+                    Data = figures[i],
+                    Fill = Brushes.White,
+                    Uid = i.ToString()
+                });
+            }
+        }
+
+        /// <summary>
+        /// Добавляет созданные фигуры в контейнер
+        /// </summary>
+        /// <param name="figures">коллекция фигур</param>
+        /// <param name="panel">контейнер</param>
+        /// <param name="colorFill">цвет заливки</param>
+        /// <param name="colorStroke">цвет обводки</param>
+        public static void ShowFigures(List<Geometry> figures, Panel panel, SolidColorBrush colorFill, SolidColorBrush colorStroke)
+        {
+            for (int i = 0; i < figures.Count; i++)
+            {
+                panel.Children.Add(new Path()
+                {
+                    StrokeThickness = Base.StrokeThickness,
+                    Stroke = colorStroke,
+                    Data = figures[i],
+                    Fill = colorFill,
+                    Uid = i.ToString()
+                });
+            }
         }
     }
 }
