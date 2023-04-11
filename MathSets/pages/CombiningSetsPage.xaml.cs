@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace MathSets.pages
@@ -25,6 +25,9 @@ namespace MathSets.pages
         List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
         private Path _pathToMoved; // Фигура для перемещения
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
+        int[] setElementsA;
+        int[] setElementsB;
+
         public CombiningSetsPage()
         {
             InitializeComponent();
@@ -127,21 +130,28 @@ namespace MathSets.pages
         {
             Canvas2.Children.Clear();
 
-            int[] setElementsA = GenerationElementsSet(4);
+            setElementsA = GenerationElementsSet(4);
             string strElementsA = ConvertMasInString(setElementsA);
-            
-            int[] setElementsB = GenerationElementsSet(4);
-            string strElementsB = ConvertMasInString(setElementsB);  
+
+            setElementsB = GenerationElementsSet(4);
+            string strElementsB = ConvertMasInString(setElementsB);
 
             TbCondition2.Text = "2) Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
 
             Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 430, 10);
+            Ellipse ellipseOneD = ellipseGeneration.getEllipse(300, 150, 430, 10);
             Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 580, 10);
+            Ellipse ellipseTwoD = ellipseGeneration.getEllipse(300, 150, 580, 10);
+            Path combEllipseOne = ellipseGeneration.getUnification(ellipseOne, ellipseOneD, GeometryCombineMode.Intersect);
+            Path combEllipseTwo = ellipseGeneration.getUnification(ellipseTwo, ellipseTwoD, GeometryCombineMode.Intersect);
             Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
-            ellipseOne.StrokeThickness = Base.StrokeThickness;
-            ellipseTwo.StrokeThickness = Base.StrokeThickness;
-            Canvas2.Children.Add(ellipseOne);
-            Canvas2.Children.Add(ellipseTwo);
+            combEllipseOne.StrokeThickness = Base.StrokeThickness;
+            combEllipseTwo.StrokeThickness = Base.StrokeThickness;
+            combinedPath.Fill = Brushes.White;
+            //Canvas2.Children.Add(ellipseOne);
+            //Canvas2.Children.Add(ellipseTwo);
+            Canvas2.Children.Add(combEllipseOne);
+            Canvas2.Children.Add(combEllipseTwo);
             Canvas2.Children.Add(combinedPath);
             TextBlock tbA = new TextBlock()
             {
@@ -156,11 +166,12 @@ namespace MathSets.pages
             };
             Canvas2.Children.Add(tbB);
 
-            int[] masElements = CombiningElementsSets(setElementsA, setElementsB);
+            int[] masCombiningElements = CombiningElementsSets(setElementsA, setElementsB);
+            int[] masElements = RandomElementsCombining(masCombiningElements);
             int marginText = 0;
             for (int i = 0; i < masElements.Length; i++)
             {
-                if(masElements[i]!=0)
+                if (masElements[i] != 0)
                 {
                     Figure figure = new Figure(28, 0, 0);
                     Geometry geometry = null;
@@ -180,12 +191,39 @@ namespace MathSets.pages
                     path.Uid = i.ToString();
                     Canvas2.Children.Add(path);
                 }
+
+
             }
             _pointsQuestionFirst.Clear();
             for (int i = 0; i < masElements.Length; i++) // Заполнение точек смещения
             {
                 _pointsQuestionFirst.Add(new Point(0, 0));
             }
+        }
+
+        private int[] RandomElementsCombining(int[] combining)
+        {
+            int[] masElements = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] masPosition = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            int n = 0;
+            for (int i = 0; i < combining.Length; i++)
+            {
+            met: int q = random.Next(1, 9);
+                for (int j = 0; j < masPosition.Length; j++)
+                {
+                    if (masPosition[j] == q)
+                    {
+                        goto met;
+                    }
+                }
+                masPosition[i] = q;
+                if(combining[q-1]!=0)
+                {
+                    masElements[n] = combining[q - 1];
+                    n++;
+                }                
+            }
+            return masElements;
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -224,6 +262,7 @@ namespace MathSets.pages
                 }
             }
         }
+
         private void SetOffsetFigure(int id, Point actualCoordinate)
         {
             Point tempPoint = _pointsQuestionFirst[id];
@@ -308,18 +347,18 @@ namespace MathSets.pages
             int[] masElementsCombining = CombiningElementsSets(masElementsSetA, masElementsSetB);
             int[] masElementsIntersection = IntersectionElementsSets(masElementsSetA, masElementsSetB);
 
-            for(int i=0;i<masAnswerOptions.Length;i++)
+            for (int i = 0; i < masAnswerOptions.Length; i++)
             {
                 masAnswerOptions[i] = -1;
             }
 
             string[] str = new string[4];
-            for (int j = 0; j<4;j++)
-            { 
-                met: int g = random.Next(4);
-                for(int i=0;i< masAnswerOptions.Length;i++)
+            for (int j = 0; j < 4; j++)
+            {
+            met: int g = random.Next(4);
+                for (int i = 0; i < masAnswerOptions.Length; i++)
                 {
-                    if(g== masAnswerOptions[i])
+                    if (g == masAnswerOptions[i])
                     {
                         goto met;
                     }
@@ -334,14 +373,14 @@ namespace MathSets.pages
                         str[j] = "A ∩ B = {" + ConvertMasInString(masElementsIntersection) + "}";
                         break;
                     case 2:
-                        str[j] = "A ∩ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1,9))) + "}";
+                        str[j] = "A ∩ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1, 9))) + "}";
                         break;
                     case 3:
-                        str[j] = "A ∪ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1, 9))) + "}";  
+                        str[j] = "A ∪ B = {" + ConvertMasInString(GenerationElementsSet(random.Next(1, 9))) + "}";
                         break;
                     default:
                         break;
-                }   
+                }
             }
 
             Cb1.Content = str[0];
@@ -349,63 +388,48 @@ namespace MathSets.pages
             Cb3.Content = str[2];
             Cb4.Content = str[3];
 
-            bool elementFoundA = false;
             int marginA = 30;
-            for(int i =0; i<masElementsSetA.Length;i++)
-            {
-                for(int j=0;j<masElementsIntersection.Length;j++)
-                {
-                    if(masElementsSetA[i]==masElementsIntersection[j])
-                    {
-                        elementFoundA = true;
-                    }
-                }
-                if(elementFoundA == false)
-                {
-                    TextBlock tb = new TextBlock()
-                    {
-                        Text = masElementsSetA[i].ToString(),
-                        Margin = new Thickness(marginA,random.Next(35,100),0,0)
-                    };
-                    Canvas3.Children.Add(tb);  
-                }
-                elementFoundA = false;
-                marginA += 30;
-            }
 
-            bool elementFoundB = false;
-            int marginB = 300;
-            for (int i = 0; i < masElementsSetB.Length; i++)
+            int[] masA = ElementsOnlyOneSet(masElementsSetA, masElementsIntersection);
+            int[] masB = ElementsOnlyOneSet(masElementsSetB, masElementsIntersection);
+            for (int i = 0; i < masA.Length; i++)
             {
-                for (int j = 0; j < masElementsIntersection.Length; j++)
-                {
-                    if (masElementsSetB[i] == masElementsIntersection[j])
-                    {
-                        elementFoundB = true;
-                    }
-                }
-                if (elementFoundB == false)
+                if (masA[i] != 0)
                 {
                     TextBlock tb = new TextBlock()
                     {
-                        Text = masElementsSetB[i].ToString(),
-                        Margin = new Thickness(marginB, random.Next(30,100), 0, 0)
+                        Text = masA[i].ToString(),
+                        Margin = new Thickness(marginA, random.Next(35, 100), 0, 0)
                     };
                     Canvas3.Children.Add(tb);
+                    marginA += 30;
                 }
-                elementFoundB = false;
-                marginB += 30;
+            }
+
+            int marginB = 300;
+            for (int i = 0; i < masB.Length; i++)
+            {
+                if (masB[i] != 0)
+                {
+                    TextBlock tb = new TextBlock()
+                    {
+                        Text = masB[i].ToString(),
+                        Margin = new Thickness(marginB, random.Next(30, 100), 0, 0)
+                    };
+                    Canvas3.Children.Add(tb);
+                    marginB += 30;
+                }
             }
 
             int marginCenter = 180;
             for (int j = 0; j < masElementsIntersection.Length; j++)
             {
-                if (masElementsIntersection[j]!=0)
+                if (masElementsIntersection[j] != 0)
                 {
                     TextBlock tb = new TextBlock()
                     {
                         Text = masElementsIntersection[j].ToString(),
-                        Margin = new Thickness(marginCenter, random.Next(30,100), 0, 0)
+                        Margin = new Thickness(marginCenter, random.Next(30, 100), 0, 0)
                     };
                     Canvas3.Children.Add(tb);
                 }
@@ -421,7 +445,7 @@ namespace MathSets.pages
         private string ConvertMasInString(int[] mas)
         {
             string str = "";
-            if(mas[0]==0)
+            if (mas[0] == 0)
             {
                 str = "Ø";
             }
@@ -435,7 +459,7 @@ namespace MathSets.pages
                     }
                 }
                 str = str.Substring(0, str.Length - 2);
-            } 
+            }
             return str;
         }
 
@@ -480,7 +504,7 @@ namespace MathSets.pages
             {
             met: if (n != 4)
                 {
-                    
+
                     for (int j = 0; j < masA.Length; j++)
                     {
                         if (masB[n] == masA[j])
@@ -504,7 +528,7 @@ namespace MathSets.pages
         /// <returns></returns>
         private int[] IntersectionElementsSets(int[] masA, int[] masB)
         {
-            int[] masElements = new int[4] { 0, 0, 0, 0};
+            int[] masElements = new int[4] { 0, 0, 0, 0 };
             int n = 0;
             for (int i = 0; i < masA.Length; i++)
             {
@@ -517,7 +541,7 @@ namespace MathSets.pages
                     }
                 }
             }
-            if(masElements.Length==0)
+            if (masElements.Length == 0)
             {
                 masElements[0] = 0;
             }
@@ -599,30 +623,152 @@ namespace MathSets.pages
 
         private void BtnCheck2_Click(object sender, RoutedEventArgs e)
         {
+            Path path = (Path)Canvas2.Children[0];
+            for (int i = 5; i < Canvas2.Children.Count; i++)
+            {
+                Path path1 = (Path)Canvas2.Children[i];
+                if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
+                {
+                    MessageBox.Show("dfdf");
+                }
+            }
 
+            int[] intersectionSets = IntersectionElementsSets(setElementsA, setElementsB);
+            int[] combiningSets = CombiningElementsSets(setElementsA, setElementsB);
+            int[] masA = ElementsOnlyOneSet(setElementsA, intersectionSets);
+            int[] masB = ElementsOnlyOneSet(setElementsB, intersectionSets);
+
+
+
+            //int[] positionElementsSetA = new int[4];
+            //int n = 0;
+            //for(int i = 0; i< combiningSets.Length; i++)
+            //{
+            //    for(int j=0; j<masA.Length;j++)
+            //    {
+            //        if(combiningSets[i] == masA[j])
+            //        {
+            //            positionElementsSetA[n] = i;
+            //            n++;
+            //        }
+            //    }
+            //}
+
+
+            //if(CheckSet(masA, Canvas2)==true)
+            //{
+            //    MessageBox.Show("Успех");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Лох");
+            //}
+        }
+
+        /// <summary>
+        /// Поиск элементов, которые содержаться только в одном множестве
+        /// </summary>
+        /// <param name="set">Множество, в котором идет поиск элементов</param>
+        /// <param name="intersectionSets">Множество, в котором храняться общие элементы</param>
+        /// <returns></returns>
+        private int[] ElementsOnlyOneSet(int[] set, int[] intersectionSets)
+        {
+            int[] mas = new int[4];
+            int n = 0;
+            bool yes = false;
+            for (int i = 0; i < set.Length; i++)
+            {
+                for (int j = 0; j < intersectionSets.Length; j++)
+                {
+                    if (set[i] == intersectionSets[j])
+                    {
+                        yes = true;
+                    }
+                }
+                if (yes == false)
+                {
+                    mas[n] = set[i];
+                    n++;
+                }
+                yes = false;
+            }
+            return mas;
+        }
+
+        /// <summary>
+        /// Проверка на вхождение элементов в эллипс
+        /// </summary>
+        /// <param name="indexesAnswers">Правильные цифры</param>
+        /// <param name="canvas">Канвас, в котором идет проверка</param>
+        /// <returns></returns>
+        private bool CheckSet(int[] indexesAnswers, Canvas canvas)
+        {
+            int countRightAnswer = 0;
+            List<Geometry> figures = new List<Geometry>();
+
+            Path pp = (Path)canvas.Children[0];
+
+            for (int i = 5; i < canvas.Children.Count; i++)
+            {
+                Path p = (Path)canvas.Children[i];
+                figures.Add(p.Data);
+            }
+            for (int i = 0; i < figures.Count; i++)
+            {
+                foreach (int item in indexesAnswers)
+                {
+                    if (pp.Data.FillContainsWithDetail(figures[i]) == IntersectionDetail.FullyContains)
+                    {
+                        if (indexesAnswers.Contains(i))
+                        {
+                            countRightAnswer++;
+                            break;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            int q = 0;
+            for (int i = 0; i < indexesAnswers.Length; i++)
+            {
+                if (indexesAnswers[i] != 0)
+                {
+                    q++;
+                }
+            }
+
+            if (countRightAnswer == q)
+            {
+                return true;
+            }
+            return false;
         }
 
         private void BtnCheck3_Click(object sender, RoutedEventArgs e)
         {
-            int combining=0, intersection=0;
-            for(int i=0;i<masAnswerOptions.Length;i++)
+            int combining = 0, intersection = 0;
+            for (int i = 0; i < masAnswerOptions.Length; i++)
             {
-                if(masAnswerOptions[i] == 0)
+                if (masAnswerOptions[i] == 0)
                 {
-                    combining = i+1;
+                    combining = i + 1;
                 }
-                if(masAnswerOptions[i]==1)
+                if (masAnswerOptions[i] == 1)
                 {
-                    intersection = i+1;
+                    intersection = i + 1;
                 }
             }
-            switch(combining)
+            switch (combining)
             {
                 case 1:
-                    switch(intersection)
+                    switch (intersection)
                     {
                         case 2:
-                            if(Cb1.IsChecked==true && Cb2.IsChecked==true && Cb3.IsChecked==false && Cb4.IsChecked==false)
+                            if (Cb1.IsChecked == true && Cb2.IsChecked == true && Cb3.IsChecked == false && Cb4.IsChecked == false)
                             {
                                 windows.CorrectResult correctResult = new windows.CorrectResult();
                                 correctResult.ShowDialog();
@@ -780,7 +926,7 @@ namespace MathSets.pages
                     break;
                 default:
                     break;
-            }            
+            }
         }
 
         private void MenuHint_Click(object sender, RoutedEventArgs e)
