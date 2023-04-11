@@ -126,7 +126,7 @@ namespace MathSets
                 Ellipse ellipseOne = (Ellipse)canvas.Children[1];
                 Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
                 Path path = (Path)canvas.Children[3];
-                if(path.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
+                if (path.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
                 {
                     if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White) // Если выделено лишнее
                     {
@@ -184,6 +184,9 @@ namespace MathSets
             }
         }
 
+        List<int> indexCorrectResult = new List<int>(); // Индексы фигур для правильного результата
+        List<string> intersectionSets = new List<string>(); // Фигуры, которые представляют собой пересечение множеств
+
 
         /// <summary>
         /// Генерация задания 2 типа (Нахождение пересечения двух множеств)
@@ -214,8 +217,13 @@ namespace MathSets
             ShowPrimer(firstSets, 'M');
             ShowPrimer(secondSets, 'K');
 
-            List<string> intersectionSets = GetIntersectionSets(firstSets, secondSets);
-            List<string> combiningSets = GetCombiningSets(firstSets, secondSets);
+            intersectionSets = GetIntersectionSets(firstSets, secondSets); // Пересечение множеств
+            List<string> combiningSets = GetCombiningSets(firstSets, secondSets); // Объединение множеств (для вывода всех фигур без повторений)
+            indexCorrectResult.Clear();
+            foreach (string set in intersectionSets)
+            {
+                indexCorrectResult.Add(combiningSets.IndexOf(set));
+            }
 
             int s = 0;
             int j = 1;
@@ -223,7 +231,7 @@ namespace MathSets
             {
                 Figure figure = new Figure(28, 0, 0);
                 Geometry geometry = null;
-                if(i >= 9)
+                if(i == 9)
                 {
                     s = 0;
                     j = 2;
@@ -231,19 +239,19 @@ namespace MathSets
                 switch (combiningSets[i])
                 {
                     case ("круг"):
-                        geometry = figure.CreateCircle(40 * s, 25 + (70 * j));
+                        geometry = figure.CreateCircle(5 + 40 * s, 25 + (70 * j));
                         break;
                     case ("треугольник"):
-                        geometry = figure.CreateTriangle(40 * s, 25 +(70 * j));
+                        geometry = figure.CreateTriangle(5 + 40 * s, 25 +(70 * j));
                         break;
                     case ("квадрат"):
-                        geometry = figure.CreateSquare(40 * s, 25 + (70 * j));
+                        geometry = figure.CreateSquare(5 + 40 * s, 25 + (70 * j));
                         break;
                     case ("ромб"):
-                        geometry = figure.CreateRhomb(40 * s, 25 + (70 * j));
+                        geometry = figure.CreateRhomb(5 + 40 * s, 25 + (70 * j));
                         break;
                     default:
-                        geometry = GetGeometryFromText(combiningSets[i], 50, 40 * s, -30 + (70 * j));
+                        geometry = figure.GetGeometryFromText(combiningSets[i], 50, 5 + 40 * s, -30 + (70 * j));
                         break;
                 }
                 s++;
@@ -395,12 +403,12 @@ namespace MathSets
                 default:
                     if (i == sets.Count - 1)
                     {
-                        geometry = GetGeometryFromText(sets[i], 28, 10, 0);
+                        geometry = figure.GetGeometryFromText(sets[i], 28, 10, 0);
 
                     }
                     else
                     {
-                        geometry = GetGeometryFromText(sets[i] + ";", 28, 10, 0);
+                        geometry = figure.GetGeometryFromText(sets[i] + ";", 28, 10, 0);
                     }
                     Path path = new Path()
                     {
@@ -440,28 +448,6 @@ namespace MathSets
                 Margin = new Thickness(730, 10, 0, 0),
             };
             CVMainPlaceQuestionSecond.Children.Add(secondPlenty);
-        }
-
-
-#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
-        /// <summary>
-        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
-        /// </summary>
-        /// <param name="text">текст для преобразования в фигуру</param>
-        /// <returns>Фигура, созданная на основании заданного текста</returns>
-        public Geometry GetGeometryFromText(string text, int _sizeFigures, int x, int y)
-        {
-            FormattedText formattedText = new FormattedText
-            (
-                text,
-                CultureInfo.CurrentCulture,
-                FlowDirection.LeftToRight,
-                new Typeface("Comic Sans MS"),
-                _sizeFigures,
-                (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
-            );
-
-            return formattedText.BuildGeometry(new Point(x, y));
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -551,16 +537,35 @@ namespace MathSets
 
         private void BtnCheckQuestionSecond_Click(object sender, RoutedEventArgs e)
         {
-            Path path = (Path)CVMainPlaceQuestionSecond.Children[2];
-            for(int i = 5; i < CVMainPlaceQuestionSecond.Children.Count; i++)
+            int kolResult = 0; // Колличество верно отвеченных
+            bool result = true; // Результат (наличие ошибок)
+            Path placeIntersection = (Path)CVMainPlaceQuestionSecond.Children[2]; // Фигура пересечения
+            for (int i = 5; i < CVMainPlaceQuestionSecond.Children.Count; i++)
             {
-                Path path1 = (Path)CVMainPlaceQuestionSecond.Children[i];
-                if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
+                Path path = (Path)CVMainPlaceQuestionSecond.Children[i];
+                if (placeIntersection.Data.FillContainsWithDetail(path.Data) == IntersectionDetail.FullyContains)
                 {
-                    MessageBox.Show("dfdf");
-                }              
+                    if(indexCorrectResult.IndexOf(Convert.ToInt32(path.Uid)) == -1)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        kolResult++;
+                    }
+                }
             }
-            
+            if(result && kolResult == indexCorrectResult.Count)
+            {
+                CorrectResult correctResult = new CorrectResult();
+                correctResult.ShowDialog();
+            }
+            else
+            {
+                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(intersectionSets);
+                resultIntersectionSetsWindow.ShowDialog();
+            }
+
         }
 
         private List<String> getCopy(List<String> list)
