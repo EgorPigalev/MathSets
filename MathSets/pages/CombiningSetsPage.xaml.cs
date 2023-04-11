@@ -27,6 +27,7 @@ namespace MathSets.pages
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
         int[] setElementsA;
         int[] setElementsB;
+        int[] masElements;
 
         public CombiningSetsPage()
         {
@@ -139,20 +140,23 @@ namespace MathSets.pages
             TbCondition2.Text = "2) Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
 
             Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 430, 10);
-            Ellipse ellipseOneD = ellipseGeneration.getEllipse(300, 150, 430, 10);
+           
             Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 580, 10);
+            
+            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+            Ellipse ellipseOneD = ellipseGeneration.getEllipse(300, 150, 430, 10);
             Ellipse ellipseTwoD = ellipseGeneration.getEllipse(300, 150, 580, 10);
             Path combEllipseOne = ellipseGeneration.getUnification(ellipseOne, ellipseOneD, GeometryCombineMode.Intersect);
             Path combEllipseTwo = ellipseGeneration.getUnification(ellipseTwo, ellipseTwoD, GeometryCombineMode.Intersect);
-            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+            combEllipseOne.Fill = Brushes.Red;
+            combEllipseTwo.Fill = Brushes.Green;
+            combinedPath.Fill = Brushes.Black;
             combEllipseOne.StrokeThickness = Base.StrokeThickness;
-            combEllipseTwo.StrokeThickness = Base.StrokeThickness;
-            combinedPath.Fill = Brushes.White;
-            //Canvas2.Children.Add(ellipseOne);
-            //Canvas2.Children.Add(ellipseTwo);
+            combEllipseTwo.StrokeThickness = Base.StrokeThickness;          
             Canvas2.Children.Add(combEllipseOne);
             Canvas2.Children.Add(combEllipseTwo);
             Canvas2.Children.Add(combinedPath);
+
             TextBlock tbA = new TextBlock()
             {
                 Text = "A",
@@ -201,9 +205,14 @@ namespace MathSets.pages
             }
         }
 
+        /// <summary>
+        /// Рандомный вывод элементов в задании 2
+        /// </summary>
+        /// <param name="combining"></param>
+        /// <returns></returns>
         private int[] RandomElementsCombining(int[] combining)
         {
-            int[] masElements = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            masElements = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
             int[] masPosition = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
             int n = 0;
             for (int i = 0; i < combining.Length; i++)
@@ -217,11 +226,11 @@ namespace MathSets.pages
                     }
                 }
                 masPosition[i] = q;
-                if(combining[q-1]!=0)
+                if (combining[q - 1] != 0)
                 {
                     masElements[n] = combining[q - 1];
                     n++;
-                }                
+                }
             }
             return masElements;
         }
@@ -241,7 +250,7 @@ namespace MathSets.pages
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 5; i < Canvas2.Children.Count; i++)
+            for (int i = 6; i < Canvas2.Children.Count; i++)
             {
                 Path p = (Path)Canvas2.Children[i];
                 p.Fill = Brushes.White;
@@ -623,45 +632,61 @@ namespace MathSets.pages
 
         private void BtnCheck2_Click(object sender, RoutedEventArgs e)
         {
-            Path path = (Path)Canvas2.Children[0];
-            for (int i = 5; i < Canvas2.Children.Count; i++)
-            {
-                Path path1 = (Path)Canvas2.Children[i];
-                if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
-                {
-                    MessageBox.Show("dfdf");
-                }
-            }
-
             int[] intersectionSets = IntersectionElementsSets(setElementsA, setElementsB);
             int[] combiningSets = CombiningElementsSets(setElementsA, setElementsB);
             int[] masA = ElementsOnlyOneSet(setElementsA, intersectionSets);
             int[] masB = ElementsOnlyOneSet(setElementsB, intersectionSets);
 
+            int[] positionElementsA = new int[4];
+            int[] positionElementsB = new int[4];
+            int[] intersectionAB = new int[4];
 
+            int razmA = 0, razmB = 0, razmIntersection = 0;
 
-            //int[] positionElementsSetA = new int[4];
-            //int n = 0;
-            //for(int i = 0; i< combiningSets.Length; i++)
+            for (int i = 0; i < masElements.Length; i++)
+            {
+                if (masElements[i] != 0)
+                {
+                    for (int j = 0; j < masA.Length; j++)
+                    {
+                        if (masElements[i] == masA[j])
+                        {
+                            positionElementsA[razmA] = i + 1;
+                            razmA++;
+                        }
+                    }
+                    for (int j = 0; j < masB.Length; j++)
+                    {
+                        if (masElements[i] == masB[j])
+                        {
+                            positionElementsB[razmB] = i + 1;
+                            razmB++;
+                        }
+                    }
+                    for (int j = 0; j < intersectionSets.Length; j++)
+                    {
+                        if (masElements[i] == intersectionSets[j])
+                        {
+                            intersectionAB[razmIntersection] = i + 1;
+                            razmIntersection++;
+                        }
+                    }
+                }
+            }
+
+            //if(CheckSet(positionElementsA, 0)==true && CheckSet(positionElementsB, 1) == true && CheckSet(intersectionAB, 2) == true)
             //{
-            //    for(int j=0; j<masA.Length;j++)
+            //    windows.CorrectResult correctResult = new windows.CorrectResult();
+            //    correctResult.ShowDialog();
+            //}
+            //Path path = (Path)Canvas2.Children[0];
+            //for (int i = 6; i < Canvas2.Children.Count; i++)
+            //{
+            //    Path path1 = (Path)Canvas2.Children[i];
+            //    if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
             //    {
-            //        if(combiningSets[i] == masA[j])
-            //        {
-            //            positionElementsSetA[n] = i;
-            //            n++;
-            //        }
+            //        MessageBox.Show("ssf");
             //    }
-            //}
-
-
-            //if(CheckSet(masA, Canvas2)==true)
-            //{
-            //    MessageBox.Show("Успех");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Лох");
             //}
         }
 
@@ -696,52 +721,42 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// Проверка на вхождение элементов в эллипс
+        /// Проверка задания 2
         /// </summary>
-        /// <param name="indexesAnswers">Правильные цифры</param>
-        /// <param name="canvas">Канвас, в котором идет проверка</param>
+        /// <param name="elements">Верные элементы</param>
+        /// <param name="canvasChildren">В какую часть должны входить элементы</param>
         /// <returns></returns>
-        private bool CheckSet(int[] indexesAnswers, Canvas canvas)
+        private bool CheckSet(int[] elements, int canvasChildren)
         {
-            int countRightAnswer = 0;
-            List<Geometry> figures = new List<Geometry>();
-
-            Path pp = (Path)canvas.Children[0];
-
-            for (int i = 5; i < canvas.Children.Count; i++)
+            int prov = 0;
+            int real = 0;
+            Path path = (Path)Canvas2.Children[canvasChildren];
+            for (int i = 6; i < Canvas2.Children.Count; i++)
             {
-                Path p = (Path)canvas.Children[i];
-                figures.Add(p.Data);
-            }
-            for (int i = 0; i < figures.Count; i++)
-            {
-                foreach (int item in indexesAnswers)
+                Path path1 = (Path)Canvas2.Children[i];
+                if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
                 {
-                    if (pp.Data.FillContainsWithDetail(figures[i]) == IntersectionDetail.FullyContains)
+                    for (int j = 0; j < elements.Length; j++)
                     {
-                        if (indexesAnswers.Contains(i))
+                        if (elements[j] == i - 4)
                         {
-                            countRightAnswer++;
-                            break;
-                        }
-                        else
-                        {
-                            return false;
+                            prov++;
                         }
                     }
+                    real++;
                 }
             }
 
-            int q = 0;
-            for (int i = 0; i < indexesAnswers.Length; i++)
+            int elementsDontZero = 0;
+            for (int i = 0; i < elements.Length; i++)
             {
-                if (indexesAnswers[i] != 0)
+                if (elements[i] != 0)
                 {
-                    q++;
+                    elementsDontZero++;
                 }
             }
 
-            if (countRightAnswer == q)
+            if (prov == elementsDontZero && real == prov)
             {
                 return true;
             }
