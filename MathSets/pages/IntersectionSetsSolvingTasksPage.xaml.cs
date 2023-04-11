@@ -150,16 +150,26 @@ namespace MathSets
             }
         }
 
-        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
         {
             MenuItem childMenuItem = (MenuItem)sender;
             MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-        }
 
-        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem childMenuItem = (MenuItem)sender;
-            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    GuideIntersectionSetsWindow guideIntersectionSetsWindow = new GuideIntersectionSetsWindow();
+                    guideIntersectionSetsWindow.ShowDialog();
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
