@@ -287,11 +287,13 @@ namespace MathSets.windows
             Figure figure = new Figure(sizeFigures, canvas.Height, canvas.Width);
             List<Geometry> figures = new List<Geometry>();
 
-            foreach (StackPanel sp in spParent.Children)
+            for (int i = 0; i < spParent.Children.Count; i++)
             {
+                StackPanel sp = (StackPanel)spParent.Children[i];
+
                 if (((TextBlock)sp.Children[1]).Text == "∈")
                 {
-                    figures.Add(figure.GetGeometryFromText((i + 1).ToString()));
+                    figures.Add(figure.GetGeometryFromText((i + 1).ToString())); // Не догнал как спавнить, есть глупая идея.
                 }
                 else
                 {

@@ -545,7 +545,7 @@ namespace MathSets
                 panel.Children.Add(new Path()
                 {
                     StrokeThickness = Base.StrokeThickness,
-                    Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                    Stroke = Base.ColorFigures,
                     Data = figures[i],
                     Fill = Brushes.White,
                     Uid = i.ToString()

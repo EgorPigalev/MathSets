@@ -41,9 +41,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Name="SpTaskFirst" Background="White">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="TbTaskFirst" Text="1) Укажи, есть ли подмножества на приведённых ниже рисунках. Принимай каждый эллипс за отдельное множество."/>
-                        </StackPanel>
+                        <TextBlock Name="TbTaskFirst" Text="1) Укажи, есть ли подмножества на приведённых ниже рисунках. Принимай каждый эллипс за отдельное множество." TextWrapping="Wrap"/>
                         <Grid Name="GridTaskFirst" Height="600" Width="870" Margin="0 10 0 10"/>
                         <Button Name="BtnCheckTaskFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckTaskFirst_Click"/>
                     </StackPanel>
