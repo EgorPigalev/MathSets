@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace MathSets.pages
@@ -19,6 +22,9 @@ namespace MathSets.pages
         Path combinedPathEx1;
         int numberEx1 = 0;
         int[] masAnswerOptions = new int[4];
+        List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
+        private Path _pathToMoved; // Фигура для перемещения
+        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
         public CombiningSetsPage()
         {
             InitializeComponent();
@@ -119,6 +125,8 @@ namespace MathSets.pages
         /// </summary>
         public void GenerationCondition2()
         {
+            Canvas2.Children.Clear();
+
             int[] setElementsA = GenerationElementsSet(4);
             string strElementsA = ConvertMasInString(setElementsA);
             
@@ -149,8 +157,119 @@ namespace MathSets.pages
             Canvas2.Children.Add(tbB);
 
             int[] masElements = CombiningElementsSets(setElementsA, setElementsB);
+            int marginText = 0;
+            for (int i = 0; i < masElements.Length; i++)
+            {
+                if(masElements[i]!=0)
+                {
+                    Figure figure = new Figure(28, 0, 0);
+                    Geometry geometry = null;
+                    geometry = GetGeometryFromText(masElements[i].ToString(), 50, marginText, 40);
+                    marginText += 40;
 
+                    Path path = new Path()
+                    {
+                        StrokeThickness = Base.StrokeThickness,
+                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                        Data = geometry,
+                        Fill = Brushes.White,
+                    };
+                    path.MouseDown += OnMouseDown;
+                    path.MouseMove += OnMouseMove;
+                    path.MouseUp += OnMouseUp;
+                    path.Uid = i.ToString();
+                    Canvas2.Children.Add(path);
+                }
+            }
+            _pointsQuestionFirst.Clear();
+            for (int i = 0; i < masElements.Length; i++) // Заполнение точек смещения
+            {
+                _pointsQuestionFirst.Add(new Point(0, 0));
+            }
+        }
 
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Path path = (Path)sender;
+
+            if (path.Uid != string.Empty)
+            {
+                path.Fill = Brushes.Gray;
+                _pathToMoved = path;
+                _oldMouseCoordinate = e.GetPosition(Canvas2);
+                path.CaptureMouse(); // Захватывание мыши
+            }
+        }
+
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            for (int i = 5; i < Canvas2.Children.Count; i++)
+            {
+                Path p = (Path)Canvas2.Children[i];
+                p.Fill = Brushes.White;
+                _pathToMoved = null;
+                p.ReleaseMouseCapture();
+            }
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_pathToMoved != null)
+            {
+                if (_pathToMoved.Uid != "")
+                {
+                    int id = Convert.ToInt32(_pathToMoved.Uid);
+                    SetOffsetFigure(id, e.GetPosition(Canvas2));
+                    _pathToMoved.Data.Transform = new TranslateTransform(_pointsQuestionFirst[id].X, _pointsQuestionFirst[id].Y);
+                }
+            }
+        }
+        private void SetOffsetFigure(int id, Point actualCoordinate)
+        {
+            Point tempPoint = _pointsQuestionFirst[id];
+
+            if (actualCoordinate.Y > _oldMouseCoordinate.Y)
+            {
+                tempPoint.Y++;
+            }
+            else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
+            {
+                tempPoint.Y--;
+            }
+
+            if (actualCoordinate.X > _oldMouseCoordinate.X)
+            {
+                tempPoint.X++;
+            }
+            else if (actualCoordinate.X < _oldMouseCoordinate.X)
+            {
+                tempPoint.X--;
+            }
+
+            _pointsQuestionFirst[id] = tempPoint;
+
+            _oldMouseCoordinate = actualCoordinate;
+        }
+
+#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
+        /// <summary>
+        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
+        /// </summary>
+        /// <param name="text">текст для преобразования в фигуру</param>
+        /// <returns>Фигура, созданная на основании заданного текста</returns>
+        public Geometry GetGeometryFromText(string text, int _sizeFigures, int x, int y)
+        {
+            FormattedText formattedText = new FormattedText
+            (
+                text,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Comic Sans MS"),
+                _sizeFigures,
+                (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
+            );
+
+            return formattedText.BuildGeometry(new Point(x, y));
         }
 
         /// <summary>
@@ -661,8 +780,7 @@ namespace MathSets.pages
                     break;
                 default:
                     break;
-            }
-            
+            }            
         }
 
         private void MenuHint_Click(object sender, RoutedEventArgs e)
