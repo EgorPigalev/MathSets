@@ -86,6 +86,9 @@
     <Compile Include="windows\HintSplittingSetsWindow.xaml.cs">
       <DependentUpon>HintSplittingSetsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\ResultEqualSetsSolvengTasksWindow.xaml.cs">
+      <DependentUpon>ResultEqualSetsSolvengTasksWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ResultLessonFourAndFive.xaml.cs">
       <DependentUpon>ResultLessonFourAndFive.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\HintSplittingSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultEqualSetsSolvengTasksWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
