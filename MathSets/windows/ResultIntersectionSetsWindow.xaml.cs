@@ -19,7 +19,7 @@ namespace MathSets
     /// </summary>
     public partial class ResultIntersectionSetsWindow : Window
     {
-        public ResultIntersectionSetsWindow(int n, List<int[]> errors)
+        public ResultIntersectionSetsWindow(int n, List<int[]> errors) // 1 задание
         {
             InitializeComponent();
             if (errors.Count == 1)
@@ -120,7 +120,7 @@ namespace MathSets
 
         }
 
-        public ResultIntersectionSetsWindow(List<int> errors, List<string> correctResult)
+        public ResultIntersectionSetsWindow(List<int> errors, List<string> correctResult) // 4 задание
         {
             InitializeComponent();
             if (errors.Count == 1)
@@ -158,6 +158,103 @@ namespace MathSets
             }
         }
 
+        public ResultIntersectionSetsWindow(List<string> intersectionSets) // 2 задание
+        {
+            InitializeComponent();
+            LBResult.Content = "Задание решено не верно";
+            TextBlock header = new TextBlock() // Заголовок
+            {
+                Text = "Правильное решение задания",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(10),
+            };
+            SpTasks.Children.Add(header);
+            Canvas canvas = new Canvas()
+            {
+                Height = 250,
+                Width = 1000,
+            };
+            SpTasks.Children.Add(canvas);
+
+            EllipseGeneration ellipseGeneration = new EllipseGeneration();
+            Ellipse ellipseOne = ellipseGeneration.getEllipse(250, 200, 325, 20); // Создание первого эллипса
+            ellipseOne.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+            canvas.Children.Add(ellipseOne);
+            Ellipse ellipseTwo = ellipseGeneration.getEllipse(250, 200, 425, 20); // Создание второго эллипса
+            ellipseTwo.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+            canvas.Children.Add(ellipseTwo);
+            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
+            combinedPath.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+            canvas.Children.Add(combinedPath);
+            Label firstPlenty = new Label()
+            {
+                Content = "M",
+                Margin = new Thickness(650, 10, 0, 0),
+            };
+            canvas.Children.Add(firstPlenty);
+            Label secondPlenty = new Label()
+            {
+                Content = "K",
+                Margin = new Thickness(325, 10, 0, 0),
+            };
+            canvas.Children.Add(secondPlenty);
+
+            int s = 0;
+            int j = 1;
+            int kol = 0;
+            for (int i = 0; i < intersectionSets.Count; i++)
+            {
+                Figure figure = new Figure(28, 0, 0);
+                Geometry geometry = null;
+                if (s % 4 == 0 && s != 0)
+                {
+                    s = 0;
+                    if(j == 4)
+                    {
+                        j = 0;
+                    }
+                    else
+                    {
+                        j++;
+                    }
+                }
+                switch (intersectionSets[i])
+                {
+                    case ("круг"):
+                        geometry = figure.CreateCircle(430 + 35 * s, 45 * j);
+                        break;
+                    case ("треугольник"):
+                        geometry = figure.CreateTriangle(430 + 35 * s, 45 * j);
+                        break;
+                    case ("квадрат"):
+                        geometry = figure.CreateSquare(430 + 35 * s, 45 * j);
+                        break;
+                    case ("ромб"):
+                        geometry = figure.CreateRhomb(430 + 35 * s, 45 * j);
+                        break;
+                    default:
+                        geometry = figure.GetGeometryFromText(intersectionSets[i], 50, 430 + 35 * s, -60 + (45 * j));
+                        break;
+                }
+                s++;
+                if (combinedPath.Data.FillContainsWithDetail(geometry) != IntersectionDetail.FullyContains)
+                {
+                    i--;
+                }
+                else
+                {
+                    Path path = new Path()
+                    {
+                        StrokeThickness = Base.StrokeThickness,
+                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                        Data = geometry,
+                        Fill = Brushes.White,
+                    };
+                    canvas.Children.Add(path);
+                    kol++;
+                }
+            }
+        }
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -491,6 +491,30 @@ namespace MathSets
                 ));
         }
 
+#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
+        /// <summary>
+        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
+        /// </summary>
+        /// <param name="text">текст для преобразования в фигуру</param>
+        /// <param name="_sizeFigures">размер фигуры</param>
+        /// <param name="x">Координата по оси X</param>
+        /// <param name="y">Координата по оси Y</param>
+        /// <returns>Фигура, созданная на основании заданного текста</returns>
+        public Geometry GetGeometryFromText(string text, int _sizeFigures, int x, int y)
+        {
+            FormattedText formattedText = new FormattedText
+            (
+                text,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Comic Sans MS"),
+                _sizeFigures,
+                (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
+            );
+
+            return formattedText.BuildGeometry(new Point(x, y));
+        }
+
         /// <summary>
         /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
         /// </summary>

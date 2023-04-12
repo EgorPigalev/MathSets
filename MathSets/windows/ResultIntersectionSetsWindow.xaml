@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Label Name="LBResult" Style="{StaticResource LabelHeaderResult}" Grid.Row="0"/>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel Name="SpTasks" VerticalAlignment="Center">
+            <StackPanel Name="SpTasks" VerticalAlignment="Top">
                 
             </StackPanel>
         </ScrollViewer>

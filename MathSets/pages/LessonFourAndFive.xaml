@@ -51,7 +51,7 @@
                     </StackPanel>
 
                     <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                        <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}" Cursor="Hand">
                             <MenuItem Header="Гайд" Click="MenuGuide_Click"/>
                             <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                         </MenuItem>
