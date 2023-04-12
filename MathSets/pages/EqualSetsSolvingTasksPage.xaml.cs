@@ -19,13 +19,17 @@ namespace MathSets.pages
         string strButton = ""; // значение для первой кнопки-ответ
         string strButtonTwo = ""; // значение для второй кнопки-ответ
         string strButtonThree = ""; // значение для третьей кнопки-ответ
-        
+
 
         public EqualSetsSolvingTasksPage()
         {
             InitializeComponent();
-            ShowFigures(CreateFigures(), cnvFigure);
-            ShowFigures(CreateFigures(), cnvFigureTwo);
+
+           ShowFigures2(CreateFigures(), cnvFigure);
+
+           ShowFigures2(CreateFigures(), cnvFigureTwo);
+
+
             ShowRandomSign();
             ShowRandomButton();
         }
@@ -70,7 +74,7 @@ namespace MathSets.pages
                 {
                     strButtonThree += "{";
                 }
-                strButtonThree +=  " ";
+                strButtonThree += " ";
                 if (i == 1)
                 {
                     strButtonThree += "}";
@@ -80,20 +84,20 @@ namespace MathSets.pages
             if (randomAnswerOptions == 0)
             {
                 OptionOne.Content = strButton;
-                OptionTwo.Content =  strButtonTwo;
-                OptionThree.Content =  strButtonThree;
+                OptionTwo.Content = strButtonTwo;
+                OptionThree.Content = strButtonThree;
             }
             else if (randomAnswerOptions == 1)
             {
-                OptionOne.Content =  strButtonTwo;
-                OptionTwo.Content =  strButtonThree;
-                OptionThree.Content =  strButton;
+                OptionOne.Content = strButtonTwo;
+                OptionTwo.Content = strButtonThree;
+                OptionThree.Content = strButton;
             }
             else if (randomAnswerOptions == 2)
             {
                 OptionOne.Content = strButtonThree;
-                OptionTwo.Content =  strButton;
-                OptionThree.Content =  strButtonTwo;
+                OptionTwo.Content = strButton;
+                OptionThree.Content = strButtonTwo;
             }
         }
 
@@ -110,6 +114,7 @@ namespace MathSets.pages
             }
             else if (rnd == 1)
             {
+
                 TextSign.Text = "≠";
             }
         }
@@ -120,7 +125,8 @@ namespace MathSets.pages
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
-            if(cnvFigure == cnvFigureTwo)
+
+            if (cnvFigure == cnvFigureTwo)
             {
                 MessageBox.Show("xaxa");
             }
@@ -148,6 +154,8 @@ namespace MathSets.pages
                 figures.CreateStar
             };
 
+          
+
            Figure.ShuffleMethods(createFiguresMethods); // Перемешиваем фигуры для рандомного расположения их в контейнере.
 
             List<Geometry> listFigures = new List<Geometry>();
@@ -158,11 +166,41 @@ namespace MathSets.pages
             {
                 listFigures.Add(createFiguresMethods[i](x, true)); // Положение фигуры по вертикали вверху.
                 x += 50;
+
             }
 
             return listFigures;
         }
+        private Canvas ShowFigures2(List<Geometry> figures, Canvas canvas)
+        {
+            canvas.Children.Clear();
+            Random random = new Random();
+            foreach (Geometry item in figures)
+            {
+                int rnd = random.Next(2);
+                if(rnd == 0)
+                {
+                    canvas.Children.Add(new Path()
+                    {
+                        StrokeThickness = 3,
+                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                        Fill = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                        Data = item
+                    });
+                }
+                else
+                {
+                    canvas.Children.Add(new Path()
+                    {
+                        StrokeThickness = 3,
+                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
 
+                        Data = item
+                    });
+                }
+            }
+            return canvas;
+        }
         /// <summary>
         /// Добавляет созданные фигуры в элемент управления "Canvas"
         /// </summary>
@@ -174,27 +212,27 @@ namespace MathSets.pages
             Random random = new Random();
             foreach (Geometry item in figures)
             {
-                int rnd = random.Next(2);
-                if (rnd == 0)
-                {
-                    canvas.Children.Add(new Path()
+                //int rnd = random.Next(2);
+                //if (rnd == 0)
+                //{
+                canvas.Children.Add(new Path()
                     {
                         StrokeThickness = 3,
                         Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
                         Fill = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
                         Data = item
                     });
-                }
-                else if (rnd == 1)
-                {
-                    canvas.Children.Add(new Path()
-                    {
-                        StrokeThickness = 3,
-                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                //}
+                //else if (rnd == 1)
+                //{
+                //    canvas.Children.Add(new Path()
+                //    {
+                //        StrokeThickness = 3,
+                //        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
 
-                        Data = item
-                    });
-                }
+                //        Data = item
+                //    });
+                //}
 
             }
         }
@@ -218,7 +256,7 @@ namespace MathSets.pages
             hint.ShowDialog();
         }
 
-  
+
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
         {
             MenuItem childMenuItem = (MenuItem)sender;
@@ -227,19 +265,19 @@ namespace MathSets.pages
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
-                    ShowFigures(CreateFigures(), cnvFigure);
-                    ShowFigures(CreateFigures(), cnvFigureTwo);
+                    ShowFigures2(CreateFigures(), cnvFigure);
+                    ShowFigures2(CreateFigures(), cnvFigureTwo);
                     ShowRandomSign();
 
                     break;
                 case 2:
-                     strButton = ""; 
-                     strButtonTwo = ""; 
-                     strButtonThree = "";
+                    strButton = "";
+                    strButtonTwo = "";
+                    strButtonThree = "";
                     ShowRandomButton();
-                    OptionThree.ClearValue(Button.BackgroundProperty); 
-                    OptionOne.ClearValue(Button.BackgroundProperty); 
-                    OptionTwo.ClearValue(Button.BackgroundProperty); 
+                    OptionThree.ClearValue(Button.BackgroundProperty);
+                    OptionOne.ClearValue(Button.BackgroundProperty);
+                    OptionTwo.ClearValue(Button.BackgroundProperty);
                     break;
                 default:
                     break;
