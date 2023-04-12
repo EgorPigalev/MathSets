@@ -1,7 +1,10 @@
-﻿using System;
+﻿using MathSets.windows;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace MathSets.pages
@@ -12,6 +15,8 @@ namespace MathSets.pages
     public partial class LessonSix : Page
     {
         private Random _random = new Random();
+        private List<Button> _buttons;
+        private List<Geometry> _figures;
 
         public LessonSix()
         {
@@ -28,13 +33,13 @@ namespace MathSets.pages
 
             int countGridDefinitions = 2;
             int minSize = 50;
-            List<Geometry> figures = CreateFiguresTastFirst(countGridDefinitions, minSize);
-            Figure.ShowFigures(figures, GridTaskFirst);
+            _figures = CreateFiguresTaskFirst(countGridDefinitions, minSize);
+            Figure.ShowFigures(_figures, GridTaskFirst);
 
             SetGridDefinitionsTaskFirst(countGridDefinitions);
         }
 
-        private List<Geometry> CreateFiguresTastFirst(int countDefinitions, int minSize)
+        private List<Geometry> CreateFiguresTaskFirst(int countDefinitions, int minSize)
         {
             List<Geometry> figures = new List<Geometry>();
 
@@ -63,8 +68,8 @@ namespace MathSets.pages
         /// <summary>
         /// Создаёт эллипс
         /// </summary>
-        /// <param name="maxWidth">максимальная ширина</param>
-        /// <param name="maxHeight">максимальная высота</param>
+        /// <param name="sizeContainer">размер контейнера</param>
+        /// <param name="maxSize">максимальные размеры</param>
         /// <param name="minSize">минимальный размер</param>
         /// <returns>Эллипс</returns>
         private Geometry CreateEllipse(Point sizeContainer, Point maxSize, int minSize)
@@ -81,8 +86,8 @@ namespace MathSets.pages
                         centerX,
                         centerY
                     ),
-                    _random.Next(minSize, (int)maxSize.X) / 2 - Base.StrokeThickness * 2,
-                    _random.Next(minSize, (int)maxSize.Y) / 2 - Base.StrokeThickness * 2
+                    _random.Next(minSize, (int)maxSize.X) / 2 - Base.StrokeThickness * 4,
+                    _random.Next(minSize, (int)maxSize.Y) / 2 - Base.StrokeThickness * 4
                 );
 
                 if (g.Center.X >= g.RadiusX && sizeContainer.X - g.Center.X >= g.RadiusX)
@@ -95,6 +100,11 @@ namespace MathSets.pages
             }
         }
 
+        /// <summary>
+        /// Проверяет наличие подмножеств
+        /// </summary>
+        /// <param name="figures">список фигур</param>
+        /// <returns>True, если половина или более множеств содержат подмножества и есть хотя бы одно множество без подмножества. В противном случае - false</returns>
         private bool CheckContains(List<Geometry> figures)
         {
             int countSets = figures.Count / 2;
@@ -107,8 +117,7 @@ namespace MathSets.pages
                     return false;
                 }
 
-                if (figures[i].FillContainsWithDetail(figures[i + 1]) == IntersectionDetail.FullyContains ||
-                    figures[i + 1].FillContainsWithDetail(figures[i]) == IntersectionDetail.FullyContains)
+                if (figures[i].FillContainsWithDetail(figures[i + 1]) == IntersectionDetail.FullyContains)
                 {
                     countRightSets++;
                 }
@@ -122,6 +131,10 @@ namespace MathSets.pages
             return false;
         }
 
+        /// <summary>
+        /// Устанавливает нужные Grid.ColumnDefinitions и Grid.RowDefinitions элементам для первого задания
+        /// </summary>
+        /// <param name="countDefinitions">количество строк и столбцов</param>
         private void SetGridDefinitionsTaskFirst(int countDefinitions)
         {
             for (int i = 0; i < countDefinitions; i++)
@@ -162,6 +175,10 @@ namespace MathSets.pages
             Grid.SetRow(buttons[3], 1);
         }
 
+        /// <summary>
+        /// Создаёт обводку, чтобы можно было визуально разделить множества в первом задании
+        /// </summary>
+        /// <returns>Список обводок</returns>
         private List<Border> CreateBordersTaskFirst()
         {
             double thickness = Base.StrokeThickness / 2;
@@ -191,8 +208,14 @@ namespace MathSets.pages
             };
         }
 
+        /// <summary>
+        /// Создаёт список StakPanel с кнопками для каждой ячейки Grid
+        /// </summary>
+        /// <param name="count">количество StakPanel</param>
+        /// <returns>Список StakPanel</returns>
         private List<StackPanel> CreateStackPanelsWithButtonsTaskFirst(int count)
         {
+            _buttons = new List<Button>();
             List<StackPanel> list = new List<StackPanel>();
 
             for (int i = 0; i < count; i++)
@@ -221,9 +244,11 @@ namespace MathSets.pages
 
                 btnIsThere.Click += ButtonClickTaskFirst;
                 btnNot.Click += ButtonClickTaskFirst;
+                _buttons.Add(btnIsThere);
+                _buttons.Add(btnNot);
+
                 sp.Children.Add(btnIsThere);
                 sp.Children.Add(btnNot);
-
                 list.Add(sp);
             }
 
@@ -232,29 +257,46 @@ namespace MathSets.pages
 
         private void ButtonClickTaskFirst(object sender, RoutedEventArgs e)
         {
-            // Смотреть Uid и красить
-            // (SolidColorBrush)Application.Current.Resources["SecondaryColor"]
-            // (SolidColorBrush)Application.Current.Resources["ButtonPressedColor"]
-        }
+            Button btn = (Button)sender;
+            int id = Convert.ToInt32(btn.Uid);
 
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
-            Base.MainFrame.Navigate(new MainMenuPage());
-        }
+            foreach (Button item in _buttons.Where(x => Convert.ToInt32(x.Uid) == id))
+            {
+                item.Background = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+                item.Foreground = Brushes.Black;
+            }
 
-        private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
-        {
-
+            btn.Background = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
+            btn.Foreground = Brushes.White;
         }
 
         private void BtnCheckTaskFirst_Click(object sender, RoutedEventArgs e)
         {
+            for (int i = 0; i < _figures.Count; i += 2)
+            {
+                if (_buttons[i].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"] &&
+                    _buttons[i + 1].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"])
+                {
+                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    return;
+                }
 
-        }
+                if (_figures[i].FillContainsWithDetail(_figures[i + 1]) != IntersectionDetail.FullyContains &&
+                    _buttons[i].Background == (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
+                {
+                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    return;
+                }
 
-        private void BtnHint_Click(object sender, RoutedEventArgs e)
-        {
+                if (_figures[i].FillContainsWithDetail(_figures[i + 1]) == IntersectionDetail.FullyContains &&
+                    _buttons[i].Background != (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
+                {
+                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    return;
+                }
+            }
 
+            new CorrectResult().ShowDialog();
         }
 
         private void MenuSaved_Click(object sender, RoutedEventArgs e)
@@ -292,6 +334,16 @@ namespace MathSets.pages
                 default:
                     break;
             }
+        }
+
+        private void BtnHint_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Base.MainFrame.Navigate(new MainMenuPage());
         }
     }
 }

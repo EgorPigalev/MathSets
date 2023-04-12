@@ -290,6 +290,30 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Создаёт шестиугольник с заданными параметрами
+        /// </summary>
+        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
+        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
+        /// <returns>Пятиугольник с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateSixagon(int x, bool isUp)
+        {
+            int y = GetCoordinateY(isUp);
+
+            int count = 6;
+            int radius = _sizeFigures / 2;
+            PointCollection tempPoints = new PointCollection();
+
+            for (double alpha = 0; alpha <= 2 * Math.PI; alpha += 2 * Math.PI / count)
+            {
+                int x1 = (int)(radius * Math.Cos(alpha));
+                int y1 = (int)(radius * Math.Sin(alpha));
+                tempPoints.Add(new Point(radius + x1, radius + y1));
+            }
+
+            return GetGeometryFromPoints(tempPoints); // Разобраться с x и y начальными.
+        }
+
+        /// <summary>
         /// Создаёт звезду с заданными параметрами
         /// </summary>
         /// <param name="x">позиция по оси Х центральной нижней точки фигуры</param>
@@ -407,6 +431,7 @@ namespace MathSets
                 CreateRhomb,
                 CreateFlame,
                 CreatePentagon,
+                CreateSixagon,
                 CreateStar
             };
         }

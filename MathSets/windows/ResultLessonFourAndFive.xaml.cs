@@ -13,7 +13,7 @@ namespace MathSets.windows
     {
         public ResultLessonFourAndFive(Canvas canvas, List<int> indexesAndwers, int sizeFigures)
         {
-            Upload();
+            InitializeComponent();
 
             Canvas cnv = CreateCanvasWithOneSet(canvas, indexesAndwers);
 
@@ -25,7 +25,7 @@ namespace MathSets.windows
 
         public ResultLessonFourAndFive(Canvas canvas, List<List<int>> indexesErrors, List<Geometry> figures)
         {
-            Upload();
+            InitializeComponent();
 
             Canvas cnv = CreateCanvasWithTwoSets(canvas);
 
@@ -38,7 +38,7 @@ namespace MathSets.windows
 
         public ResultLessonFourAndFive(Canvas canvas, StackPanel stackPanel, int sizeFigures)
         {
-            Upload();
+            InitializeComponent();
 
             Canvas cnv = CreateCanvasWithTwoSets(canvas);
 
@@ -58,13 +58,6 @@ namespace MathSets.windows
             CreateFiguresTaskSecond((StackPanel)spCondition.Children[1], cnv, xStart);
 
             SpResult.Children.Add(cnv);
-        }
-
-        private void Upload()
-        {
-            InitializeComponent();
-
-            LbResult.Content = "Ты допустил ошибку.";
         }
 
         /// <summary>

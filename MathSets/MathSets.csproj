@@ -90,6 +90,9 @@
     <Compile Include="windows\ResultLessonFourAndFive.xaml.cs">
       <DependentUpon>ResultLessonFourAndFive.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\ResultLessonSix.xaml.cs">
+      <DependentUpon>ResultLessonSix.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ResultSetAndElementsTasksWindow.xaml.cs">
       <DependentUpon>ResultSetAndElementsTasksWindow.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\ResultLessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultLessonSix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
