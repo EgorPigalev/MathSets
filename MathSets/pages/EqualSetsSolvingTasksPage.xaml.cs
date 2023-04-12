@@ -138,7 +138,7 @@ namespace MathSets.pages
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFigures()
         {
-            classes.Figures figures = new classes.Figures(40, cnvFigure.Height, cnvFigure.Width); // Размер фигур, высота и ширина контейнера.
+            Figure figures = new Figure(40, cnvFigure.Height, cnvFigure.Width); // Размер фигур, высота и ширина контейнера.
 
             List<classes.CreateFiguresDelegate> createFiguresMethods = new List<classes.CreateFiguresDelegate> // Сюда добавляем фигуры, которые нам надо.
             {

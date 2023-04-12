@@ -59,7 +59,6 @@
       <DependentUpon>CombiningSetsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\Figure.cs" />
-    <Compile Include="classes\Figures.cs" />
     <Compile Include="pages\EqualSetsSolvingTasksPage.xaml.cs">
       <DependentUpon>EqualSetsSolvingTasksPage.xaml</DependentUpon>
     </Compile>
