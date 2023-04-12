@@ -1,4 +1,4 @@
-﻿<Window x:Class="MathSets.windows.GuideIntersectionSetsWindow"
+﻿<Window x:Class="MathSets.windows.GuideWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,7 +13,16 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Label Name="LBResult" Style="{StaticResource LabelHeaderResult}" Grid.Row="0" Content="Видеоинструкция по выполнению задания"/>
-        <MediaElement Name="MEGuide" Grid.Row="1"/>
-        <Button Name="BtnExit" Content="Закрыть" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnExit_Click"/>
+        <MediaElement Name="MEGuide" Grid.Row="1" LoadedBehavior="Manual" MediaEnded="MEGuide_MediaEnded"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="BtnExit" Content="Закрыть" Grid.Column="0" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnExit_Click"/>
+            <Button Name="BtnStart" Content="Запустить" Grid.Column="1" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnStart_Click"/>
+            <Button Name="BtnPause" Content="Пауза" Grid.Column="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnPause_Click"/>
+        </Grid>
     </Grid>
 </Window>

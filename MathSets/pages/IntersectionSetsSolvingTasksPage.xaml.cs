@@ -158,16 +158,16 @@ namespace MathSets
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
-                    GuideIntersectionSetsWindow guideIntersectionSetsWindow = new GuideIntersectionSetsWindow();
-                    guideIntersectionSetsWindow.ShowDialog();
+                    new GuideWindow(10).ShowDialog();
                     break;
                 case 2:
-
+                    new GuideWindow(11).ShowDialog();
                     break;
                 case 3:
-
+                    new GuideWindow(12).ShowDialog();
                     break;
                 default:
+                    new GuideWindow(13).ShowDialog();
                     break;
             }
         }

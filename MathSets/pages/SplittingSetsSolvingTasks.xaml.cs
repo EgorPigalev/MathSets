@@ -44,7 +44,6 @@ namespace MathSets.pages
         /// <summary>
         /// Генерация задания 1 типа (вставка пропущенных букв)
         /// </summary>
-        /// <param name="n">Номер задания</param>
         private void NewOneTask()
         {
             Random random = new Random();
@@ -490,16 +489,10 @@ namespace MathSets.pages
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
-                    GuideIntersectionSetsWindow guideIntersectionSetsWindow = new GuideIntersectionSetsWindow();
-                    guideIntersectionSetsWindow.ShowDialog();
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
+                    new GuideWindow(17).ShowDialog();
                     break;
                 default:
+                    new GuideWindow(18).ShowDialog();
                     break;
             }
         }

@@ -74,8 +74,8 @@
     <Compile Include="windows\CorrectResult.xaml.cs">
       <DependentUpon>CorrectResult.xaml</DependentUpon>
     </Compile>
-    <Compile Include="windows\GuideIntersectionSetsWindow.xaml.cs">
-      <DependentUpon>GuideIntersectionSetsWindow.xaml</DependentUpon>
+    <Compile Include="windows\GuideWindow.xaml.cs">
+      <DependentUpon>GuideWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\HintEqualSetsWindow.xaml.cs">
       <DependentUpon>HintEqualSetsWindow.xaml</DependentUpon>
@@ -122,7 +122,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="windows\GuideIntersectionSetsWindow.xaml">
+    <Page Include="windows\GuideWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,8 +247,17 @@
   <ItemGroup>
     <Resource Include="resources\ResultCorrect.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="video\" />
+    <Resource Include="resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="video\IntersectionSetsFirstTask.mp4" />
+    <Content Include="video\IntersectionSetsFourTask.mp4" />
+    <Content Include="video\IntersectionSetsSecondTask.mp4" />
+    <Content Include="video\IntersectionSetsThreeTask.mp4" />
+    <Content Include="video\SplittingSetsFirstTask.mp4" />
+    <Content Include="video\SplittingSetsSecondTask.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
