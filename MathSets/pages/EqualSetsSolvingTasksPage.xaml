@@ -57,7 +57,7 @@
                             <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.ColumnSpan="2" >
                                 <Canvas Margin="20,0,0,0"   Name="cnvFigure"  Width="200" Height="100"/>
                                 <TextBlock Margin="20,0,0,0"   Name="TextSign"></TextBlock>
-                                <ComboBox>
+                                <ComboBox Name="ComboBoxTextSign">
                                     <ComboBoxItem Name="EqualSign">=</ComboBoxItem>
                                     <ComboBoxItem>≠</ComboBoxItem>
                                 </ComboBox>

@@ -214,6 +214,28 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Создаёт круг с заданными параметрами
+        /// </summary>
+        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
+        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
+        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateEllipse(int x, bool isUp)
+        {
+            int y = GetCoordinateY(isUp);
+
+            return new EllipseGeometry
+            (
+                new Point
+                (
+                    x + _sizeFigures / 2,
+                    y - _sizeFigures / 2
+                ),
+                _sizeFigures / 2,
+                _sizeFigures / 2
+            );
+        }
+
+        /// <summary>
         /// Создаёт ромб с заданными параметрами
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
