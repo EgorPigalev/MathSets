@@ -140,7 +140,7 @@ namespace MathSets.pages
         {
             Figure figures = new Figure(40, cnvFigure.Height, cnvFigure.Width); // Размер фигур, высота и ширина контейнера.
 
-            List<classes.CreateFiguresDelegate> createFiguresMethods = new List<classes.CreateFiguresDelegate> // Сюда добавляем фигуры, которые нам надо.
+            List<CreateFiguresDelegate> createFiguresMethods = new List<CreateFiguresDelegate> // Сюда добавляем фигуры, которые нам надо.
             {
                 figures.CreateTriangle,
                 figures.CreateSquare,
@@ -148,7 +148,7 @@ namespace MathSets.pages
                 figures.CreateStar
             };
 
-            classes.Figures.ShuffleMethods(createFiguresMethods); // Перемешиваем фигуры для рандомного расположения их в контейнере.
+           Figure.ShuffleMethods(createFiguresMethods); // Перемешиваем фигуры для рандомного расположения их в контейнере.
 
             List<Geometry> listFigures = new List<Geometry>();
             int offset = figures.GetOffset(createFiguresMethods.Count); // Отступы между фигурами (высчитывается автоматически на основании ширины контейнера,
