@@ -13,7 +13,7 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Label Name="LBResult" Style="{StaticResource LabelHeaderResult}" Grid.Row="0" Content="Видеоинструкция по выполнению задания"/>
-        <MediaElement Name="MEGuide" Source="GuideZadanieFirstIntersectionSets.mp4" Grid.Row="1" LoadedBehavior="Play"/>
+        <MediaElement Name="MEGuide" Grid.Row="1"/>
         <Button Name="BtnExit" Content="Закрыть" Grid.Row="2" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnExit_Click"/>
     </Grid>
 </Window>

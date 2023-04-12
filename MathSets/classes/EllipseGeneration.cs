@@ -62,6 +62,30 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Создание объединения эллипса и фигуры
+        /// </summary>
+        /// <param name="ellipseOne">Первый эллипс</param>
+        /// <param name="geometry">Фигура</param>
+        /// <param name="geometryCombineMode">Метод комбинирования</param>
+        /// <returns>Комбинированная фигура</returns>
+        public Path getUnificationEllipseAndPath(Ellipse ellipseOne, Geometry geometry, GeometryCombineMode geometryCombineMode)
+        {
+            EllipseGeometry pathGeometryOne = new EllipseGeometry() // Создание EllipseGeometry, который равен первому эллипсу (он нужен для нахождения объединения)
+            {
+                RadiusX = ellipseOne.Width / 2,
+                RadiusY = ellipseOne.Height / 2,
+                Center = new Point(ellipseOne.Margin.Left + (ellipseOne.Width / 2), ellipseOne.Margin.Top + (ellipseOne.Height / 2)),
+            };
+            CombinedGeometry combinedGeometry = new CombinedGeometry(geometryCombineMode, pathGeometryOne, geometry); // Объединение двух эллипсов
+            Path combinedPath = new Path();
+            combinedPath.Data = combinedGeometry;
+            combinedPath.Fill = Brushes.White;
+            combinedPath.Stroke = Brushes.Black;
+            combinedPath.StrokeThickness = Base.StrokeThickness;
+            return combinedPath;
+        }
+
+        /// <summary>
         /// Создание объединения трех эллипсов
         /// </summary>
         /// <param name="ellipseOne">Первый эллипс</param>

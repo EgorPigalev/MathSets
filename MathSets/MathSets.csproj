@@ -246,15 +246,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\PictureForTaskSplittingSets.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\ResultCorrect.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="windows\GuideZadanieFirstIntersectionSets.mp4">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="video\" />
