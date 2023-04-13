@@ -646,20 +646,7 @@ namespace MathSets.pages
             MenuItem childMenuItem = (MenuItem)sender;
             MenuItem menuItem = (MenuItem)childMenuItem.Parent;
 
-            switch (Convert.ToInt32(menuItem.Uid))
-            {
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                default:
-                    break;
-            }
+            new GuideWindow(3, Convert.ToInt32(menuItem.Uid)).ShowDialog();
         }
 
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)

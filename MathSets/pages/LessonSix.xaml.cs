@@ -345,5 +345,13 @@ namespace MathSets.pages
         {
             Base.MainFrame.Navigate(new MainMenuPage());
         }
+
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            new GuideWindow(4, Convert.ToInt32(menuItem.Uid)).ShowDialog();
+        }
     }
 }
