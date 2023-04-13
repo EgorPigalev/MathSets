@@ -110,7 +110,7 @@ namespace MathSets.windows
         }
 
         /// <summary>
-        /// Создаёт фигуры-ответы.
+        /// Создаёт фигуры-ответы
         /// </summary>
         /// <param name="canvas">контейнер</param>
         /// <param name="size">размер фигур</param>

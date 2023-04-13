@@ -131,9 +131,9 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// Генерирует ответы (3 фигуры) для первого задания
+        /// Генерирует фигуры-ответы для первого задания
         /// </summary>
-        /// <returns>Список структур, представляющий из себя пару: ключ - фигура, где ключ - целочисленный индекс из первоначального списка методов</returns>
+        /// <returns>Список фигур</returns>
         private List<Geometry> CreateAnswersTaskFirst(int count)
         {
             int sizeFigures = (int)TbTaskFirst.FontSize;
@@ -203,7 +203,7 @@ namespace MathSets.pages
         /// </summary>
         /// <param name="figures">списико фигур</param>
         /// <param name="currentIndexes">индексы фигур в соответствии с первоначальным списком методов их создания</param>
-        private void SortForDefaultPosition(List<Geometry> figures, List<int> currentIndexes)
+        public static void SortForDefaultPosition(List<Geometry> figures, List<int> currentIndexes)
         {
             List<Geometry> tempList = new List<Geometry>();
             tempList.AddRange(figures);
