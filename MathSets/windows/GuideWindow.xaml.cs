@@ -22,11 +22,19 @@ namespace MathSets.windows
     {
         private bool status; // Статус пауза/продолжить (true - идёт; false - стоит на паузе)
         private string pathCurrentDirectory; // Путь до папки где хранятся видео
+
+        /// <summary>
+        /// Конструктор класса GuideWindow
+        /// </summary>
+        /// <param name="i">номер темы</param>
+        /// <param name="j">номер задания</param>
         public GuideWindow(int i, int j)
         {
             InitializeComponent();
+
             status = false;
             pathCurrentDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\video\\";
+
             switch(i)
             {
                 case 1:
@@ -94,7 +102,7 @@ namespace MathSets.windows
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
