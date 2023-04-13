@@ -109,27 +109,45 @@ namespace MathSets.windows
             return cnv;
         }
 
+        /// <summary>
+        /// Создаёт фигуры-ответы.
+        /// </summary>
+        /// <param name="canvas">контейнер</param>
+        /// <param name="size">размер фигур</param>
+        /// <param name="indexesAndwers">индексы фигур-ответов</param>
+        /// <returns>Список фигур-ответов</returns>
         private List<Geometry> GetAnswersFigures(Canvas canvas, int size, List<int> indexesAndwers)
         {
             Figure figure = new Figure(size, canvas.Height, canvas.Width / 2);
             List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
 
             List<Geometry> figures = new List<Geometry>();
-            int xStart = Base.StrokeThickness + (int)canvas.Width / 2 + size * 2;
 
-            for (int i = 0; i < indexesAndwers.Count; i++)
+            while (true)
             {
-                if (i % 2 == 0)
+                int xStart = Base.StrokeThickness + (int)canvas.Width / 2 + size * 2;
+
+                for (int i = 0; i < indexesAndwers.Count; i++)
                 {
-                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, true));
-                    figures[i].Transform = new TranslateTransform(0, size / 4); // Для смещения немного вниз от верхней границы множества.
+                    if (i % 2 == 0)
+                    {
+                        figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, true));
+                        figures[i].Transform = new TranslateTransform(0, size / 4); // Для смещения немного вниз от верхней границы множества.
+                    }
+                    else
+                    {
+                        figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, false));
+                        figures[i].Transform = new TranslateTransform(0, -size / 4); // Для смещения немного вверх от нижней границы множества.
+                        xStart += size * 2;
+                    }
                 }
-                else
+
+                if (!Figure.CheckIntersectionsFiguresAndSets(figures, new List<Geometry>() { ((Path)canvas.Children[1]).Data }))
                 {
-                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, false));
-                    figures[i].Transform = new TranslateTransform(0, -size / 4); // Для смещения немного вверх от нижней границы множества.
-                    xStart += size * 2;
+                    break;
                 }
+
+                figures.Clear();
             }
 
             return figures;

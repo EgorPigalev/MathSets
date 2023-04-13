@@ -317,9 +317,10 @@ namespace MathSets
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
         /// <returns>Пятиугольник с заданными начальной позицией и вертикальным положением</returns>
-        public Geometry CreateSixagon(int x, bool isUp)
+        public Geometry CreateHexagon(int x, bool isUp)
         {
             int y = GetCoordinateY(isUp);
+            y -= _sizeFigures;
 
             int count = 6;
             int radius = _sizeFigures / 2;
@@ -327,12 +328,37 @@ namespace MathSets
 
             for (double alpha = 0; alpha <= 2 * Math.PI; alpha += 2 * Math.PI / count)
             {
-                int x1 = (int)(radius * Math.Cos(alpha));
-                int y1 = (int)(radius * Math.Sin(alpha));
-                tempPoints.Add(new Point(radius + x1, radius + y1));
+                double xNew = x + radius * Math.Cos(alpha);
+                double yNew = y + radius * Math.Sin(alpha);
+                tempPoints.Add(new Point(radius + xNew, radius + yNew));
             }
 
-            return GetGeometryFromPoints(tempPoints); // Разобраться с x и y начальными.
+            return GetGeometryFromPoints(tempPoints);
+        }
+
+        /// <summary>
+        /// Создаёт семиугольник с заданными параметрами
+        /// </summary>
+        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
+        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
+        /// <returns>Пятиугольник с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateHeptagon(int x, bool isUp)
+        {
+            int y = GetCoordinateY(isUp);
+            y -= _sizeFigures;
+
+            int count = 7;
+            int radius = _sizeFigures / 2;
+            PointCollection tempPoints = new PointCollection();
+
+            for (double alpha = Math.PI / 15; alpha <= 2 * Math.PI + Math.PI / 15; alpha += 2 * Math.PI / count)
+            {
+                double xNew = x + radius * Math.Cos(alpha);
+                double yNew = y + radius * Math.Sin(alpha);
+                tempPoints.Add(new Point(radius + xNew, radius + yNew));
+            }
+
+            return GetGeometryFromPoints(tempPoints);
         }
 
         /// <summary>
@@ -366,7 +392,7 @@ namespace MathSets
                 alpha += Math.PI / count;
             }
 
-            double displacementY = tempPoints[1].Y - tempPoints[0].Y + 10; // Чтобы фигура убиралась в контейнер по вертикали.
+            double displacementY = tempPoints[1].Y - tempPoints[0].Y + 7; // Чтобы фигура убиралась в контейнер по вертикали.
             PointCollection points = new PointCollection();
 
             foreach (Point item in tempPoints)
@@ -453,7 +479,8 @@ namespace MathSets
                 CreateRhomb,
                 CreateFlame,
                 CreatePentagon,
-                CreateSixagon,
+                CreateHexagon,
+                CreateHeptagon,
                 CreateStar
             };
         }
@@ -525,7 +552,7 @@ namespace MathSets
         /// <param name="x">Координата по оси X</param>
         /// <param name="y">Координата по оси Y</param>
         /// <returns>Фигура, созданная на основании заданного текста</returns>
-        public Geometry GetGeometryFromText(string text, int sizeFigures, int x, int y)
+        public Geometry GetGeometryFromText(string text, int size, int x, int y)
         {
             FormattedText formattedText = new FormattedText
             (
@@ -533,7 +560,7 @@ namespace MathSets
                 CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
                 new Typeface("Comic Sans MS"),
-                sizeFigures,
+                size,
                 (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
             );
 
@@ -612,7 +639,7 @@ namespace MathSets
             int countRightAnswer = 0;
             List<Geometry> figures = new List<Geometry>();
 
-            for (int i = 1; i < canvas.Children.Count; i++)
+            for (int i = 1; i < canvas.Children.Count; i++) // i = 1, так как первый элемент контейнера canvas - название множества.
             {
                 Path p = (Path)canvas.Children[i];
                 figures.Add(p.Data);
