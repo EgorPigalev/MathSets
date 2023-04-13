@@ -44,23 +44,40 @@ namespace MathSets.pages
                 {
                     if (i == 0)
                     {
-                        TextBlockLeftVar2.Text += "{ ";
-                        TextBlockRightVar2.Text += "{ ";
+                        TextBlockLeftVar2.Text += "{";
+                        TextBlockRightVar2.Text += "{";
                     }
                     int indexx = random.Next(2);
                     if (indexx == 0)
                     {
                         index = random.Next(numbers.Length);
-                        TextBlockLeftVar2.Text += numbers[index] + "; ";
-                        TextBlockRightVar2.Text += numbers[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar2.Text += numbers[index] + "";
+                            TextBlockRightVar2.Text += numbers[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar2.Text += numbers[index] + "; ";
+                            TextBlockRightVar2.Text += numbers[index] + "; ";
+                        }
                     }
                     else
                     {
 
                         index = random.Next(vowelLetters.Length);
-                        TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
-                        TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar2.Text += vowelLetters[index] + "";
+                            TextBlockRightVar2.Text += vowelLetters[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                        }
                     }
+                    
                     if (i == 4)
                     {
                         TextBlockLeftVar2.Text += "}";
@@ -74,21 +91,36 @@ namespace MathSets.pages
                 {
                     if (i == 0)
                     {
-                        TextBlockLeftVar2.Text += "{ ";
+                        TextBlockLeftVar2.Text += "{";
 
                     }
                     int indexx = random.Next(2);
                     if (indexx == 0)
                     {
                         index = random.Next(numbers.Length);
-                        TextBlockLeftVar2.Text += numbers[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar2.Text += numbers[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar2.Text += numbers[index] + "; ";
+                        }
 
                     }
                     else
                     {
-
                         index = random.Next(vowelLetters.Length);
-                        TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar2.Text += vowelLetters[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
+                        }
 
                     }
                     if (i == 4)
@@ -102,21 +134,35 @@ namespace MathSets.pages
                     if (i == 0)
                     {
 
-                        TextBlockRightVar2.Text += "{ ";
+                        TextBlockRightVar2.Text += "{";
                     }
                     int indexx = random.Next(2);
                     if (indexx == 0)
                     {
                         index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar2.Text += numbers[index] + "";
 
-                        TextBlockRightVar2.Text += numbers[index] + "; ";
+                        }
+                        else
+                        {
+                            TextBlockRightVar2.Text += numbers[index] + "; ";
+                        }
                     }
                     else
                     {
 
                         index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar2.Text += vowelLetters[index] + "";
 
-                        TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                        }
+                        else
+                        {
+                            TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                        }
                     }
                     if (i == 4)
                     {
@@ -139,22 +185,38 @@ namespace MathSets.pages
                 {
                     if (i == 0)
                     {
-                        TextBlockLeftVar.Text += "{ ";
-                        TextBlockRightVar.Text += "{ ";
+                        TextBlockLeftVar.Text += "{";
+                        TextBlockRightVar.Text += "{";
                     }
                     int indexx = random.Next(2);
                     if (indexx == 0)
                     {
                         index = random.Next(numbers.Length);
-                        TextBlockLeftVar.Text += numbers[index] + "; ";
-                        TextBlockRightVar.Text += numbers[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar.Text += numbers[index] + "";
+                            TextBlockRightVar.Text += numbers[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar.Text += numbers[index] + "; ";
+                            TextBlockRightVar.Text += numbers[index] + "; ";
+                        }
                     }
                     else
                     {
 
                         index = random.Next(vowelLetters.Length);
-                        TextBlockLeftVar.Text += vowelLetters[index] + "; ";
-                        TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar.Text += vowelLetters[index] + "";
+                            TextBlockRightVar.Text += vowelLetters[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                        }
                     }
                     if (i == 4)
                     {
@@ -169,21 +231,37 @@ namespace MathSets.pages
                 {
                     if (i == 0)
                     {
-                        TextBlockLeftVar.Text += "{ ";
+                        TextBlockLeftVar.Text += "{";
 
                     }
                     int indexx = random.Next(2);
                     if (indexx == 0)
                     {
                         index = random.Next(numbers.Length);
-                        TextBlockLeftVar.Text += numbers[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar.Text += numbers[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar.Text += numbers[index] + "; ";
+                        }
 
                     }
                     else
                     {
 
                         index = random.Next(vowelLetters.Length);
-                        TextBlockLeftVar.Text += vowelLetters[index] + "; ";
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar.Text += vowelLetters[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar.Text += vowelLetters[index] + "; ";
+                        }
 
                     }
                     if (i == 4)
@@ -197,21 +275,35 @@ namespace MathSets.pages
                     if (i == 0)
                     {
 
-                        TextBlockRightVar.Text += "{ ";
+                        TextBlockRightVar.Text += "{";
                     }
                     int indexx = random.Next(2);
                     if (indexx == 0)
                     {
                         index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar.Text += numbers[index] + "";
 
-                        TextBlockRightVar.Text += numbers[index] + "; ";
+                        }
+                        else
+                        {
+                            TextBlockRightVar.Text += numbers[index] + "; ";
+                        }
                     }
                     else
                     {
 
                         index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar.Text += vowelLetters[index] + "";
 
-                        TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                        }
+                        else
+                        {
+                            TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                        }
                     }
                     if (i == 4)
                     {
@@ -234,10 +326,17 @@ namespace MathSets.pages
             {
                 if (i == 0)
                 {
-                    strButton += "{ ";
+                    strButton += "{";
                 }
                 index = random.Next(numbers.Length);
-                strButton += numbers[index] + "; ";
+                if (i == countButtonNumbers)
+                {
+                    strButton += numbers[index] + "";
+                }
+                else
+                {
+                    strButton += numbers[index] + "; ";
+                }
                 if (i == countButtonNumbers)
                 {
                     strButton += "}";
@@ -248,10 +347,17 @@ namespace MathSets.pages
             {
                 if (i == 0)
                 {
-                    strButtonTwo += "{ ";
+                    strButtonTwo += "{";
                 }
                 index = random.Next(numbers.Length);
-                strButtonTwo += numbers[index] + "; ";
+                if (i == countButtonNumbers)
+                {
+                    strButtonTwo += numbers[index] + "";
+                }
+                else
+                {
+                    strButtonTwo += numbers[index] + "; ";
+                }
                 if (i == countButtonNumbers)
                 {
                     strButtonTwo += "}";
