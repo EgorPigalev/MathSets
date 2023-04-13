@@ -40,66 +40,63 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Name="SpQuestionFirst" Background="White">
+                    <StackPanel Name="SpTaskFirst" Background="White">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="TbQuestionFirst" Text="1) Дано множество А {"/>
-                            <StackPanel Name="SpFiguresQuestionFirst" Orientation="Horizontal"/>
+                            <TextBlock Name="TbTaskFirst" Text="1) Дано множество А {"/>
+                            <StackPanel Name="SpFiguresTaskFirst" Orientation="Horizontal"/>
                             <TextBlock Text="}. Изобрази данное множество на рисунке."/>
                         </StackPanel>
-                        <Canvas Name="CnvQuestionFirst" Height="280" Width="870" ClipToBounds="True" Margin="0 10 0 10"/>
-                        <Button Name="BtnCheckQuestionFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFirst_Click"/>
+                        <Canvas Name="CnvTaskFirst" Height="280" Width="870" ClipToBounds="True" Margin="0 10 0 10"/>
+                        <Button Name="BtnCheckTaskFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckTaskFirst_Click"/>
                     </StackPanel>
 
                     <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
-                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                        <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}" Cursor="Hand">
+                            <MenuItem Header="Гайд" Click="MenuGuide_Click"/>
                             <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                         </MenuItem>
                     </Menu>
 
-                    <StackPanel Grid.Row="1" Name="SpQuestionSecond" Background="White" Margin="0 20 0 0">
-                        <TextBlock Name="TbQuestionSecond" Text="2) Дана диаграмма. Выбери нужные знаки." Margin="0 0 0 10"/>
+                    <StackPanel Grid.Row="1" Name="SpTaskSecond" Background="White" Margin="0 20 0 0">
+                        <TextBlock Name="TbTaskSecond" Text="2) Дана диаграмма. Выбери нужные знаки." Margin="0 0 0 10"/>
                         
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel Orientation="Horizontal" Width="310">
-                                <StackPanel Name="SpQuestionSecondSetA" Margin="0 0 30 0"/>
-                                <StackPanel Name="SpQuestionSecondSetB"/>
+                                <StackPanel Name="SpTaskSecondSetA" Margin="0 0 30 0"/>
+                                <StackPanel Name="SpTaskSecondSetB"/>
                             </StackPanel>
 
-                            <Canvas Name="CnvQuestionSecond" Height="280" Width="550"/>
+                            <Canvas Name="CnvTaskSecond" Height="280" Width="550"/>
                         </StackPanel>
                         
-                        <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionSecond_Click"/>
+                        <Button Name="BtnCheckTaskSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckTaskSecond_Click"/>
                     </StackPanel>
 
                     <Menu Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
                         <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}">
-                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <MenuItem Header="Гайд" Click="MenuGuide_Click"/>
                             <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                         </MenuItem>
                     </Menu>
 
-                    <StackPanel Grid.Row="2" Name="SpQuestionThree" Background="White" Margin="0 20 0 0">
-                        <TextBlock Name="TbQuestionThree" Text="3) Отметь элементы на диаграмме, если известно, что:" Margin="0 0 0 10"/>
+                    <StackPanel Grid.Row="2" Name="SpTaskThree" Background="White" Margin="0 20 0 0">
+                        <TextBlock Name="TbTaskThree" Text="3) Отметь элементы на диаграмме, если известно, что:" Margin="0 0 0 10"/>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" Width="310">
-                                <StackPanel Name="SpQuestionThreeSetA" Margin="0 0 30 0"/>
-                                <StackPanel Name="SpQuestionThreeSetB"/>
+                            <StackPanel Name="SpCondition" Orientation="Horizontal" Width="310">
+                                <StackPanel Name="SpTaskThreeSetA" Margin="0 0 30 0"/>
+                                <StackPanel Name="SpTaskThreeSetB"/>
                             </StackPanel>
 
-                            <Canvas Name="CnvQuestionThree" Height="280" Width="550"/>
+                            <Canvas Name="CnvTaskThree" Height="280" Width="550"/>
                         </StackPanel>
 
-                        <Button Name="BtnCheckQuestionThree" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckQuestionThree_Click"/>
+                        <Button Name="BtnCheckTaskThree" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Margin="10" Click="BtnCheckTaskThree_Click"/>
                     </StackPanel>
 
                     <Menu Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
                         <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}">
-                            <MenuItem Header="Сохранить" Click="MenuSaved_Click"/>
-                            <MenuItem Header="Открыть" Click="MenuOpenSaved_Click"/>
+                            <MenuItem Header="Гайд" Click="MenuGuide_Click"/>
                             <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                         </MenuItem>
                     </Menu>

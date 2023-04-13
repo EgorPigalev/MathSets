@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MathSets.pages;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MathSets
 {
@@ -37,22 +27,27 @@ namespace MathSets
 
         private void SPSetAndElements_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Base.MainFrame.Navigate(new pages.SetAndElementsSolvingTasksPage());
+            Base.MainFrame.Navigate(new SetAndElementsSolvingTasksPage());
         }
 
         private void SpLessonFourAndFive_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Base.MainFrame.Navigate(new pages.LessonFourAndFive());
+            Base.MainFrame.Navigate(new LessonFourAndFive());
         }
 
         private void SPSplittingSets_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Base.MainFrame.Navigate(new pages.SplittingSetsSolvingTasks());
+            Base.MainFrame.Navigate(new SplittingSetsSolvingTasks());
         }
 
         private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Base.MainFrame.Navigate(new pages.CombiningSetsPage());
+            Base.MainFrame.Navigate(new CombiningSetsPage());
+        }
+
+        private void SpLessonSix_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Base.MainFrame.Navigate(new LessonSix());
         }
 
         private void SPEqualSets_MouseDown(object sender, MouseButtonEventArgs e)

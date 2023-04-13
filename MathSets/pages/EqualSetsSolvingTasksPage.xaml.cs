@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace MathSets.pages
 {
@@ -13,22 +11,217 @@ namespace MathSets.pages
     public partial class EqualSetsSolvingTasksPage : Page
     {
 
-        string[] numbers = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // значения для задания 2
+        string[] numbers = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // массив цифр
+        string[] vowelLetters = { "а", "о", "у", "ы", "э", "е", "ё", "и", "ю", "я" }; // массив гласный букв
         public static Random random = new Random();
         int index;
         string strButton = ""; // значение для первой кнопки-ответ
         string strButtonTwo = ""; // значение для второй кнопки-ответ
         string strButtonThree = ""; // значение для третьей кнопки-ответ
-        
+        Canvas c;
+        Canvas c2;
 
         public EqualSetsSolvingTasksPage()
         {
             InitializeComponent();
-            ShowFigures(CreateFigures(), cnvFigure);
-            ShowFigures(CreateFigures(), cnvFigureTwo);
-            ShowRandomSign();
+
+
             ShowRandomButton();
+            ShowRandomZnachenia();
+            ShowRandomZnachenia2();
         }
+
+
+        /// <summary>
+        /// метод для вывода варианта ответа
+        /// </summary>
+        private void ShowRandomZnachenia2()
+        {
+            int r = random.Next(2);
+            if (r == 0)
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar2.Text += "{ ";
+                        TextBlockRightVar2.Text += "{ ";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        TextBlockLeftVar2.Text += numbers[index] + "; ";
+                        TextBlockRightVar2.Text += numbers[index] + "; ";
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+                        TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
+                        TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                    }
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar2.Text += "}";
+                        TextBlockRightVar2.Text += "}";
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar2.Text += "{ ";
+
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        TextBlockLeftVar2.Text += numbers[index] + "; ";
+
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+                        TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
+
+                    }
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar2.Text += "}";
+
+                    }
+                }
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+
+                        TextBlockRightVar2.Text += "{ ";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+
+                        TextBlockRightVar2.Text += numbers[index] + "; ";
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+
+                        TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                    }
+                    if (i == 4)
+                    {
+
+                        TextBlockRightVar2.Text += "}";
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// метод для вывода варианта ответа
+        /// </summary>
+        private void ShowRandomZnachenia()
+        {
+            int r = random.Next(2);
+            if (r == 0)
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar.Text += "{ ";
+                        TextBlockRightVar.Text += "{ ";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        TextBlockLeftVar.Text += numbers[index] + "; ";
+                        TextBlockRightVar.Text += numbers[index] + "; ";
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+                        TextBlockLeftVar.Text += vowelLetters[index] + "; ";
+                        TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                    }
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar.Text += "}";
+                        TextBlockRightVar.Text += "}";
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar.Text += "{ ";
+
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        TextBlockLeftVar.Text += numbers[index] + "; ";
+
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+                        TextBlockLeftVar.Text += vowelLetters[index] + "; ";
+
+                    }
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar.Text += "}";
+
+                    }
+                }
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+
+                        TextBlockRightVar.Text += "{ ";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+
+                        TextBlockRightVar.Text += numbers[index] + "; ";
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+
+                        TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                    }
+                    if (i == 4)
+                    {
+
+                        TextBlockRightVar.Text += "}";
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         /// метод длявывода рандомных ответов в задание 2
@@ -70,7 +263,7 @@ namespace MathSets.pages
                 {
                     strButtonThree += "{";
                 }
-                strButtonThree +=  " ";
+                strButtonThree += " ";
                 if (i == 1)
                 {
                     strButtonThree += "}";
@@ -80,39 +273,24 @@ namespace MathSets.pages
             if (randomAnswerOptions == 0)
             {
                 OptionOne.Content = strButton;
-                OptionTwo.Content =  strButtonTwo;
-                OptionThree.Content =  strButtonThree;
+                OptionTwo.Content = strButtonTwo;
+                OptionThree.Content = strButtonThree;
             }
             else if (randomAnswerOptions == 1)
             {
-                OptionOne.Content =  strButtonTwo;
-                OptionTwo.Content =  strButtonThree;
-                OptionThree.Content =  strButton;
+                OptionOne.Content = strButtonTwo;
+                OptionTwo.Content = strButtonThree;
+                OptionThree.Content = strButton;
             }
             else if (randomAnswerOptions == 2)
             {
                 OptionOne.Content = strButtonThree;
-                OptionTwo.Content =  strButton;
-                OptionThree.Content =  strButtonTwo;
+                OptionTwo.Content = strButton;
+                OptionThree.Content = strButtonTwo;
             }
         }
 
-        /// <summary>
-        /// Метод два вывода рандомного знака
-        /// </summary>
-        private void ShowRandomSign()
-        {
-            Random random = new Random();
-            int rnd = random.Next(2);
-            if (rnd == 0)
-            {
-                TextSign.Text = "=";
-            }
-            else if (rnd == 1)
-            {
-                TextSign.Text = "≠";
-            }
-        }
+
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             Base.MainFrame.Navigate(new MainMenuPage());
@@ -120,97 +298,78 @@ namespace MathSets.pages
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
-            if(cnvFigure == cnvFigureTwo)
+            if (ComboBoxTextSign.Text != "" && ComboBoxTextSign2.Text != "")
             {
-                MessageBox.Show("xaxa");
+                string strAnswer = ""; // переменна для записи ответа, который выбрал пользователь
+                string strAnswer2 = ""; // переменна для записи ответа, который выбрал пользователь
+                if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1)) && (((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1) || ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0))) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    if ((TextBlockLeftVar.Text == TextBlockRightVar.Text && ComboBoxTextSign.SelectedIndex == 0) || (TextBlockLeftVar.Text != TextBlockRightVar.Text && ComboBoxTextSign.SelectedIndex == 1))
+                    {
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer2, TextBlockLeftVar2.Text, TextBlockRightVar2.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text && ComboBoxTextSign2.SelectedIndex == 0) || (TextBlockLeftVar2.Text != TextBlockRightVar2.Text && ComboBoxTextSign2.SelectedIndex == 1))
+                    {
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindow1 = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, TextBlockLeftVar.Text, TextBlockRightVar.Text);
+                        resultEqualSetsSolvengTasksWindow1.ShowDialog();
+                    }
+                    else
+                    {
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindow3 = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer2, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar2.Text, TextBlockRightVar2.Text);
+                        resultEqualSetsSolvengTasksWindow3.ShowDialog();
+                    }
+                }
             }
             else
             {
-                MessageBox.Show("lllll");
-            }
-        }
-
-
-
-        /// <summary>
-        /// Создаёт фигуры.
-        /// </summary>
-        /// <returns>Коллекция фигур</returns>
-        private List<Geometry> CreateFigures()
-        {
-            classes.Figures figures = new classes.Figures(40, cnvFigure.Height, cnvFigure.Width); // Размер фигур, высота и ширина контейнера.
-
-            List<classes.CreateFiguresDelegate> createFiguresMethods = new List<classes.CreateFiguresDelegate> // Сюда добавляем фигуры, которые нам надо.
-            {
-                figures.CreateTriangle,
-                figures.CreateSquare,
-                figures.CreateEllipse,
-                figures.CreateStar
-            };
-
-            classes.Figures.ShuffleMethods(createFiguresMethods); // Перемешиваем фигуры для рандомного расположения их в контейнере.
-
-            List<Geometry> listFigures = new List<Geometry>();
-            int offset = figures.GetOffset(createFiguresMethods.Count); // Отступы между фигурами (высчитывается автоматически на основании ширины контейнера,
-            int x = 0;                                                  // при желании можно вручную указать.
-
-            for (int i = 0; i < createFiguresMethods.Count; i++)
-            {
-                listFigures.Add(createFiguresMethods[i](x, true)); // Положение фигуры по вертикали вверху.
-                x += 50;
+                MessageBox.Show($"Выбери ответ");
             }
 
-            return listFigures;
         }
 
-        /// <summary>
-        /// Добавляет созданные фигуры в элемент управления "Canvas"
-        /// </summary>
-        /// <param name="figures">коллекция фигур</param>
-        /// <param name="canvas">элемент управления "Canvas"</param>
-        private void ShowFigures(List<Geometry> figures, Canvas canvas)
-        {
-            canvas.Children.Clear();
-            Random random = new Random();
-            foreach (Geometry item in figures)
-            {
-                int rnd = random.Next(2);
-                if (rnd == 0)
-                {
-                    canvas.Children.Add(new Path()
-                    {
-                        StrokeThickness = 3,
-                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                        Fill = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                        Data = item
-                    });
-                }
-                else if (rnd == 1)
-                {
-                    canvas.Children.Add(new Path()
-                    {
-                        StrokeThickness = 3,
-                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-
-                        Data = item
-                    });
-                }
-
-            }
-        }
 
         SolidColorBrush colorButton = new SolidColorBrush(Color.FromRgb(241, 76, 24)); // цвет для кнопок, в который они перекрасятся при нажатии
-        private void BtnOption1_Click(object sender, RoutedEventArgs e)
-        {
-            BtnOption1.Background = colorButton; // красим кнопку
-            BtnOption2.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
-        }
 
-        private void BtnOption2_Click(object sender, RoutedEventArgs e)
-        {
-            BtnOption2.Background = colorButton; // красим кнопку
-            BtnOption1.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
-        }
 
         private void BtnHint_Click_1(object sender, RoutedEventArgs e)
         {
@@ -218,7 +377,7 @@ namespace MathSets.pages
             hint.ShowDialog();
         }
 
-  
+
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
         {
             MenuItem childMenuItem = (MenuItem)sender;
@@ -227,19 +386,24 @@ namespace MathSets.pages
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
-                    ShowFigures(CreateFigures(), cnvFigure);
-                    ShowFigures(CreateFigures(), cnvFigureTwo);
-                    ShowRandomSign();
+                    TextBlockLeftVar.Text = "";
+                    TextBlockRightVar.Text = "";
+                    TextBlockLeftVar2.Text = "";
+                    TextBlockRightVar2.Text = "";
+                    ComboBoxTextSign2.Text = "";
+                    ComboBoxTextSign.Text = "";
+                    ShowRandomZnachenia();
+                    ShowRandomZnachenia2();
 
                     break;
                 case 2:
-                     strButton = ""; 
-                     strButtonTwo = ""; 
-                     strButtonThree = "";
+                    strButton = "";
+                    strButtonTwo = "";
+                    strButtonThree = "";
                     ShowRandomButton();
-                    OptionThree.ClearValue(Button.BackgroundProperty); 
-                    OptionOne.ClearValue(Button.BackgroundProperty); 
-                    OptionTwo.ClearValue(Button.BackgroundProperty); 
+                    OptionThree.ClearValue(Button.BackgroundProperty);
+                    OptionOne.ClearValue(Button.BackgroundProperty);
+                    OptionTwo.ClearValue(Button.BackgroundProperty);
                     break;
                 default:
                     break;
