@@ -266,6 +266,9 @@
     <Resource Include="resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="video\CombiningSetsFirstTask.mkv" />
+    <Content Include="video\CombiningSetsSecondTask.mkv" />
+    <Content Include="video\CombiningSetsThirdTask.mkv" />
     <Content Include="video\IntersectionSetsFirstTask.mp4" />
     <Content Include="video\IntersectionSetsFourTask.mp4" />
     <Content Include="video\IntersectionSetsSecondTask.mp4" />
