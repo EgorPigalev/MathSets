@@ -13,17 +13,17 @@ namespace MathSets.windows
     /// </summary>
     public partial class ResultLessonSix : Window
     {
-        public ResultLessonSix(string gridString, List<Geometry> figures)
+        public ResultLessonSix(Grid grid, List<Geometry> figures)
         {
             InitializeComponent();
 
-            StringReader stringReader = new StringReader(gridString);
+            StringReader stringReader = new StringReader(XamlWriter.Save(grid));
             XmlReader xmlReader = XmlReader.Create(stringReader);
-            Grid grid = (Grid)XamlReader.Load(xmlReader);
+            Grid newGrid = (Grid)XamlReader.Load(xmlReader);
 
-            UploadGridTaskFirst(grid, figures);
+            UploadGridTaskFirst(newGrid, figures);
 
-            SpResult.Children.Add(grid);
+            SpResult.Children.Add(newGrid);
         }
 
         /// <summary>

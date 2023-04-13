@@ -277,21 +277,21 @@ namespace MathSets.pages
                 if (_buttons[i].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"] &&
                     _buttons[i + 1].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"])
                 {
-                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    new ResultLessonSix(GridTaskFirst, _figures).ShowDialog();
                     return;
                 }
 
                 if (_figures[i].FillContainsWithDetail(_figures[i + 1]) != IntersectionDetail.FullyContains &&
                     _buttons[i].Background == (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
                 {
-                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    new ResultLessonSix(GridTaskFirst, _figures).ShowDialog();
                     return;
                 }
 
                 if (_figures[i].FillContainsWithDetail(_figures[i + 1]) == IntersectionDetail.FullyContains &&
                     _buttons[i].Background != (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
                 {
-                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    new ResultLessonSix(GridTaskFirst, _figures).ShowDialog();
                     return;
                 }
             }
