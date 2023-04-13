@@ -769,7 +769,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb1.Content.ToString();
+                                string answerTwo = Cb2.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 3:
@@ -780,7 +782,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb1.Content.ToString();
+                                string answerTwo = Cb3.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 4:
@@ -791,7 +795,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb1.Content.ToString();
+                                string answerTwo = Cb4.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         default:
@@ -809,7 +815,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb1.Content.ToString();
+                                string answerTwo = Cb2.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 3:
@@ -820,7 +828,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb2.Content.ToString();
+                                string answerTwo = Cb3.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 4:
@@ -831,7 +841,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb2.Content.ToString();
+                                string answerTwo = Cb4.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         default:
@@ -849,7 +861,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb1.Content.ToString();
+                                string answerTwo = Cb3.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 2:
@@ -860,7 +874,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb2.Content.ToString();
+                                string answerTwo = Cb3.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 4:
@@ -871,7 +887,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb3.Content.ToString();
+                                string answerTwo = Cb4.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         default:
@@ -889,7 +907,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb1.Content.ToString();
+                                string answerTwo = Cb4.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 2:
@@ -900,7 +920,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb2.Content.ToString();
+                                string answerTwo = Cb4.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         case 3:
@@ -911,7 +933,9 @@ namespace MathSets.pages
                             }
                             else
                             {
-                                MessageBox.Show("Неправильно");
+                                string answerOne = Cb3.Content.ToString();
+                                string answerTwo = Cb4.Content.ToString();
+                                new windows.ResultCombiningSetsWindow(answerOne, answerTwo).ShowDialog();
                             }
                             break;
                         default:

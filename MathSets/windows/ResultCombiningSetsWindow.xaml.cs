@@ -93,6 +93,29 @@ namespace MathSets.windows
             }
         }
 
+        public ResultCombiningSetsWindow(Canvas canvas)
+        {
+            InitializeComponent();
+          
+        }
+
+        public ResultCombiningSetsWindow(string answerOne, string answerTwo)
+        {
+            InitializeComponent();
+
+            TextBlock tbA = new TextBlock()
+            {
+                Text = answerOne
+                
+            };
+            SpResult.Children.Add(tbA);
+            TextBlock tbB = new TextBlock()
+            {
+                Text = answerTwo
+                
+            };
+            SpResult.Children.Add(tbB);
+        }
 
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
