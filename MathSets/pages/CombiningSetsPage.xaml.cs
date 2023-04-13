@@ -563,7 +563,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        MessageBox.Show("Неправильно!");
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
                     }
                     break;
                 case 1:
@@ -574,7 +574,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        MessageBox.Show("Неправильно!");
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
                     }
                     break;
                 case 2:
@@ -585,7 +585,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        MessageBox.Show("Неправильно!");
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
                     }
                     break;
                 case 3:
@@ -596,7 +596,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        MessageBox.Show("Неправильно!");
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
                     }
                     break;
             }

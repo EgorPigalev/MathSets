@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MathSets.windows"
         mc:Ignorable="d" Style="{StaticResource WindowMainStyle}"
-        Title="HintCombiningSetsWindow" Height="650" Width="1000">
+        Title="Объединение множеств. Свойства объединения." Height="650" Width="1000">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
