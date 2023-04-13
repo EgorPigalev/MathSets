@@ -23,5 +23,10 @@ namespace MathSets.windows
         {
             InitializeComponent();
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
