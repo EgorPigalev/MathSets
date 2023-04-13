@@ -64,6 +64,10 @@ namespace MathSets.windows
                     {
                         MEGuide.Source = new Uri(pathCurrentDirectory + "LessonSixTaskFirst.mp4");
                     }
+                    else if (taskNumber == 2)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "LessonSixTaskSecond.mp4");
+                    }
                     break;
                 case 5:
                     if (taskNumber == 1)

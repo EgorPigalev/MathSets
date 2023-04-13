@@ -286,6 +286,7 @@
     <Content Include="video\LessonFourAndFiveTaskSecond.mp4" />
     <Content Include="video\LessonFourAndFiveTaskThird.mp4" />
     <Content Include="video\LessonSixTaskFirst.mp4" />
+    <Content Include="video\LessonSixTaskSecond.mp4" />
     <Content Include="video\SetAndElementFirstTask.mp4" />
     <Content Include="video\SetAndElementSecondTask.mp4" />
     <Content Include="video\SplittingSetsFirstTask.mp4" />
