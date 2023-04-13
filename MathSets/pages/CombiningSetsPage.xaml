@@ -44,7 +44,7 @@
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
                                     <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
+                                        <MenuItem Header="Гайд" Click="MenuHint_Click"/>
                                         <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                     </MenuItem>
                                 </Menu>
@@ -74,7 +74,7 @@
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
                                     <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
+                                        <MenuItem Header="Гайд" Click="MenuHint_Click"/>
                                         <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                     </MenuItem>
                                 </Menu>
@@ -100,7 +100,7 @@
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
                                     <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
+                                        <MenuItem Header="Гайд" Click="MenuHint_Click"/>
                                         <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                     </MenuItem>
                                 </Menu>

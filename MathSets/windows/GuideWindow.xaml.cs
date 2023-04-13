@@ -74,6 +74,18 @@ namespace MathSets.windows
                     }
                     break;
                 case 6:
+                    if (j == 1)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsFirstTask.mkv");
+                    }
+                    if (j == 2)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsSecondTask.mkv");
+                    }
+                    if (j == 3)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsThirdTask.mkv");
+                    }
 
                     break;
                 case 7:
