@@ -41,6 +41,15 @@ namespace MathSets.windows
                 case 13:
                     MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsFourTask.mp4");
                     break;
+                case 14:
+                    MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsFirstTask.mkv");
+                    break;
+                case 15:
+                    MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsSecondTask.mkv");
+                    break;
+                case 16:
+                    MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsThirdTask.mkv");
+                    break;
                 case 17:
                     MEGuide.Source = new Uri(pathCurrentDirectory + "SplittingSetsFirstTask.mp4");
                     break;
