@@ -957,7 +957,23 @@ namespace MathSets.pages
 
         private void MenuHint_Click(object sender, RoutedEventArgs e)
         {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
 
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    new windows.GuideWindow(14).ShowDialog();
+                    break;
+                case 2:
+                    new windows.GuideWindow(15).ShowDialog();
+                    break;
+                case 3:
+                    new windows.GuideWindow(16).ShowDialog();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
