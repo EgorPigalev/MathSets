@@ -51,21 +51,23 @@
 
                             <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
                                 <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
+                                    <MenuItem Header="Гайд" Click="MenuRefresh_Click"/>
                                     <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                                   
                                 </MenuItem>
                             </Menu>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.ColumnSpan="2" Margin="0,10,0,0">
                                 <TextBlock Name="TextBlockLeftVar"></TextBlock>
-                                <ComboBox Name="ComboBoxTextSign">
+                                <ComboBox Margin="10,0,10,0"  Name="ComboBoxTextSign">
                                     <ComboBoxItem Name="EqualSign">=</ComboBoxItem>
                                     <ComboBoxItem>≠</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Name="TextBlockRightVar"></TextBlock>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Grid.Row="2"  Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Horizontal" Grid.Row="2"  Grid.ColumnSpan="2" Margin="0,10,0,0">
                                 <TextBlock Name="TextBlockLeftVar2"></TextBlock>
-                                <ComboBox Name="ComboBoxTextSign2">
+                                <ComboBox Margin="10,0,10,0" Name="ComboBoxTextSign2">
                                     <ComboBoxItem >=</ComboBoxItem>
                                     <ComboBoxItem>≠</ComboBoxItem>
                                 </ComboBox>
@@ -94,6 +96,7 @@
 
                             <Menu  Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
                                 <MenuItem Margin="0 5 0 0" Style="{StaticResource MenuStyle}" Uid="2" Header="..." >
+                                    <MenuItem Header="Гайд" Click="MenuRefresh_Click"/>
                                     <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                 </MenuItem>
                             </Menu>
