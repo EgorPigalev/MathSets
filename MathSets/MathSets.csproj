@@ -92,6 +92,9 @@
     <Compile Include="windows\HintSplittingSetsWindow.xaml.cs">
       <DependentUpon>HintSplittingSetsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\ResultCombiningSetsWindow.xaml.cs">
+      <DependentUpon>ResultCombiningSetsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\ResultEqualSetsSolvengTasksWindow.xaml.cs">
       <DependentUpon>ResultEqualSetsSolvengTasksWindow.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\HintSplittingSetsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultCombiningSetsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,6 +280,9 @@
     <Resource Include="resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="video\CombiningSetsFirstTask.mkv" />
+    <Content Include="video\CombiningSetsSecondTask.mkv" />
+    <Content Include="video\CombiningSetsThirdTask.mkv" />
     <Content Include="video\IntersectionSetsFirstTask.mp4" />
     <Content Include="video\IntersectionSetsFourTask.mp4" />
     <Content Include="video\IntersectionSetsSecondTask.mp4" />
