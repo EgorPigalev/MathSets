@@ -86,6 +86,9 @@
     <Compile Include="windows\HintLessonFourAndFive.xaml.cs">
       <DependentUpon>HintLessonFourAndFive.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\HintLessonSix.xaml.cs">
+      <DependentUpon>HintLessonSix.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\HintSplittingSetsWindow.xaml.cs">
       <DependentUpon>HintSplittingSetsWindow.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,9 @@
     </Compile>
     <Compile Include="windows\ResultLessonFourAndFive.xaml.cs">
       <DependentUpon>ResultLessonFourAndFive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\ResultLessonSix.xaml.cs">
+      <DependentUpon>ResultLessonSix.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\ResultSetAndElementsTasksWindow.xaml.cs">
       <DependentUpon>ResultSetAndElementsTasksWindow.xaml</DependentUpon>
@@ -141,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\HintLessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\HintLessonSix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\ResultLessonFourAndFive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\ResultLessonSix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

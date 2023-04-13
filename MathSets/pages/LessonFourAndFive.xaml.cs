@@ -18,18 +18,18 @@ namespace MathSets.pages
         private Path _pathToMoved; // Фигура для перемещения.
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры).
 
-        // Поля для первого задания
+        // Поля для первого задания.
         private int _sizeFiguresTaskFirst = 70; // Размер фигур.
         private List<int> _indexesAnswersTaskFirst = new List<int>(); // Индексы верных ответов (верных фигур).
         private List<Geometry> _figuresTaskFirst; // Фигуры.
         private Geometry _setTaskFirst; // Множество.
         private List<Point> _pointsToMovedTaskFirst = new List<Point>(); // Точки для перемещения фигур.
 
-        // Поля для второго задания
+        // Поля для второго задания.
         private List<Geometry> _figuresTaskSecond; // Фигуры.
         private List<Geometry> _setsTaskSecond; // Множества.
 
-        // Поля для третьего задания
+        // Поля для третьего задания.
         private int _sizeFiguresTaskThree = 50; // Размер фигур.
         private List<Geometry> _figuresTaskThree; // Фигуры.
         private List<Geometry> _setsTaskThree; // Множества.
@@ -45,14 +45,14 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// Отображает на экране первое упражнение
+        /// Отображает на экране первое задание
         /// </summary>
         private void ShowExerciseFirst()
         {
             CnvTaskFirst.Children.Clear();
             SpFiguresTaskFirst.Children.Clear();
 
-            int countRigthAnswers = 3; // Количество элементов в изначально заданном множестве, которое нужно отобразить (множестве по заданию).
+            int countRigthAnswers = _random.Next(2, 5); // Количество элементов в изначально заданном множестве, которое нужно отобразить (множестве по заданию).
 
             _setTaskFirst = CreateSet(CnvTaskFirst);
             _figuresTaskFirst = CreateFiguresTaskFirst();
@@ -65,7 +65,7 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// Отображает на экране второе упражнение
+        /// Отображает на экране второе задание
         /// </summary>
         private void ShowExerciseSecond()
         {
@@ -73,7 +73,7 @@ namespace MathSets.pages
             SpTaskSecondSetA.Children.Clear();
             SpTaskSecondSetB.Children.Clear();
 
-            int countNumbers = 5; // Количество элементов множества.
+            int countNumbers = _random.Next(4, 7); // Количество элементов множества.
 
             _setsTaskSecond = CreateSets(CnvTaskSecond);
             _figuresTaskSecond = CreateFiguresTaskSecond(countNumbers);
@@ -86,7 +86,7 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// Отображает на экране третье упражнение
+        /// Отображает на экране третье задание
         /// </summary>
         private void ShowExerciseThree()
         {
@@ -94,7 +94,7 @@ namespace MathSets.pages
             SpTaskThreeSetA.Children.Clear();
             SpTaskThreeSetB.Children.Clear();
 
-            int countNumbers = 5; // Количество элементов множества.
+            int countNumbers = _random.Next(4, 7); // Количество элементов множества.
 
             _setsTaskThree = CreateSets(CnvTaskThree);
             _figuresTaskThree = CreateFiguresTaskThree(countNumbers);
@@ -599,6 +599,8 @@ namespace MathSets.pages
             }
             else
             {
+                MessageBox.Show("Ошибка. Не работает пока");
+                return;
                 new ResultLessonFourAndFive(CnvTaskThree, SpCondition, _sizeFiguresTaskThree).ShowDialog();
             }
         }
