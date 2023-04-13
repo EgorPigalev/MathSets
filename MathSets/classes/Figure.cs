@@ -500,7 +500,7 @@ namespace MathSets
         /// <param name="x">Координата по оси X</param>
         /// <param name="y">Координата по оси Y</param>
         /// <returns>Фигура, созданная на основании заданного текста</returns>
-        public Geometry GetGeometryFromText(string text, int _sizeFigures, int x, int y)
+        public Geometry GetGeometryFromText(string text, int sizeFigures, int x, int y)
         {
             FormattedText formattedText = new FormattedText
             (
@@ -508,7 +508,7 @@ namespace MathSets
                 CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
                 new Typeface("Comic Sans MS"),
-                _sizeFigures,
+                sizeFigures,
                 (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
             );
 
