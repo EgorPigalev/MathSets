@@ -282,6 +282,10 @@
     <Content Include="video\IntersectionSetsFourTask.mp4" />
     <Content Include="video\IntersectionSetsSecondTask.mp4" />
     <Content Include="video\IntersectionSetsThreeTask.mp4" />
+    <Content Include="video\LessonFourAndFiveTaskFirst.mp4" />
+    <Content Include="video\LessonFourAndFiveTaskSecond.mp4" />
+    <Content Include="video\LessonFourAndFiveTaskThird.mp4" />
+    <Content Include="video\LessonSixTaskFirst.mp4" />
     <Content Include="video\SetAndElementFirstTask.mp4" />
     <Content Include="video\SetAndElementSecondTask.mp4" />
     <Content Include="video\SplittingSetsFirstTask.mp4" />
