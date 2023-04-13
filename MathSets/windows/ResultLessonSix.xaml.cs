@@ -30,6 +30,8 @@ namespace MathSets.windows
         {
             InitializeComponent();
 
+            MessageBox.Show("Не готово пока");
+
             StringReader stringReader = new StringReader(XamlWriter.Save(canvas));
             XmlReader xmlReader = XmlReader.Create(stringReader);
             Canvas newCanvas = (Canvas)XamlReader.Load(xmlReader);
