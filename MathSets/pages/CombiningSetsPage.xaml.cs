@@ -139,18 +139,13 @@ namespace MathSets.pages
 
             TbCondition2.Text = "2) Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
 
-            Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 430, 10);
-           
-            Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 580, 10);
-            
+            Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 430, 10);        
+            Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 580, 10);         
             Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
             Ellipse ellipseOneD = ellipseGeneration.getEllipse(300, 150, 430, 10);
             Ellipse ellipseTwoD = ellipseGeneration.getEllipse(300, 150, 580, 10);
             Path combEllipseOne = ellipseGeneration.getUnification(ellipseOne, ellipseOneD, GeometryCombineMode.Intersect);
             Path combEllipseTwo = ellipseGeneration.getUnification(ellipseTwo, ellipseTwoD, GeometryCombineMode.Intersect);
-            combEllipseOne.Fill = Brushes.Red;
-            combEllipseTwo.Fill = Brushes.Green;
-            combinedPath.Fill = Brushes.Black;
             combEllipseOne.StrokeThickness = Base.StrokeThickness;
             combEllipseTwo.StrokeThickness = Base.StrokeThickness;          
             Canvas2.Children.Add(combEllipseOne);
@@ -171,35 +166,33 @@ namespace MathSets.pages
             Canvas2.Children.Add(tbB);
 
             int[] masCombiningElements = CombiningElementsSets(setElementsA, setElementsB);
-            int[] masElements = RandomElementsCombining(masCombiningElements);
+            int[] masElementsRandom = RandomElementsCombining(masCombiningElements);
             int marginText = 0;
-            for (int i = 0; i < masElements.Length; i++)
+            for (int i = 0; i < masElementsRandom.Length; i++)
             {
-                if (masElements[i] != 0)
+                if (masElementsRandom[i] != 0)
                 {
                     Figure figure = new Figure(28, 0, 0);
                     Geometry geometry = null;
-                    geometry = GetGeometryFromText(masElements[i].ToString(), 50, marginText, 40);
+                    geometry = GetGeometryFromText(masElementsRandom[i].ToString(), 50, marginText, 40);
                     marginText += 40;
 
-                    Path path = new Path()
+                    Path pathNumbers = new Path()
                     {
                         StrokeThickness = Base.StrokeThickness,
                         Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
                         Data = geometry,
                         Fill = Brushes.White,
                     };
-                    path.MouseDown += OnMouseDown;
-                    path.MouseMove += OnMouseMove;
-                    path.MouseUp += OnMouseUp;
-                    path.Uid = i.ToString();
-                    Canvas2.Children.Add(path);
+                    pathNumbers.MouseDown += OnMouseDown;
+                    pathNumbers.MouseMove += OnMouseMove;
+                    pathNumbers.MouseUp += OnMouseUp;
+                    pathNumbers.Uid = i.ToString();
+                    Canvas2.Children.Add(pathNumbers);
                 }
-
-
             }
             _pointsQuestionFirst.Clear();
-            for (int i = 0; i < masElements.Length; i++) // Заполнение точек смещения
+            for (int i = 0; i < masElementsRandom.Length; i++) // Заполнение точек смещения
             {
                 _pointsQuestionFirst.Add(new Point(0, 0));
             }
@@ -250,7 +243,7 @@ namespace MathSets.pages
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 6; i < Canvas2.Children.Count; i++)
+            for (int i = 5; i < Canvas2.Children.Count; i++)
             {
                 Path p = (Path)Canvas2.Children[i];
                 p.Fill = Brushes.White;
@@ -633,31 +626,26 @@ namespace MathSets.pages
         private void BtnCheck2_Click(object sender, RoutedEventArgs e)
         {
             int[] intersectionSets = IntersectionElementsSets(setElementsA, setElementsB);
-            int[] combiningSets = CombiningElementsSets(setElementsA, setElementsB);
-            int[] masA = ElementsOnlyOneSet(setElementsA, intersectionSets);
-            int[] masB = ElementsOnlyOneSet(setElementsB, intersectionSets);
-
             int[] positionElementsA = new int[4];
             int[] positionElementsB = new int[4];
             int[] intersectionAB = new int[4];
-
             int razmA = 0, razmB = 0, razmIntersection = 0;
 
             for (int i = 0; i < masElements.Length; i++)
             {
                 if (masElements[i] != 0)
                 {
-                    for (int j = 0; j < masA.Length; j++)
+                    for (int j = 0; j < setElementsA.Length; j++)
                     {
-                        if (masElements[i] == masA[j])
+                        if (masElements[i] == setElementsA[j])
                         {
                             positionElementsA[razmA] = i + 1;
                             razmA++;
                         }
                     }
-                    for (int j = 0; j < masB.Length; j++)
+                    for (int j = 0; j < setElementsB.Length; j++)
                     {
-                        if (masElements[i] == masB[j])
+                        if (masElements[i] == setElementsB[j])
                         {
                             positionElementsB[razmB] = i + 1;
                             razmB++;
@@ -674,20 +662,11 @@ namespace MathSets.pages
                 }
             }
 
-            //if(CheckSet(positionElementsA, 0)==true && CheckSet(positionElementsB, 1) == true && CheckSet(intersectionAB, 2) == true)
-            //{
-            //    windows.CorrectResult correctResult = new windows.CorrectResult();
-            //    correctResult.ShowDialog();
-            //}
-            //Path path = (Path)Canvas2.Children[0];
-            //for (int i = 6; i < Canvas2.Children.Count; i++)
-            //{
-            //    Path path1 = (Path)Canvas2.Children[i];
-            //    if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
-            //    {
-            //        MessageBox.Show("ssf");
-            //    }
-            //}
+            if (CheckSet(positionElementsA, 0) == true && CheckSet(positionElementsB, 1) == true && CheckSet(intersectionAB, 2) == true)
+            {
+                windows.CorrectResult correctResult = new windows.CorrectResult();
+                correctResult.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -731,7 +710,7 @@ namespace MathSets.pages
             int prov = 0;
             int real = 0;
             Path path = (Path)Canvas2.Children[canvasChildren];
-            for (int i = 6; i < Canvas2.Children.Count; i++)
+            for (int i = 5; i < Canvas2.Children.Count; i++)
             {
                 Path path1 = (Path)Canvas2.Children[i];
                 if (path.Data.FillContainsWithDetail(path1.Data) == IntersectionDetail.FullyContains)
