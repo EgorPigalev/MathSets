@@ -28,17 +28,50 @@
                                 <Run Text="то между ними ставят знак ⊂, а если нет, то знак ⊄."/>
                             </TextBlock>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap">
+                                <TextBlock TextWrapping="Wrap" Margin="0 0 70 0">
                                 <Run Text="Запись"/>
-                                <Run Text="Число 2 принадлежит множеству B &quot;" FontStyle="Italic"/>
-                                <Run Text="записывают короче: 2 ∈ B. Знак ∈ читают: &quot;принадлежит&quot;."/>
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="⊂"/>
+                                <Run Text="B" FontStyle="Italic"/>
+                                <Run Text="читается:"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap">
-                                <Run Text="Предложение &quot;"/>
-                                <Run Text="Буква a не принадлежит множеству B &quot;" FontStyle="Italic"/>
-                                <Run Text="также можно записать короче короче: a ∉ B. Знак ∉ читают: &quot;не принадлежит&quot;."/>
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="является подмножеством"/>
+                                <Run Text="B" FontStyle="Italic"/>
+                                    <LineBreak/>
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="включено в"/>
+                                <Run Text="B" FontStyle="Italic"/>
+                                    <LineBreak/>
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="содержится в"/>
+                                <Run Text="B" FontStyle="Italic"/>
                                 </TextBlock>
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
+                                <TextBlock TextWrapping="Wrap" Margin="0 0 70 0">
+                                <Run Text="Запись"/>
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="⊄"/>
+                                <Run Text="B" FontStyle="Italic"/>
+                                <Run Text="читается:"/>
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap">
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="не является подмножеством"/>
+                                <Run Text="B" FontStyle="Italic"/>
+                                    <LineBreak/>
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="не включено в"/>
+                                <Run Text="B" FontStyle="Italic"/>
+                                    <LineBreak/>
+                                <Run Text="A" FontStyle="Italic"/>
+                                <Run Text="не содержится в"/>
+                                <Run Text="B" FontStyle="Italic"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Text="Диаграмма подмножества расположена внутри диаграммы множества" TextWrapping="Wrap"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>

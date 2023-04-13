@@ -22,39 +22,81 @@ namespace MathSets.windows
     {
         private bool status; // Статус пауза/продолжить (true - идёт; false - стоит на паузе)
         private string pathCurrentDirectory; // Путь до папки где хранятся видео
-        public GuideWindow(int i)
+        public GuideWindow(int i, int j)
         {
             InitializeComponent();
             status = false;
             pathCurrentDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\video\\";
             switch(i)
             {
-                case 10:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsFirstTask.mp4");
+                case 1:
+                    if (j == 1)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "SetAndElementFirstTask.mp4");
+                    }
+                    if (j == 2)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "SetAndElementSecondTask.mp4");
+                    }
                     break;
-                case 11:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsSecondTask.mp4");
+                case 2:
+                    if (j == 1)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "EqualSetsFirstTask.mp4");
+                    }
+                    if (j == 2)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "EqualSetsSecondTask.mp4");
+                    }
                     break;
-                case 12:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsThreeTask.mp4");
+                case 3:
+
                     break;
-                case 13:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsFourTask.mp4");
+                case 4:
+                    
                     break;
-                case 14:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsFirstTask.mkv");
+                case 5:
+                    if (j == 1)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsFirstTask.mp4");
+                    }
+                    if (j == 2)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsSecondTask.mp4");
+                    }
+                    if (j == 3)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsThreeTask.mp4");
+                    }
+                    if (j == 4)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "IntersectionSetsFourTask.mp4");
+                    }
                     break;
-                case 15:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsSecondTask.mkv");
+                case 6:
+                    if (j == 1)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsFirstTask.mkv");
+                    }
+                    if (j == 2)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsSecondTask.mkv");
+                    }
+                    if (j == 3)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsThirdTask.mkv");
+                    }
+
                     break;
-                case 16:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "CombiningSetsThirdTask.mkv");
-                    break;
-                case 17:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "SplittingSetsFirstTask.mp4");
-                    break;
-                case 18:
-                    MEGuide.Source = new Uri(pathCurrentDirectory + "SplittingSetsSecondTask.mp4");
+                case 7:
+                    if (j == 1)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "SplittingSetsFirstTask.mp4");
+                    }
+                    if (j == 2)
+                    {
+                        MEGuide.Source = new Uri(pathCurrentDirectory + "SplittingSetsSecondTask.mp4");
+                    }
                     break;
 
             }
