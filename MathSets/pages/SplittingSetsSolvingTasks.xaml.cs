@@ -489,10 +489,10 @@ namespace MathSets.pages
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
-                    new GuideWindow(17).ShowDialog();
+                    new GuideWindow(7, 1).ShowDialog();
                     break;
                 default:
-                    new GuideWindow(18).ShowDialog();
+                    new GuideWindow(7, 2).ShowDialog();
                     break;
             }
         }

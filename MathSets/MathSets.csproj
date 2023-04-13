@@ -178,10 +178,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pages\IntersectionSetsSavedTasksPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="pages\IntersectionSetsSolvingTasksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,9 +204,6 @@
     </Compile>
     <Compile Include="windows\HintIntersectionSetsWindow.xaml.cs">
       <DependentUpon>HintIntersectionSetsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="pages\IntersectionSetsSavedTasksPage.xaml.cs">
-      <DependentUpon>IntersectionSetsSavedTasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\IntersectionSetsSolvingTasksPage.xaml.cs">
       <DependentUpon>IntersectionSetsSolvingTasksPage.xaml</DependentUpon>
@@ -283,10 +276,14 @@
     <Content Include="video\CombiningSetsFirstTask.mkv" />
     <Content Include="video\CombiningSetsSecondTask.mkv" />
     <Content Include="video\CombiningSetsThirdTask.mkv" />
+    <Content Include="video\EqualSetsFirstTask.mp4" />
+    <Content Include="video\EqualSetsSecondTask.mp4" />
     <Content Include="video\IntersectionSetsFirstTask.mp4" />
     <Content Include="video\IntersectionSetsFourTask.mp4" />
     <Content Include="video\IntersectionSetsSecondTask.mp4" />
     <Content Include="video\IntersectionSetsThreeTask.mp4" />
+    <Content Include="video\SetAndElementFirstTask.mp4" />
+    <Content Include="video\SetAndElementSecondTask.mp4" />
     <Content Include="video\SplittingSetsFirstTask.mp4" />
     <Content Include="video\SplittingSetsSecondTask.mp4" />
   </ItemGroup>
