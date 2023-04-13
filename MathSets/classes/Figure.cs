@@ -214,6 +214,28 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Создаёт круг с заданными параметрами
+        /// </summary>
+        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
+        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
+        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
+        public Geometry CreateEllipse(int x, bool isUp)
+        {
+            int y = GetCoordinateY(isUp);
+
+            return new EllipseGeometry
+            (
+                new Point
+                (
+                    x + _sizeFigures / 2,
+                    y - _sizeFigures / 2
+                ),
+                _sizeFigures / 2,
+                _sizeFigures / 2
+            );
+        }
+
+        /// <summary>
         /// Создаёт ромб с заданными параметрами
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
@@ -492,6 +514,30 @@ namespace MathSets
                     s_random.Next(Base.StrokeThickness, _widthContainer - _sizeFigures),
                     s_random.Next(Base.StrokeThickness + 1, _heightContainer - _sizeFigures - Base.StrokeThickness)
                 ));
+        }
+
+#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
+        /// <summary>
+        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
+        /// </summary>
+        /// <param name="text">текст для преобразования в фигуру</param>
+        /// <param name="_sizeFigures">размер фигуры</param>
+        /// <param name="x">Координата по оси X</param>
+        /// <param name="y">Координата по оси Y</param>
+        /// <returns>Фигура, созданная на основании заданного текста</returns>
+        public Geometry GetGeometryFromText(string text, int sizeFigures, int x, int y)
+        {
+            FormattedText formattedText = new FormattedText
+            (
+                text,
+                CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Comic Sans MS"),
+                sizeFigures,
+                (Brush)new BrushConverter().ConvertFrom("#F14C18") // Данное поле изменяется при создании объекта Path.
+            );
+
+            return formattedText.BuildGeometry(new Point(x, y));
         }
 
         /// <summary>

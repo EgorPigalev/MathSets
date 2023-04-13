@@ -21,7 +21,12 @@ namespace MathSets.pages
     /// </summary>
     public partial class SplittingSetsSolvingTasks : Page
     {
-        List<string> correctResult = new List<string>(); // Верный результат в 1 задание
+        Random random = new Random();
+
+        List<string> correctResultFirstTask = new List<string>(); // Верный результат в 1 задание
+        List<string> correctResultSecondTask = new List<string>(); // Верный результат во 2 задание
+
+
         public SplittingSetsSolvingTasks()
         {
             InitializeComponent();
@@ -32,28 +37,20 @@ namespace MathSets.pages
         /// </summary>
         private void NewTasks()
         {
-            int n = 1; // Номер задания
-            NewOneTask(n);
-            n++;
-            NewTwoTask(n);
+            NewOneTask();
+            NewTwoTask();
         }
 
         /// <summary>
         /// Генерация задания 1 типа (вставка пропущенных букв)
         /// </summary>
-        /// <param name="n">Номер задания</param>
-        private void NewOneTask(int n)
+        private void NewOneTask()
         {
             Random random = new Random();
-            int type = random.Next(3); // Буква обозначающая совокупность всех подмножеств (выбирается рандомно)
+            WPMainPlaceQuestionFirst.Children.Clear();
+            int type = random.Next(4); // Буква обозначающая совокупность всех подмножеств (выбирается рандомно)
             List<String> list = new List<String>() { "A", "B", "C", "D" }; // Список всех множеств
             List<String> subsetsList = new List<String>() { "A", "B", "C", "D" }; // Список всех множеств
-            Grid grid = new Grid(); // Добавления grid для вывода формулировки задания
-            ColumnDefinition oneColumn = new ColumnDefinition();
-            ColumnDefinition twoColumn = new ColumnDefinition();
-            twoColumn.Width = new GridLength(50); // Столбце под кнопку подсказка
-            grid.ColumnDefinitions.Add(oneColumn);
-            grid.ColumnDefinitions.Add(twoColumn);
             string subsets = "";
             if(list.Count - 1 == type)
             {
@@ -76,42 +73,18 @@ namespace MathSets.pages
                     }
                 }
             }
-            TextBlock taskStatement = new TextBlock() // Формулировка задания
-            {
-                Text = n + ") Множество " + GetTypeSumbol(type) + " разбито на части " + subsets + ". Вставьте пропущенные буквы:",
-                TextWrapping = TextWrapping.Wrap,
-            };
-            SpTasks.Children.Add(grid);
-            grid.Children.Add(taskStatement);
-            Grid.SetColumn(taskStatement, 0);
-            Button BtnHint = new Button() // Кнопка для подсказки
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Content = "?",
-                Style = (Style)FindResource("ButtonMainStyle"),
-            };
-            BtnHint.Click += BtnHint_Click;
-            Grid.SetColumn(BtnHint, 1);
-            grid.Children.Add(BtnHint);
-            Grid gridMain = new Grid(); // Место для задания
-            SpTasks.Children.Add(gridMain);
+            NameSet.Text = GetTypeSumbol(type);
+            NameSubsets.Text = subsets;
+            
+            Grid gridMain = new Grid();
+            WPMainPlaceQuestionFirst.Children.Add(gridMain);
             ColumnDefinition oneColumnMain = new ColumnDefinition();
             ColumnDefinition twoColumnMain = new ColumnDefinition();
             ColumnDefinition threeColumnMain = new ColumnDefinition();
-            threeColumnMain.Width = new GridLength(400);
+            threeColumnMain.Width = new GridLength(350);
             gridMain.ColumnDefinitions.Add(oneColumnMain);
             gridMain.ColumnDefinitions.Add(twoColumnMain);
             gridMain.ColumnDefinitions.Add(threeColumnMain);
-            Image image = new Image() // Добавление картинки в правый угол
-            {
-                Source = new BitmapImage(new Uri("../resources/PictureForTaskSplittingSets.png", UriKind.Relative)),
-                Width = 60,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                Margin = new Thickness(0, 60, 0, 0),
-            };
-            gridMain.Children.Add(image);
-            Grid.SetColumn(image, 2);
             Canvas canvas = new Canvas() // Место куда будет помещен рисунок с множеством
             {
                 Width = 320,
@@ -120,7 +93,7 @@ namespace MathSets.pages
             gridMain.Children.Add(canvas);
             Grid.SetColumn(canvas, 2);
             EllipseGeneration ellipseGeneration = new EllipseGeneration();
-            int height = random.Next(100, 150); // Высота множества
+            int height = 150; // Высота множества
             int width = 300; // Ширина множества
             Ellipse ellipseOne = ellipseGeneration.getEllipse(width, height, 0, 40); // Главный эллипс
             canvas.Children.Add(ellipseOne);
@@ -154,15 +127,6 @@ namespace MathSets.pages
             }
             subsetsList.Remove(GetTypeSumbol(type));
             CalculatePrimer(gridMain, GetTypeSumbol(type), subsetsList);
-            Button BtnResult = new Button() // Кнопка для проверки результата
-            {
-                Content = "Проверить",
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Style = (Style)FindResource("ButtonMainStyle"),
-            };
-            BtnResult.Click += BtnResult_Click;
-            SpTasks.Children.Add(BtnResult);
         }
 
         /// <summary>
@@ -173,6 +137,7 @@ namespace MathSets.pages
         /// <param name="subsets">Подмножества</param>
         private void CalculatePrimer(Grid gridMain, string main, List<String> subsets)
         {
+            correctResultFirstTask.Clear();
             StackPanel oneColumnText = new StackPanel()
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -193,7 +158,7 @@ namespace MathSets.pages
             };
             onePrimer.Children.Add(onePrimerTextTwo);
             oneColumnText.Children.Add(onePrimer);
-            correctResult.Add("" + subsets[0] + " + " + subsets[1] + " + " + subsets[2] + " = " + main); // Добавление правильного результата для первого примера
+            correctResultFirstTask.Add("" + subsets[0] + " + " + subsets[1] + " + " + subsets[2] + " = " + main); // Добавление правильного результата для первого примера
 
             StackPanel twoPrimer = new StackPanel()
             {
@@ -206,7 +171,7 @@ namespace MathSets.pages
             twoPrimer.Children.Add(twoPrimerTextOne);
             twoPrimer.Children.Add(CreateComboBox());
             oneColumnText.Children.Add(twoPrimer);
-            correctResult.Add("" + main + " - " + subsets[2] + " - " + subsets[1] + " = " + subsets[0]); // Добавление правильного результата для второго примера
+            correctResultFirstTask.Add("" + main + " - " + subsets[2] + " - " + subsets[1] + " = " + subsets[0]); // Добавление правильного результата для второго примера
 
             StackPanel threePrimer = new StackPanel()
             {
@@ -219,7 +184,7 @@ namespace MathSets.pages
             threePrimer.Children.Add(threePrimerTextOne);
             threePrimer.Children.Add(CreateComboBox());
             oneColumnText.Children.Add(threePrimer);
-            correctResult.Add("" + main + " - " + subsets[0] + " = " + subsets[1] + " + " + subsets[2]); // Добавление правильного результата для третьего примера
+            correctResultFirstTask.Add("" + main + " - " + subsets[0] + " = " + subsets[1] + " + " + subsets[2]); // Добавление правильного результата для третьего примера
 
             StackPanel fourPrimer = new StackPanel()
             {
@@ -233,7 +198,7 @@ namespace MathSets.pages
             fourPrimer.Children.Add(fourPrimerTextOne);
             fourPrimer.Children.Add(CreateComboBox());
             oneColumnText.Children.Add(fourPrimer);
-            correctResult.Add(main + " - " + subsets[0] + " - " + subsets[1] + " = " + subsets[2]); // Добавление правильного результата для четвертого примера
+            correctResultFirstTask.Add(main + " - " + subsets[0] + " - " + subsets[1] + " = " + subsets[2]); // Добавление правильного результата для четвертого примера
 
             gridMain.Children.Add(oneColumnText);
             Grid.SetColumn(oneColumnText, 0);
@@ -259,7 +224,7 @@ namespace MathSets.pages
             fivePrimer.Children.Add(FivePrimerTextTwo);
             fivePrimer.Children.Add(CreateComboBox());
             twoColumnText.Children.Add(fivePrimer);
-            correctResult.Add("" + subsets[0] + " + " + subsets[2] + " = " + main + " - " + subsets[1]); // Добавление правильного результата для пятого примера
+            correctResultFirstTask.Add("" + subsets[0] + " + " + subsets[2] + " = " + main + " - " + subsets[1]); // Добавление правильного результата для пятого примера
 
             StackPanel sixthPrimer = new StackPanel()
             {
@@ -283,7 +248,7 @@ namespace MathSets.pages
             };
             sixthPrimer.Children.Add(sixthPrimerTextThree);
             twoColumnText.Children.Add(sixthPrimer);
-            correctResult.Add("" + subsets[2] + " + " + subsets[1] + " = " + main + " - " + subsets[0]); // Добавление правильного результата для шестого примера
+            correctResultFirstTask.Add("" + subsets[2] + " + " + subsets[1] + " = " + main + " - " + subsets[0]); // Добавление правильного результата для шестого примера
 
             StackPanel sevenPrimer = new StackPanel()
             {
@@ -308,8 +273,8 @@ namespace MathSets.pages
             sevenPrimer.Children.Add(sevenPrimerTextThree);
             twoColumnText.Children.Add(sevenPrimer);
             sevenPrimer.Children.Add(CreateComboBox());
-            correctResult.Add("" + subsets[1] + " = " + main + " - " + subsets[2] + " - " + subsets[0]); // Добавление правильного результата для седьмого примера первый вариант
-            correctResult.Add("" + subsets[1] + " = " + main + " - " + subsets[0] + " - " + subsets[2]); // Добавление правильного результата для седьмого примера второй вариант
+            correctResultFirstTask.Add("" + subsets[1] + " = " + main + " - " + subsets[2] + " - " + subsets[0]); // Добавление правильного результата для седьмого примера первый вариант
+            correctResultFirstTask.Add("" + subsets[1] + " = " + main + " - " + subsets[0] + " - " + subsets[2]); // Добавление правильного результата для седьмого примера второй вариант
 
             StackPanel eightPrimer = new StackPanel()
             {
@@ -330,8 +295,8 @@ namespace MathSets.pages
             eightPrimer.Children.Add(eightPrimerTextTwo);
             eightPrimer.Children.Add(CreateComboBox());
             twoColumnText.Children.Add(eightPrimer);
-            correctResult.Add(main + " - " + subsets[2] + " = " + subsets[1] + " + " + subsets[0]); // Добавление правильного результата для восьмого примера первый вариант
-            correctResult.Add(main + " - " + subsets[2] + " = " + subsets[0] + " + " + subsets[1]); // Добавление правильного результата для восьмого примера второй вариант
+            correctResultFirstTask.Add(main + " - " + subsets[2] + " = " + subsets[1] + " + " + subsets[0]); // Добавление правильного результата для восьмого примера первый вариант
+            correctResultFirstTask.Add(main + " - " + subsets[2] + " = " + subsets[0] + " + " + subsets[1]); // Добавление правильного результата для восьмого примера второй вариант
 
             gridMain.Children.Add(twoColumnText);
             Grid.SetColumn(twoColumnText, 1);
@@ -407,11 +372,152 @@ namespace MathSets.pages
             NewTasks();
         }
 
-        private void BtnResult_Click(object sender, RoutedEventArgs e)
+        List<int> sets = new List<int>(); // Индексы выбранных букв (0 - общее множество; 1,2 - подмножества)
+        List<string> list = new List<String>() { "A", "B", "C", "D", "M", "K" }; // Список всех множеств
+
+        /// <summary>
+        /// Генерация задания 2 типа (Разбить множество на части)
+        /// </summary>
+        private void NewTwoTask()
+        {
+            CVMainPlaceQuestionSecond.Children.Clear();
+            PartsSet.Children.Clear();
+            MarkRight.Children.Clear();
+            correctResultSecondTask.Clear();
+
+            sets.Clear();
+            CreateSet();
+            List<string> parts = new List<string>();
+            parts.Add(list[sets[0]] + ", " + list[sets[1]] + " и " + list[sets[2]]);
+            parts.Add(list[sets[1]] + " и " + list[sets[2]]);
+            parts.Add(list[sets[0]] + " и " + list[sets[2]]);
+            parts.Add(list[sets[random.Next(3, sets.Count)]] + " и " + list[sets[random.Next(3, sets.Count)]]);
+
+            correctResultSecondTask.Add(list[sets[1]] + " и " + list[sets[2]]);
+
+            ComboBox comboBoxParts = new ComboBox();
+            for(int i = 0; i < 4; i++)
+            {
+                int a = random.Next(parts.Count);
+                comboBoxParts.Items.Add(parts[a]);
+                parts.Remove(parts[a]);
+            }
+            PartsSet.Children.Add(comboBoxParts);
+            CalculatePrimerTaskTwo();
+        }
+
+        /// <summary>
+        /// Генерация множества для второго задания
+        /// </summary>
+        private void CreateSet()
+        {
+            List<string> listCopy = new List<String>() { "A", "B", "C", "D", "M", "K" }; // Список всех множеств
+
+            int type = random.Next(6); // Буква обозначающая совокупность всех подмножеств (выбирается рандомно)
+            NameSets.Text = listCopy[type];
+            sets.Add(type);
+            EllipseGeneration ellipseGeneration = new EllipseGeneration();
+            int height = 150; // Высота множества
+            int width = 300; // Ширина множества
+            Ellipse ellipseOne = ellipseGeneration.getEllipse(width, height, 0, 40); // Главный эллипс
+            CVMainPlaceQuestionSecond.Children.Add(ellipseOne);
+            TextBlock textNamePlenty = new TextBlock() // Название множества
+            {
+                Text = listCopy[type],
+                Margin = new Thickness(width, 40, 0, 0),
+            };
+            listCopy.Remove(listCopy[type]); // Удаление выбранного множества
+            CVMainPlaceQuestionSecond.Children.Add(textNamePlenty);
+            Ellipse ellipseTwo = ellipseGeneration.getEllipse(width, height * 3, -width / 2, -height);
+            Path pathOne = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+            pathOne.Fill = Brushes.LightYellow;
+            CVMainPlaceQuestionSecond.Children.Add(pathOne);
+            int b = width / 4;
+            for (int i = 0; i < 2; i++) // Генерация подмножеств
+            {
+                int a = random.Next(listCopy.Count);
+                TextBlock textBlock = new TextBlock()
+                {
+                    Text = listCopy[a],
+                    Margin = new Thickness(b, 40 + height / 2, 0, 0),
+                };
+                sets.Add(list.IndexOf(listCopy[a]));
+                CVMainPlaceQuestionSecond.Children.Add(textBlock);
+                listCopy.Remove(listCopy[a]);
+                b += width / 2;
+            }
+            foreach (string str in listCopy)
+            {
+                sets.Add(list.IndexOf(str));
+            }
+        }
+
+        /// <summary>
+        /// Генерация примеров для выбора правильных во втором задание
+        /// </summary>
+        private void CalculatePrimerTaskTwo()
+        {
+            List<string> primer = new List<string>();
+            primer.Add(list[sets[1]] + " + " + list[sets[2]] + " = " + list[sets[0]]);
+            primer.Add(list[sets[0]] + " - " + list[sets[2]] + " = " + list[sets[1]]);
+            primer.Add(list[sets[2]] + " + " + list[sets[1]] + " = " + list[sets[0]]);
+            primer.Add(list[sets[1]] + " - " + list[sets[2]] + " = " + list[sets[0]]);
+            primer.Add(list[sets[2]] + " - " + list[sets[1]] + " = " + list[sets[0]]);
+            primer.Add(list[sets[random.Next(3, sets.Count)]] + " + " + list[sets[random.Next(3, sets.Count)]] + " = " + list[sets[random.Next(3, sets.Count)]]);
+
+            correctResultSecondTask.Add(list[sets[1]] + " + " + list[sets[2]] + " = " + list[sets[0]]);
+            correctResultSecondTask.Add(list[sets[0]] + " - " + list[sets[2]] + " = " + list[sets[1]]);
+            correctResultSecondTask.Add(list[sets[2]] + " + " + list[sets[1]] + " = " + list[sets[0]]);
+
+            for (int i = 0; i < 6; i++)
+            {
+                int a = random.Next(primer.Count);
+                CheckBox checkBox = new CheckBox()
+                {
+                    Content = primer[a]
+                };
+                MarkRight.Children.Add(checkBox);
+                primer.Remove(primer[a]);
+            }
+        }
+
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    new GuideWindow(17).ShowDialog();
+                    break;
+                default:
+                    new GuideWindow(18).ShowDialog();
+                    break;
+            }
+        }
+
+        private void MenuRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            switch (Convert.ToInt32(menuItem.Uid))
+            {
+                case 1:
+                    NewOneTask();
+                    break;
+                default:
+                    NewTwoTask();
+                    break;
+            }
+        }
+
+        private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
         {
             List<string> error = new List<string>(); // Ошибки
-            Grid grid = (Grid)SpTasks.Children[1];
-            StackPanel oneColumn = (StackPanel)grid.Children[2];
+            Grid grid = (Grid)WPMainPlaceQuestionFirst.Children[0];
+            StackPanel oneColumn = (StackPanel)grid.Children[1];
             int j = 0;
             foreach (StackPanel primer in oneColumn.Children) // Проверка 1 столбца (первых 4 примеров)
             {
@@ -429,13 +535,13 @@ namespace MathSets.pages
                         primerText += primerComboBox.SelectionBoxItem;
                     }
                 }
-                if (correctResult[j] != primerText)
+                if (correctResultFirstTask[j] != primerText)
                 {
-                    error.Add(correctResult[j]);
+                    error.Add(correctResultFirstTask[j]);
                 }
                 j++;
             }
-            StackPanel twoColumn = (StackPanel)grid.Children[3];
+            StackPanel twoColumn = (StackPanel)grid.Children[2];
             foreach (StackPanel primer in twoColumn.Children) // Проверка 2 столбца (последних 4 примеров)
             {
                 string primerText = "";
@@ -454,24 +560,24 @@ namespace MathSets.pages
                 }
                 if (j >= 6)
                 {
-                    if (correctResult[j] != primerText && correctResult[j + 1] != primerText)
+                    if (correctResultFirstTask[j] != primerText && correctResultFirstTask[j + 1] != primerText)
                     {
-                        error.Add(correctResult[j] + " или " + correctResult[j + 1]);
+                        error.Add(correctResultFirstTask[j] + " или " + correctResultFirstTask[j + 1]);
                     }
                     j += 2;
                 }
                 else
                 {
-                    if (correctResult[j] != primerText)
+                    if (correctResultFirstTask[j] != primerText)
                     {
-                        error.Add(correctResult[j]);
+                        error.Add(correctResultFirstTask[j]);
                     }
                     j++;
                 }
             }
             if (error.Count > 0)
             {
-                ResultSplittingSetsWindows resultSplittingSetsWindows = new ResultSplittingSetsWindows(error);
+                ResultSplittingSetsWindows resultSplittingSetsWindows = new ResultSplittingSetsWindows(error, 1);
                 resultSplittingSetsWindows.ShowDialog();
             }
             else
@@ -481,37 +587,44 @@ namespace MathSets.pages
             }
         }
 
-        /// <summary>
-        /// Генерация задания 2 типа (Разбить множество на части)
-        /// </summary>
-        /// <param name="n">Номер задания</param>
-        private void NewTwoTask(int n)
+        private void BtnCheckQuestionSecond_Click(object sender, RoutedEventArgs e)
         {
-            Grid grid = new Grid(); // Добавления grid для вывода формулировки задания
-            ColumnDefinition oneColumn = new ColumnDefinition();
-            ColumnDefinition twoColumn = new ColumnDefinition();
-            twoColumn.Width = new GridLength(50); // Столбце под кнопку подсказка
-            grid.ColumnDefinitions.Add(oneColumn);
-            grid.ColumnDefinitions.Add(twoColumn);
-            TextBlock taskStatement = new TextBlock() // Формулировка задания
+            bool result = true;
+            int kolCorrectResult = 0;
+            ComboBox comboBox = (ComboBox)PartsSet.Children[0];
+            if(!comboBox.SelectionBoxItem.Equals(correctResultSecondTask[0]))
             {
-                Text = "\n" + n + ") Разбей множество фигур на части: a) по форме; б) по цвету; в) по размеру.\nСколько частей получилось?",
-                TextWrapping = TextWrapping.Wrap,
-            };
-            SpTasks.Children.Add(grid);
-            grid.Children.Add(taskStatement);
-            Grid.SetColumn(taskStatement, 0);
-            Button BtnHint = new Button() // Кнопка для подсказки
+                result = false;
+            }
+            else
             {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Content = "?",
-                Style = (Style)FindResource("ButtonMainStyle"),
-            };
-            BtnHint.Click += BtnHint_Click;
-            Grid.SetColumn(BtnHint, 1);
-            grid.Children.Add(BtnHint);
-            
+                kolCorrectResult++;
+            }
+            for(int i = 0; i < MarkRight.Children.Count; i++)
+            {
+                CheckBox checkBox = (CheckBox)MarkRight.Children[i];
+                if(checkBox.IsChecked == true)
+                {
+                    if(correctResultSecondTask.IndexOf(checkBox.Content.ToString()) == -1)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        kolCorrectResult++;
+                    }
+                }
+            }
+            if(result && kolCorrectResult == correctResultSecondTask.Count)
+            {
+                CorrectResult correctResult = new CorrectResult();
+                correctResult.ShowDialog();
+            }
+            else
+            {
+                ResultSplittingSetsWindows resultSplittingSetsWindows = new ResultSplittingSetsWindows(correctResultSecondTask, 2);
+                resultSplittingSetsWindows.ShowDialog();
+            }
         }
     }
 }
