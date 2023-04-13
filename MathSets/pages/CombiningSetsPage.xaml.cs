@@ -20,6 +20,8 @@ namespace MathSets.pages
         Ellipse ellipseOneEx1;
         Ellipse ellipseTwoEx1;
         Path combinedPathEx1;
+        Ellipse ellipseOneEx2;
+        Ellipse ellipseTwoEx2;
         int numberEx1 = 0;
         int[] masAnswerOptions = new int[4];
         List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
@@ -139,18 +141,18 @@ namespace MathSets.pages
 
             TbCondition2.Text = "2) Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
 
-            Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 430, 10);        
-            Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 580, 10);         
-            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+            ellipseOneEx2 = ellipseGeneration.getEllipse(300, 150, 430, 10);        
+            ellipseTwoEx2 = ellipseGeneration.getEllipse(300, 150, 580, 10);
+            Path combinedPathEx2 = ellipseGeneration.getUnification(ellipseOneEx2, ellipseTwoEx2, GeometryCombineMode.Intersect);
             Ellipse ellipseOneD = ellipseGeneration.getEllipse(300, 150, 430, 10);
             Ellipse ellipseTwoD = ellipseGeneration.getEllipse(300, 150, 580, 10);
-            Path combEllipseOne = ellipseGeneration.getUnification(ellipseOne, ellipseOneD, GeometryCombineMode.Intersect);
-            Path combEllipseTwo = ellipseGeneration.getUnification(ellipseTwo, ellipseTwoD, GeometryCombineMode.Intersect);
-            combEllipseOne.StrokeThickness = Base.StrokeThickness;
-            combEllipseTwo.StrokeThickness = Base.StrokeThickness;          
-            Canvas2.Children.Add(combEllipseOne);
-            Canvas2.Children.Add(combEllipseTwo);
-            Canvas2.Children.Add(combinedPath);
+            Path combEllipseOneEx2 = ellipseGeneration.getUnification(ellipseOneEx2, ellipseOneD, GeometryCombineMode.Intersect);
+            Path combEllipseTwoEx2 = ellipseGeneration.getUnification(ellipseTwoEx2, ellipseTwoD, GeometryCombineMode.Intersect);
+            combEllipseOneEx2.StrokeThickness = Base.StrokeThickness;
+            combEllipseTwoEx2.StrokeThickness = Base.StrokeThickness;          
+            Canvas2.Children.Add(combEllipseOneEx2);
+            Canvas2.Children.Add(combEllipseTwoEx2);
+            Canvas2.Children.Add(combinedPathEx2);
 
             TextBlock tbA = new TextBlock()
             {
@@ -563,7 +565,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, numberEx1).ShowDialog();
                     }
                     break;
                 case 1:
@@ -574,7 +576,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, numberEx1).ShowDialog();
                     }
                     break;
                 case 2:
@@ -585,7 +587,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, numberEx1).ShowDialog();
                     }
                     break;
                 case 3:
@@ -596,7 +598,7 @@ namespace MathSets.pages
                     }
                     else
                     {
-                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, combinedPathEx1, numberEx1).ShowDialog();
+                        new windows.ResultCombiningSetsWindow(Cnv, ellipseOneEx1, ellipseTwoEx1, numberEx1).ShowDialog();
                     }
                     break;
             }
@@ -666,6 +668,12 @@ namespace MathSets.pages
             {
                 windows.CorrectResult correctResult = new windows.CorrectResult();
                 correctResult.ShowDialog();
+            }
+            else
+            {
+                int[] masOlnyA = ElementsOnlyOneSet(setElementsA, intersectionSets);
+                int[] masOlnyB = ElementsOnlyOneSet(setElementsB, intersectionSets);
+                new windows.ResultCombiningSetsWindow(ellipseOneEx2, ellipseTwoEx2, masOlnyA, masOlnyB, intersectionSets).ShowDialog();
             }
         }
 
