@@ -13,7 +13,7 @@ namespace MathSets.pages
     /// </summary>
     public partial class SplittingSetsSolvingTasks : Page
     {
-        Random Random = new Random();
+        private Random _random = new Random();
 
         private List<string> _correctResultFirstTask = new List<string>(); // Верный результат в 1 задание
         private List<string> _correctResultSecondTask = new List<string>(); // Верный результат во 2 задание
@@ -40,9 +40,8 @@ namespace MathSets.pages
         {
             try
             {
-                Random Random = new Random();
                 WPMainPlaceQuestionFirst.Children.Clear();
-                int type = Random.Next(4); // Буква обозначающая совокупность всех подмножеств (выбирается рандомно)
+                int type = _random.Next(4); // Буква обозначающая совокупность всех подмножеств (выбирается рандомно)
                 List<string> list = new List<string>() { "A", "B", "C", "D" }; // Список всех множеств
                 List<string> subsetsList = new List<string>() { "A", "B", "C", "D" }; // Список всех множеств
                 string subsets = "";
@@ -69,7 +68,6 @@ namespace MathSets.pages
                 }
                 NameSet.Text = GetTypeSumbol(type);
                 NameSubsets.Text = subsets;
-
                 Grid gridMain = new Grid();
                 WPMainPlaceQuestionFirst.Children.Add(gridMain);
                 ColumnDefinition oneColumnMain = new ColumnDefinition();
@@ -86,10 +84,10 @@ namespace MathSets.pages
                 };
                 gridMain.Children.Add(canvas);
                 Grid.SetColumn(canvas, 2);
-                EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
                 int height = 150; // Высота множества
                 int width = 300; // Ширина множества
-                Ellipse ellipseOne = EllipseGeneration.GetEllipse(width, height, 0, 40); // Главный эллипс
+                Ellipse ellipseOne = ellipseGeneration.GetEllipse(width, height, 0, 40); // Главный эллипс
                 canvas.Children.Add(ellipseOne);
                 TextBlock textNamePlenty = new TextBlock() // Название множества
                 {
@@ -98,18 +96,18 @@ namespace MathSets.pages
                 };
                 list.Remove(list[type]); // Удаление выбранного множества
                 canvas.Children.Add(textNamePlenty);
-                Ellipse ellipseTwo = EllipseGeneration.GetEllipse(width * 2 / 3, height * 3, -width / 3, -height);
-                Path pathOne = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+                Ellipse ellipseTwo = ellipseGeneration.GetEllipse(width * 2 / 3, height * 3, -width / 3, -height);
+                Path pathOne = ellipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
                 pathOne.Fill = Brushes.LightYellow;
                 canvas.Children.Add(pathOne);
-                Ellipse ellipseThree = EllipseGeneration.GetEllipse(width * 2 / 3, height * 3, width * 2 / 3, -height);
-                Path pathTwo = EllipseGeneration.GetUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect);
+                Ellipse ellipseThree = ellipseGeneration.GetEllipse(width * 2 / 3, height * 3, width * 2 / 3, -height);
+                Path pathTwo = ellipseGeneration.GetUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect);
                 pathTwo.Fill = Brushes.LightGray;
                 canvas.Children.Add(pathTwo);
                 int b = width / 6;
                 for (int i = 0; i < 3; i++) // Генерация названий подмножеств
                 {
-                    int a = Random.Next(list.Count);
+                    int a = _random.Next(list.Count);
                     TextBlock textBlock = new TextBlock()
                     {
                         Text = list[a],
@@ -369,8 +367,8 @@ namespace MathSets.pages
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)
         {
-            HintSplittingSetsWindow HintSplittingSetsWindow = new HintSplittingSetsWindow();
-            HintSplittingSetsWindow.ShowDialog();
+            HintSplittingSetsWindow hintSplittingSetsWindow = new HintSplittingSetsWindow();
+            hintSplittingSetsWindow.ShowDialog();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -379,7 +377,7 @@ namespace MathSets.pages
         }
 
         private List<int> _sets = new List<int>(); // Индексы выбранных букв (0 - общее множество; 1,2 - подмножества)
-        private List<string> _list = new List<String>() { "A", "B", "C", "D", "M", "K" }; // Список всех множеств
+        private List<string> _list = new List<string>() { "A", "B", "C", "D", "M", "K" }; // Список всех множеств
 
         /// <summary>
         /// Генерация задания 2 типа (Разбить множество на части)
@@ -399,14 +397,14 @@ namespace MathSets.pages
                 parts.Add(_list[_sets[0]] + ", " + _list[_sets[1]] + " и " + _list[_sets[2]]);
                 parts.Add(_list[_sets[1]] + " и " + _list[_sets[2]]);
                 parts.Add(_list[_sets[0]] + " и " + _list[_sets[2]]);
-                parts.Add(_list[_sets[Random.Next(3, _sets.Count)]] + " и " + _list[_sets[Random.Next(3, _sets.Count)]]);
+                parts.Add(_list[_sets[_random.Next(3, _sets.Count)]] + " и " + _list[_sets[_random.Next(3, _sets.Count)]]);
 
                 _correctResultSecondTask.Add(_list[_sets[1]] + " и " + _list[_sets[2]]);
 
                 ComboBox comboBoxParts = new ComboBox();
                 for (int i = 0; i < 4; i++)
                 {
-                    int a = Random.Next(parts.Count);
+                    int a = _random.Next(parts.Count);
                     comboBoxParts.Items.Add(parts[a]);
                     parts.Remove(parts[a]);
                 }
@@ -427,13 +425,13 @@ namespace MathSets.pages
             try
             {
                 List<string> listCopy = new List<String>() { "A", "B", "C", "D", "M", "K" }; // Список всех множеств
-                int type = Random.Next(6); // Буква обозначающая совокупность всех подмножеств (выбирается рандомно)
+                int type = _random.Next(6); // Буква обозначающая совокупность всех подмножеств (выбирается рандомно)
                 NameSets.Text = listCopy[type];
                 _sets.Add(type);
-                EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
                 int height = 150; // Высота множества
                 int width = 300; // Ширина множества
-                Ellipse ellipseOne = EllipseGeneration.GetEllipse(width, height, 0, 40); // Главный эллипс
+                Ellipse ellipseOne = ellipseGeneration.GetEllipse(width, height, 0, 40); // Главный эллипс
                 CVMainPlaceQuestionSecond.Children.Add(ellipseOne);
                 TextBlock textNamePlenty = new TextBlock() // Название множества
                 {
@@ -442,14 +440,14 @@ namespace MathSets.pages
                 };
                 listCopy.Remove(listCopy[type]); // Удаление выбранного множества
                 CVMainPlaceQuestionSecond.Children.Add(textNamePlenty);
-                Ellipse ellipseTwo = EllipseGeneration.GetEllipse(width, height * 3, -width / 2, -height);
-                Path pathOne = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+                Ellipse ellipseTwo = ellipseGeneration.GetEllipse(width, height * 3, -width / 2, -height);
+                Path pathOne = ellipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
                 pathOne.Fill = Brushes.LightYellow;
                 CVMainPlaceQuestionSecond.Children.Add(pathOne);
                 int b = width / 4;
                 for (int i = 0; i < 2; i++) // Генерация подмножеств
                 {
-                    int a = Random.Next(listCopy.Count);
+                    int a = _random.Next(listCopy.Count);
                     TextBlock textBlock = new TextBlock()
                     {
                         Text = listCopy[a],
@@ -484,7 +482,7 @@ namespace MathSets.pages
                 primer.Add(_list[_sets[2]] + " + " + _list[_sets[1]] + " = " + _list[_sets[0]]);
                 primer.Add(_list[_sets[1]] + " - " + _list[_sets[2]] + " = " + _list[_sets[0]]);
                 primer.Add(_list[_sets[2]] + " - " + _list[_sets[1]] + " = " + _list[_sets[0]]);
-                primer.Add(_list[_sets[Random.Next(3, _sets.Count)]] + " + " + _list[_sets[Random.Next(3, _sets.Count)]] + " = " + _list[_sets[Random.Next(3, _sets.Count)]]);
+                primer.Add(_list[_sets[_random.Next(3, _sets.Count)]] + " + " + _list[_sets[_random.Next(3, _sets.Count)]] + " = " + _list[_sets[_random.Next(3, _sets.Count)]]);
 
                 _correctResultSecondTask.Add(_list[_sets[1]] + " + " + _list[_sets[2]] + " = " + _list[_sets[0]]);
                 _correctResultSecondTask.Add(_list[_sets[0]] + " - " + _list[_sets[2]] + " = " + _list[_sets[1]]);
@@ -492,7 +490,7 @@ namespace MathSets.pages
 
                 for (int i = 0; i < 6; i++)
                 {
-                    int a = Random.Next(primer.Count);
+                    int a = _random.Next(primer.Count);
                     CheckBox checkBox = new CheckBox()
                     {
                         Content = primer[a]

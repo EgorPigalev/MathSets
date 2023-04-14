@@ -16,7 +16,7 @@ namespace MathSets
     /// </summary>
     public partial class IntersectionSetsSolvingTasksPage : Page
     {
-        private Random Random = new Random();
+        private Random _random = new Random();
         private List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
         private Path _pathToMoved; // Фигура для перемещения
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
@@ -54,19 +54,19 @@ namespace MathSets
                         Height = 250,
                     };
                     WPMainPlaceQuestionFirst.Children.Add(canvas);
-                    EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                    EllipseGeneration ellipseGeneration = new EllipseGeneration();
                     Label subtaskText = new Label()
                     {
                         Content = (Char)(65 + i) + ")",
                     };
                     canvas.Children.Add(subtaskText);
-                    Ellipse ellipseOne = EllipseGeneration.GetEllipse(Random.Next(50, 200), Random.Next(50, 200), Random.Next(40, 100), Random.Next(0, 50)); // Создание первого эллипса
+                    Ellipse ellipseOne = ellipseGeneration.GetEllipse(_random.Next(50, 200), _random.Next(50, 200), _random.Next(40, 100), _random.Next(0, 50)); // Создание первого эллипса
                     ellipseOne.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(ellipseOne);
-                    Ellipse ellipseTwo = EllipseGeneration.GetEllipse(Random.Next(50, 200), Random.Next(50, 200), Random.Next(40, 100), Random.Next(0, 50)); // Создание второго эллипса
+                    Ellipse ellipseTwo = ellipseGeneration.GetEllipse(_random.Next(50, 200), _random.Next(50, 200), _random.Next(40, 100), _random.Next(0, 50)); // Создание второго эллипса
                     ellipseTwo.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(ellipseTwo);
-                    Path combinedPath = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
+                    Path combinedPath = ellipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
                     combinedPath.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(combinedPath);
                 }
@@ -119,15 +119,15 @@ namespace MathSets
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)
         {
-            HintIntersectionSetsWindow Hint = new HintIntersectionSetsWindow();
-            Hint.ShowDialog();
+            HintIntersectionSetsWindow hint = new HintIntersectionSetsWindow();
+            hint.ShowDialog();
         }
 
         private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
                 List<int[]> errors = new List<int[]>(); // Массив ошибок
                 for (int i = 0; i < WPMainPlaceQuestionFirst.Children.Count; i++) // Проверка каждого пункта
                 {
@@ -139,12 +139,12 @@ namespace MathSets
                     {
                         if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White) // Если выделено лишнее
                         {
-                            errors.Add(EllipseGeneration.GetDateEllipse(i, ellipseOne, ellipseTwo));
+                            errors.Add(ellipseGeneration.GetDateEllipse(i, ellipseOne, ellipseTwo));
                         }
                     }
                     else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || path.Fill != Brushes.Yellow) // Если выделено не только пересечение
                     {
-                        errors.Add(EllipseGeneration.GetDateEllipse(i, ellipseOne, ellipseTwo));
+                        errors.Add(ellipseGeneration.GetDateEllipse(i, ellipseOne, ellipseTwo));
                     }
                 }
                 if (errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
@@ -250,7 +250,7 @@ namespace MathSets
                 int row = 1;
                 for (int i = 0; i < combiningSets.Count; i++)
                 {
-                    Figure Figure = new Figure(28, 0, 0);
+                    Figure figure = new Figure(28, 0, 0);
                     Geometry geometry = null;
                     if (i == 9)
                     {
@@ -260,19 +260,19 @@ namespace MathSets
                     switch (combiningSets[i])
                     {
                         case ("круг"):
-                            geometry = Figure.CreateCircle(5 + 40 * column, 25 + (70 * row));
+                            geometry = figure.CreateCircle(5 + 40 * column, 25 + (70 * row));
                             break;
                         case ("треугольник"):
-                            geometry = Figure.CreateTriangle(5 + 40 * column, 25 + (70 * row));
+                            geometry = figure.CreateTriangle(5 + 40 * column, 25 + (70 * row));
                             break;
                         case ("квадрат"):
-                            geometry = Figure.CreateSquare(5 + 40 * column, 25 + (70 * row));
+                            geometry = figure.CreateSquare(5 + 40 * column, 25 + (70 * row));
                             break;
                         case ("ромб"):
-                            geometry = Figure.CreateRhomb(5 + 40 * column, 25 + (70 * row));
+                            geometry = figure.CreateRhomb(5 + 40 * column, 25 + (70 * row));
                             break;
                         default:
-                            geometry = Figure.GetGeometryFromText(combiningSets[i], 50, 5 + 40 * column, -30 + (70 * row));
+                            geometry = figure.GetGeometryFromText(combiningSets[i], 50, 5 + 40 * column, -30 + (70 * row));
                             break;
                     }
                     column++;
@@ -449,12 +449,12 @@ namespace MathSets
         {
             try
             {
-                Figure Figure = new Figure(28, 0, 0);
+                Figure figure = new Figure(28, 0, 0);
                 Geometry geometry = null;
                 switch (sets[i])
                 {
                     case ("круг"):
-                        geometry = Figure.CreateCircle(10, height);
+                        geometry = figure.CreateCircle(10, height);
                         ShowFigures(stackPanel, geometry);
                         if (i != sets.Count - 1)
                         {
@@ -462,7 +462,7 @@ namespace MathSets
                         }
                         break;
                     case ("треугольник"):
-                        geometry = Figure.CreateTriangle(10, height);
+                        geometry = figure.CreateTriangle(10, height);
                         ShowFigures(stackPanel, geometry);
                         if (i != sets.Count - 1)
                         {
@@ -470,7 +470,7 @@ namespace MathSets
                         }
                         break;
                     case ("квадрат"):
-                        geometry = Figure.CreateSquare(10, height);
+                        geometry = figure.CreateSquare(10, height);
                         ShowFigures(stackPanel, geometry);
                         if (i != sets.Count - 1)
                         {
@@ -478,7 +478,7 @@ namespace MathSets
                         }
                         break;
                     case ("ромб"):
-                        geometry = Figure.CreateRhomb(10, height);
+                        geometry = figure.CreateRhomb(10, height);
                         ShowFigures(stackPanel, geometry);
                         if (i != sets.Count - 1)
                         {
@@ -488,12 +488,12 @@ namespace MathSets
                     default:
                         if (i == sets.Count - 1)
                         {
-                            geometry = Figure.GetGeometryFromText(sets[i], 28, 10, 0);
+                            geometry = figure.GetGeometryFromText(sets[i], 28, 10, 0);
 
                         }
                         else
                         {
-                            geometry = Figure.GetGeometryFromText(sets[i] + ";", 28, 10, 0);
+                            geometry = figure.GetGeometryFromText(sets[i] + ";", 28, 10, 0);
                         }
                         Path path = new Path()
                         {
@@ -518,14 +518,14 @@ namespace MathSets
         {
             try
             {
-                EllipseGeneration EllipseGeneration = new EllipseGeneration();
-                Ellipse ellipseOne = EllipseGeneration.GetEllipse(250, 200, 400, 20); // Создание первого эллипса
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
+                Ellipse ellipseOne = ellipseGeneration.GetEllipse(250, 200, 400, 20); // Создание первого эллипса
                 ellipseOne.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
                 CVMainPlaceQuestionSecond.Children.Add(ellipseOne);
-                Ellipse ellipseTwo = EllipseGeneration.GetEllipse(250, 200, 500, 20); // Создание второго эллипса
+                Ellipse ellipseTwo = ellipseGeneration.GetEllipse(250, 200, 500, 20); // Создание второго эллипса
                 ellipseTwo.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
                 CVMainPlaceQuestionSecond.Children.Add(ellipseTwo);
-                Path combinedPath = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
+                Path combinedPath = ellipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
                 combinedPath.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
                 CVMainPlaceQuestionSecond.Children.Add(combinedPath);
                 Label firstPlenty = new Label()
@@ -625,17 +625,17 @@ namespace MathSets
         /// Рандомно генерирует множество
         /// </summary>
         /// <returns></returns>
-        private List<String> GetSets()
+        private List<string> GetSets()
         {
             try
             {
-                List<string> sets = new List<String>();
-                int count = Random.Next(4, 8);
+                List<string> sets = new List<string>();
+                int count = _random.Next(4, 8);
                 List<string> listChoice = GetCopy(_list);
                 int index;
                 for (int i = 0; i < count; i++)
                 {
-                    index = Random.Next(listChoice.Count);
+                    index = _random.Next(listChoice.Count);
                     sets.Add(listChoice[index]);
                     listChoice.RemoveAt(index);
                 }
@@ -718,31 +718,31 @@ namespace MathSets
                         Height = 250,
                     };
                     WPMainPlaceQuestionThree.Children.Add(canvas);
-                    EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                    EllipseGeneration ellipseGeneration = new EllipseGeneration();
                     Label label = new Label()
                     {
                         Content = (Char)(65 + i) + ")",
                     };
                     canvas.Children.Add(label);
-                    Ellipse ellipseOne = EllipseGeneration.GetEllipse(Random.Next(100, 200), Random.Next(100, 125), Random.Next(20, 40), Random.Next(10, 20)); // Создание первого эллипса
+                    Ellipse ellipseOne = ellipseGeneration.GetEllipse(_random.Next(100, 200), _random.Next(100, 125), _random.Next(20, 40), _random.Next(10, 20)); // Создание первого эллипса
                     ellipseOne.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(ellipseOne);
-                    Ellipse ellipseTwo = EllipseGeneration.GetEllipse(Random.Next(100, 200), Random.Next(100, 125), Random.Next(80, 100), Random.Next(0, 10)); // Создание второго эллипса
+                    Ellipse ellipseTwo = ellipseGeneration.GetEllipse(_random.Next(100, 200), _random.Next(100, 125), _random.Next(80, 100), _random.Next(0, 10)); // Создание второго эллипса
                     ellipseTwo.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(ellipseTwo);
-                    Ellipse ellipseThree = EllipseGeneration.GetEllipse(Random.Next(100, 200), Random.Next(100, 125), Random.Next(40, 60), Random.Next(40, 50)); // Создание третьего эллипса
+                    Ellipse ellipseThree = ellipseGeneration.GetEllipse(_random.Next(100, 200), _random.Next(100, 125), _random.Next(40, 60), _random.Next(40, 50)); // Создание третьего эллипса
                     ellipseThree.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(ellipseThree);
-                    Path combinedPathOne = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание первого пересечения
+                    Path combinedPathOne = ellipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание первого пересечения
                     combinedPathOne.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(combinedPathOne);
-                    Path combinedPathTwo = EllipseGeneration.GetUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect); // Создание второго пересечения
+                    Path combinedPathTwo = ellipseGeneration.GetUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect); // Создание второго пересечения
                     combinedPathTwo.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(combinedPathTwo);
-                    Path combinedPathThree = EllipseGeneration.GetUnification(ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание третьего пересечения
+                    Path combinedPathThree = ellipseGeneration.GetUnification(ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание третьего пересечения
                     combinedPathThree.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(combinedPathThree);
-                    Path combinedPathFour = EllipseGeneration.GetUnificationThree(ellipseOne, ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание общего пересечения
+                    Path combinedPathFour = ellipseGeneration.GetUnificationThree(ellipseOne, ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание общего пересечения
                     combinedPathFour.MouseDown += Ellipse_MouseDown;
                     canvas.Children.Add(combinedPathFour);
                 }
@@ -757,7 +757,7 @@ namespace MathSets
         {
             try
             {
-                EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                EllipseGeneration ellipseGeneration = new EllipseGeneration();
                 List<int[]> errors = new List<int[]>(); // Массив ошибок
                 for (int i = 0; i < WPMainPlaceQuestionThree.Children.Count; i++) // Проверка каждого пункта
                 {
@@ -773,12 +773,12 @@ namespace MathSets
                     {
                         if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White) // Если выделено лишнее
                         {
-                            errors.Add(EllipseGeneration.GetDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
+                            errors.Add(ellipseGeneration.GetDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
                         }
                     }
                     else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White || pathFour.Fill != Brushes.Yellow) // Если выделено не только пересечение
                     {
-                        errors.Add(EllipseGeneration.GetDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
+                        errors.Add(ellipseGeneration.GetDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
                     }
                 }
                 if (errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
@@ -817,7 +817,7 @@ namespace MathSets
                 List<char> chars = new List<char>();
                 for (int i = 0; i < 3; i++)
                 {
-                    int row = Random.Next(listChar.Count);
+                    int row = _random.Next(listChar.Count);
                     chars.Add(listChar[row]);
                     listChar.Remove(listChar[row]);
                 }
@@ -839,7 +839,7 @@ namespace MathSets
                 };
                 for (int i = 0; i < 4; i++)
                 {
-                    int row = Random.Next(movingProperty.Count);
+                    int row = _random.Next(movingProperty.Count);
                     ComboBoxItem comboBoxItem = new ComboBoxItem();
                     comboBoxItem.Content = movingProperty[row];
                     comboBoxFirst.Items.Add(comboBoxItem);
@@ -867,7 +867,7 @@ namespace MathSets
                 };
                 for (int i = 0; i < 4; i++)
                 {
-                    int row = Random.Next(combinationProperty.Count);
+                    int row = _random.Next(combinationProperty.Count);
                     ComboBoxItem comboBoxItem = new ComboBoxItem();
                     comboBoxItem.Content = combinationProperty[row];
                     comboBoxSecond.Items.Add(comboBoxItem);
