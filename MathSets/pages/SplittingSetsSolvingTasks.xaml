@@ -20,7 +20,7 @@
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Разбиение множеств на части по свойствам" Style="{StaticResource LabelHeaderText}"/>
-                <Button Grid.Column="1" Name="BtnHint" Content="?" Style="{StaticResource ButtonMainStyle}" Margin="0 2 20 2" Click="BtnHint_Click"/>
+                <Button Grid.Column="1" Name="BtnHint" Content="?" Style="{StaticResource ButtonMainStyle}" Margin="0 2 20 2" Click="BtnHint_Click" Cursor="Hand"/>
             </Grid>
         </Border>
         <Grid Grid.Row="1" >
