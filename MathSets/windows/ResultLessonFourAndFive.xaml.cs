@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace MathSets.windows
 {
@@ -36,28 +39,25 @@ namespace MathSets.windows
             SpResult.Children.Add(cnv);
         }
 
-        public ResultLessonFourAndFive(Canvas canvas, StackPanel stackPanel, int sizeFigures)
+        public ResultLessonFourAndFive(StackPanel stackPanel, int sizeFigures)
         {
             InitializeComponent();
 
-            Canvas cnv = CreateCanvasWithTwoSets(canvas);
+            System.IO.StringReader stringReader = new System.IO.StringReader(XamlWriter.Save(stackPanel));
+            XmlReader xmlReader = XmlReader.Create(stringReader);
+            StackPanel spParent = (StackPanel)XamlReader.Load(xmlReader);
 
-            List<Geometry> figures = new List<Geometry>();
-            for (int i = 0; i < cnv.Children.Count + 1; i++) // + 1, чтобы захватить индекс 4.
+            Canvas canvas = (Canvas)spParent.Children[1];
+
+            int countIterations = canvas.Children.Count - 5;
+            for (int i = 0; i < countIterations; i++) // Удаление фигур из контейнера.
             {
-                figures.Add(((Path)cnv.Children[4]).Data.Clone()); // 4, так как фигуры начинаются с 3 от 0 позиции.
-                cnv.Children.RemoveAt(4);
+                canvas.Children.RemoveAt(5); // 5, так как фигуры начинаются с 5 позиции.
             }
 
-            SpResult.Orientation = Orientation.Horizontal;
-            StackPanel spCondition = CopyStackPanel(stackPanel);
-            SpResult.Children.Add(spCondition);
+            Figure.ShowFigures(CreateFiguresTaskSecond((StackPanel)spParent.Children[0], canvas, sizeFigures), canvas);
 
-            double xStart = Base.StrokeThickness + (canvas.Width - canvas.Width / 2 + 100 - 100 * 2) / 2;
-            CreateFiguresTaskSecond((StackPanel)spCondition.Children[0], cnv, xStart);
-            CreateFiguresTaskSecond((StackPanel)spCondition.Children[1], cnv, xStart);
-
-            SpResult.Children.Add(cnv);
+            SpResult.Children.Add(spParent);
         }
 
         /// <summary>
@@ -249,66 +249,92 @@ namespace MathSets.windows
             return panelParent;
         }
 
-        private StackPanel CopyStackPanel(StackPanel spSource)
+        /// <summary>
+        /// Создаёт фигуры для второго задания.
+        /// </summary>
+        /// <param name="spCondition">StackPanel условий (принадлежит или нет)</param>
+        /// <param name="canvas">контейнер</param>
+        /// <param name="sizeFigures">размер фигур</param>
+        /// <returns>Список фигур</returns>
+        private List<Geometry> CreateFiguresTaskSecond(StackPanel spCondition, Canvas canvas, int sizeFigures)
         {
-            StackPanel sp = new StackPanel()
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 30, 0)
-            };
+            EllipseGeometry setA = (EllipseGeometry)((Path)canvas.Children[2]).Data;
+            EllipseGeometry setB = (EllipseGeometry)((Path)canvas.Children[3]).Data;
+            Point centerSetIntersect = new Point(setA.Center.X + (setB.Center.X - setA.Center.X) / 2, setA.Center.Y);
 
-            foreach (StackPanel spSet in spSource.Children)
-            {
-                StackPanel newSpSet = new StackPanel();
-                newSpSet.Orientation = spSet.Orientation;
-                sp.Children.Add(newSpSet);
-
-                foreach (StackPanel spRowSet in spSet.Children)
-                {
-                    StackPanel newSpRowSet = new StackPanel();
-                    newSpRowSet.Orientation = spRowSet.Orientation;
-                    newSpSet.Children.Add(newSpRowSet);
-
-                    foreach (TextBlock tb in spRowSet.Children)
-                    {
-                        TextBlock newTb = new TextBlock()
-                        {
-                            Text = tb.Text,
-                            FontFamily = tb.FontFamily,
-                            Width = tb.Width,
-                            Margin = tb.Margin,
-                            VerticalAlignment = tb.VerticalAlignment
-                        };
-                        newSpRowSet.Children.Add(newTb);
-                    }
-                }
-            }
-
-            return sp;
-        }
-
-        private List<Geometry> CreateFiguresTaskSecond(StackPanel spParent, Canvas canvas, double x)
-        {
-            //for (int i = 0; i < sets.Count; i++)
-            //{
-            //    sets[i].Transform = new TranslateTransform(0, (panel.Height - sizeFigure / 1.5) / 2); // 1.5, потому что одна ось меньше другой в 1.5 раза.
-            //}
-
-            int sizeFigures = (int)(canvas.Height * 0.7 * 1.5 - Base.StrokeThickness * 2);
             Figure figure = new Figure(sizeFigures, canvas.Height, canvas.Width);
             List<Geometry> figures = new List<Geometry>();
 
-            for (int i = 0; i < spParent.Children.Count; i++)
+            List<int> countFiguresInSets = new List<int>() { 0, 0, 0, 0 }; // Индексы: 0 - множество А, 1 - множество В, 2 - пересечение А и В, 3 - фигуры без множества.
+
+            for (int i = 0; i < ((StackPanel)spCondition.Children[0]).Children.Count; i++)
             {
-                StackPanel sp = (StackPanel)spParent.Children[i];
+                StackPanel spSetA = (StackPanel)((StackPanel)spCondition.Children[0]).Children[i]; // Условия множества A.
+                StackPanel spSetB = (StackPanel)((StackPanel)spCondition.Children[1]).Children[i]; // Условия множества B.
 
-                if (((TextBlock)sp.Children[1]).Text == "∈")
+                if (((TextBlock)spSetA.Children[1]).Text == "∈" && ((TextBlock)spSetB.Children[1]).Text == "∈") // Фигура принадлежит пересечению множеств.
                 {
-                    figures.Add(figure.GetGeometryFromText((i + 1).ToString())); // Не догнал как спавнить, есть глупая идея.
+                    figures.Add(figure.GetGeometryFromText
+                    (
+                        (i + 1).ToString(),
+                        (int)centerSetIntersect.X - sizeFigures/3,
+                        Convert.ToInt32(centerSetIntersect.Y - setA.RadiusY *0.6 + countFiguresInSets[2] * (sizeFigures + 10))
+                    ));
+                    countFiguresInSets[2]++;
                 }
-                else
+                else if (((TextBlock)spSetA.Children[1]).Text == "∈") // Фигура принадлежит множеству А.
                 {
-
+                    if (countFiguresInSets[0] == 1)
+                    {
+                        figures.Add(figure.GetGeometryFromText
+                        (
+                            (i + 1).ToString(),
+                            Convert.ToInt32(setA.Center.X - setA.RadiusX + sizeFigures * 2.1),
+                            (int)setA.Center.Y - (int)setA.RadiusY / 2 + countFiguresInSets[0] * (sizeFigures + 10)
+                        ));
+                    }
+                    else
+                    {
+                        figures.Add(figure.GetGeometryFromText
+                        (
+                            (i + 1).ToString(),
+                            Convert.ToInt32(setA.Center.X - setA.RadiusX + sizeFigures),
+                            (int)setA.Center.Y - (int)setA.RadiusY / 2 + countFiguresInSets[0] * (sizeFigures + 10)
+                        ));
+                    }
+                    countFiguresInSets[0]++;
+                }
+                else if (((TextBlock)spSetB.Children[1]).Text == "∈") // Фигура принадлежит множеству В.
+                {
+                    if (countFiguresInSets[1] == 1)
+                    {
+                        figures.Add(figure.GetGeometryFromText
+                        (
+                            (i + 1).ToString(),
+                            Convert.ToInt32(setB.Center.X + setB.RadiusX - sizeFigures * 1.1),
+                            (int)setB.Center.Y - (int)setB.RadiusY / 2 + countFiguresInSets[1] * (sizeFigures + 10)
+                        ));
+                    }
+                    else
+                    {
+                        figures.Add(figure.GetGeometryFromText
+                        (
+                            (i + 1).ToString(),
+                            Convert.ToInt32(setB.Center.X + setB.RadiusX - sizeFigures * 2),
+                            (int)setB.Center.Y - (int)setB.RadiusY / 2 + countFiguresInSets[1] * (sizeFigures + 10)
+                        ));
+                    }
+                    countFiguresInSets[1]++;
+                }
+                else // Фигура не принадлежит множествам А и В.
+                {
+                    figures.Add(figure.GetGeometryFromText
+                    (
+                        (i + 1).ToString(),
+                        Convert.ToInt32(setA.Center.X + countFiguresInSets[3] * (sizeFigures + 10)),
+                        (int)setA.Center.Y + (int)setA.RadiusY + 40
+                    ));
+                    countFiguresInSets[3]++;
                 }
             }
 

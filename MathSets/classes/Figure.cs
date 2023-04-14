@@ -191,51 +191,6 @@ namespace MathSets
         }
 
         /// <summary>
-        /// Создаёт вытянутый по оси Y эллипс с заданными параметрами
-        /// </summary>
-        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
-        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Эллипс с заданными начальной позицией и вертикальным положением</returns>
-        public Geometry CreateEllipseTransformX(int x, bool isUp)
-        {
-            int transformX = 3;
-            int y = GetCoordinateY(isUp);
-
-            return new EllipseGeometry
-            (
-                new Point
-                (
-                    x + _sizeFigures / transformX,
-                    y - _sizeFigures / 2
-                ),
-                _sizeFigures / transformX,
-                _sizeFigures / 2
-            );
-        }
-
-        /// <summary>
-        /// Создаёт круг с заданными параметрами
-        /// </summary>
-        /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
-        /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Круг с заданными начальной позицией и вертикальным положением</returns>
-        public Geometry CreateEllipse(int x, bool isUp)
-        {
-            int y = GetCoordinateY(isUp);
-
-            return new EllipseGeometry
-            (
-                new Point
-                (
-                    x + _sizeFigures / 2,
-                    y - _sizeFigures / 2
-                ),
-                _sizeFigures / 2,
-                _sizeFigures / 2
-            );
-        }
-
-        /// <summary>
         /// Создаёт ромб с заданными параметрами
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
@@ -316,7 +271,7 @@ namespace MathSets
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Пятиугольник с заданными начальной позицией и вертикальным положением</returns>
+        /// <returns>Шестиугольник с заданными начальной позицией и вертикальным положением</returns>
         public Geometry CreateHexagon(int x, bool isUp)
         {
             int y = GetCoordinateY(isUp);
@@ -341,7 +296,7 @@ namespace MathSets
         /// </summary>
         /// <param name="x">позиция по оси Х крайней левой точки фигуры</param>
         /// <param name="isUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
-        /// <returns>Пятиугольник с заданными начальной позицией и вертикальным положением</returns>
+        /// <returns>Семиугольник с заданными начальной позицией и вертикальным положением</returns>
         public Geometry CreateHeptagon(int x, bool isUp)
         {
             int y = GetCoordinateY(isUp);
@@ -404,6 +359,26 @@ namespace MathSets
         }
 
         /// <summary>
+        /// Получает методы создания всех фигур у данного объекта
+        /// </summary>
+        /// <returns>Коллекция методов создания фигур</returns>
+        public List<CreateFiguresDelegate> GetAllCreateFiguresMethods()
+        {
+            return new List<CreateFiguresDelegate>
+            {
+                CreateTriangle,
+                CreateSquare,
+                CreateCircle,
+                CreateRhomb,
+                CreateFlame,
+                CreatePentagon,
+                CreateHexagon,
+                CreateHeptagon,
+                CreateStar
+            };
+        }
+
+        /// <summary>
         /// Генерирует случайную координату Y для фигуры в зависимости от её вертикального расположения
         /// </summary>
         /// <param name="IsUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
@@ -442,11 +417,10 @@ namespace MathSets
         /// Вычисляет отступы между фигурами (с учётом размеров самой фигуры)
         /// </summary>
         /// <param name="countFigures">количество фигур</param>
-        /// <returns></returns>
+        /// <returns>Отступ между фигурами</returns>
         public int GetOffset(int countFigures)
         {
-
-            if (countFigures >= 3)
+            if (countFigures >= 3 && _widthContainer > countFigures * _sizeFigures)
             {
                 int offset;
 
@@ -463,26 +437,6 @@ namespace MathSets
             }
 
             return 0;
-        }
-
-        /// <summary>
-        /// Получает методы создания всех фигур у данного объекта
-        /// </summary>
-        /// <returns>Коллекция методов создания фигур</returns>
-        public List<CreateFiguresDelegate> GetAllCreateFiguresMethods()
-        {
-            return new List<CreateFiguresDelegate>
-            {
-                CreateTriangle,
-                CreateSquare,
-                CreateCircle,
-                CreateRhomb,
-                CreateFlame,
-                CreatePentagon,
-                CreateHexagon,
-                CreateHeptagon,
-                CreateStar
-            };
         }
 
         /// <summary>
@@ -520,7 +474,7 @@ namespace MathSets
 
 #pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
         /// <summary>
-        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
+        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент, с рандомными координатами
         /// </summary>
         /// <param name="text">текст для преобразования в фигуру</param>
         /// <returns>Фигура, созданная на основании заданного текста</returns>
@@ -543,12 +497,11 @@ namespace MathSets
                 ));
         }
 
-#pragma warning disable CS0618 // Для сокрытия предупреждения об устаревшем FormattedText
         /// <summary>
-        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент
+        /// Создаёт фигуру на основании текста, преобразовавая его в графический элемент, с заданными координатами
         /// </summary>
         /// <param name="text">текст для преобразования в фигуру</param>
-        /// <param name="_sizeFigures">размер фигуры</param>
+        /// <param name="size">размер фигуры</param>
         /// <param name="x">Координата по оси X</param>
         /// <param name="y">Координата по оси Y</param>
         /// <returns>Фигура, созданная на основании заданного текста</returns>
