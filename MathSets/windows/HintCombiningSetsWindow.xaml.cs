@@ -23,23 +23,23 @@ namespace MathSets.windows
         {
             InitializeComponent();
             EllipseGeneration ellipseGeneration = new EllipseGeneration();
-            Path combinedPath = ellipseGeneration.getUnification(EllipseOne, EllipseTwo, GeometryCombineMode.Intersect);
+            Path combinedPath = ellipseGeneration.GetUnification(EllipseOne, EllipseTwo, GeometryCombineMode.Intersect);
             combinedPath.Stroke = Brushes.White;
             Cnv.Children.Add(combinedPath);
-            Ellipse ellipseOne = ellipseGeneration.getEllipse(180, 120, 20, 20);
-            Ellipse ellipseTwo = ellipseGeneration.getEllipse(250, 150, 140, 10);
+            Ellipse ellipseOne = ellipseGeneration.GetEllipse(180, 120, 20, 20);
+            Ellipse ellipseTwo = ellipseGeneration.GetEllipse(250, 150, 140, 10);
             ellipseOne.StrokeThickness = Base.StrokeThickness;
             ellipseTwo.StrokeThickness = Base.StrokeThickness;
             Cnv.Children.Add(ellipseOne);
             Cnv.Children.Add(ellipseTwo);
-            Path combinedPath1 = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+            Path combinedPath1 = ellipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
             Cnv.Children.Add(combinedPath1);
 
-            Ellipse ellipsePoint1 = ellipseGeneration.getEllipse(5, 5, 50, 80);
-            Ellipse ellipsePoint2 = ellipseGeneration.getEllipse(5, 5, 160, 50);
-            Ellipse ellipsePoint3 = ellipseGeneration.getEllipse(5, 5, 170, 80);
-            Ellipse ellipsePoint4 = ellipseGeneration.getEllipse(5, 5, 250, 50);
-            Ellipse ellipsePoint5 = ellipseGeneration.getEllipse(5, 5, 300, 90);
+            Ellipse ellipsePoint1 = ellipseGeneration.GetEllipse(5, 5, 50, 80);
+            Ellipse ellipsePoint2 = ellipseGeneration.GetEllipse(5, 5, 160, 50);
+            Ellipse ellipsePoint3 = ellipseGeneration.GetEllipse(5, 5, 170, 80);
+            Ellipse ellipsePoint4 = ellipseGeneration.GetEllipse(5, 5, 250, 50);
+            Ellipse ellipsePoint5 = ellipseGeneration.GetEllipse(5, 5, 300, 90);
             ellipsePoint1.Fill = Brushes.Black;
             ellipsePoint2.Fill = Brushes.Black;
             ellipsePoint3.Fill = Brushes.Black;

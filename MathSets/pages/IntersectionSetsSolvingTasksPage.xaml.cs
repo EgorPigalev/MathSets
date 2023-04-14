@@ -3,17 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MathSets
@@ -23,11 +16,11 @@ namespace MathSets
     /// </summary>
     public partial class IntersectionSetsSolvingTasksPage : Page
     {
-        Random random = new Random();
-        List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
+        private Random Random = new Random();
+        private List<Point> _pointsQuestionFirst = new List<Point>(); // Точки смещения для второго задания
         private Path _pathToMoved; // Фигура для перемещения
         private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры)
-        private List<string> correctResultFourTask = new List<string>();
+        private List<string> _correctResultFourTask = new List<string>();
 
         public IntersectionSetsSolvingTasksPage()
         {
@@ -50,58 +43,72 @@ namespace MathSets
         /// </summary>
         private void NewOneTask()
         {
-            WPMainPlaceQuestionFirst.Children.Clear();
-            for (int i = 0; i < 4; i++)
+            try
             {
-                Canvas canvas = new Canvas()
+                WPMainPlaceQuestionFirst.Children.Clear();
+                for (int i = 0; i < 4; i++)
                 {
-                    Width = 350,
-                    Height = 250,
-                };
-                WPMainPlaceQuestionFirst.Children.Add(canvas);
-                EllipseGeneration ellipseGeneration = new EllipseGeneration();
-                Label label = new Label()
-                {
-                    Content = (Char)(65 + i) + ")",
-                };
-                canvas.Children.Add(label);
-                Ellipse ellipseOne = ellipseGeneration.getEllipse(random.Next(50, 200), random.Next(50, 200), random.Next(40, 100), random.Next(0, 50)); // Создание первого эллипса
-                ellipseOne.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(ellipseOne);
-                Ellipse ellipseTwo = ellipseGeneration.getEllipse(random.Next(50, 200), random.Next(50, 200), random.Next(40, 100), random.Next(0, 50)); // Создание второго эллипса
-                ellipseTwo.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(ellipseTwo);
-                Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
-                combinedPath.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(combinedPath);
+                    Canvas canvas = new Canvas()
+                    {
+                        Width = 350,
+                        Height = 250,
+                    };
+                    WPMainPlaceQuestionFirst.Children.Add(canvas);
+                    EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                    Label subtaskText = new Label()
+                    {
+                        Content = (Char)(65 + i) + ")",
+                    };
+                    canvas.Children.Add(subtaskText);
+                    Ellipse ellipseOne = EllipseGeneration.GetEllipse(Random.Next(50, 200), Random.Next(50, 200), Random.Next(40, 100), Random.Next(0, 50)); // Создание первого эллипса
+                    ellipseOne.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(ellipseOne);
+                    Ellipse ellipseTwo = EllipseGeneration.GetEllipse(Random.Next(50, 200), Random.Next(50, 200), Random.Next(40, 100), Random.Next(0, 50)); // Создание второго эллипса
+                    ellipseTwo.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(ellipseTwo);
+                    Path combinedPath = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
+                    combinedPath.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(combinedPath);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("При генерации задания 1 типа возникла ошибка", "Системное сообщение");
             }
         }
 
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (typeof(Ellipse) == sender.GetType()) // Если нажали на эллипс, то его закрашиваем
+            try
             {
-                Ellipse ellipse = sender as Ellipse;
-                if (ellipse.Fill == Brushes.Yellow) // Если уже закрашен, то возвращаем обратно белый фон
+                if (typeof(Ellipse) == sender.GetType()) // Если нажали на эллипс, то его закрашиваем
                 {
-                    ellipse.Fill = Brushes.White;
+                    Ellipse ellipse = sender as Ellipse;
+                    if (ellipse.Fill == Brushes.Yellow) // Если уже закрашен, то возвращаем обратно белый фон
+                    {
+                        ellipse.Fill = Brushes.White;
+                    }
+                    else
+                    {
+                        ellipse.Fill = Brushes.Yellow;
+                    }
                 }
-                else
+                else // Если нажали не на эллипс
                 {
-                    ellipse.Fill = Brushes.Yellow;
+                    Path ellipse = sender as Path;
+                    if (ellipse.Fill == Brushes.Yellow) // Если уже закрашен, то возвращаем обратно белый фон
+                    {
+                        ellipse.Fill = Brushes.White;
+                    }
+                    else
+                    {
+                        ellipse.Fill = Brushes.Yellow;
+                    }
                 }
             }
-            else // Если нажали не на эллипс
+            catch
             {
-                Path ellipse = sender as Path;
-                if (ellipse.Fill == Brushes.Yellow) // Если уже закрашен, то возвращаем обратно белый фон
-                {
-                    ellipse.Fill = Brushes.White;
-                }
-                else
-                {
-                    ellipse.Fill = Brushes.Yellow;
-                }
+                MessageBox.Show("При обработке события возникла ошибка", "Системное сообщение");
             }
         }
 
@@ -112,41 +119,48 @@ namespace MathSets
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)
         {
-            HintIntersectionSetsWindow hint = new HintIntersectionSetsWindow();
-            hint.ShowDialog();
+            HintIntersectionSetsWindow Hint = new HintIntersectionSetsWindow();
+            Hint.ShowDialog();
         }
 
         private void BtnCheckQuestionFirst_Click(object sender, RoutedEventArgs e)
         {
-            EllipseGeneration ellipseGeneration = new EllipseGeneration();
-            List<int[]> errors = new List<int[]>(); // Массив ошибок
-            for (int i = 0; i < WPMainPlaceQuestionFirst.Children.Count; i++) // Проверка каждого пункта
+            try
             {
-                Canvas canvas = (Canvas)WPMainPlaceQuestionFirst.Children[i];
-                Ellipse ellipseOne = (Ellipse)canvas.Children[1];
-                Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
-                Path path = (Path)canvas.Children[3];
-                if (path.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
+                EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                List<int[]> errors = new List<int[]>(); // Массив ошибок
+                for (int i = 0; i < WPMainPlaceQuestionFirst.Children.Count; i++) // Проверка каждого пункта
                 {
-                    if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White) // Если выделено лишнее
+                    Canvas canvas = (Canvas)WPMainPlaceQuestionFirst.Children[i];
+                    Ellipse ellipseOne = (Ellipse)canvas.Children[1];
+                    Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
+                    Path path = (Path)canvas.Children[3];
+                    if (path.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
                     {
-                        errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
+                        if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White) // Если выделено лишнее
+                        {
+                            errors.Add(EllipseGeneration.GetDateEllipse(i, ellipseOne, ellipseTwo));
+                        }
+                    }
+                    else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || path.Fill != Brushes.Yellow) // Если выделено не только пересечение
+                    {
+                        errors.Add(EllipseGeneration.GetDateEllipse(i, ellipseOne, ellipseTwo));
                     }
                 }
-                else if(ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || path.Fill != Brushes.Yellow) // Если выделено не только пересечение
+                if (errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
                 {
-                    errors.Add(ellipseGeneration.getDateEllipse(i, ellipseOne, ellipseTwo));
+                    ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(1, errors);
+                    resultIntersectionSetsWindow.ShowDialog();
+                }
+                else
+                {
+                    CorrectResult correctResult = new CorrectResult();
+                    correctResult.ShowDialog();
                 }
             }
-            if(errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
+            catch
             {
-                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(1, errors);
-                resultIntersectionSetsWindow.ShowDialog();
-            }
-            else
-            {
-                CorrectResult correctResult = new CorrectResult();
-                correctResult.ShowDialog();
+                MessageBox.Show("При проверки результата первого задания возникла ошибка", "Системное сообщение");
             }
         }
 
@@ -154,7 +168,6 @@ namespace MathSets
         {
             MenuItem childMenuItem = (MenuItem)sender;
             MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
@@ -176,7 +189,6 @@ namespace MathSets
         {
             MenuItem childMenuItem = (MenuItem)sender;
             MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
@@ -194,94 +206,97 @@ namespace MathSets
             }
         }
 
-        List<int> indexCorrectResult = new List<int>(); // Индексы фигур для правильного результата
-        List<string> intersectionSets = new List<string>(); // Фигуры, которые представляют собой пересечение множеств
-
+        private List<int> _indexCorrectResult = new List<int>(); // Индексы фигур для правильного результата
+        private List<string> _intersectionSets = new List<string>(); // Фигуры, которые представляют собой пересечение множеств
 
         /// <summary>
         /// Генерация задания 2 типа (Нахождение пересечения двух множеств)
         /// </summary>
         private void NewTwoTask()
         {
-            CVMainPlaceQuestionSecond.Children.Clear();
-            CreateSetsQuestionSecond();
-            List<String> firstSets = new List<string>(); // Первое множество
-            List<String> secondSets = new List<string>(); // Второе множество
-            bool b = true;
-            while (b)
+            try
             {
-                firstSets = getSets(); // Первое множество
-                secondSets = getSets(); // Второе множество
-                foreach (string set in firstSets) // Проверка на то, что в двух множествах есть хотя бы одно пересечение
+                CVMainPlaceQuestionSecond.Children.Clear();
+                CreateSetsQuestionSecond();
+                List<string> firstSets = new List<string>(); // Первое множество
+                List<string> secondSets = new List<string>(); // Второе множество
+                bool b = true;
+                while (b)
                 {
-                    foreach (string set2 in secondSets)
+                    firstSets = GetSets(); // Первое множество
+                    secondSets = GetSets(); // Второе множество
+                    foreach (string set in firstSets) // Проверка на то, что в двух множествах есть хотя бы одно пересечение
                     {
-                        if (set.Equals(set2))
+                        foreach (string set2 in secondSets)
                         {
-                            b = false;
+                            if (set.Equals(set2))
+                            {
+                                b = false;
+                            }
                         }
                     }
                 }
-            }
-            SPPrimer.Children.Clear();
-            ShowPrimer(firstSets, 'M');
-            ShowPrimer(secondSets, 'K');
-
-            intersectionSets = GetIntersectionSets(firstSets, secondSets); // Пересечение множеств
-            List<string> combiningSets = GetCombiningSets(firstSets, secondSets); // Объединение множеств (для вывода всех фигур без повторений)
-            indexCorrectResult.Clear();
-            foreach (string set in intersectionSets)
-            {
-                indexCorrectResult.Add(combiningSets.IndexOf(set));
-            }
-
-            int s = 0;
-            int j = 1;
-            for (int i = 0; i < combiningSets.Count; i++)
-            {
-                Figure figure = new Figure(28, 0, 0);
-                Geometry geometry = null;
-                if(i == 9)
+                SPPrimer.Children.Clear();
+                ShowPrimer(firstSets, 'M');
+                ShowPrimer(secondSets, 'K');
+                _intersectionSets = GetIntersectionSets(firstSets, secondSets); // Пересечение множеств
+                List<string> combiningSets = GetCombiningSets(firstSets, secondSets); // Объединение множеств (для вывода всех фигур без повторений)
+                _indexCorrectResult.Clear();
+                foreach (string set in _intersectionSets)
                 {
-                    s = 0;
-                    j = 2;
+                    _indexCorrectResult.Add(combiningSets.IndexOf(set));
                 }
-                switch (combiningSets[i])
+                int column = 0; // Столбец
+                int row = 1;
+                for (int i = 0; i < combiningSets.Count; i++)
                 {
-                    case ("круг"):
-                        geometry = figure.CreateCircle(5 + 40 * s, 25 + (70 * j));
-                        break;
-                    case ("треугольник"):
-                        geometry = figure.CreateTriangle(5 + 40 * s, 25 +(70 * j));
-                        break;
-                    case ("квадрат"):
-                        geometry = figure.CreateSquare(5 + 40 * s, 25 + (70 * j));
-                        break;
-                    case ("ромб"):
-                        geometry = figure.CreateRhomb(5 + 40 * s, 25 + (70 * j));
-                        break;
-                    default:
-                        geometry = figure.GetGeometryFromText(combiningSets[i], 50, 5 + 40 * s, -30 + (70 * j));
-                        break;
+                    Figure Figure = new Figure(28, 0, 0);
+                    Geometry geometry = null;
+                    if (i == 9)
+                    {
+                        column = 0;
+                        row = 2;
+                    }
+                    switch (combiningSets[i])
+                    {
+                        case ("круг"):
+                            geometry = Figure.CreateCircle(5 + 40 * column, 25 + (70 * row));
+                            break;
+                        case ("треугольник"):
+                            geometry = Figure.CreateTriangle(5 + 40 * column, 25 + (70 * row));
+                            break;
+                        case ("квадрат"):
+                            geometry = Figure.CreateSquare(5 + 40 * column, 25 + (70 * row));
+                            break;
+                        case ("ромб"):
+                            geometry = Figure.CreateRhomb(5 + 40 * column, 25 + (70 * row));
+                            break;
+                        default:
+                            geometry = Figure.GetGeometryFromText(combiningSets[i], 50, 5 + 40 * column, -30 + (70 * row));
+                            break;
+                    }
+                    column++;
+                    Path path = new Path()
+                    {
+                        StrokeThickness = Base.StrokeThickness,
+                        Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
+                        Data = geometry,
+                        Fill = Brushes.White,
+                    };
+                    path.MouseDown += OnMouseDown;
+                    path.MouseMove += OnMouseMove;
+                    path.Uid = i.ToString();
+                    CVMainPlaceQuestionSecond.Children.Add(path);
                 }
-                s++;
-                Path path = new Path()
+                _pointsQuestionFirst.Clear();
+                for (int i = 0; i < combiningSets.Count; i++) // Заполнение точек смещения
                 {
-                    StrokeThickness = Base.StrokeThickness,
-                    Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18"),
-                    Data = geometry,
-                    Fill = Brushes.White,
-                };
-                path.MouseDown += OnMouseDown;
-                path.MouseMove += OnMouseMove;
-                path.Uid = i.ToString();
-                CVMainPlaceQuestionSecond.Children.Add(path);
+                    _pointsQuestionFirst.Add(new Point(0, 0));
+                }
             }
-
-            _pointsQuestionFirst.Clear();
-            for (int i = 0; i < combiningSets.Count; i++) // Заполнение точек смещения
+            catch
             {
-                _pointsQuestionFirst.Add(new Point(0, 0));
+                MessageBox.Show("При генерации задания 2 типа возникла ошибка", "Системное сообщение");
             }
         }
 
@@ -293,18 +308,26 @@ namespace MathSets
         /// <returns>Множество полученное в результате пересечения</returns>
         private List<string> GetIntersectionSets(List<string> firstSets, List<string> secondSets)
         {
-            List<string> intersectionSets = new List<string>();
-            foreach (string set in firstSets)
+            try
             {
-                foreach (string set2 in secondSets)
+                List<string> _intersectionSets = new List<string>();
+                foreach (string set in firstSets)
                 {
-                    if (set.Equals(set2))
+                    foreach (string set2 in secondSets)
                     {
-                        intersectionSets.Add(set2);
+                        if (set.Equals(set2))
+                        {
+                            _intersectionSets.Add(set2);
+                        }
                     }
                 }
+                return _intersectionSets;
             }
-            return intersectionSets;
+            catch
+            {
+                MessageBox.Show("При определение пересечения возникла ошибка", "Системное сообщение");
+                return null;
+            }
         }
 
         /// <summary>
@@ -315,119 +338,176 @@ namespace MathSets
         /// <returns>Множество полученное в результате объединения</returns>
         private List<string> GetCombiningSets(List<string> firstSets, List<string> secondSets)
         {
-            List<string> combiningSets = new List<string>();
-            foreach (string set in firstSets)
+            try
             {
-                combiningSets.Add(set);
+                List<string> combiningSets = new List<string>();
+                foreach (string set in firstSets)
+                {
+                    combiningSets.Add(set);
+                }
+                foreach (string set2 in secondSets)
+                {
+                    combiningSets.Add(set2);
+                }
+                combiningSets = combiningSets.Distinct().ToList();
+                return combiningSets;
             }
-            foreach(string set2 in secondSets)
+            catch
             {
-                combiningSets.Add(set2);
+                MessageBox.Show("При определение объединения возникла ошибка", "Системное сообщение");
+                return null;
             }
-            combiningSets = combiningSets.Distinct().ToList();
-            return combiningSets;
         }
 
+        /// <summary>
+        /// Вывод примера
+        /// </summary>
+        /// <param name="sets">Множество</param>
+        /// <param name="textSet">Название множества</param>
         private void ShowPrimer(List<string> sets, char textSet)
         {
-            StackPanel setsM = new StackPanel()
+            try
             {
-                Orientation = Orientation.Horizontal
-            };
-            SPPrimer.Children.Add(setsM);
-            Label textSetsMOne = new Label()
-            {
-                Content = textSet + " = {"
-            };
-            setsM.Children.Add(textSetsMOne);
-            for (int i = 0; i < sets.Count; i++)
-            {
-                ShowSets(sets, i, setsM, 35);
+                StackPanel setsM = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal
+                };
+                SPPrimer.Children.Add(setsM);
+                Label textSetsMOne = new Label()
+                {
+                    Content = textSet + " = {"
+                };
+                setsM.Children.Add(textSetsMOne);
+                for (int i = 0; i < sets.Count; i++)
+                {
+                    ShowSets(sets, i, setsM, 35);
+                }
+                Label textSetsMTwo = new Label()
+                {
+                    Content = "}"
+                };
+                setsM.Children.Add(textSetsMTwo);
             }
-            Label textSetsMTwo = new Label()
+            catch
             {
-                Content = "}"
-            };
-            setsM.Children.Add(textSetsMTwo);
+                MessageBox.Show("При выводе множества возникла ошибка", "Системное сообщение");
+            }
         }
 
+        /// <summary>
+        /// Добавление фигуры
+        /// </summary>
+        /// <param name="setsM">Место куда добавить фигуру</param>
+        /// <param name="geometry">Геометрия фигуры</param>
         private void ShowFigures(StackPanel setsM, Geometry geometry)
         {
-            Path pathFigure = new Path()
+            try
             {
-                StrokeThickness = Base.StrokeThickness,
-                Stroke = Brushes.Black,
-                Data = geometry,
-                Fill = Brushes.White,
-            };
-            setsM.Children.Add(pathFigure);
+                Path pathFigure = new Path()
+                {
+                    StrokeThickness = Base.StrokeThickness,
+                    Stroke = Brushes.Black,
+                    Data = geometry,
+                    Fill = Brushes.White,
+                };
+                setsM.Children.Add(pathFigure);
+            }
+            catch
+            {
+                MessageBox.Show("При добавление фигуры возникла ошибка", "Системное сообщение");
+            }
         }
 
+        /// <summary>
+        /// Добавления точки с запятой
+        /// </summary>
+        /// <param name="stackPanel">Место куда добавить</param>
         private void ShowComma(StackPanel stackPanel)
         {
-            Label label = new Label()
+            try
             {
-                Content = ";",
-            };
-            stackPanel.Children.Add(label);
+                Label label = new Label()
+                {
+                    Content = ";",
+                };
+                stackPanel.Children.Add(label);
+            }
+            catch
+            {
+                MessageBox.Show("При генерации множества возникла ошибка", "Системное сообщение");
+            }
         }
 
+        /// <summary>
+        /// Вывод фигуры
+        /// </summary>
+        /// <param name="sets">Множество</param>
+        /// <param name="i">Номер эллемента в множестве</param>
+        /// <param name="stackPanel">Место куда добавлять фигуру</param>
+        /// <param name="height">Размер буквы</param>
         private void ShowSets(List<String> sets, int i, StackPanel stackPanel, int height)
         {
-            Figure figure = new Figure(28, 0, 0);
-            Geometry geometry = null;
-            switch (sets[i])
+            try
             {
-                case ("круг"):
-                    geometry = figure.CreateCircle(10, height);
-                    ShowFigures(stackPanel, geometry);
-                    if (i != sets.Count - 1)
-                    {
-                        ShowComma(stackPanel);
-                    }
-                    break;
-                case ("треугольник"):
-                    geometry = figure.CreateTriangle(10, height);
-                    ShowFigures(stackPanel, geometry);
-                    if (i != sets.Count - 1)
-                    {
-                        ShowComma(stackPanel);
-                    }
-                    break;
-                case ("квадрат"):
-                    geometry = figure.CreateSquare(10, height);
-                    ShowFigures(stackPanel, geometry);
-                    if (i != sets.Count - 1)
-                    {
-                        ShowComma(stackPanel);
-                    }
-                    break;
-                case ("ромб"):
-                    geometry = figure.CreateRhomb(10, height);
-                    ShowFigures(stackPanel, geometry);
-                    if (i != sets.Count - 1)
-                    {
-                        ShowComma(stackPanel);
-                    }
-                    break;
-                default:
-                    if (i == sets.Count - 1)
-                    {
-                        geometry = figure.GetGeometryFromText(sets[i], 28, 10, 0);
+                Figure Figure = new Figure(28, 0, 0);
+                Geometry geometry = null;
+                switch (sets[i])
+                {
+                    case ("круг"):
+                        geometry = Figure.CreateCircle(10, height);
+                        ShowFigures(stackPanel, geometry);
+                        if (i != sets.Count - 1)
+                        {
+                            ShowComma(stackPanel);
+                        }
+                        break;
+                    case ("треугольник"):
+                        geometry = Figure.CreateTriangle(10, height);
+                        ShowFigures(stackPanel, geometry);
+                        if (i != sets.Count - 1)
+                        {
+                            ShowComma(stackPanel);
+                        }
+                        break;
+                    case ("квадрат"):
+                        geometry = Figure.CreateSquare(10, height);
+                        ShowFigures(stackPanel, geometry);
+                        if (i != sets.Count - 1)
+                        {
+                            ShowComma(stackPanel);
+                        }
+                        break;
+                    case ("ромб"):
+                        geometry = Figure.CreateRhomb(10, height);
+                        ShowFigures(stackPanel, geometry);
+                        if (i != sets.Count - 1)
+                        {
+                            ShowComma(stackPanel);
+                        }
+                        break;
+                    default:
+                        if (i == sets.Count - 1)
+                        {
+                            geometry = Figure.GetGeometryFromText(sets[i], 28, 10, 0);
 
-                    }
-                    else
-                    {
-                        geometry = figure.GetGeometryFromText(sets[i] + ";", 28, 10, 0);
-                    }
-                    Path path = new Path()
-                    {
-                        StrokeThickness = Base.StrokeThickness,
-                        Data = geometry,
-                        Fill = Brushes.Black,
-                    };
-                    stackPanel.Children.Add(path);
-                    break;
+                        }
+                        else
+                        {
+                            geometry = Figure.GetGeometryFromText(sets[i] + ";", 28, 10, 0);
+                        }
+                        Path path = new Path()
+                        {
+                            StrokeThickness = Base.StrokeThickness,
+                            Data = geometry,
+                            Fill = Brushes.Black,
+                        };
+                        stackPanel.Children.Add(path);
+                        break;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("При добавление фигуры возникла ошибка", "Системное сообщение");
             }
         }
 
@@ -436,28 +516,35 @@ namespace MathSets
         /// </summary>
         private void CreateSetsQuestionSecond()
         {
-            EllipseGeneration ellipseGeneration = new EllipseGeneration();
-            Ellipse ellipseOne = ellipseGeneration.getEllipse(250, 200, 400, 20); // Создание первого эллипса
-            ellipseOne.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
-            CVMainPlaceQuestionSecond.Children.Add(ellipseOne);
-            Ellipse ellipseTwo = ellipseGeneration.getEllipse(250, 200, 500, 20); // Создание второго эллипса
-            ellipseTwo.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
-            CVMainPlaceQuestionSecond.Children.Add(ellipseTwo);
-            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
-            combinedPath.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
-            CVMainPlaceQuestionSecond.Children.Add(combinedPath);
-            Label firstPlenty = new Label()
+            try
             {
-                Content = "M",
-                Margin = new Thickness(400, 10, 0, 0),
-            };
-            CVMainPlaceQuestionSecond.Children.Add(firstPlenty);
-            Label secondPlenty = new Label()
+                EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                Ellipse ellipseOne = EllipseGeneration.GetEllipse(250, 200, 400, 20); // Создание первого эллипса
+                ellipseOne.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+                CVMainPlaceQuestionSecond.Children.Add(ellipseOne);
+                Ellipse ellipseTwo = EllipseGeneration.GetEllipse(250, 200, 500, 20); // Создание второго эллипса
+                ellipseTwo.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+                CVMainPlaceQuestionSecond.Children.Add(ellipseTwo);
+                Path combinedPath = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание пересечения
+                combinedPath.Stroke = (Brush)new BrushConverter().ConvertFrom("#F14C18");
+                CVMainPlaceQuestionSecond.Children.Add(combinedPath);
+                Label firstPlenty = new Label()
+                {
+                    Content = "M",
+                    Margin = new Thickness(400, 10, 0, 0),
+                };
+                CVMainPlaceQuestionSecond.Children.Add(firstPlenty);
+                Label secondPlenty = new Label()
+                {
+                    Content = "K",
+                    Margin = new Thickness(730, 10, 0, 0),
+                };
+                CVMainPlaceQuestionSecond.Children.Add(secondPlenty);
+            }
+            catch
             {
-                Content = "K",
-                Margin = new Thickness(730, 10, 0, 0),
-            };
-            CVMainPlaceQuestionSecond.Children.Add(secondPlenty);
+                MessageBox.Show("При формирование множества для второго задания возникла ошибка", "Системное сообщение");
+            }
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -474,7 +561,6 @@ namespace MathSets
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             Path path = (Path)sender;
-
             if (path.Uid != string.Empty)
             {
                 path.Fill = Brushes.Gray;
@@ -497,90 +583,118 @@ namespace MathSets
             }
         }
 
+        /// <summary>
+        /// Устоновить новые координаты смещения фигуры
+        /// </summary>
+        /// <param name="id">Номер в списке координат фигур</param>
+        /// <param name="actualCoordinate">Актуальные координаты курсора</param>
         private void SetOffsetFigure(int id, Point actualCoordinate)
         {
-            Point tempPoint = _pointsQuestionFirst[id];
-
-            if (actualCoordinate.Y > _oldMouseCoordinate.Y)
+            try
             {
-                tempPoint.Y++;
-            }
-            else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
-            {
-                tempPoint.Y--;
-            }
+                Point tempPoint = _pointsQuestionFirst[id];
+                if (actualCoordinate.Y > _oldMouseCoordinate.Y)
+                {
+                    tempPoint.Y++;
+                }
+                else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
+                {
+                    tempPoint.Y--;
+                }
 
-            if (actualCoordinate.X > _oldMouseCoordinate.X)
-            {
-                tempPoint.X++;
+                if (actualCoordinate.X > _oldMouseCoordinate.X)
+                {
+                    tempPoint.X++;
+                }
+                else if (actualCoordinate.X < _oldMouseCoordinate.X)
+                {
+                    tempPoint.X--;
+                }
+                _pointsQuestionFirst[id] = tempPoint;
+                _oldMouseCoordinate = actualCoordinate;
             }
-            else if (actualCoordinate.X < _oldMouseCoordinate.X)
+            catch
             {
-                tempPoint.X--;
+                MessageBox.Show("При установке новых координат смещения фигуры возникла ошибка", "Системное сообщение");
             }
-
-            _pointsQuestionFirst[id] = tempPoint;
-
-            _oldMouseCoordinate = actualCoordinate;
         }
 
         
-        List<String> list = new List<string> { "a", "б", "в", "г", "д", "е", "ж", "з", "треугольник", "квадрат", "круг", "ромб"}; // Допустимые символы из которых могут состоять множества
+        private List<string> _list = new List<string> { "a", "б", "в", "г", "д", "е", "ж", "з", "треугольник", "квадрат", "круг", "ромб"}; // Допустимые символы из которых могут состоять множества
         /// <summary>
         /// Рандомно генерирует множество
         /// </summary>
         /// <returns></returns>
-        private List<String> getSets()
+        private List<String> GetSets()
         {
-            List<String> sets = new List<String>();
-            int count = random.Next(4,8);
-            List<String> listChoice = getCopy(list);
-            int index = 0;
-            for (int i = 0; i < count; i++)
+            try
             {
-                index = random.Next(listChoice.Count);
-                sets.Add(listChoice[index]);
-                listChoice.RemoveAt(index);
+                List<string> sets = new List<String>();
+                int count = Random.Next(4, 8);
+                List<string> listChoice = GetCopy(_list);
+                int index;
+                for (int i = 0; i < count; i++)
+                {
+                    index = Random.Next(listChoice.Count);
+                    sets.Add(listChoice[index]);
+                    listChoice.RemoveAt(index);
+                }
+                return sets;
             }
-            return sets;
+            catch
+            {
+                MessageBox.Show("При генерации множества возникла ошибка", "Системное сообщение");
+                return null;
+            }
         }
 
         private void BtnCheckQuestionSecond_Click(object sender, RoutedEventArgs e)
         {
-            int kolResult = 0; // Колличество верно отвеченных
-            bool result = true; // Результат (наличие ошибок)
-            Path placeIntersection = (Path)CVMainPlaceQuestionSecond.Children[2]; // Фигура пересечения
-            for (int i = 5; i < CVMainPlaceQuestionSecond.Children.Count; i++)
+            try
             {
-                Path path = (Path)CVMainPlaceQuestionSecond.Children[i];
-                if (placeIntersection.Data.FillContainsWithDetail(path.Data) == IntersectionDetail.FullyContains)
+                int kolResult = 0; // Колличество верно отвеченных
+                bool result = true; // Результат (наличие ошибок)
+                Path placeIntersection = (Path)CVMainPlaceQuestionSecond.Children[2]; // Фигура пересечения
+                for (int i = 5; i < CVMainPlaceQuestionSecond.Children.Count; i++)
                 {
-                    if(indexCorrectResult.IndexOf(Convert.ToInt32(path.Uid)) == -1)
+                    Path path = (Path)CVMainPlaceQuestionSecond.Children[i];
+                    if (placeIntersection.Data.FillContainsWithDetail(path.Data) == IntersectionDetail.FullyContains)
                     {
-                        result = false;
-                    }
-                    else
-                    {
-                        kolResult++;
+                        if (_indexCorrectResult.IndexOf(Convert.ToInt32(path.Uid)) == -1)
+                        {
+                            result = false;
+                        }
+                        else
+                        {
+                            kolResult++;
+                        }
                     }
                 }
+                if (result && kolResult == _indexCorrectResult.Count)
+                {
+                    CorrectResult correctResult = new CorrectResult();
+                    correctResult.ShowDialog();
+                }
+                else
+                {
+                    ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(_intersectionSets);
+                    resultIntersectionSetsWindow.ShowDialog();
+                }
             }
-            if(result && kolResult == indexCorrectResult.Count)
+            catch
             {
-                CorrectResult correctResult = new CorrectResult();
-                correctResult.ShowDialog();
+                MessageBox.Show("При проверки результата во втором задание возникла ошибка", "Системное сообщение");
             }
-            else
-            {
-                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(intersectionSets);
-                resultIntersectionSetsWindow.ShowDialog();
-            }
-
         }
 
-        private List<String> getCopy(List<String> list)
+        /// <summary>
+        /// Копирование списка
+        /// </summary>
+        /// <param name="list">Список для копирования</param>
+        /// <returns>Скопированный список</returns>
+        private List<string> GetCopy(List<string> list)
         {
-            List<String> newList = new List<string>();
+            List<string> newList = new List<string>();
             foreach (string str in list)
             {
                 newList.Add(str);
@@ -593,80 +707,94 @@ namespace MathSets
         /// </summary>
         private void NewThreeTask()
         {
-            WPMainPlaceQuestionThree.Children.Clear();
-            for (int i = 0; i < 4; i++)
+            try
             {
-                Canvas canvas = new Canvas()
+                WPMainPlaceQuestionThree.Children.Clear();
+                for (int i = 0; i < 4; i++)
                 {
-                    Width = 350,
-                    Height = 250,
-                };
-                WPMainPlaceQuestionThree.Children.Add(canvas);
-                EllipseGeneration ellipseGeneration = new EllipseGeneration();
-                Label label = new Label()
-                {
-                    Content = (Char)(65 + i) + ")",
-                };
-                canvas.Children.Add(label);
-                Ellipse ellipseOne = ellipseGeneration.getEllipse(random.Next(100, 200), random.Next(100, 125), random.Next(20, 40), random.Next(10, 20)); // Создание первого эллипса
-                ellipseOne.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(ellipseOne);
-                Ellipse ellipseTwo = ellipseGeneration.getEllipse(random.Next(100, 200), random.Next(100, 125), random.Next(80, 100), random.Next(0, 10)); // Создание второго эллипса
-                ellipseTwo.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(ellipseTwo);
-                Ellipse ellipseThree = ellipseGeneration.getEllipse(random.Next(100, 200), random.Next(100, 125), random.Next(40, 60), random.Next(40, 50)); // Создание третьего эллипса
-                ellipseThree.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(ellipseThree);
-                Path combinedPathOne = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание первого пересечения
-                combinedPathOne.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(combinedPathOne);
-                Path combinedPathTwo = ellipseGeneration.getUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect); // Создание второго пересечения
-                combinedPathTwo.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(combinedPathTwo);
-                Path combinedPathThree = ellipseGeneration.getUnification(ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание третьего пересечения
-                combinedPathThree.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(combinedPathThree);
-                Path combinedPathFour = ellipseGeneration.getUnificationThree(ellipseOne, ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание общего пересечения
-                combinedPathFour.MouseDown += Ellipse_MouseDown;
-                canvas.Children.Add(combinedPathFour);
+                    Canvas canvas = new Canvas()
+                    {
+                        Width = 350,
+                        Height = 250,
+                    };
+                    WPMainPlaceQuestionThree.Children.Add(canvas);
+                    EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                    Label label = new Label()
+                    {
+                        Content = (Char)(65 + i) + ")",
+                    };
+                    canvas.Children.Add(label);
+                    Ellipse ellipseOne = EllipseGeneration.GetEllipse(Random.Next(100, 200), Random.Next(100, 125), Random.Next(20, 40), Random.Next(10, 20)); // Создание первого эллипса
+                    ellipseOne.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(ellipseOne);
+                    Ellipse ellipseTwo = EllipseGeneration.GetEllipse(Random.Next(100, 200), Random.Next(100, 125), Random.Next(80, 100), Random.Next(0, 10)); // Создание второго эллипса
+                    ellipseTwo.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(ellipseTwo);
+                    Ellipse ellipseThree = EllipseGeneration.GetEllipse(Random.Next(100, 200), Random.Next(100, 125), Random.Next(40, 60), Random.Next(40, 50)); // Создание третьего эллипса
+                    ellipseThree.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(ellipseThree);
+                    Path combinedPathOne = EllipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect); // Создание первого пересечения
+                    combinedPathOne.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(combinedPathOne);
+                    Path combinedPathTwo = EllipseGeneration.GetUnification(ellipseOne, ellipseThree, GeometryCombineMode.Intersect); // Создание второго пересечения
+                    combinedPathTwo.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(combinedPathTwo);
+                    Path combinedPathThree = EllipseGeneration.GetUnification(ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание третьего пересечения
+                    combinedPathThree.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(combinedPathThree);
+                    Path combinedPathFour = EllipseGeneration.GetUnificationThree(ellipseOne, ellipseTwo, ellipseThree, GeometryCombineMode.Intersect); // Создание общего пересечения
+                    combinedPathFour.MouseDown += Ellipse_MouseDown;
+                    canvas.Children.Add(combinedPathFour);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("При генерации 3 задания возникла ошибка", "Системное сообщение");
             }
         }
 
         private void BtnCheckQuestionThree_Click(object sender, RoutedEventArgs e)
         {
-            EllipseGeneration ellipseGeneration = new EllipseGeneration();
-            List<int[]> errors = new List<int[]>(); // Массив ошибок
-            for (int i = 0; i < WPMainPlaceQuestionThree.Children.Count; i++) // Проверка каждого пункта
+            try
             {
-                Canvas canvas = (Canvas)WPMainPlaceQuestionThree.Children[i];
-                Ellipse ellipseOne = (Ellipse)canvas.Children[1];
-                Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
-                Ellipse ellipseThree= (Ellipse)canvas.Children[3];
-                Path pathOne = (Path)canvas.Children[4];
-                Path pathTwo = (Path)canvas.Children[5];
-                Path pathThree = (Path)canvas.Children[6];
-                Path pathFour = (Path)canvas.Children[7];
-                if (pathFour.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
+                EllipseGeneration EllipseGeneration = new EllipseGeneration();
+                List<int[]> errors = new List<int[]>(); // Массив ошибок
+                for (int i = 0; i < WPMainPlaceQuestionThree.Children.Count; i++) // Проверка каждого пункта
                 {
-                    if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White) // Если выделено лишнее
+                    Canvas canvas = (Canvas)WPMainPlaceQuestionThree.Children[i];
+                    Ellipse ellipseOne = (Ellipse)canvas.Children[1];
+                    Ellipse ellipseTwo = (Ellipse)canvas.Children[2];
+                    Ellipse ellipseThree = (Ellipse)canvas.Children[3];
+                    Path pathOne = (Path)canvas.Children[4];
+                    Path pathTwo = (Path)canvas.Children[5];
+                    Path pathThree = (Path)canvas.Children[6];
+                    Path pathFour = (Path)canvas.Children[7];
+                    if (pathFour.ActualWidth == 0) // Если объединение не существует, пересечение равно пустому множеству
                     {
-                        errors.Add(ellipseGeneration.getDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
+                        if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White) // Если выделено лишнее
+                        {
+                            errors.Add(EllipseGeneration.GetDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
+                        }
+                    }
+                    else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White || pathFour.Fill != Brushes.Yellow) // Если выделено не только пересечение
+                    {
+                        errors.Add(EllipseGeneration.GetDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
                     }
                 }
-                else if (ellipseOne.Fill != Brushes.White || ellipseTwo.Fill != Brushes.White || ellipseThree.Fill != Brushes.White || pathOne.Fill != Brushes.White || pathTwo.Fill != Brushes.White || pathThree.Fill != Brushes.White || pathFour.Fill != Brushes.Yellow) // Если выделено не только пересечение
+                if (errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
                 {
-                    errors.Add(ellipseGeneration.getDateEllipseThree(i, ellipseOne, ellipseTwo, ellipseThree));
+                    ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(3, errors);
+                    resultIntersectionSetsWindow.ShowDialog();
+                }
+                else
+                {
+                    CorrectResult correctResult = new CorrectResult();
+                    correctResult.ShowDialog();
                 }
             }
-            if (errors.Count > 0) // Если есть ошибки, то открывается окно с правильным решением
+            catch
             {
-                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(3, errors);
-                resultIntersectionSetsWindow.ShowDialog();
-            }
-            else
-            {
-                CorrectResult correctResult = new CorrectResult();
-                correctResult.ShowDialog();
+                MessageBox.Show("При проверки результата в 3 задание возникла ошибка", "Системное сообщение");
             }
         }
 
@@ -675,115 +803,128 @@ namespace MathSets
         /// </summary>
         private void NewFourTask()
         {
-            Random random = new Random();
-            correctResultFourTask.Clear();
-            SPMainPlaceQuestionFour.Children.Clear();
-            Grid grid = new Grid();
-            ColumnDefinition oneColumn = new ColumnDefinition();
-            ColumnDefinition twoColumn = new ColumnDefinition();
-            grid.ColumnDefinitions.Add(oneColumn);
-            grid.ColumnDefinitions.Add(twoColumn);
-            SPMainPlaceQuestionFour.Children.Add(grid);
-            List<char> listChar = new List<char> { 'A', 'B', 'C', 'D', 'M', 'K', 'T'};
-            List<char> chars = new List<char>();
-            for(int i = 0; i < 3; i++)
+            try
             {
-                int j = random.Next(listChar.Count);
-                chars.Add(listChar[j]);
-                listChar.Remove(listChar[j]);    
-            }
-            List<string> movingProperty = new List<string>() { chars[1] + " ∩ " + chars[0], chars[1] + " ∩ " + chars[1], chars[0] + " ∩ " + chars[0], chars[0] + " ∩ " + chars[1]};
-            correctResultFourTask.Add(chars[0] + " ∩ " + chars[1] + " = " + movingProperty[0]);
-            StackPanel primerFirst = new StackPanel()
-            {
-                Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Center,
-            };
-            Label labelFirst = new Label()
-            {
-                Content = chars[0] + " ∩ " + chars[1] + " = "
-            };
-            primerFirst.Children.Add(labelFirst);
-            ComboBox comboBoxFirst = new ComboBox()
-            {
-                Width = 100
-            };
-            for(int i = 0; i < 4; i++)
-            {
-                int j = random.Next(movingProperty.Count);
-                ComboBoxItem comboBoxItem = new ComboBoxItem();
-                comboBoxItem.Content = movingProperty[j];
-                comboBoxFirst.Items.Add(comboBoxItem);
-                movingProperty.Remove(movingProperty[j]);
-            }
-            primerFirst.Children.Add(comboBoxFirst);
-            grid.Children.Add(primerFirst);
-            Grid.SetColumn(primerFirst, 0);
+                _correctResultFourTask.Clear();
+                SPMainPlaceQuestionFour.Children.Clear();
+                Grid grid = new Grid();
+                ColumnDefinition oneColumn = new ColumnDefinition();
+                ColumnDefinition twoColumn = new ColumnDefinition();
+                grid.ColumnDefinitions.Add(oneColumn);
+                grid.ColumnDefinitions.Add(twoColumn);
+                SPMainPlaceQuestionFour.Children.Add(grid);
+                List<char> listChar = new List<char> { 'A', 'B', 'C', 'D', 'M', 'K', 'T' };
+                List<char> chars = new List<char>();
+                for (int i = 0; i < 3; i++)
+                {
+                    int row = Random.Next(listChar.Count);
+                    chars.Add(listChar[row]);
+                    listChar.Remove(listChar[row]);
+                }
+                List<string> movingProperty = new List<string>() { chars[1] + " ∩ " + chars[0], chars[1] + " ∩ " + chars[1], chars[0] + " ∩ " + chars[0], chars[0] + " ∩ " + chars[1] };
+                _correctResultFourTask.Add(chars[0] + " ∩ " + chars[1] + " = " + movingProperty[0]);
+                StackPanel primerFirst = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                };
+                Label labelFirst = new Label()
+                {
+                    Content = chars[0] + " ∩ " + chars[1] + " = "
+                };
+                primerFirst.Children.Add(labelFirst);
+                ComboBox comboBoxFirst = new ComboBox()
+                {
+                    Width = 100
+                };
+                for (int i = 0; i < 4; i++)
+                {
+                    int row = Random.Next(movingProperty.Count);
+                    ComboBoxItem comboBoxItem = new ComboBoxItem();
+                    comboBoxItem.Content = movingProperty[row];
+                    comboBoxFirst.Items.Add(comboBoxItem);
+                    movingProperty.Remove(movingProperty[row]);
+                }
+                primerFirst.Children.Add(comboBoxFirst);
+                grid.Children.Add(primerFirst);
+                Grid.SetColumn(primerFirst, 0);
 
-            List<string> combinationProperty = new List<string>() { chars[0] + " ∩ (" + chars[1] + " ∩ " + chars[2] + ")", "(" + chars[2] + " ∩ " + chars[1] + " ∩ " + chars[0] + ")", chars[0] + " ∩ (2 * " + chars[1] + ")", chars[0] + " ∩ " + chars[1] + " ∩ " + chars[2] };
-            correctResultFourTask.Add("(" + chars[0] + " ∩ " + chars[1] + ") ∩ " + chars[2] + " = " + combinationProperty[0]);
-            StackPanel primerSecond = new StackPanel()
-            {
-                Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Center,
-            };
-            Label labelSecond = new Label()
-            {
-                Content = "(" + chars[0] + " ∩ " + chars[1] + ") ∩ " + chars[2] + " = "
-            };
-            primerSecond.Children.Add(labelSecond);
-            ComboBox comboBoxSecond = new ComboBox()
-            {
-                Width = 160
-            };
-            for (int i = 0; i < 4; i++)
-            {
-                int j = random.Next(combinationProperty.Count);
-                ComboBoxItem comboBoxItem = new ComboBoxItem();
-                comboBoxItem.Content = combinationProperty[j];
-                comboBoxSecond.Items.Add(comboBoxItem);
-                combinationProperty.Remove(combinationProperty[j]);
+                List<string> combinationProperty = new List<string>() { chars[0] + " ∩ (" + chars[1] + " ∩ " + chars[2] + ")", "(" + chars[2] + " ∩ " + chars[1] + " ∩ " + chars[0] + ")", chars[0] + " ∩ (2 * " + chars[1] + ")", chars[0] + " ∩ " + chars[1] + " ∩ " + chars[2] };
+                _correctResultFourTask.Add("(" + chars[0] + " ∩ " + chars[1] + ") ∩ " + chars[2] + " = " + combinationProperty[0]);
+                StackPanel primerSecond = new StackPanel()
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                };
+                Label labelSecond = new Label()
+                {
+                    Content = "(" + chars[0] + " ∩ " + chars[1] + ") ∩ " + chars[2] + " = "
+                };
+                primerSecond.Children.Add(labelSecond);
+                ComboBox comboBoxSecond = new ComboBox()
+                {
+                    Width = 160
+                };
+                for (int i = 0; i < 4; i++)
+                {
+                    int row = Random.Next(combinationProperty.Count);
+                    ComboBoxItem comboBoxItem = new ComboBoxItem();
+                    comboBoxItem.Content = combinationProperty[row];
+                    comboBoxSecond.Items.Add(comboBoxItem);
+                    combinationProperty.Remove(combinationProperty[row]);
+                }
+                primerSecond.Children.Add(comboBoxSecond);
+                grid.Children.Add(primerSecond);
+                Grid.SetColumn(primerSecond, 1);
             }
-            primerSecond.Children.Add(comboBoxSecond);
-            grid.Children.Add(primerSecond);
-            Grid.SetColumn(primerSecond, 1);
+            catch
+            {
+                MessageBox.Show("При генерации 4 задания возникла ошибка", "Системное сообщение");
+            }
         }
 
         private void BtnCheckQuestionFour_Click(object sender, RoutedEventArgs e)
         {
-            List<int> errors = new List<int>();
-            Grid grid = (Grid)SPMainPlaceQuestionFour.Children[0];
-            for(int i = 0; i < grid.Children.Count; i++)
+            try
             {
-                StackPanel stackPanel = (StackPanel)grid.Children[i];
-                string text = "";
-                for (int j = 0; j < stackPanel.Children.Count; j++)
+                List<int> errors = new List<int>();
+                Grid grid = (Grid)SPMainPlaceQuestionFour.Children[0];
+                for (int i = 0; i < grid.Children.Count; i++)
                 {
-                    if (typeof(Label) == stackPanel.Children[j].GetType())
+                    StackPanel stackPanel = (StackPanel)grid.Children[i];
+                    string text = "";
+                    for (int row = 0; row < stackPanel.Children.Count; row++)
                     {
-                        Label label = (Label)stackPanel.Children[j];
-                        text += label.Content;
+                        if (typeof(Label) == stackPanel.Children[row].GetType())
+                        {
+                            Label label = (Label)stackPanel.Children[row];
+                            text += label.Content;
+                        }
+                        else if (typeof(ComboBox) == stackPanel.Children[row].GetType())
+                        {
+                            ComboBox comboBox = (ComboBox)stackPanel.Children[row];
+                            text += comboBox.SelectionBoxItem;
+                        }
                     }
-                    else if (typeof(ComboBox) == stackPanel.Children[j].GetType())
+                    if (_correctResultFourTask[i] != text)
                     {
-                        ComboBox comboBox = (ComboBox)stackPanel.Children[j];
-                        text += comboBox.SelectionBoxItem;
+                        errors.Add(i);
                     }
                 }
-                if (correctResultFourTask[i] != text)
+                if (errors.Count == 0)
                 {
-                    errors.Add(i);
+                    CorrectResult correctResult = new CorrectResult();
+                    correctResult.ShowDialog();
+                }
+                else
+                {
+                    ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(errors, _correctResultFourTask);
+                    resultIntersectionSetsWindow.ShowDialog();
                 }
             }
-            if(errors.Count == 0)
+            catch
             {
-                CorrectResult correctResult = new CorrectResult();
-                correctResult.ShowDialog();
-            }
-            else
-            {
-                ResultIntersectionSetsWindow resultIntersectionSetsWindow = new ResultIntersectionSetsWindow(errors, correctResultFourTask);
-                resultIntersectionSetsWindow.ShowDialog();
+                MessageBox.Show("При проверки результата в 4 задание возникла ошибка", "Системное сообщение");
             }
         }
     }

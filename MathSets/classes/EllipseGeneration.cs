@@ -19,7 +19,7 @@ namespace MathSets
         /// <param name="x">отступ слева</param>
         /// <param name="y">отступ справа</param>
         /// <returns></returns>
-        public Ellipse getEllipse(int widht, int height, int x, int y)
+        public Ellipse GetEllipse(int widht, int height, int x, int y)
         {
             Ellipse ellipse = new Ellipse();
             ellipse.Width = widht;
@@ -38,7 +38,7 @@ namespace MathSets
         /// <param name="ellipseTwo">Второй эллипс</param>
         /// <param name="geometryCombineMode">Метод комбинирования</param>
         /// <returns>Комбинированная фигура</returns>
-        public Path getUnification(Ellipse ellipseOne, Ellipse ellipseTwo, GeometryCombineMode geometryCombineMode)
+        public Path GetUnification(Ellipse ellipseOne, Ellipse ellipseTwo, GeometryCombineMode geometryCombineMode)
         {
             EllipseGeometry pathGeometryOne = new EllipseGeometry() // Создание EllipseGeometry, который равен первому эллипсу (он нужен для нахождения объединения)
             {
@@ -68,7 +68,7 @@ namespace MathSets
         /// <param name="geometry">Фигура</param>
         /// <param name="geometryCombineMode">Метод комбинирования</param>
         /// <returns>Комбинированная фигура</returns>
-        public Path getUnificationEllipseAndPath(Ellipse ellipseOne, Geometry geometry, GeometryCombineMode geometryCombineMode)
+        public Path GetUnificationEllipseAndPath(Ellipse ellipseOne, Geometry geometry, GeometryCombineMode geometryCombineMode)
         {
             EllipseGeometry pathGeometryOne = new EllipseGeometry() // Создание EllipseGeometry, который равен первому эллипсу (он нужен для нахождения объединения)
             {
@@ -93,7 +93,7 @@ namespace MathSets
         /// <param name="ellipseThree">Тритий эллипс</param>
         /// <param name="geometryCombineMode">Метод комбинирования</param>
         /// <returns>Комбинированная фигура</returns>
-        public Path getUnificationThree(Ellipse ellipseOne, Ellipse ellipseTwo, Ellipse ellipseThree, GeometryCombineMode geometryCombineMode)
+        public Path GetUnificationThree(Ellipse ellipseOne, Ellipse ellipseTwo, Ellipse ellipseThree, GeometryCombineMode geometryCombineMode)
         {
             EllipseGeometry pathGeometryOne = new EllipseGeometry() // Создание EllipseGeometry, который равен первому эллипсу (он нужен для нахождения объединения)
             {
@@ -133,7 +133,7 @@ namespace MathSets
         /// <param name="ellipseOne">Первый эллипс</param>
         /// <param name="ellipseTwo">Второй эллипс</param>
         /// <returns></returns>
-        public int[] getDateEllipse(int i, Ellipse ellipseOne, Ellipse ellipseTwo)
+        public int[] GetDateEllipse(int i, Ellipse ellipseOne, Ellipse ellipseTwo)
         {
             int[] massive = new int[9]; // Информация для вывода верного ответа
             massive[0] = i;
@@ -156,7 +156,7 @@ namespace MathSets
         /// <param name="ellipseTwo">Второй эллипс</param>
         /// <param name="ellipseThree">Третий эллипс</param>
         /// <returns></returns>
-        public int[] getDateEllipseThree(int i, Ellipse ellipseOne, Ellipse ellipseTwo, Ellipse ellipseThree)
+        public int[] GetDateEllipseThree(int i, Ellipse ellipseOne, Ellipse ellipseTwo, Ellipse ellipseThree)
         {
             int[] massive = new int[13]; // Информация для вывода верного ответа
             massive[0] = i;

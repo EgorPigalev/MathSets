@@ -19,10 +19,8 @@ namespace MathSets.windows
         public GuideWindow(int themeNumber, int taskNumber)
         {
             InitializeComponent();
-
             _status = false;
             string pathCurrentDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\video\\"; // Путь до папки, где хранятся видео.
-
             switch (themeNumber)
             {
                 case 1:

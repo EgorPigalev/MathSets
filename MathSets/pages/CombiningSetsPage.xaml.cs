@@ -84,13 +84,13 @@ namespace MathSets.pages
         /// </summary>
         public void GenerationCondition()
         {
-            ellipseOneEx1 = ellipseGeneration.getEllipse(300, 150, 0, 10);
+            ellipseOneEx1 = ellipseGeneration.GetEllipse(300, 150, 0, 10);
             ellipseOneEx1.MouseDown += Ellipse_MouseDown;
             Cnv.Children.Add(ellipseOneEx1);
-            ellipseTwoEx1 = ellipseGeneration.getEllipse(300, 150, 150, 10);
+            ellipseTwoEx1 = ellipseGeneration.GetEllipse(300, 150, 150, 10);
             ellipseTwoEx1.MouseDown += Ellipse_MouseDown;
             Cnv.Children.Add(ellipseTwoEx1);
-            combinedPathEx1 = ellipseGeneration.getUnification(ellipseOneEx1, ellipseTwoEx1, GeometryCombineMode.Intersect);
+            combinedPathEx1 = ellipseGeneration.GetUnification(ellipseOneEx1, ellipseTwoEx1, GeometryCombineMode.Intersect);
             combinedPathEx1.MouseDown += Ellipse_MouseDown;
             Cnv.Children.Add(combinedPathEx1);
             ellipseOneEx1.StrokeThickness = Base.StrokeThickness;
@@ -141,13 +141,13 @@ namespace MathSets.pages
 
             TbCondition2.Text = "2) Даны множества А {" + strElementsA + "} и В {" + strElementsB + "}. Изобрази элементы данных множеств на диаграмме (перетащи цифры)";
 
-            ellipseOneEx2 = ellipseGeneration.getEllipse(300, 150, 430, 10);        
-            ellipseTwoEx2 = ellipseGeneration.getEllipse(300, 150, 580, 10);
-            Path combinedPathEx2 = ellipseGeneration.getUnification(ellipseOneEx2, ellipseTwoEx2, GeometryCombineMode.Intersect);
-            Ellipse ellipseOneD = ellipseGeneration.getEllipse(300, 150, 430, 10);
-            Ellipse ellipseTwoD = ellipseGeneration.getEllipse(300, 150, 580, 10);
-            Path combEllipseOneEx2 = ellipseGeneration.getUnification(ellipseOneEx2, ellipseOneD, GeometryCombineMode.Intersect);
-            Path combEllipseTwoEx2 = ellipseGeneration.getUnification(ellipseTwoEx2, ellipseTwoD, GeometryCombineMode.Intersect);
+            ellipseOneEx2 = ellipseGeneration.GetEllipse(300, 150, 430, 10);        
+            ellipseTwoEx2 = ellipseGeneration.GetEllipse(300, 150, 580, 10);
+            Path combinedPathEx2 = ellipseGeneration.GetUnification(ellipseOneEx2, ellipseTwoEx2, GeometryCombineMode.Intersect);
+            Ellipse ellipseOneD = ellipseGeneration.GetEllipse(300, 150, 430, 10);
+            Ellipse ellipseTwoD = ellipseGeneration.GetEllipse(300, 150, 580, 10);
+            Path combEllipseOneEx2 = ellipseGeneration.GetUnification(ellipseOneEx2, ellipseOneD, GeometryCombineMode.Intersect);
+            Path combEllipseTwoEx2 = ellipseGeneration.GetUnification(ellipseTwoEx2, ellipseTwoD, GeometryCombineMode.Intersect);
             combEllipseOneEx2.StrokeThickness = Base.StrokeThickness;
             combEllipseTwoEx2.StrokeThickness = Base.StrokeThickness;          
             Canvas2.Children.Add(combEllipseOneEx2);
@@ -325,9 +325,9 @@ namespace MathSets.pages
             Cb2.IsChecked = false;
             Cb3.IsChecked = false;
             Cb4.IsChecked = false;
-            Ellipse ellipseOne = ellipseGeneration.getEllipse(300, 150, 0, 10);
-            Ellipse ellipseTwo = ellipseGeneration.getEllipse(300, 150, 150, 10);
-            Path combinedPath = ellipseGeneration.getUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
+            Ellipse ellipseOne = ellipseGeneration.GetEllipse(300, 150, 0, 10);
+            Ellipse ellipseTwo = ellipseGeneration.GetEllipse(300, 150, 150, 10);
+            Path combinedPath = ellipseGeneration.GetUnification(ellipseOne, ellipseTwo, GeometryCombineMode.Intersect);
             ellipseOne.StrokeThickness = Base.StrokeThickness;
             ellipseTwo.StrokeThickness = Base.StrokeThickness;
             Canvas3.Children.Add(ellipseOne);

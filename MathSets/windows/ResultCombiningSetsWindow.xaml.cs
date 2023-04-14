@@ -52,7 +52,7 @@ namespace MathSets.windows
             };
             newCanvas.Children.Add(ellipseTwoNew);
 
-            Path pathNew = ellipseGeneration.getUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
+            Path pathNew = ellipseGeneration.GetUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
             newCanvas.Children.Add(pathNew);
 
             TextBlock tbA = new TextBlock()
@@ -132,7 +132,7 @@ namespace MathSets.windows
             };
             newCanvas.Children.Add(ellipseTwoNew);
 
-            Path pathNew = ellipseGeneration.getUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
+            Path pathNew = ellipseGeneration.GetUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
             newCanvas.Children.Add(pathNew);
 
             AddElementsIncanvas(masOnlyA, 30, newCanvas);
