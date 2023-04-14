@@ -39,13 +39,21 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                                <StackPanel Grid.Column="0">
                                     <TextBlock Name="TbCondition"/>
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
-                                    <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
-                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                                    <MenuItem Uid="1" Header="..." Style="{StaticResource MenuItemWithDropdown}">
+                                        <MenuItem Header="Подсказка" Click="MenuHint_Click" Style="{StaticResource SubMenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/resources/HintMenu.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click" Style="{StaticResource SubMenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/resources/UpdateMenu.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
                                     </MenuItem>
                                 </Menu>
                             </Grid>
@@ -69,13 +77,21 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                                <StackPanel Grid.Column="0">
                                     <TextBlock TextWrapping="Wrap" Name="TbCondition2"/>
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                    <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
-                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                                    <MenuItem Uid="2" Header="..." Style="{StaticResource MenuItemWithDropdown}">
+                                        <MenuItem Header="Подсказка" Click="MenuHint_Click" Style="{StaticResource SubMenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/resources/HintMenu.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click" Style="{StaticResource SubMenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/resources/UpdateMenu.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
                                     </MenuItem>
                                 </Menu>
                             </Grid>
@@ -95,13 +111,21 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                                <StackPanel Grid.Column="0">
                                     <TextBlock TextWrapping="Wrap" Text="3) Вам дана диаграмма. Выребире верные равенства."/>
                                 </StackPanel>
                                 <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                    <MenuItem Uid="3" Header="..." Style="{StaticResource MenuStyle}">
-                                        <MenuItem Header="Подсказка" Click="MenuHint_Click"/>
-                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                                    <MenuItem Uid="3" Header="..." Style="{StaticResource MenuItemWithDropdown}">
+                                        <MenuItem Header="Подсказка" Click="MenuHint_Click" Style="{StaticResource SubMenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/resources/HintMenu.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Обновить" Click="MenuRefresh_Click" Style="{StaticResource SubMenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/resources/UpdateMenu.png"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
                                     </MenuItem>
                                 </Menu>
                             </Grid>

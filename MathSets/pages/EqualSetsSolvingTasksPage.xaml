@@ -50,10 +50,18 @@
                             </StackPanel>
 
                             <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
-                                <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
-                                    <MenuItem Header="Подсказка" Click="MenuGuide_Click"/>
-                                    <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
-                                   
+                                <MenuItem Uid="1" Header="..." Style="{StaticResource MenuItemWithDropdown}">
+                                    <MenuItem Header="Подсказка" Click="MenuGuide_Click" Style="{StaticResource SubMenuItem}">
+                                        <MenuItem.Icon>
+                                            <Image Source="/resources/HintMenu.png"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Обновить" Click="MenuRefresh_Click" Style="{StaticResource SubMenuItem}">
+                                        <MenuItem.Icon>
+                                            <Image Source="/resources/UpdateMenu.png"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+
                                 </MenuItem>
                             </Menu>
 
@@ -126,9 +134,17 @@
 
 
                             <Menu  Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                <MenuItem Margin="0 5 0 0" Style="{StaticResource MenuStyle}" Uid="2" Header="..." >
-                                    <MenuItem Header="Подсказка" Click="MenuGuide_Click"/>
-                                    <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                                <MenuItem Margin="0 0 0 0" Style="{StaticResource MenuItemWithDropdown}" Uid="2" Header="..." >
+                                    <MenuItem Header="Подсказка" Click="MenuGuide_Click" Style="{StaticResource SubMenuItem}">
+                                        <MenuItem.Icon>
+                                            <Image Source="/resources/HintMenu.png"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Обновить" Click="MenuRefresh_Click" Style="{StaticResource SubMenuItem}">
+                                        <MenuItem.Icon>
+                                            <Image Source="/resources/UpdateMenu.png"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
                                 </MenuItem>
                             </Menu>
                             <Button Style="{StaticResource ButtonMainStyle}" Click="OptionOne_Click"  Margin="50,10,50,0" Name="OptionOne" Grid.Column="0" Grid.Row="1"></Button>

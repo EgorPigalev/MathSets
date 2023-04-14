@@ -42,9 +42,17 @@
                             <Button Name="BtnCheckQuestionFirst" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionFirst_Click"/>
                         </StackPanel>
                         <Menu Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center">
-                            <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}" Cursor="Hand">
-                                <MenuItem Header="Подсказка" Click="MenuGuide_Click"/>
-                                <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                            <MenuItem Uid="1" Header="..." Style="{StaticResource MenuItemWithDropdown}" Cursor="Hand">
+                                <MenuItem Header="Подсказка" Click="MenuGuide_Click" Style="{StaticResource SubMenuItem}">
+                                    <MenuItem.Icon>
+                                        <Image Source="/resources/HintMenu.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Обновить" Click="MenuRefresh_Click" Style="{StaticResource SubMenuItem}">
+                                    <MenuItem.Icon>
+                                        <Image Source="/resources/UpdateMenu.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </MenuItem>
                         </Menu>
                         <StackPanel Name="SpQuestionSecond" Background="White" Grid.Row="1" Margin="0 20 0 0">
@@ -74,9 +82,17 @@
                             <Button Name="BtnCheckQuestionSecond" Content="Проверить" Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Center" Click="BtnCheckQuestionSecond_Click"/>
                         </StackPanel>
                         <Menu Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 20 0 0">
-                            <MenuItem Uid="2" Header="..." Style="{StaticResource MenuStyle}" Cursor="Hand">
-                                <MenuItem Header="Подсказка" Click="MenuGuide_Click"/>
-                                <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
+                            <MenuItem Uid="2" Header="..." Style="{StaticResource MenuItemWithDropdown}" Cursor="Hand">
+                                <MenuItem Header="Подсказка" Click="MenuGuide_Click" Style="{StaticResource SubMenuItem}">
+                                    <MenuItem.Icon>
+                                        <Image Source="/resources/HintMenu.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Обновить" Click="MenuRefresh_Click" Style="{StaticResource SubMenuItem}">
+                                    <MenuItem.Icon>
+                                        <Image Source="/resources/UpdateMenu.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </MenuItem>
                         </Menu>
                     </Grid>
