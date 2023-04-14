@@ -13,17 +13,117 @@ namespace MathSets.windows
     /// </summary>
     public partial class ResultLessonSix : Window
     {
-        public ResultLessonSix(string gridString, List<Geometry> figures)
+        public ResultLessonSix(Grid grid, List<Geometry> figures)
         {
             InitializeComponent();
 
-            StringReader stringReader = new StringReader(gridString);
+            StringReader stringReader = new StringReader(XamlWriter.Save(grid));
             XmlReader xmlReader = XmlReader.Create(stringReader);
-            Grid grid = (Grid)XamlReader.Load(xmlReader);
+            Grid newGrid = (Grid)XamlReader.Load(xmlReader);
 
-            UploadGridTaskFirst(grid, figures);
+            UploadGridTaskFirst(newGrid, figures);
 
-            SpResult.Children.Add(grid);
+            SpResult.Children.Add(newGrid);
+        }
+
+        public ResultLessonSix(Canvas canvas, List<int> indexesAnswersSetA, List<int> indexesAnswersSetB, int sizeFigures)
+        {
+            InitializeComponent();
+
+            MessageBox.Show("Не готово пока");
+
+            StringReader stringReader = new StringReader(XamlWriter.Save(canvas));
+            XmlReader xmlReader = XmlReader.Create(stringReader);
+            Canvas newCanvas = (Canvas)XamlReader.Load(xmlReader);
+
+            for (int i = 4; i < newCanvas.Children.Count; i++) // i = 4, так как фигуры начинаются с 4 позиции.
+            {
+                newCanvas.Children.RemoveAt(4);
+            }
+
+            DeleteDuplicateIndexesFigures(ref indexesAnswersSetA, indexesAnswersSetB);
+
+            List<Geometry> figuresSetA = GetAnswersFigures(((System.Windows.Shapes.Path)canvas.Children[2]).Data, sizeFigures, indexesAnswersSetA);
+            List<Geometry> figuresSetB = GetAnswersFigures(((System.Windows.Shapes.Path)canvas.Children[3]).Data, sizeFigures, indexesAnswersSetB);
+
+            Figure.ShowFigures(figuresSetA, newCanvas);
+            Figure.ShowFigures(figuresSetB, newCanvas);
+
+            SpResult.Children.Add(newCanvas);
+        }
+
+        /// <summary>
+        /// Удаляет повторяющиеся индексы фигур со списком indexesAnswersSetB из списка индексов indexesAnswersSetA
+        /// </summary>
+        /// <param name="indexesAnswersSetA">индексы фигур-ответов для первого множества</param>
+        /// <param name="indexesAnswersSetB">индексы фигур-ответов для второго множества</param>
+        private void DeleteDuplicateIndexesFigures(ref List<int> indexesAnswersSetA, List<int> indexesAnswersSetB)
+        {
+            bool isCollectionWithoutDuplicates = true;
+
+            foreach (int item in indexesAnswersSetA)
+            {
+                if (indexesAnswersSetB.Contains(item))
+                {
+                    isCollectionWithoutDuplicates = false;
+                    break;
+                }
+            }
+
+            if (isCollectionWithoutDuplicates)
+            {
+                return;
+            }
+
+            List<int> indexes = new List<int>();
+
+            foreach (int item in indexesAnswersSetB)
+            {
+                if (indexesAnswersSetA.Contains(item))
+                {
+                    indexes.Add(item);
+                }
+            }
+
+            foreach (int item in indexes)
+            {
+                indexesAnswersSetA.Remove(item);
+            }
+        }
+
+        /// <summary>
+        /// Создаёт фигуры-ответы
+        /// </summary>
+        /// <param name="canvas">контейнер</param>
+        /// <param name="size">размер фигур</param>
+        /// <param name="indexesAndwers">индексы фигур-ответов</param>
+        /// <returns>Список фигур-ответов</returns>
+        private List<Geometry> GetAnswersFigures(Geometry set, int size, List<int> indexesAndwers)
+        {
+            EllipseGeometry ellipse = (EllipseGeometry)set;
+
+            Figure figure = new Figure(size, ellipse.RadiusY * 2, ellipse.RadiusX * 2);
+            List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
+
+            List<Geometry> figures = new List<Geometry>();
+            int xStart = Base.StrokeThickness + (int)(ellipse.Center.X - ellipse.RadiusX + size / 2);
+
+            for (int i = 0; i < indexesAndwers.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, true));
+                }
+                else
+                {
+                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, false));
+                    xStart += size * 2;
+                }
+
+                figures[i].Transform = new TranslateTransform(0, ellipse.Center.Y - ellipse.RadiusY); // Для смещения фигуры вниз (так как начальный Y не задаётся).
+            }
+
+            return figures;
         }
 
         /// <summary>

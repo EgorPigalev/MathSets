@@ -963,13 +963,13 @@ namespace MathSets.pages
             switch (Convert.ToInt32(menuItem.Uid))
             {
                 case 1:
-                    new windows.GuideWindow(7, 1).ShowDialog();
+                    new windows.GuideWindow(6, 1).ShowDialog();
                     break;
                 case 2:
-                    new windows.GuideWindow(7, 2).ShowDialog();
+                    new windows.GuideWindow(6, 2).ShowDialog();
                     break;
                 case 3:
-                    new windows.GuideWindow(7, 3).ShowDialog();
+                    new windows.GuideWindow(6, 3).ShowDialog();
                     break;
                 default:
                     break;

@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace MathSets.pages
 {
@@ -15,14 +16,27 @@ namespace MathSets.pages
     public partial class LessonSix : Page
     {
         private Random _random = new Random();
-        private List<Button> _buttons;
-        private List<Geometry> _figures;
+
+        // Поля для первого задания.
+        private List<Button> _buttonsTaskFirst;
+        private List<Geometry> _figuresTaskFirst;
+
+        // Поля для второго задания.
+        private int _sizeFiguresTaskSecond = 50; // Размер фигур.
+        private List<int> _indexesAnswersSetA = new List<int>(); // Индексы верных ответов (верных фигур) для множества A.
+        private List<int> _indexesAnswersSetB = new List<int>(); // Индексы верных ответов (верных фигур) для множества B.
+        private List<Geometry> _figuresTaskSecond; // Фигуры.
+        private List<Geometry> _setsTaskSecond; // Множества.
+        private Path _pathToMoved; // Фигура для перемещения.
+        private Point _oldMouseCoordinate; // Предыдущие координаты курсора (для перемещения фигуры).
+        private List<Point> _pointsToMovedTaskFirst = new List<Point>(); // Точки для перемещения фигур.
 
         public LessonSix()
         {
             InitializeComponent();
 
             ShowTaskFirst();
+            ShowTaskSecond();
         }
 
         private void ShowTaskFirst()
@@ -33,12 +47,311 @@ namespace MathSets.pages
 
             int countGridDefinitions = 2;
             int minSize = 50;
-            _figures = CreateFiguresTaskFirst(countGridDefinitions, minSize);
-            Figure.ShowFigures(_figures, GridTaskFirst);
+            _figuresTaskFirst = CreateFiguresTaskFirst(countGridDefinitions, minSize);
+            Figure.ShowFigures(_figuresTaskFirst, GridTaskFirst);
 
             SetGridDefinitionsTaskFirst(countGridDefinitions);
         }
 
+        private void ShowTaskSecond()
+        {
+            CnvTaskSecond.Children.Clear();
+            SpFiguresTaskSecondSetA.Children.Clear();
+            SpFiguresTaskSecondSetB.Children.Clear();
+
+            int countRigthAnswersSetA = _random.Next(3, 6); // Количество элементов в изначально заданном множестве A, которое нужно отобразить (множестве по заданию).
+            int countRigthAnswersSetB = _random.Next(1, 3); // Количество элементов в изначально заданном множестве B, которое нужно отобразить (множестве по заданию).
+
+            _setsTaskSecond = CreateSetsTaskSecond(new Point(CnvTaskSecond.Width / 2, CnvTaskSecond.Height), CnvTaskSecond);
+
+
+            InitializeSetsTaskSecond(out List<Geometry> figuresAnswersSetA, out List<Geometry> figuresAnswersSetB, countRigthAnswersSetA, countRigthAnswersSetB);
+
+            Figure.ShowFigures(_setsTaskSecond, CnvTaskSecond);
+            Figure.ShowFigures(figuresAnswersSetA, SpFiguresTaskSecondSetA);
+            Figure.ShowFigures(figuresAnswersSetB, SpFiguresTaskSecondSetB);
+            _figuresTaskSecond = CreateFiguresTaskSecond();
+            Figure.ShowFigures(_figuresTaskSecond, CnvTaskSecond);
+
+            SetHandlersTaskSecond();
+        }
+
+        /// <summary>
+        /// Устанавливает события для panel, необходимые для перемещения фигур, для первого задания
+        /// </summary>
+        /// <param name="panel">Контейнер</param>
+        private void SetHandlersTaskSecond()
+        {
+            SpTaskSecond.MouseUp += OnMouseUp;
+
+            foreach (Path item in CnvTaskSecond.Children)
+            {
+                if (_figuresTaskSecond.Contains(item.Data))
+                {
+                    item.MouseMove += OnMouseMoveTaskFirst;
+                    item.MouseDown += OnMouseDown;
+                }
+            }
+        }
+
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_pathToMoved != null)
+            {
+                _pathToMoved.Fill = Brushes.White;
+                _pathToMoved.ReleaseMouseCapture();
+                _pathToMoved = null;
+            }
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Path path = (Path)sender;
+
+            if (path.Uid != string.Empty)
+            {
+                path.Fill = Base.ColorDraggableElement;
+                _pathToMoved = path;
+                _oldMouseCoordinate = e.GetPosition(CnvTaskSecond);
+                _pathToMoved.CaptureMouse();
+            }
+        }
+
+        private void OnMouseMoveTaskFirst(object sender, MouseEventArgs e)
+        {
+            if (_pathToMoved != null)
+            {
+                int id = Convert.ToInt32(_pathToMoved.Uid);
+
+                _pointsToMovedTaskFirst[id] = GetOffsetFigure(_pointsToMovedTaskFirst[id], e.GetPosition(CnvTaskSecond));
+
+                _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedTaskFirst[id].X, _pointsToMovedTaskFirst[id].Y);
+            }
+        }
+
+        /// <summary>
+        /// Вычисляет новые координаты для перемещения фигуры
+        /// </summary>
+        /// <param name="point"> точка для изменения</param>
+        /// <param name="actualCoordinate">актуальные координаты курсора</param>
+        /// <returns></returns>
+        private Point GetOffsetFigure(Point point, Point actualCoordinate)
+        {
+            if (actualCoordinate.Y > _oldMouseCoordinate.Y)
+            {
+                point.Y++;
+            }
+            else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
+            {
+                point.Y--;
+            }
+
+            if (actualCoordinate.X > _oldMouseCoordinate.X)
+            {
+                point.X++;
+            }
+            else if (actualCoordinate.X < _oldMouseCoordinate.X)
+            {
+                point.X--;
+            }
+
+            _oldMouseCoordinate = actualCoordinate;
+
+            return point;
+        }
+
+        /// <summary>
+        /// Инициализирует множества-условия для второго задания.
+        /// </summary>
+        /// <param name="setFirst">первое множество</param>
+        /// <param name="setSecond">второе множество</param>
+        /// <param name="countFirst">количество элементов первого множества</param>
+        /// <param name="countSecond">количество элементов второго множества</param>
+        private void InitializeSetsTaskSecond(out List<Geometry> setFirst, out List<Geometry> setSecond, int countFirst, int countSecond)
+        {
+            while (true)
+            {
+                bool isInvalidSets = false; // Проверка наличия всех элементов setSecond в setFirst.
+
+                setFirst = CreateAnswersTaskSecond(countFirst, _indexesAnswersSetA, SpFiguresTaskSecondSetA);
+                setSecond = CreateAnswersTaskSecond(countSecond, _indexesAnswersSetB, SpFiguresTaskSecondSetB);
+
+                foreach (int item in _indexesAnswersSetB)
+                {
+                    if (!_indexesAnswersSetA.Contains(item))
+                    {
+                        isInvalidSets = true;
+                    }
+                }
+
+                if (!isInvalidSets)
+                {
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Генерирует фигуры-ответы для второго задания
+        /// </summary>
+        /// <returns>Список фигур</returns>
+        private List<Geometry> CreateAnswersTaskSecond(int count, List<int> answers, Panel panel)
+        {
+            int sizeFigures = (int)TbTaskFirst.FontSize;
+            Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, panel.Width);
+            List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
+            List<int> tempIndexesFigures = Figure.ShuffleMethods(createFiguresMethods);
+
+            answers.Clear();
+            for (int i = 0; i < count; i++)
+            {
+                answers.Add(tempIndexesFigures[i]);
+            }
+
+            List<Geometry> listFigures = new List<Geometry>();
+            int x = 10;
+
+            for (int i = 0; i < count; i++)
+            {
+                listFigures.Add(createFiguresMethods[i](x, true));
+            }
+
+            panel.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
+
+            return listFigures;
+        }
+
+        /// <summary>
+        /// Генерирует фигуры для второго задания
+        /// </summary>
+        /// <returns>Коллекция фигур</returns>
+        private List<Geometry> CreateFiguresTaskSecond()
+        {
+            Figure figure = new Figure(_sizeFiguresTaskSecond, CnvTaskSecond.Height, CnvTaskSecond.Width / 2);
+            List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
+            List<int> indexesFigures = Figure.ShuffleMethods(createFiguresMethods);
+
+            List<Geometry> figures = new List<Geometry>();
+            int offset = figure.GetOffset(createFiguresMethods.Count);
+            int xStart = Base.StrokeThickness;
+
+            for (int i = 0; i < createFiguresMethods.Count; i++)
+            {
+                if (i == createFiguresMethods.Count - 1) // Размещаем последнюю фигуру в нижней части контейнера.
+                {
+                    figures.Add(createFiguresMethods[i](xStart, false));
+                    break;
+                }
+
+                if (i % 2 == 0)
+                {
+                    figures.Add(createFiguresMethods[i](xStart, true)); // Положение фигуры по вертикали сверху.
+                }
+                else
+                {
+                    figures.Add(createFiguresMethods[i](xStart, false)); // Положение фигуры по вертикали снизу.
+                    xStart += offset;
+                }
+            }
+
+            _pointsToMovedTaskFirst.Clear();
+            for (int i = 0; i < figures.Count; i++)
+            {
+                _pointsToMovedTaskFirst.Add(new Point(0, 0));
+            }
+
+            LessonFourAndFive.SortForDefaultPosition(figures, indexesFigures);
+
+            return figures;
+        }
+
+        /// <summary>
+        /// Создаёт множество с подмножеством
+        /// </summary>
+        /// <param name="maxSize">максимальные размеры главного множества</param>
+        /// <param name="panel">контейнер</param>
+        /// <returns>Список множеств</returns>
+        private List<Geometry> CreateSetsTaskSecond(Point maxSize, Panel panel)
+        {
+            Point maxSizeSecondEllipse = new Point(CnvTaskSecond.Width / 2 * 0.7, CnvTaskSecond.Height * 0.7);
+            Point sizeContainer = new Point(maxSize.X + 1, maxSize.Y + 1);
+            List<Geometry> sets = new List<Geometry>();
+            List<Geometry> namesOfSets = new List<Geometry>();
+
+            while (true)
+            {
+                sets.Add(CreateEllipse(sizeContainer, maxSize, (int)CnvTaskSecond.Height - 1));
+
+                sets.Add(CreateEllipse(sizeContainer, maxSizeSecondEllipse, Convert.ToInt32(_sizeFiguresTaskSecond * 2.5)));
+
+
+                if (sets[0].FillContainsWithDetail(sets[1]) == IntersectionDetail.FullyContains)
+                {
+                    for (int i = 0; i < sets.Count; i++)
+                    {
+                        EllipseGeometry g = (EllipseGeometry)sets[i];
+
+                        Point center = g.Center;
+                        center.X += panel.Width / 2; // Смещение множества в правую часть контейнера.
+                        g.Center = center;
+                    }
+
+                    if (!CheckIntersectionsNamesOfSets(sets, panel))
+                    {
+                        break;
+                    }
+                }
+
+                sets.Clear();
+            }
+
+            return sets;
+        }
+
+        /// <summary>
+        /// Создаёт названия множеств и проверяет их пересечения
+        /// </summary>
+        /// <param name="sets">список множеств</param>
+        /// <param name="panel">контейнер</param>
+        /// <returns>true, если пересечения найдены, в противном случае - false</returns>
+        private bool CheckIntersectionsNamesOfSets(List<Geometry> sets, Panel panel)
+        {
+            List<Geometry> list = new List<Geometry>();
+
+            for (int i = 0; i < sets.Count; i++)
+            {
+                EllipseGeometry g = (EllipseGeometry)sets[i];
+
+                list.Add(new Figure(60, 0, 0).GetGeometryFromText(((char)(65 + i)).ToString(), Convert.ToInt32(g.Center.X - g.RadiusX - 40), Convert.ToInt32(g.Center.Y - g.RadiusY)));
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    if (list[i].FillContainsWithDetail(list[j]) != IntersectionDetail.Empty)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            Figure.ShowFigures(list, panel, Brushes.White, Brushes.Black);
+
+            foreach (Path item in panel.Children)
+            {
+                Panel.SetZIndex(item, 100);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Создаёт фигуры для первого задания
+        /// </summary>
+        /// <param name="countDefinitions">количество строк и столбцов</param>
+        /// <param name="minSize">минимальный размер фигур</param>
+        /// <returns>Список фигур</returns>
         private List<Geometry> CreateFiguresTaskFirst(int countDefinitions, int minSize)
         {
             List<Geometry> figures = new List<Geometry>();
@@ -74,8 +387,8 @@ namespace MathSets.pages
         /// <returns>Эллипс</returns>
         private Geometry CreateEllipse(Point sizeContainer, Point maxSize, int minSize)
         {
-            int centerX = _random.Next(minSize, (int)sizeContainer.X - minSize);
-            int centerY = _random.Next(minSize, (int)sizeContainer.Y - minSize);
+            int centerX = _random.Next(minSize / 2, (int)sizeContainer.X - minSize / 2);
+            int centerY = _random.Next(minSize / 2, (int)sizeContainer.Y - minSize / 2);
 
             while (true)
             {
@@ -215,7 +528,7 @@ namespace MathSets.pages
         /// <returns>Список StakPanel</returns>
         private List<StackPanel> CreateStackPanelsWithButtonsTaskFirst(int count)
         {
-            _buttons = new List<Button>();
+            _buttonsTaskFirst = new List<Button>();
             List<StackPanel> list = new List<StackPanel>();
 
             for (int i = 0; i < count; i++)
@@ -244,8 +557,8 @@ namespace MathSets.pages
 
                 btnIsThere.Click += ButtonClickTaskFirst;
                 btnNot.Click += ButtonClickTaskFirst;
-                _buttons.Add(btnIsThere);
-                _buttons.Add(btnNot);
+                _buttonsTaskFirst.Add(btnIsThere);
+                _buttonsTaskFirst.Add(btnNot);
 
                 sp.Children.Add(btnIsThere);
                 sp.Children.Add(btnNot);
@@ -260,7 +573,7 @@ namespace MathSets.pages
             Button btn = (Button)sender;
             int id = Convert.ToInt32(btn.Uid);
 
-            foreach (Button item in _buttons.Where(x => Convert.ToInt32(x.Uid) == id))
+            foreach (Button item in _buttonsTaskFirst.Where(x => Convert.ToInt32(x.Uid) == id))
             {
                 item.Background = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
                 item.Foreground = Brushes.Black;
@@ -272,26 +585,26 @@ namespace MathSets.pages
 
         private void BtnCheckTaskFirst_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < _figures.Count; i += 2)
+            for (int i = 0; i < _figuresTaskFirst.Count; i += 2)
             {
-                if (_buttons[i].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"] &&
-                    _buttons[i + 1].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"])
+                if (_buttonsTaskFirst[i].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"] &&
+                    _buttonsTaskFirst[i + 1].Background == (SolidColorBrush)Application.Current.Resources["PrimaryColor"])
                 {
-                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    new ResultLessonSix(GridTaskFirst, _figuresTaskFirst).ShowDialog();
                     return;
                 }
 
-                if (_figures[i].FillContainsWithDetail(_figures[i + 1]) != IntersectionDetail.FullyContains &&
-                    _buttons[i].Background == (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
+                if (_figuresTaskFirst[i].FillContainsWithDetail(_figuresTaskFirst[i + 1]) != IntersectionDetail.FullyContains &&
+                    _buttonsTaskFirst[i].Background == (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
                 {
-                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    new ResultLessonSix(GridTaskFirst, _figuresTaskFirst).ShowDialog();
                     return;
                 }
 
-                if (_figures[i].FillContainsWithDetail(_figures[i + 1]) == IntersectionDetail.FullyContains &&
-                    _buttons[i].Background != (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
+                if (_figuresTaskFirst[i].FillContainsWithDetail(_figuresTaskFirst[i + 1]) == IntersectionDetail.FullyContains &&
+                    _buttonsTaskFirst[i].Background != (SolidColorBrush)Application.Current.Resources["SecondaryColor"])
                 {
-                    new ResultLessonSix(XamlWriter.Save(GridTaskFirst), _figures).ShowDialog();
+                    new ResultLessonSix(GridTaskFirst, _figuresTaskFirst).ShowDialog();
                     return;
                 }
             }
@@ -299,20 +612,17 @@ namespace MathSets.pages
             new CorrectResult().ShowDialog();
         }
 
-        private void MenuSaved_Click(object sender, RoutedEventArgs e)
+        private void BtnCheckTaskSecond_Click(object sender, RoutedEventArgs e)
         {
-            MenuItem childMenuItem = (MenuItem)sender;
-            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-
-
-        }
-
-        private void MenuOpenSaved_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem childMenuItem = (MenuItem)sender;
-            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-
-
+            if (Figure.CheckOccurrencesFiguresInSet(_indexesAnswersSetA, _figuresTaskSecond, _setsTaskSecond[0]) &&
+                Figure.CheckOccurrencesFiguresInSet(_indexesAnswersSetB, _figuresTaskSecond, _setsTaskSecond[1]))
+            {
+                new CorrectResult().ShowDialog();
+            }
+            else
+            {
+                new ResultLessonSix(CnvTaskSecond, _indexesAnswersSetA, _indexesAnswersSetB, _sizeFiguresTaskSecond).ShowDialog();
+            }
         }
 
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
@@ -326,19 +636,24 @@ namespace MathSets.pages
                     ShowTaskFirst();
                     break;
                 case 2:
-                    //ShowExerciseSecond();
-                    break;
-                case 3:
-                    //ShowExerciseThree();
+                    ShowTaskSecond();
                     break;
                 default:
                     break;
             }
         }
 
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            new GuideWindow(4, Convert.ToInt32(menuItem.Uid)).ShowDialog();
+        }
+
         private void BtnHint_Click(object sender, RoutedEventArgs e)
         {
-
+            new HintLessonSix().ShowDialog();
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
