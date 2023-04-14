@@ -14,7 +14,14 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Style="{StaticResource BorderHeader}">
-            <Label Content="Разбиение множеств на части по свойствам" Style="{StaticResource LabelHeaderText}" Grid.Row="0"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Разбиение множеств на части по свойствам" Style="{StaticResource LabelHeaderText}"/>
+                <Button Grid.Column="1" Name="BtnHint" Content="?" Style="{StaticResource ButtonMainStyle}" Margin="0 2 20 2" Click="BtnHint_Click"/>
+            </Grid>
         </Border>
         <Grid Grid.Row="1" >
             <Border Style="{StaticResource BorderMain}">
