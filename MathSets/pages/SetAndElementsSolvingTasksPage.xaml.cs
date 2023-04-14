@@ -188,30 +188,51 @@ namespace MathSets.pages
             if (BtnOption3.Background == colorButton)
             {
                 strAnswer = Convert.ToString(BtnOption3.Content);
+                if (strAnswer == rightOptions[rightOptionsIndex]) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = rightOptions[rightOptionsIndex]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else if (BtnOption2.Background == colorButton)
             {
                 strAnswer = Convert.ToString(BtnOption2.Content);
+                if (strAnswer == rightOptions[rightOptionsIndex]) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = rightOptions[rightOptionsIndex]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else if (BtnOption1.Background == colorButton)
             {
                 strAnswer = Convert.ToString(BtnOption1.Content);
+                if (strAnswer == rightOptions[rightOptionsIndex]) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = rightOptions[rightOptionsIndex]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else
             {
                 MessageBox.Show($"Выбери ответ");
-            }
-
-            if (strAnswer == rightOptions[rightOptionsIndex]) // если пользователь выбрал правильный ответ
-            {
-                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
-                correctResult.ShowDialog();
-            }
-            else // если пользователь выбрал неверный ответ
-            {
-                strAnswer = rightOptions[rightOptionsIndex]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
-                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer); 
-                resultSetAndElementsTasks.ShowDialog();
             }
         }
 
@@ -264,40 +285,81 @@ namespace MathSets.pages
             if (OptionOne.Background == colorButton)
             {
                 strAnswer = Convert.ToString(OptionOne.Content);
+                if (strAnswer == answerOptions[0] && verificationLabel == 0) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else if (strAnswer == answerOptions[1] && verificationLabel == 1) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else if (strAnswer == answerOptions[2] && verificationLabel == 2) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = answerOptions[verificationLabel]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else if (OptionTwo.Background == colorButton)
             {
                 strAnswer = Convert.ToString(OptionTwo.Content);
+                if (strAnswer == answerOptions[0] && verificationLabel == 0) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else if (strAnswer == answerOptions[1] && verificationLabel == 1) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else if (strAnswer == answerOptions[2] && verificationLabel == 2) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = answerOptions[verificationLabel]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else if (OptionThree.Background == colorButton)
             {
                 strAnswer = Convert.ToString(OptionThree.Content);
+                if (strAnswer == answerOptions[0] && verificationLabel == 0) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else if (strAnswer == answerOptions[1] && verificationLabel == 1) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else if (strAnswer == answerOptions[2] && verificationLabel == 2) // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = answerOptions[verificationLabel]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else
             {
                 MessageBox.Show($"Выбери ответ");
-            }
-
-            if (strAnswer == answerOptions[0] && verificationLabel == 0) // если пользователь выбрал правильный ответ
-            {
-                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
-                correctResult.ShowDialog();
-            }
-            else if (strAnswer == answerOptions[1] && verificationLabel == 1) // если пользователь выбрал правильный ответ
-            {
-                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
-                correctResult.ShowDialog();
-            }
-            else if (strAnswer == answerOptions[2] && verificationLabel == 2) // если пользователь выбрал правильный ответ
-            {
-                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
-                correctResult.ShowDialog();
-            }
-            else // если пользователь выбрал неверный ответ
-            {
-                strAnswer = answerOptions[verificationLabel]; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
-                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
-                resultSetAndElementsTasks.ShowDialog();
             }
         }
 
@@ -331,6 +393,14 @@ namespace MathSets.pages
                 default:
                     break;
             }
+        }
+
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            new windows.GuideWindow(1, Convert.ToInt32(menuItem.Uid)).ShowDialog();
         }
     }
 }

@@ -522,30 +522,51 @@ namespace MathSets.pages
             if (OptionOne.Background == colorButton)
             {
                 strAnswer = Convert.ToString(OptionOne.Content);
+                if (strAnswer == "{  }") // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = "{  }"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else if (OptionTwo.Background == colorButton)
             {
                 strAnswer = Convert.ToString(OptionTwo.Content);
+                if (strAnswer == "{  }") // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = "{  }"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else if (OptionThree.Background == colorButton)
             {
                 strAnswer = Convert.ToString(OptionThree.Content);
+                if (strAnswer == "{  }") // если пользователь выбрал правильный ответ
+                {
+                    windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
+                    correctResult.ShowDialog();
+                }
+                else // если пользователь выбрал неверный ответ
+                {
+                    strAnswer = "{  }"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                    windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
+                    resultSetAndElementsTasks.ShowDialog();
+                }
             }
             else
             {
                 MessageBox.Show($"Выбери ответ");
-            }
-
-            if (strAnswer == "{  }") // если пользователь выбрал правильный ответ
-            {
-                windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
-                correctResult.ShowDialog();
-            }
-            else // если пользователь выбрал неверный ответ
-            {
-                strAnswer = "{  }"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
-                windows.ResultSetAndElementsTasksWindow resultSetAndElementsTasks = new windows.ResultSetAndElementsTasksWindow(strAnswer);
-                resultSetAndElementsTasks.ShowDialog();
             }
         }
 
@@ -568,6 +589,13 @@ namespace MathSets.pages
             OptionThree.Background = colorButton; // красим кнопку
             OptionOne.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             OptionTwo.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
+        }
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            new windows.GuideWindow(2, Convert.ToInt32(menuItem.Uid)).ShowDialog();
         }
     }
 }

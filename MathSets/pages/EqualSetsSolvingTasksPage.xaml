@@ -51,7 +51,7 @@
 
                             <Menu Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 5 0 0">
                                 <MenuItem Uid="1" Header="..." Style="{StaticResource MenuStyle}">
-                                    <MenuItem Header="Гайд" Click="MenuRefresh_Click"/>
+                                    <MenuItem Header="Подсказка" Click="MenuGuide_Click"/>
                                     <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                    
                                 </MenuItem>
@@ -96,7 +96,7 @@
 
                             <Menu  Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center">
                                 <MenuItem Margin="0 5 0 0" Style="{StaticResource MenuStyle}" Uid="2" Header="..." >
-                                    <MenuItem Header="Гайд" Click="MenuRefresh_Click"/>
+                                    <MenuItem Header="Подсказка" Click="MenuGuide_Click"/>
                                     <MenuItem Header="Обновить" Click="MenuRefresh_Click"/>
                                 </MenuItem>
                             </Menu>
