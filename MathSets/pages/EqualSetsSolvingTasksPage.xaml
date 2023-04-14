@@ -45,7 +45,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="0"  Grid.ColumnSpan="2" >
-                            <TextBlock  TextWrapping="Wrap" Margin="0,0,0,0">Верно ли записаны равенства и неравенства?
+                            <TextBlock  TextWrapping="Wrap" Margin="0,0,0,0">Выберите нужный знак
                             </TextBlock>
                             </StackPanel>
 
@@ -57,22 +57,53 @@
                                 </MenuItem>
                             </Menu>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="1"  Grid.ColumnSpan="2" Margin="0,10,0,0">
-                                <TextBlock Name="TextBlockLeftVar"></TextBlock>
-                                <ComboBox Margin="10,0,10,0"  Name="ComboBoxTextSign">
-                                    <ComboBoxItem Name="EqualSign">=</ComboBoxItem>
-                                    <ComboBoxItem>≠</ComboBoxItem>
-                                </ComboBox>
-                                <TextBlock Name="TextBlockRightVar"></TextBlock>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Grid.Row="2"  Grid.ColumnSpan="2" Margin="0,10,0,0">
-                                <TextBlock Name="TextBlockLeftVar2"></TextBlock>
+
+                                <Grid Grid.Row="1"  Grid.ColumnSpan="2" Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                
+                                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                    <TextBlock Name="TextBlockLeftVar"></TextBlock>
+                                    <ComboBox Margin="10,0,10,0"  Name="ComboBoxTextSign">
+                                        <ComboBoxItem Name="EqualSign">=</ComboBoxItem>
+                                        <ComboBoxItem>≠</ComboBoxItem>
+                                    </ComboBox>
+                                    <TextBlock Name="TextBlockRightVar"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                    <TextBlock Name="TextBlockLeftVar3"></TextBlock>
+                                    <ComboBox Margin="10,0,10,0"  Name="ComboBoxTextSign3">
+                                        <ComboBoxItem Name="EqualSign3">=</ComboBoxItem>
+                                        <ComboBoxItem>≠</ComboBoxItem>
+                                    </ComboBox>
+                                    <TextBlock Name="TextBlockRightVar3"></TextBlock>
+                                </StackPanel>
+                                </Grid>
+
+                            <Grid Grid.Row="2"  Grid.ColumnSpan="2" Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                    <TextBlock Name="TextBlockLeftVar2"></TextBlock>
                                 <ComboBox Margin="10,0,10,0" Name="ComboBoxTextSign2">
                                     <ComboBoxItem >=</ComboBoxItem>
                                     <ComboBoxItem>≠</ComboBoxItem>
                                 </ComboBox>
                                 <TextBlock Name="TextBlockRightVar2"></TextBlock>
-                            </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                    <TextBlock Name="TextBlockLeftVar4"></TextBlock>
+                                    <ComboBox Margin="10,0,10,0"  Name="ComboBoxTextSign4">
+                                        <ComboBoxItem Name="EqualSign4">=</ComboBoxItem>
+                                        <ComboBoxItem>≠</ComboBoxItem>
+                                    </ComboBox>
+                                    <TextBlock Name="TextBlockRightVar4"></TextBlock>
+                                </StackPanel>
+                            </Grid>
 
                             <StackPanel Grid.Row="4" Grid.ColumnSpan="2">
                                 <Button  Style="{StaticResource ButtonMainStyle}" Click="BtnCheck_Click" Name="BtnCheck" Margin="0,30,0,10">Проверить</Button>

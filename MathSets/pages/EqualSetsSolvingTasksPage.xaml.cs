@@ -18,8 +18,7 @@ namespace MathSets.pages
         string strButton = ""; // значение для первой кнопки-ответ
         string strButtonTwo = ""; // значение для второй кнопки-ответ
         string strButtonThree = ""; // значение для третьей кнопки-ответ
-        Canvas c;
-        Canvas c2;
+
 
         public EqualSetsSolvingTasksPage()
         {
@@ -29,8 +28,289 @@ namespace MathSets.pages
             ShowRandomButton();
             ShowRandomZnachenia();
             ShowRandomZnachenia2();
+            ShowRandomZnachenia3();
+            ShowRandomZnachenia4();
         }
 
+        /// <summary>
+        /// метод для вывода варианта ответа
+        /// </summary>
+        private void ShowRandomZnachenia3()
+        {
+            int r = random.Next(2);
+            if (r == 0)
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar3.Text += "{";
+                        TextBlockRightVar3.Text += "{";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar3.Text += numbers[index] + "";
+                            TextBlockRightVar3.Text += numbers[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar3.Text += numbers[index] + "; ";
+                            TextBlockRightVar3.Text += numbers[index] + "; ";
+                        }
+                    }
+                    else
+                    {
+                        index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar3.Text += vowelLetters[index] + "";
+                            TextBlockRightVar3.Text += vowelLetters[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar3.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar3.Text += vowelLetters[index] + "; ";
+                        }
+                    }
+
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar3.Text += "}";
+                        TextBlockRightVar3.Text += "}";
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar3.Text += "{";
+
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar3.Text += numbers[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar3.Text += numbers[index] + "; ";
+                        }
+
+                    }
+                    else
+                    {
+                        index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar3.Text += vowelLetters[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar3.Text += vowelLetters[index] + "; ";
+                        }
+
+                    }
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar3.Text += "}";
+
+                    }
+                }
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+
+                        TextBlockRightVar3.Text += "{";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar3.Text += numbers[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockRightVar3.Text += numbers[index] + "; ";
+                        }
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar3.Text += vowelLetters[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockRightVar3.Text += vowelLetters[index] + "; ";
+                        }
+                    }
+                    if (i == 4)
+                    {
+
+                        TextBlockRightVar3.Text += "}";
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// метод для вывода варианта ответа
+        /// </summary>
+        private void ShowRandomZnachenia4()
+        {
+            int r = random.Next(2);
+            if (r == 0)
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar4.Text += "{";
+                        TextBlockRightVar4.Text += "{";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar4.Text += numbers[index] + "";
+                            TextBlockRightVar4.Text += numbers[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar4.Text += numbers[index] + "; ";
+                            TextBlockRightVar4.Text += numbers[index] + "; ";
+                        }
+                    }
+                    else
+                    {
+                        index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar4.Text += vowelLetters[index] + "";
+                            TextBlockRightVar4.Text += vowelLetters[index] + "";
+                        }
+                        else
+                        {
+                            TextBlockLeftVar4.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar4.Text += vowelLetters[index] + "; ";
+                        }
+                    }
+
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar4.Text += "}";
+                        TextBlockRightVar4.Text += "}";
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+                        TextBlockLeftVar4.Text += "{";
+
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar4.Text += numbers[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar4.Text += numbers[index] + "; ";
+                        }
+
+                    }
+                    else
+                    {
+                        index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockLeftVar4.Text += vowelLetters[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockLeftVar4.Text += vowelLetters[index] + "; ";
+                        }
+
+                    }
+                    if (i == 4)
+                    {
+                        TextBlockLeftVar4.Text += "}";
+
+                    }
+                }
+                for (int i = 0; i <= 4; i++) // цикл для вывода текста 
+                {
+                    if (i == 0)
+                    {
+
+                        TextBlockRightVar4.Text += "{";
+                    }
+                    int indexx = random.Next(2);
+                    if (indexx == 0)
+                    {
+                        index = random.Next(numbers.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar4.Text += numbers[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockRightVar4.Text += numbers[index] + "; ";
+                        }
+                    }
+                    else
+                    {
+
+                        index = random.Next(vowelLetters.Length);
+                        if (i == 4)
+                        {
+                            TextBlockRightVar4.Text += vowelLetters[index] + "";
+
+                        }
+                        else
+                        {
+                            TextBlockRightVar4.Text += vowelLetters[index] + "; ";
+                        }
+                    }
+                    if (i == 4)
+                    {
+
+                        TextBlockRightVar4.Text += "}";
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// метод для вывода варианта ответа
@@ -408,14 +688,21 @@ namespace MathSets.pages
             {
                 string strAnswer = ""; // переменна для записи ответа, который выбрал пользователь
                 string strAnswer2 = ""; // переменна для записи ответа, который выбрал пользователь
-                if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1)) && (((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1) || ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0))) // если пользователь выбрал правильный ответ
+                string strAnswer3 = ""; // переменна для записи ответа, который выбрал пользователь
+                string strAnswer4 = ""; // переменна для записи ответа, который выбрал пользователь
+                if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1)) && 
+                    (((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1) || ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0)) &&
+                     (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+                      (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0))) // если пользователь выбрал правильный ответ
                 {
                     windows.CorrectResult correctResult = new windows.CorrectResult(); // Вывод окна "Ты молодец"
                     correctResult.ShowDialog();
                 }
                 else // если пользователь выбрал неверный ответ
                 {
-                    if ((TextBlockLeftVar.Text == TextBlockRightVar.Text && ComboBoxTextSign.SelectedIndex == 0) || (TextBlockLeftVar.Text != TextBlockRightVar.Text && ComboBoxTextSign.SelectedIndex == 1))
+                    if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1)) &&
+                        (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0)))
                     {
                         if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
                         {
@@ -428,7 +715,281 @@ namespace MathSets.pages
                         windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer2, TextBlockLeftVar2.Text, TextBlockRightVar2.Text);
                         resultEqualSetsSolvengTasksWindo.ShowDialog();
                     }
-                    else if ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text && ComboBoxTextSign2.SelectedIndex == 0) || (TextBlockLeftVar2.Text != TextBlockRightVar2.Text && ComboBoxTextSign2.SelectedIndex == 1))
+                    else if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 1)) &&
+                        (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer2, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar2.Text, TextBlockRightVar2.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 1)) &&
+                       (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 0)) &&
+                       (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0)) &&
+                       (((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer2, strAnswer3, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar2.Text, TextBlockRightVar2.Text, TextBlockLeftVar3.Text, TextBlockRightVar3.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 1)) &&
+                        (((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1) || ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 0) || ((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer3, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar3.Text, TextBlockRightVar3.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 1)) &&
+                      (((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1) || ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0)) &&
+                      (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 0)) &&
+                      (((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 0) || ((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer3, strAnswer4, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar3.Text, TextBlockRightVar3.Text, TextBlockLeftVar4.Text, TextBlockRightVar4.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 1)) &&
+                      (((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1) || ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0)) &&
+                      (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+                      (((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 0) || ((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer4, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar4.Text, TextBlockRightVar4.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 1)) &&
+                    (((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1) || ((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0)) &&
+                    (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0)) &&
+                    (((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 0) || ((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer2, strAnswer3, TextBlockLeftVar2.Text, TextBlockRightVar2.Text, TextBlockLeftVar3.Text, TextBlockRightVar3.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 1)) &&
+                 (((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1) || ((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0)) &&
+                 (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 0)) &&
+                 (((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 0) || ((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer2, strAnswer3, strAnswer4, TextBlockLeftVar2.Text, TextBlockRightVar2.Text, TextBlockLeftVar3.Text, TextBlockRightVar3.Text, TextBlockLeftVar4.Text, TextBlockRightVar4.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 1)) &&
+               (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+               (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 0)) &&
+               (((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 0) || ((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
+                        {
+                            strAnswer = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer2, strAnswer, strAnswer4, TextBlockLeftVar2.Text, TextBlockRightVar2.Text, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar4.Text, TextBlockRightVar4.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex != 1)) &&
+                    (((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1) || ((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0)) &&
+                    (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+                    (((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 0) || ((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar2.Text != TextBlockRightVar2.Text)
+                        {
+                            strAnswer2 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer2, strAnswer4, TextBlockLeftVar2.Text, TextBlockRightVar2.Text, TextBlockLeftVar4.Text, TextBlockRightVar4.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 0) || ((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex != 1)) &&
+                   (((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1) || ((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0)) &&
+                   (((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1) || ((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0)) &&
+                   (((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 0) || ((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex != 1)))
+                    {
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindo = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer3, strAnswer4, TextBlockLeftVar3.Text, TextBlockRightVar3.Text, TextBlockLeftVar4.Text, TextBlockRightVar4.Text);
+                        resultEqualSetsSolvengTasksWindo.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1)) &&
+                             (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0)))
                     {
                         if (TextBlockLeftVar.Text != TextBlockRightVar.Text)
                         {
@@ -439,6 +1000,36 @@ namespace MathSets.pages
                             strAnswer = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
                         }
                         windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindow1 = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, TextBlockLeftVar.Text, TextBlockRightVar.Text);
+                        resultEqualSetsSolvengTasksWindow1.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1)) &&
+                             (((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1) || ((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar4.Text != TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 1) || ((TextBlockLeftVar4.Text == TextBlockRightVar4.Text) && ComboBoxTextSign4.SelectedIndex == 0)))
+                    {
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindow1 = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer3, TextBlockLeftVar3.Text, TextBlockRightVar3.Text);
+                        resultEqualSetsSolvengTasksWindow1.ShowDialog();
+                    }
+                    else if ((((TextBlockLeftVar2.Text == TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 0) || ((TextBlockLeftVar2.Text != TextBlockRightVar2.Text) && ComboBoxTextSign2.SelectedIndex == 1)) &&
+                             (((TextBlockLeftVar3.Text != TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 1) || ((TextBlockLeftVar3.Text == TextBlockRightVar3.Text) && ComboBoxTextSign3.SelectedIndex == 0)) &&
+                        (((TextBlockLeftVar.Text != TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 1) || ((TextBlockLeftVar.Text == TextBlockRightVar.Text) && ComboBoxTextSign.SelectedIndex == 0)))
+                    {
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindow1 = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer4, TextBlockLeftVar4.Text, TextBlockRightVar4.Text);
                         resultEqualSetsSolvengTasksWindow1.ShowDialog();
                     }
                     else
@@ -460,8 +1051,25 @@ namespace MathSets.pages
                         {
                             strAnswer2 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
                         }
+                        if (TextBlockLeftVar3.Text != TextBlockRightVar3.Text)
+                        {
+                            strAnswer3 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer3 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        if (TextBlockLeftVar4.Text != TextBlockRightVar4.Text)
+                        {
+                            strAnswer4 = "≠"; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
+                        else
+                        {
+                            strAnswer4 = "="; // переменной присваиваем значение верного ответа, чтобы вывести его в ошибки
+                        }
 
-                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindow3 = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer2, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar2.Text, TextBlockRightVar2.Text);
+                        windows.ResultEqualSetsSolvengTasksWindow resultEqualSetsSolvengTasksWindow3 = new windows.ResultEqualSetsSolvengTasksWindow(strAnswer, strAnswer2, strAnswer3, strAnswer4, TextBlockLeftVar.Text, TextBlockRightVar.Text, TextBlockLeftVar2.Text, TextBlockRightVar2.Text,
+                            TextBlockRightVar3.Text, TextBlockLeftVar3.Text, TextBlockRightVar4.Text, TextBlockLeftVar4.Text);
                         resultEqualSetsSolvengTasksWindow3.ShowDialog();
                     }
                 }
@@ -494,12 +1102,20 @@ namespace MathSets.pages
                 case 1:
                     TextBlockLeftVar.Text = "";
                     TextBlockRightVar.Text = "";
+                    TextBlockLeftVar3.Text = "";
+                    TextBlockRightVar3.Text = "";
+                    TextBlockLeftVar4.Text = "";
+                    TextBlockRightVar4.Text = "";
                     TextBlockLeftVar2.Text = "";
                     TextBlockRightVar2.Text = "";
                     ComboBoxTextSign2.Text = "";
                     ComboBoxTextSign.Text = "";
+                    ComboBoxTextSign3.Text = "";
+                    ComboBoxTextSign4.Text = "";
                     ShowRandomZnachenia();
                     ShowRandomZnachenia2();
+                    ShowRandomZnachenia3();
+                    ShowRandomZnachenia4();
 
                     break;
                 case 2:
