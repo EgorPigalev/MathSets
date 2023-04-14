@@ -73,16 +73,16 @@ namespace MathSets.pages
             SpTaskSecondSetA.Children.Clear();
             SpTaskSecondSetB.Children.Clear();
 
-            int countNumbers = _random.Next(4, 7); // Количество элементов множества.
+            int countItems = _random.Next(4, 7); // Количество элементов множества.
 
             _setsTaskSecond = CreateSets(CnvTaskSecond);
-            _figuresTaskSecond = CreateFiguresTaskSecond(countNumbers);
+            _figuresTaskSecond = CreateFiguresTaskSecond(countItems);
 
             Figure.ShowFigures(_setsTaskSecond, CnvTaskSecond);
             Figure.ShowFigures(_figuresTaskSecond, CnvTaskSecond);
 
-            ShowStackPanelAnswersTaskSecond(SpTaskSecondSetA, 'A', countNumbers);
-            ShowStackPanelAnswersTaskSecond(SpTaskSecondSetB, 'B', countNumbers);
+            ShowStackPanelAnswersTaskSecond(SpTaskSecondSetA, 'A', countItems);
+            ShowStackPanelAnswersTaskSecond(SpTaskSecondSetB, 'B', countItems);
         }
 
         /// <summary>
@@ -91,20 +91,17 @@ namespace MathSets.pages
         private void ShowExerciseThree()
         {
             CnvTaskThree.Children.Clear();
-            SpTaskThreeSetA.Children.Clear();
-            SpTaskThreeSetB.Children.Clear();
+            SpCondition.Children.Clear();
 
-            int countNumbers = _random.Next(4, 7); // Количество элементов множества.
+            int countItems = _random.Next(4, 7); // Количество элементов множества.
 
             _setsTaskThree = CreateSets(CnvTaskThree);
-            _figuresTaskThree = CreateFiguresTaskThree(countNumbers);
+            _figuresTaskThree = CreateFiguresTaskThree(countItems);
 
             Figure.ShowFigures(_setsTaskThree, CnvTaskThree);
             Figure.ShowFigures(_figuresTaskThree, CnvTaskThree);
 
-            ShowConditionsTaskThree(SpTaskThreeSetA, 'A', countNumbers);
-            ShowConditionsTaskThree(SpTaskThreeSetB, 'B', countNumbers);
-
+            ShowConditionsTaskThree(new List<string>() { "A", "B" }, countItems);
             SetHandlersTaskThree();
         }
 
@@ -519,13 +516,83 @@ namespace MathSets.pages
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="namesOfSets"></param>
+        /// <param name="count"></param>
+        private void ShowConditionsTaskThree(List<string> namesOfSets, int count)
+        {
+            List<StackPanel> stackPanels = new List<StackPanel>();
+
+            while (true)
+            {
+                foreach (string name in namesOfSets)
+                {
+                    stackPanels.Add(CreateConditionsTaskThree(name, count));
+                }
+
+                if (CheckCountItemsInConditions(stackPanels, 3))
+                {
+                    break;
+                }
+
+                stackPanels.Clear();
+            }
+
+            foreach (StackPanel item in stackPanels)
+            {
+                SpCondition.Children.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Проверяет количество условий
+        /// </summary>
+        /// <param name="stackPanels">коллекция панелей с условиями</param>
+        /// <param name="countMax">максимальное количество условий</param>
+        /// <returns>True, если количество условий не превышает countMax, в противном случае - false</returns>
+        private bool CheckCountItemsInConditions(List<StackPanel> stackPanels, int countMax)
+        {
+            StackPanel spSetA = stackPanels[0];
+            StackPanel spSetB = stackPanels[1];
+
+            int countItemsInSetA = 0;
+            int countItemsInSetB = 0;
+            int countItemsInIntersect = 0;
+
+            for (int i = 0; i < spSetA.Children.Count; i++)
+            {
+                if (((TextBlock)((StackPanel)spSetA.Children[i]).Children[1]).Text == "∈" && ((TextBlock)((StackPanel)spSetB.Children[i]).Children[1]).Text == "∈")
+                {
+                    countItemsInIntersect++;
+                }
+                else if (((TextBlock)((StackPanel)spSetA.Children[i]).Children[1]).Text == "∈")
+                {
+                    countItemsInSetA++;
+                }
+                else if (((TextBlock)((StackPanel)spSetB.Children[i]).Children[1]).Text == "∈")
+                {
+                    countItemsInSetB++;
+                }
+            }
+
+            if (countItemsInSetA > countMax || countItemsInSetB > countMax || countItemsInIntersect > countMax)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Создаёт условие для второго задания
         /// </summary>
-        /// <param name="panel">контейнер</param>
         /// <param name="set">название множества</param>
         /// <param name="count">общее количество элементов множеств</param>
-        private void ShowConditionsTaskThree(StackPanel panel, char set, int count)
+        private StackPanel CreateConditionsTaskThree(string set, int count)
         {
+            StackPanel spParent = new StackPanel();
+
             for (int i = 0; i < count; i++)
             {
                 StackPanel sp = new StackPanel()
@@ -554,14 +621,16 @@ namespace MathSets.pages
 
                 sp.Children.Add(new TextBlock() // Наименование множества.
                 {
-                    Text = set.ToString(),
+                    Text = set,
                     FontFamily = new FontFamily(Base.FontFamily),
                     Margin = new Thickness(0, 0, 10, 0),
                     VerticalAlignment = VerticalAlignment.Center
                 });
 
-                panel.Children.Add(sp);
+                spParent.Children.Add(sp);
             }
+
+            return spParent;
         }
 
         /// <summary>
@@ -595,7 +664,10 @@ namespace MathSets.pages
 
         private void BtnCheckTaskThree_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckTaskThree(SpTaskThreeSetA, _setsTaskThree[0]) && CheckTaskThree(SpTaskThreeSetB, _setsTaskThree[1]))
+            StackPanel spSetA = (StackPanel)SpCondition.Children[0];
+            StackPanel SpSetB = (StackPanel)SpCondition.Children[1];
+
+            if (CheckTaskThree(spSetA, _setsTaskThree[0]) && CheckTaskThree(SpSetB, _setsTaskThree[1]))
             {
                 new CorrectResult().ShowDialog();
             }
