@@ -289,7 +289,7 @@ namespace MathSets.windows
                         figures.Add(figure.GetGeometryFromText
                         (
                             (i + 1).ToString(),
-                            Convert.ToInt32(setA.Center.X - setA.RadiusX + sizeFigures * 2.1),
+                            Convert.ToInt32(setA.Center.X - setA.RadiusX + sizeFigures / 2),
                             (int)setA.Center.Y - (int)setA.RadiusY / 2 + countFiguresInSets[0] * (sizeFigures + 10)
                         ));
                     }
@@ -298,7 +298,7 @@ namespace MathSets.windows
                         figures.Add(figure.GetGeometryFromText
                         (
                             (i + 1).ToString(),
-                            Convert.ToInt32(setA.Center.X - setA.RadiusX + sizeFigures),
+                            Convert.ToInt32(setA.Center.X - setA.RadiusX + sizeFigures * 1.5),
                             (int)setA.Center.Y - (int)setA.RadiusY / 2 + countFiguresInSets[0] * (sizeFigures + 10)
                         ));
                     }

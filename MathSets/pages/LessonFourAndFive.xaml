@@ -100,11 +100,7 @@
                         <TextBlock Name="TbTaskThree" Text="3) Отметь элементы на диаграмме, если известно, что:" Margin="0 0 0 10"/>
 
                         <StackPanel Name="SpTaskThreeWork" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <StackPanel Name="SpCondition" Orientation="Horizontal" Width="310">
-                                <StackPanel Name="SpTaskThreeSetA" Margin="0 0 30 0"/>
-                                <StackPanel Name="SpTaskThreeSetB"/>
-                            </StackPanel>
-
+                            <StackPanel Name="SpCondition" Orientation="Horizontal" Width="310"/>
                             <Canvas Name="CnvTaskThree" Height="280" Width="550"/>
                         </StackPanel>
 
