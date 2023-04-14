@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -420,7 +419,7 @@ namespace MathSets
         /// <returns>Отступ между фигурами</returns>
         public int GetOffset(int countFigures)
         {
-            if (countFigures >= 3 && _widthContainer > countFigures * _sizeFigures)
+            if (countFigures >= 3 && _widthContainer > (countFigures % 2 == 0 ? countFigures / 2 : countFigures / 2 + 1) * _sizeFigures)
             {
                 int offset;
 
@@ -630,7 +629,7 @@ namespace MathSets
         /// </summary>
         /// <param name="figures">список фигур</param>
         /// <param name="sets">список множеств</param>
-        /// <returns>true, если пересечения множеств и фигур найдены, в противном случае - false</returns>
+        /// <returns>True, если пересечения множеств и фигур найдены, в противном случае - false</returns>
         public static bool CheckIntersectionsFiguresAndSets(List<Geometry> figures, List<Geometry> sets)
         {
             for (int i = 0; i < figures.Count; i++)

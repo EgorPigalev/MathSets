@@ -41,20 +41,14 @@ namespace MathSets.windows
 
             DeleteDuplicateIndexesFigures(ref indexesAnswersSetA, indexesAnswersSetB);
 
-            List<Geometry> figuresSetB = GetAnswersFiguresSetB(((System.Windows.Shapes.Path)canvas.Children[3]).Data, sizeFigures, indexesAnswersSetB);
-            List<Geometry> figuresSetA;
-
-            while (true)
-            {
-                figuresSetA = GetAnswersFiguresSetA(((System.Windows.Shapes.Path)canvas.Children[2]).Data, sizeFigures, indexesAnswersSetA);
-
-                if (!Figure.CheckIntersectionsFiguresAndSets(figuresSetA, new List<Geometry>() { ((System.Windows.Shapes.Path)canvas.Children[3]).Data }))
-                {
-                    break;
-                }
-
-                figuresSetA.Clear();
-            }
+            List<Geometry> figuresSetB = GetAnswersFiguresSetB(((System.Windows.Shapes.Path)newCanvas.Children[3]).Data, sizeFigures, indexesAnswersSetB);
+            List<Geometry> figuresSetA = GetAnswersFiguresSetA
+            (
+                ((System.Windows.Shapes.Path)newCanvas.Children[2]).Data,
+                sizeFigures,
+                indexesAnswersSetA,
+                ((System.Windows.Shapes.Path)newCanvas.Children[3]).Data
+            );
 
             Figure.ShowFigures(figuresSetA, newCanvas);
             Figure.ShowFigures(figuresSetB, newCanvas);
@@ -180,8 +174,9 @@ namespace MathSets.windows
         /// <param name="set">множество</param>
         /// <param name="size">размер фигур</param>
         /// <param name="indexesAndwers">индексы фигур-ответов</param>
+        /// <param name="otherSet">другое множество, с которым фигуры тоже не должны пересекаться</param>
         /// <returns>Список фигур-ответов</returns>
-        private List<Geometry> GetAnswersFiguresSetA(Geometry set, int size, List<int> indexesAndwers)
+        private List<Geometry> GetAnswersFiguresSetA(Geometry set, int size, List<int> indexesAndwers, Geometry otherSet)
         {
             EllipseGeometry ellipse = (EllipseGeometry)set;
 
@@ -200,15 +195,14 @@ namespace MathSets.windows
                     xStart += size * 2;
                 }
 
-                if (!Figure.CheckIntersectionsFiguresAndSets(figures, new List<Geometry>() { set }))
+                if (!Figure.CheckIntersectionsFiguresAndSets(figures, new List<Geometry>() { set }) &&
+                    !Figure.CheckIntersectionsFiguresAndSets(figures, new List<Geometry>() { otherSet }))
                 {
-                    break;
+                    return figures;
                 }
 
                 figures.Clear();
             }
-
-            return figures;
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
