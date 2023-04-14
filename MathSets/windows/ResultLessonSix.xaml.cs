@@ -30,8 +30,6 @@ namespace MathSets.windows
         {
             InitializeComponent();
 
-            MessageBox.Show("Не готово пока");
-
             StringReader stringReader = new StringReader(XamlWriter.Save(canvas));
             XmlReader xmlReader = XmlReader.Create(stringReader);
             Canvas newCanvas = (Canvas)XamlReader.Load(xmlReader);
@@ -43,13 +41,59 @@ namespace MathSets.windows
 
             DeleteDuplicateIndexesFigures(ref indexesAnswersSetA, indexesAnswersSetB);
 
-            List<Geometry> figuresSetA = GetAnswersFigures(((System.Windows.Shapes.Path)canvas.Children[2]).Data, sizeFigures, indexesAnswersSetA);
-            List<Geometry> figuresSetB = GetAnswersFigures(((System.Windows.Shapes.Path)canvas.Children[3]).Data, sizeFigures, indexesAnswersSetB);
+            List<Geometry> figuresSetB = GetAnswersFiguresSetB(((System.Windows.Shapes.Path)canvas.Children[3]).Data, sizeFigures, indexesAnswersSetB);
+            List<Geometry> figuresSetA;
+
+            while (true)
+            {
+                figuresSetA = GetAnswersFiguresSetA(((System.Windows.Shapes.Path)canvas.Children[2]).Data, sizeFigures, indexesAnswersSetA);
+
+                if (!Figure.CheckIntersectionsFiguresAndSets(figuresSetA, new List<Geometry>() { ((System.Windows.Shapes.Path)canvas.Children[3]).Data }))
+                {
+                    break;
+                }
+
+                figuresSetA.Clear();
+            }
 
             Figure.ShowFigures(figuresSetA, newCanvas);
             Figure.ShowFigures(figuresSetB, newCanvas);
 
             SpResult.Children.Add(newCanvas);
+        }
+
+        /// <summary>
+        /// Устанавливает содержимое Grid для первого задания
+        /// </summary>
+        /// <param name="grid">контейнер Grid</param>
+        /// <param name="figures">список фигур (множеств)</param>
+        private void UploadGridTaskFirst(Grid grid, List<Geometry> figures)
+        {
+            int indexFigure = 0;
+
+            for (int i = grid.Children.Count - 4; i < grid.Children.Count; i++)
+            {
+                StackPanel sp = (StackPanel)grid.Children[i];
+                Button btnIsThere = (Button)sp.Children[0];
+                Button btNot = (Button)sp.Children[1];
+
+                if (figures[indexFigure].FillContainsWithDetail(figures[indexFigure + 1]) == IntersectionDetail.FullyContains)
+                {
+                    btnIsThere.Background = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
+                    btnIsThere.Foreground = Brushes.White;
+                    btNot.Background = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+                    btNot.Foreground = Brushes.Black;
+                }
+                else
+                {
+                    btNot.Background = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
+                    btNot.Foreground = Brushes.White;
+                    btnIsThere.Background = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+                    btnIsThere.Foreground = Brushes.Black;
+                }
+
+                indexFigure += 2;
+            }
         }
 
         /// <summary>
@@ -94,11 +138,11 @@ namespace MathSets.windows
         /// <summary>
         /// Создаёт фигуры-ответы
         /// </summary>
-        /// <param name="canvas">контейнер</param>
+        /// <param name="set">множество</param>
         /// <param name="size">размер фигур</param>
         /// <param name="indexesAndwers">индексы фигур-ответов</param>
         /// <returns>Список фигур-ответов</returns>
-        private List<Geometry> GetAnswersFigures(Geometry set, int size, List<int> indexesAndwers)
+        private List<Geometry> GetAnswersFiguresSetB(Geometry set, int size, List<int> indexesAndwers)
         {
             EllipseGeometry ellipse = (EllipseGeometry)set;
 
@@ -106,58 +150,65 @@ namespace MathSets.windows
             List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
 
             List<Geometry> figures = new List<Geometry>();
-            int xStart = Base.StrokeThickness + (int)(ellipse.Center.X - ellipse.RadiusX + size / 2);
 
-            for (int i = 0; i < indexesAndwers.Count; i++)
+            while (true)
             {
-                if (i % 2 == 0)
+                int xStart = Base.StrokeThickness + (int)(ellipse.Center.X - ellipse.RadiusX + size / 2);
+
+                for (int i = 0; i < indexesAndwers.Count; i++)
                 {
                     figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, true));
-                }
-                else
-                {
-                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, false));
                     xStart += size * 2;
+
+                    figures[i].Transform = new TranslateTransform(0, ellipse.Center.Y - ellipse.RadiusY + size); // Для смещения фигуры вниз (так как начальный Y не задаётся).
                 }
 
-                figures[i].Transform = new TranslateTransform(0, ellipse.Center.Y - ellipse.RadiusY); // Для смещения фигуры вниз (так как начальный Y не задаётся).
+                if (!Figure.CheckIntersectionsFiguresAndSets(figures, new List<Geometry>() { set }))
+                {
+                    break;
+                }
+
+                figures.Clear();
             }
 
             return figures;
         }
 
         /// <summary>
-        /// Устанавливает содержимое Grid для первого задания
+        /// Создаёт фигуры-ответы
         /// </summary>
-        /// <param name="grid">контейнер Grid</param>
-        /// <param name="figures">список фигур (множеств)</param>
-        private void UploadGridTaskFirst(Grid grid, List<Geometry> figures)
+        /// <param name="set">множество</param>
+        /// <param name="size">размер фигур</param>
+        /// <param name="indexesAndwers">индексы фигур-ответов</param>
+        /// <returns>Список фигур-ответов</returns>
+        private List<Geometry> GetAnswersFiguresSetA(Geometry set, int size, List<int> indexesAndwers)
         {
-            int indexFigure = 0;
+            EllipseGeometry ellipse = (EllipseGeometry)set;
 
-            for (int i = grid.Children.Count - 4; i < grid.Children.Count; i++)
+            Figure figure = new Figure(size, ellipse.RadiusY * 2, ellipse.RadiusX * 2);
+            List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
+
+            List<Geometry> figures = new List<Geometry>();
+
+            while (true)
             {
-                StackPanel sp = (StackPanel)grid.Children[i];
-                Button btnIsThere = (Button)sp.Children[0];
-                Button btNot = (Button)sp.Children[1];
+                int xStart = Base.StrokeThickness + (int)(ellipse.Center.X - ellipse.RadiusX + size * 2);
 
-                if (figures[indexFigure].FillContainsWithDetail(figures[indexFigure + 1]) == IntersectionDetail.FullyContains)
+                for (int i = 0; i < indexesAndwers.Count; i++)
                 {
-                    btnIsThere.Background = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
-                    btnIsThere.Foreground = Brushes.White;
-                    btNot.Background = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
-                    btNot.Foreground = Brushes.Black;
-                }
-                else
-                {
-                    btNot.Background = (SolidColorBrush)Application.Current.Resources["SecondaryColor"];
-                    btNot.Foreground = Brushes.White;
-                    btnIsThere.Background = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
-                    btnIsThere.Foreground = Brushes.Black;
+                    figures.Add(createFiguresMethods[indexesAndwers[i]](xStart, false));
+                    xStart += size * 2;
                 }
 
-                indexFigure += 2;
+                if (!Figure.CheckIntersectionsFiguresAndSets(figures, new List<Geometry>() { set }))
+                {
+                    break;
+                }
+
+                figures.Clear();
             }
+
+            return figures;
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
