@@ -39,6 +39,9 @@ namespace MathSets.pages
             ShowTaskSecond();
         }
 
+        /// <summary>
+        /// Отображает на экране первое задание
+        /// </summary>
         private void ShowTaskFirst()
         {
             GridTaskFirst.Children.Clear();
@@ -53,17 +56,19 @@ namespace MathSets.pages
             SetGridDefinitionsTaskFirst(countGridDefinitions);
         }
 
+        /// <summary>
+        /// Отображает на экране второе задание
+        /// </summary>
         private void ShowTaskSecond()
         {
             CnvTaskSecond.Children.Clear();
             SpFiguresTaskSecondSetA.Children.Clear();
             SpFiguresTaskSecondSetB.Children.Clear();
 
-            int countRigthAnswersSetA = _random.Next(3, 6); // Количество элементов в изначально заданном множестве A, которое нужно отобразить (множестве по заданию).
+            int countRigthAnswersSetA = _random.Next(3, 5); // Количество элементов в изначально заданном множестве A, которое нужно отобразить (множестве по заданию).
             int countRigthAnswersSetB = _random.Next(1, 3); // Количество элементов в изначально заданном множестве B, которое нужно отобразить (множестве по заданию).
 
-            _setsTaskSecond = CreateSetsTaskSecond(new Point(CnvTaskSecond.Width / 2, CnvTaskSecond.Height), CnvTaskSecond);
-
+            _setsTaskSecond = CreateSets(CnvTaskSecond);
 
             InitializeSetsTaskSecond(out List<Geometry> figuresAnswersSetA, out List<Geometry> figuresAnswersSetB, countRigthAnswersSetA, countRigthAnswersSetB);
 
@@ -74,276 +79,6 @@ namespace MathSets.pages
             Figure.ShowFigures(_figuresTaskSecond, CnvTaskSecond);
 
             SetHandlersTaskSecond();
-        }
-
-        /// <summary>
-        /// Устанавливает события для panel, необходимые для перемещения фигур, для первого задания
-        /// </summary>
-        /// <param name="panel">Контейнер</param>
-        private void SetHandlersTaskSecond()
-        {
-            SpTaskSecond.MouseUp += OnMouseUp;
-
-            foreach (Path item in CnvTaskSecond.Children)
-            {
-                if (_figuresTaskSecond.Contains(item.Data))
-                {
-                    item.MouseMove += OnMouseMoveTaskFirst;
-                    item.MouseDown += OnMouseDown;
-                }
-            }
-        }
-
-        private void OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (_pathToMoved != null)
-            {
-                _pathToMoved.Fill = Brushes.White;
-                _pathToMoved.ReleaseMouseCapture();
-                _pathToMoved = null;
-            }
-        }
-
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Path path = (Path)sender;
-
-            if (path.Uid != string.Empty)
-            {
-                path.Fill = Base.ColorDraggableElement;
-                _pathToMoved = path;
-                _oldMouseCoordinate = e.GetPosition(CnvTaskSecond);
-                _pathToMoved.CaptureMouse();
-            }
-        }
-
-        private void OnMouseMoveTaskFirst(object sender, MouseEventArgs e)
-        {
-            if (_pathToMoved != null)
-            {
-                int id = Convert.ToInt32(_pathToMoved.Uid);
-
-                _pointsToMovedTaskFirst[id] = GetOffsetFigure(_pointsToMovedTaskFirst[id], e.GetPosition(CnvTaskSecond));
-
-                _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedTaskFirst[id].X, _pointsToMovedTaskFirst[id].Y);
-            }
-        }
-
-        /// <summary>
-        /// Вычисляет новые координаты для перемещения фигуры
-        /// </summary>
-        /// <param name="point"> точка для изменения</param>
-        /// <param name="actualCoordinate">актуальные координаты курсора</param>
-        /// <returns></returns>
-        private Point GetOffsetFigure(Point point, Point actualCoordinate)
-        {
-            if (actualCoordinate.Y > _oldMouseCoordinate.Y)
-            {
-                point.Y++;
-            }
-            else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
-            {
-                point.Y--;
-            }
-
-            if (actualCoordinate.X > _oldMouseCoordinate.X)
-            {
-                point.X++;
-            }
-            else if (actualCoordinate.X < _oldMouseCoordinate.X)
-            {
-                point.X--;
-            }
-
-            _oldMouseCoordinate = actualCoordinate;
-
-            return point;
-        }
-
-        /// <summary>
-        /// Инициализирует множества-условия для второго задания.
-        /// </summary>
-        /// <param name="setFirst">первое множество</param>
-        /// <param name="setSecond">второе множество</param>
-        /// <param name="countFirst">количество элементов первого множества</param>
-        /// <param name="countSecond">количество элементов второго множества</param>
-        private void InitializeSetsTaskSecond(out List<Geometry> setFirst, out List<Geometry> setSecond, int countFirst, int countSecond)
-        {
-            while (true)
-            {
-                bool isInvalidSets = false; // Проверка наличия всех элементов setSecond в setFirst.
-
-                setFirst = CreateAnswersTaskSecond(countFirst, _indexesAnswersSetA, SpFiguresTaskSecondSetA);
-                setSecond = CreateAnswersTaskSecond(countSecond, _indexesAnswersSetB, SpFiguresTaskSecondSetB);
-
-                foreach (int item in _indexesAnswersSetB)
-                {
-                    if (!_indexesAnswersSetA.Contains(item))
-                    {
-                        isInvalidSets = true;
-                    }
-                }
-
-                if (!isInvalidSets)
-                {
-                    return;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Генерирует фигуры-ответы для второго задания
-        /// </summary>
-        /// <returns>Список фигур</returns>
-        private List<Geometry> CreateAnswersTaskSecond(int count, List<int> answers, Panel panel)
-        {
-            int sizeFigures = (int)TbTaskFirst.FontSize;
-            Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, panel.Width);
-            List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
-            List<int> tempIndexesFigures = Figure.ShuffleMethods(createFiguresMethods);
-
-            answers.Clear();
-            for (int i = 0; i < count; i++)
-            {
-                answers.Add(tempIndexesFigures[i]);
-            }
-
-            List<Geometry> listFigures = new List<Geometry>();
-            int x = 10;
-
-            for (int i = 0; i < count; i++)
-            {
-                listFigures.Add(createFiguresMethods[i](x, true));
-            }
-
-            panel.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
-
-            return listFigures;
-        }
-
-        /// <summary>
-        /// Генерирует фигуры для второго задания
-        /// </summary>
-        /// <returns>Коллекция фигур</returns>
-        private List<Geometry> CreateFiguresTaskSecond()
-        {
-            Figure figure = new Figure(_sizeFiguresTaskSecond, CnvTaskSecond.Height, CnvTaskSecond.Width / 2);
-            List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
-            List<int> indexesFigures = Figure.ShuffleMethods(createFiguresMethods);
-
-            List<Geometry> figures = new List<Geometry>();
-            int offset = figure.GetOffset(createFiguresMethods.Count);
-            int xStart = Base.StrokeThickness;
-
-            for (int i = 0; i < createFiguresMethods.Count; i++)
-            {
-                if (i == createFiguresMethods.Count - 1) // Размещаем последнюю фигуру в нижней части контейнера.
-                {
-                    figures.Add(createFiguresMethods[i](xStart, false));
-                    break;
-                }
-
-                if (i % 2 == 0)
-                {
-                    figures.Add(createFiguresMethods[i](xStart, true)); // Положение фигуры по вертикали сверху.
-                }
-                else
-                {
-                    figures.Add(createFiguresMethods[i](xStart, false)); // Положение фигуры по вертикали снизу.
-                    xStart += offset;
-                }
-            }
-
-            _pointsToMovedTaskFirst.Clear();
-            for (int i = 0; i < figures.Count; i++)
-            {
-                _pointsToMovedTaskFirst.Add(new Point(0, 0));
-            }
-
-            LessonFourAndFive.SortForDefaultPosition(figures, indexesFigures);
-
-            return figures;
-        }
-
-        /// <summary>
-        /// Создаёт множество с подмножеством
-        /// </summary>
-        /// <param name="maxSize">максимальные размеры главного множества</param>
-        /// <param name="panel">контейнер</param>
-        /// <returns>Список множеств</returns>
-        private List<Geometry> CreateSetsTaskSecond(Point maxSize, Panel panel)
-        {
-            Point maxSizeSecondEllipse = new Point(CnvTaskSecond.Width / 2 * 0.7, CnvTaskSecond.Height * 0.7);
-            Point sizeContainer = new Point(maxSize.X + 1, maxSize.Y + 1);
-            List<Geometry> sets = new List<Geometry>();
-            List<Geometry> namesOfSets = new List<Geometry>();
-
-            while (true)
-            {
-                sets.Add(CreateEllipse(sizeContainer, maxSize, (int)CnvTaskSecond.Height - 1));
-
-                sets.Add(CreateEllipse(sizeContainer, maxSizeSecondEllipse, Convert.ToInt32(_sizeFiguresTaskSecond * 2.5)));
-
-
-                if (sets[0].FillContainsWithDetail(sets[1]) == IntersectionDetail.FullyContains)
-                {
-                    for (int i = 0; i < sets.Count; i++)
-                    {
-                        EllipseGeometry g = (EllipseGeometry)sets[i];
-
-                        Point center = g.Center;
-                        center.X += panel.Width / 2; // Смещение множества в правую часть контейнера.
-                        g.Center = center;
-                    }
-
-                    if (!CheckIntersectionsNamesOfSets(sets, panel))
-                    {
-                        break;
-                    }
-                }
-
-                sets.Clear();
-            }
-
-            return sets;
-        }
-
-        /// <summary>
-        /// Создаёт названия множеств и проверяет их пересечения
-        /// </summary>
-        /// <param name="sets">список множеств</param>
-        /// <param name="panel">контейнер</param>
-        /// <returns>true, если пересечения найдены, в противном случае - false</returns>
-        private bool CheckIntersectionsNamesOfSets(List<Geometry> sets, Panel panel)
-        {
-            List<Geometry> list = new List<Geometry>();
-
-            for (int i = 0; i < sets.Count; i++)
-            {
-                EllipseGeometry g = (EllipseGeometry)sets[i];
-
-                list.Add(new Figure(60, 0, 0).GetGeometryFromText(((char)(65 + i)).ToString(), Convert.ToInt32(g.Center.X - g.RadiusX - 40), Convert.ToInt32(g.Center.Y - g.RadiusY)));
-            }
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                for (int j = i + 1; j < list.Count; j++)
-                {
-                    if (list[i].FillContainsWithDetail(list[j]) != IntersectionDetail.Empty)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            Figure.ShowFigures(list, panel, Brushes.White, Brushes.Black);
-
-            foreach (Path item in panel.Children)
-            {
-                Panel.SetZIndex(item, 100);
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -583,6 +318,89 @@ namespace MathSets.pages
             btn.Foreground = Brushes.White;
         }
 
+        /// <summary>
+        /// Устанавливает события для panel, необходимые для перемещения фигур, для первого задания
+        /// </summary>
+        private void SetHandlersTaskSecond()
+        {
+            SpTaskSecond.MouseUp += OnMouseUp;
+
+            foreach (Path item in CnvTaskSecond.Children)
+            {
+                if (_figuresTaskSecond.Contains(item.Data))
+                {
+                    item.MouseMove += OnMouseMoveTaskFirst;
+                    item.MouseDown += OnMouseDown;
+                }
+            }
+        }
+
+        private void OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_pathToMoved != null)
+            {
+                _pathToMoved.Fill = Brushes.White;
+                _pathToMoved.ReleaseMouseCapture();
+                _pathToMoved = null;
+            }
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Path path = (Path)sender;
+
+            if (path.Uid != string.Empty)
+            {
+                path.Fill = Base.ColorDraggableElement;
+                _pathToMoved = path;
+                _oldMouseCoordinate = e.GetPosition(CnvTaskSecond);
+                _pathToMoved.CaptureMouse();
+            }
+        }
+
+        private void OnMouseMoveTaskFirst(object sender, MouseEventArgs e)
+        {
+            if (_pathToMoved != null)
+            {
+                int id = Convert.ToInt32(_pathToMoved.Uid);
+
+                _pointsToMovedTaskFirst[id] = GetOffsetFigure(_pointsToMovedTaskFirst[id], e.GetPosition(CnvTaskSecond));
+
+                _pathToMoved.Data.Transform = new TranslateTransform(_pointsToMovedTaskFirst[id].X, _pointsToMovedTaskFirst[id].Y);
+            }
+        }
+
+        /// <summary>
+        /// Вычисляет новые координаты для перемещения фигуры
+        /// </summary>
+        /// <param name="point"> точка для изменения</param>
+        /// <param name="actualCoordinate">актуальные координаты курсора</param>
+        /// <returns>Новые координаты фигуры</returns>
+        private Point GetOffsetFigure(Point point, Point actualCoordinate)
+        {
+            if (actualCoordinate.Y > _oldMouseCoordinate.Y)
+            {
+                point.Y++;
+            }
+            else if (actualCoordinate.Y < _oldMouseCoordinate.Y)
+            {
+                point.Y--;
+            }
+
+            if (actualCoordinate.X > _oldMouseCoordinate.X)
+            {
+                point.X++;
+            }
+            else if (actualCoordinate.X < _oldMouseCoordinate.X)
+            {
+                point.X--;
+            }
+
+            _oldMouseCoordinate = actualCoordinate;
+
+            return point;
+        }
+
         private void BtnCheckTaskFirst_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < _figuresTaskFirst.Count; i += 2)
@@ -612,6 +430,149 @@ namespace MathSets.pages
             new CorrectResult().ShowDialog();
         }
 
+        /// <summary>
+        /// Генерирует множество и его подмножество в виде эллипсов
+        /// </summary>
+        /// <param name="panel">контейнер</param>
+        /// <returns>Список эллипсов (множеств)</returns>
+        private List<Geometry> CreateSets(Panel panel)
+        {
+            List<Geometry> sets = new List<Geometry>();
+
+            double sizeFigure = panel.Height * 1.5 - Base.StrokeThickness * 2; // 1.5, потому что одна ось больше другой в 1.5 раза.
+            double xStart = panel.Width / 2 + (panel.Width / 2 - sizeFigure) / 2;
+
+            Figure.ShowFigures(new List<Geometry>()
+            {
+                new Figure(60, 0, 0).GetGeometryFromText("A", (int)panel.Width - 60, -20),
+                new Figure(60, 0, 0).GetGeometryFromText("B", (int)panel.Width - 80, 80)
+            },
+            panel,
+            Brushes.White,
+            Brushes.Black);
+
+            Panel.SetZIndex(panel.Children[0], 1);
+            Panel.SetZIndex(panel.Children[1], 1);
+
+            sets.Add(new Figure((int)sizeFigure, (sizeFigure + Base.StrokeThickness) * 2, panel.Width / 2). // Главное множество.
+                CreateEllipseTransformY((int)xStart, true));
+
+            sets.Add(new Figure((int)sizeFigure / 2, (sizeFigure + Base.StrokeThickness) * 2, panel.Width / 2). // Подмножество.
+                CreateEllipseTransformY((int)xStart + (int)sizeFigure / 3, true));
+
+            ((EllipseGeometry)sets[1]).Center = new Point(((EllipseGeometry)sets[1]).Center.X, ((EllipseGeometry)sets[0]).Center.Y - 50); // 50 - придуманное число
+                                                                                                                                          // для смещения подмножества
+            return sets;                                                                                                                  // немного вверх.
+        }
+
+        /// <summary>
+        /// Инициализирует множества-условия для второго задания
+        /// </summary>
+        /// <param name="setFirst">первое множество</param>
+        /// <param name="setSecond">второе множество</param>
+        /// <param name="countFirst">количество элементов первого множества</param>
+        /// <param name="countSecond">количество элементов второго множества</param>
+        private void InitializeSetsTaskSecond(out List<Geometry> setFirst, out List<Geometry> setSecond, int countFirst, int countSecond)
+        {
+            while (true)
+            {
+                bool isInvalidSets = false; // Проверка наличия всех элементов setSecond в setFirst.
+
+                setFirst = CreateAnswersTaskSecond(countFirst, _indexesAnswersSetA, SpFiguresTaskSecondSetA);
+                setSecond = CreateAnswersTaskSecond(countSecond, _indexesAnswersSetB, SpFiguresTaskSecondSetB);
+
+                foreach (int item in _indexesAnswersSetB)
+                {
+                    if (!_indexesAnswersSetA.Contains(item))
+                    {
+                        isInvalidSets = true;
+                    }
+                }
+
+                if (!isInvalidSets)
+                {
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Генерирует фигуры-ответы для второго задания
+        /// </summary>
+        /// <param name="count">количество фигур</param>
+        /// <param name="answers">индексы фигур-ответов</param>
+        /// <param name="panel">контейнер</param>
+        /// <returns>Список фигур-ответов</returns>
+        private List<Geometry> CreateAnswersTaskSecond(int count, List<int> answers, Panel panel)
+        {
+            int sizeFigures = (int)TbTaskFirst.FontSize;
+            Figure figures = new Figure(sizeFigures, (sizeFigures + 2) * 2, panel.Width);
+            List<CreateFiguresDelegate> createFiguresMethods = figures.GetAllCreateFiguresMethods();
+            List<int> tempIndexesFigures = Figure.ShuffleMethods(createFiguresMethods);
+
+            answers.Clear();
+            for (int i = 0; i < count; i++)
+            {
+                answers.Add(tempIndexesFigures[i]);
+            }
+
+            List<Geometry> listFigures = new List<Geometry>();
+            int x = 10;
+
+            for (int i = 0; i < count; i++)
+            {
+                listFigures.Add(createFiguresMethods[i](x, true));
+            }
+
+            panel.Width = listFigures.Count * sizeFigures + (listFigures.Count + 1) * x;
+
+            return listFigures;
+        }
+
+        /// <summary>
+        /// Генерирует фигуры для второго задания
+        /// </summary>
+        /// <returns>Коллекция фигур</returns>
+        private List<Geometry> CreateFiguresTaskSecond()
+        {
+            Figure figure = new Figure(_sizeFiguresTaskSecond, CnvTaskSecond.Height, CnvTaskSecond.Width / 2);
+            List<CreateFiguresDelegate> createFiguresMethods = figure.GetAllCreateFiguresMethods();
+            List<int> indexesFigures = Figure.ShuffleMethods(createFiguresMethods);
+
+            List<Geometry> figures = new List<Geometry>();
+            int offset = figure.GetOffset(createFiguresMethods.Count);
+            int xStart = Base.StrokeThickness;
+
+            for (int i = 0; i < createFiguresMethods.Count; i++)
+            {
+                if (i == createFiguresMethods.Count - 1) // Размещаем последнюю фигуру в нижней части контейнера.
+                {
+                    figures.Add(createFiguresMethods[i](xStart, false));
+                    break;
+                }
+
+                if (i % 2 == 0)
+                {
+                    figures.Add(createFiguresMethods[i](xStart, true)); // Положение фигуры по вертикали сверху.
+                }
+                else
+                {
+                    figures.Add(createFiguresMethods[i](xStart, false)); // Положение фигуры по вертикали снизу.
+                    xStart += offset;
+                }
+            }
+
+            _pointsToMovedTaskFirst.Clear();
+            for (int i = 0; i < figures.Count; i++)
+            {
+                _pointsToMovedTaskFirst.Add(new Point(0, 0));
+            }
+
+            LessonFourAndFive.SortForDefaultPosition(figures, indexesFigures);
+
+            return figures;
+        }
+
         private void BtnCheckTaskSecond_Click(object sender, RoutedEventArgs e)
         {
             if (Figure.CheckOccurrencesFiguresInSet(_indexesAnswersSetA, _figuresTaskSecond, _setsTaskSecond[0]) &&
@@ -623,6 +584,14 @@ namespace MathSets.pages
             {
                 new ResultLessonSix(CnvTaskSecond, _indexesAnswersSetA, _indexesAnswersSetB, _sizeFiguresTaskSecond).ShowDialog();
             }
+        }
+
+        private void MenuGuide_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem childMenuItem = (MenuItem)sender;
+            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
+
+            new GuideWindow(4, Convert.ToInt32(menuItem.Uid)).ShowDialog();
         }
 
         private void MenuRefresh_Click(object sender, RoutedEventArgs e)
@@ -641,14 +610,6 @@ namespace MathSets.pages
                 default:
                     break;
             }
-        }
-
-        private void MenuGuide_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem childMenuItem = (MenuItem)sender;
-            MenuItem menuItem = (MenuItem)childMenuItem.Parent;
-
-            new GuideWindow(4, Convert.ToInt32(menuItem.Uid)).ShowDialog();
         }
 
         private void BtnHint_Click(object sender, RoutedEventArgs e)

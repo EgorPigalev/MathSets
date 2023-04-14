@@ -122,7 +122,7 @@ namespace MathSets.pages
             {
                 new Figure(60, 0, 0).GetGeometryFromText("A", (int)panel.Width - 60, -20)
             },
-            CnvTaskFirst,
+            panel,
             Brushes.White,
             Brushes.Black);
 
@@ -133,7 +133,8 @@ namespace MathSets.pages
         /// <summary>
         /// Генерирует фигуры-ответы для первого задания
         /// </summary>
-        /// <returns>Список фигур</returns>
+        /// <param name="count">количество фигур</param>
+        /// <returns>Список фигур-ответов</returns>
         private List<Geometry> CreateAnswersTaskFirst(int count)
         {
             int sizeFigures = (int)TbTaskFirst.FontSize;
@@ -220,7 +221,6 @@ namespace MathSets.pages
         /// <summary>
         /// Устанавливает события для panel, необходимые для перемещения фигур, для первого задания
         /// </summary>
-        /// <param name="panel">Контейнер</param>
         private void SetHandlersTaskFirst()
         {
             SpTaskFirst.MouseUp += OnMouseUp;
@@ -272,7 +272,7 @@ namespace MathSets.pages
         /// </summary>
         /// <param name="point"> точка для изменения</param>
         /// <param name="actualCoordinate">актуальные координаты курсора</param>
-        /// <returns></returns>
+        /// <returns>Новые коодинаты фигуры</returns>
         private Point GetOffsetFigure(Point point, Point actualCoordinate)
         {
             if (actualCoordinate.Y > _oldMouseCoordinate.Y)
@@ -372,15 +372,16 @@ namespace MathSets.pages
         /// <returns>Список множеств</returns>
         private List<Geometry> CreateSets(Panel panel)
         {
-            double sizeFigure = panel.Height * 0.7 * 1.5 - Base.StrokeThickness * 2;                    // 1.5, потому что одна ось меньше другой в 1.5 раза,
-            double xStart = Base.StrokeThickness + (panel.Width - panel.Width / 2 + 100 - 100 * 2) / 2; // 0.7 - для уменьшения размеров множества, придуманное число.
-                                                                                                        // 100 - для смещения эллипса вправо, придуманное число.
+            int offset = 100; // Смещение второго множества относительно первого по оси Х.
+            double sizeFigure = panel.Height * 0.7 * 1.5 - Base.StrokeThickness * 2;   // 1.5, потому что одна ось меньше другой в 1.5 раза,
+            double xStart = Base.StrokeThickness + (panel.Width / 2 - offset) / 2; // 0.7 - для уменьшения размеров множества, придуманное число.
+
             List<Geometry> sets = new List<Geometry>
             {
                 new Figure((int)sizeFigure, (sizeFigure + Base.StrokeThickness) * 2, panel.Width / 2).
                 CreateEllipseTransformY((int)xStart, true, -20),
                 new Figure((int)sizeFigure, (sizeFigure + Base.StrokeThickness) * 2, panel.Width / 2).
-                CreateEllipseTransformY((int)xStart + 100, true, -20)
+                CreateEllipseTransformY((int)xStart + offset, true, -20)
             };
 
             for (int i = 0; i < sets.Count; i++)
@@ -407,6 +408,7 @@ namespace MathSets.pages
         /// <summary>
         /// Генерирует фигуры из цифр для второго задания
         /// </summary>
+        /// <param name="countFigures">количество фигур</param>
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresTaskSecond(int countFigures)
         {
@@ -492,6 +494,7 @@ namespace MathSets.pages
         /// <summary>
         /// Генерирует фигуры из цифр для третьего задания
         /// </summary>
+        /// <param name="countFigures">количество фигур</param>
         /// <returns>Коллекция фигур</returns>
         private List<Geometry> CreateFiguresTaskThree(int countFigures)
         {
@@ -564,7 +567,6 @@ namespace MathSets.pages
         /// <summary>
         /// Устанавливает события для panel, необходимые для перемещения фигур, для третьего задания
         /// </summary>
-        /// <param name="panel">Контейнер</param>
         private void SetHandlersTaskThree() // 2, так как вторым элементом списка является само множество, а первым - его название.
         {
             SpTaskThree.MouseUp += OnMouseUp;
@@ -599,9 +601,8 @@ namespace MathSets.pages
             }
             else
             {
-                MessageBox.Show("Ошибка. Не работает пока");
+                new ResultLessonFourAndFive(SpTaskThreeWork, _sizeFiguresTaskThree).ShowDialog();
                 return;
-                new ResultLessonFourAndFive(CnvTaskThree, SpCondition, _sizeFiguresTaskThree).ShowDialog();
             }
         }
 
@@ -631,16 +632,6 @@ namespace MathSets.pages
             return true;
         }
 
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
-            Base.MainFrame.Navigate(new MainMenuPage());
-        }
-
-        private void BtnHint_Click(object sender, RoutedEventArgs e)
-        {
-            new HintLessonFourAndFive().ShowDialog();
-        }
-
         private void MenuGuide_Click(object sender, RoutedEventArgs e)
         {
             MenuItem childMenuItem = (MenuItem)sender;
@@ -668,6 +659,16 @@ namespace MathSets.pages
                 default:
                     break;
             }
+        }
+
+        private void BtnHint_Click(object sender, RoutedEventArgs e)
+        {
+            new HintLessonFourAndFive().ShowDialog();
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Base.MainFrame.Navigate(new MainMenuPage());
         }
     }
 }
