@@ -11,13 +11,13 @@ namespace MathSets.pages
     public partial class EqualSetsSolvingTasksPage : Page
     {
 
-        string[] numbers = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // массив цифр
-        string[] vowelLetters = { "а", "о", "у", "ы", "э", "е", "ё", "и", "ю", "я" }; // массив гласный букв
-        public static Random random = new Random();
-        int index;
-        string strButton = ""; // значение для первой кнопки-ответ
-        string strButtonTwo = ""; // значение для второй кнопки-ответ
-        string strButtonThree = ""; // значение для третьей кнопки-ответ
+        private string[] _numbers = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // массив цифр
+        private string[] _vowelLetters = { "а", "о", "у", "ы", "э", "е", "ё", "и", "ю", "я" }; // массив гласный букв
+        private static Random _random = new Random();
+        private int _index;
+        private string _strButton = ""; // значение для первой кнопки-ответ
+        private string _strButtonTwo = ""; // значение для второй кнопки-ответ
+        private string _strButtonThree = ""; // значение для третьей кнопки-ответ
 
 
         public EqualSetsSolvingTasksPage()
@@ -33,11 +33,11 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// метод для вывода варианта ответа
+        /// метод для вывода множества в задание 1 для третьего равенства
         /// </summary>
         private void ShowRandomZnachenia3()
         {
-            int r = random.Next(2);
+            int r = _random.Next(2);
             if (r == 0)
             {
                 for (int i = 0; i <= 4; i++) // цикл для вывода текста 
@@ -47,33 +47,33 @@ namespace MathSets.pages
                         TextBlockLeftVar3.Text += "{";
                         TextBlockRightVar3.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar3.Text += numbers[index] + "";
-                            TextBlockRightVar3.Text += numbers[index] + "";
+                            TextBlockLeftVar3.Text += _numbers[_index] + "";
+                            TextBlockRightVar3.Text += _numbers[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar3.Text += numbers[index] + "; ";
-                            TextBlockRightVar3.Text += numbers[index] + "; ";
+                            TextBlockLeftVar3.Text += _numbers[_index] + "; ";
+                            TextBlockRightVar3.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar3.Text += vowelLetters[index] + "";
-                            TextBlockRightVar3.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar3.Text += _vowelLetters[_index] + "";
+                            TextBlockRightVar3.Text += _vowelLetters[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar3.Text += vowelLetters[index] + "; ";
-                            TextBlockRightVar3.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar3.Text += _vowelLetters[_index] + "; ";
+                            TextBlockRightVar3.Text += _vowelLetters[_index] + "; ";
                         }
                     }
 
@@ -93,32 +93,32 @@ namespace MathSets.pages
                         TextBlockLeftVar3.Text += "{";
 
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar3.Text += numbers[index] + "";
+                            TextBlockLeftVar3.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar3.Text += numbers[index] + "; ";
+                            TextBlockLeftVar3.Text += _numbers[_index] + "; ";
                         }
 
                     }
                     else
                     {
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar3.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar3.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar3.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar3.Text += _vowelLetters[_index] + "; ";
                         }
 
                     }
@@ -135,32 +135,32 @@ namespace MathSets.pages
 
                         TextBlockRightVar3.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar3.Text += numbers[index] + "";
+                            TextBlockRightVar3.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar3.Text += numbers[index] + "; ";
+                            TextBlockRightVar3.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
 
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar3.Text += vowelLetters[index] + "";
+                            TextBlockRightVar3.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar3.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar3.Text += _vowelLetters[_index] + "; ";
                         }
                     }
                     if (i == 4)
@@ -173,11 +173,11 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// метод для вывода варианта ответа
+        /// метод для вывода множества в задание 1 для четвертого равенства
         /// </summary>
         private void ShowRandomZnachenia4()
         {
-            int r = random.Next(2);
+            int r = _random.Next(2);
             if (r == 0)
             {
                 for (int i = 0; i <= 4; i++) // цикл для вывода текста 
@@ -187,33 +187,33 @@ namespace MathSets.pages
                         TextBlockLeftVar4.Text += "{";
                         TextBlockRightVar4.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar4.Text += numbers[index] + "";
-                            TextBlockRightVar4.Text += numbers[index] + "";
+                            TextBlockLeftVar4.Text += _numbers[_index] + "";
+                            TextBlockRightVar4.Text += _numbers[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar4.Text += numbers[index] + "; ";
-                            TextBlockRightVar4.Text += numbers[index] + "; ";
+                            TextBlockLeftVar4.Text += _numbers[_index] + "; ";
+                            TextBlockRightVar4.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar4.Text += vowelLetters[index] + "";
-                            TextBlockRightVar4.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar4.Text += _vowelLetters[_index] + "";
+                            TextBlockRightVar4.Text += _vowelLetters[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar4.Text += vowelLetters[index] + "; ";
-                            TextBlockRightVar4.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar4.Text += _vowelLetters[_index] + "; ";
+                            TextBlockRightVar4.Text += _vowelLetters[_index] + "; ";
                         }
                     }
 
@@ -233,32 +233,32 @@ namespace MathSets.pages
                         TextBlockLeftVar4.Text += "{";
 
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar4.Text += numbers[index] + "";
+                            TextBlockLeftVar4.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar4.Text += numbers[index] + "; ";
+                            TextBlockLeftVar4.Text += _numbers[_index] + "; ";
                         }
 
                     }
                     else
                     {
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar4.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar4.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar4.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar4.Text += _vowelLetters[_index] + "; ";
                         }
 
                     }
@@ -275,32 +275,32 @@ namespace MathSets.pages
 
                         TextBlockRightVar4.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar4.Text += numbers[index] + "";
+                            TextBlockRightVar4.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar4.Text += numbers[index] + "; ";
+                            TextBlockRightVar4.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
 
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar4.Text += vowelLetters[index] + "";
+                            TextBlockRightVar4.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar4.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar4.Text += _vowelLetters[_index] + "; ";
                         }
                     }
                     if (i == 4)
@@ -313,11 +313,11 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// метод для вывода варианта ответа
+        /// метод для вывода множества в задание 1 для второго равенства
         /// </summary>
         private void ShowRandomZnachenia2()
         {
-            int r = random.Next(2);
+            int r = _random.Next(2);
             if (r == 0)
             {
                 for (int i = 0; i <= 4; i++) // цикл для вывода текста 
@@ -327,34 +327,34 @@ namespace MathSets.pages
                         TextBlockLeftVar2.Text += "{";
                         TextBlockRightVar2.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar2.Text += numbers[index] + "";
-                            TextBlockRightVar2.Text += numbers[index] + "";
+                            TextBlockLeftVar2.Text += _numbers[_index] + "";
+                            TextBlockRightVar2.Text += _numbers[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar2.Text += numbers[index] + "; ";
-                            TextBlockRightVar2.Text += numbers[index] + "; ";
+                            TextBlockLeftVar2.Text += _numbers[_index] + "; ";
+                            TextBlockRightVar2.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
 
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar2.Text += vowelLetters[index] + "";
-                            TextBlockRightVar2.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar2.Text += _vowelLetters[_index] + "";
+                            TextBlockRightVar2.Text += _vowelLetters[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
-                            TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar2.Text += _vowelLetters[_index] + "; ";
+                            TextBlockRightVar2.Text += _vowelLetters[_index] + "; ";
                         }
                     }
                     
@@ -374,32 +374,32 @@ namespace MathSets.pages
                         TextBlockLeftVar2.Text += "{";
 
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar2.Text += numbers[index] + "";
+                            TextBlockLeftVar2.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar2.Text += numbers[index] + "; ";
+                            TextBlockLeftVar2.Text += _numbers[_index] + "; ";
                         }
 
                     }
                     else
                     {
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar2.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar2.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar2.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar2.Text += _vowelLetters[_index] + "; ";
                         }
 
                     }
@@ -416,32 +416,32 @@ namespace MathSets.pages
 
                         TextBlockRightVar2.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar2.Text += numbers[index] + "";
+                            TextBlockRightVar2.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar2.Text += numbers[index] + "; ";
+                            TextBlockRightVar2.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
 
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar2.Text += vowelLetters[index] + "";
+                            TextBlockRightVar2.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar2.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar2.Text += _vowelLetters[_index] + "; ";
                         }
                     }
                     if (i == 4)
@@ -454,11 +454,11 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// метод для вывода варианта ответа
+        /// метод для вывода множества в задание 1 для первого равенства
         /// </summary>
         private void ShowRandomZnachenia()
         {
-            int r = random.Next(2);
+            int r = _random.Next(2);
             if (r == 0)
             {
                 for (int i = 0; i <= 4; i++) // цикл для вывода текста 
@@ -468,34 +468,34 @@ namespace MathSets.pages
                         TextBlockLeftVar.Text += "{";
                         TextBlockRightVar.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar.Text += numbers[index] + "";
-                            TextBlockRightVar.Text += numbers[index] + "";
+                            TextBlockLeftVar.Text += _numbers[_index] + "";
+                            TextBlockRightVar.Text += _numbers[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar.Text += numbers[index] + "; ";
-                            TextBlockRightVar.Text += numbers[index] + "; ";
+                            TextBlockLeftVar.Text += _numbers[_index] + "; ";
+                            TextBlockRightVar.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
 
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar.Text += vowelLetters[index] + "";
-                            TextBlockRightVar.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar.Text += _vowelLetters[_index] + "";
+                            TextBlockRightVar.Text += _vowelLetters[_index] + "";
                         }
                         else
                         {
-                            TextBlockLeftVar.Text += vowelLetters[index] + "; ";
-                            TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar.Text += _vowelLetters[_index] + "; ";
+                            TextBlockRightVar.Text += _vowelLetters[_index] + "; ";
                         }
                     }
                     if (i == 4)
@@ -514,33 +514,33 @@ namespace MathSets.pages
                         TextBlockLeftVar.Text += "{";
 
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar.Text += numbers[index] + "";
+                            TextBlockLeftVar.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar.Text += numbers[index] + "; ";
+                            TextBlockLeftVar.Text += _numbers[_index] + "; ";
                         }
 
                     }
                     else
                     {
 
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockLeftVar.Text += vowelLetters[index] + "";
+                            TextBlockLeftVar.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockLeftVar.Text += vowelLetters[index] + "; ";
+                            TextBlockLeftVar.Text += _vowelLetters[_index] + "; ";
                         }
 
                     }
@@ -557,32 +557,32 @@ namespace MathSets.pages
 
                         TextBlockRightVar.Text += "{";
                     }
-                    int indexx = random.Next(2);
+                    int indexx = _random.Next(2);
                     if (indexx == 0)
                     {
-                        index = random.Next(numbers.Length);
+                        _index = _random.Next(_numbers.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar.Text += numbers[index] + "";
+                            TextBlockRightVar.Text += _numbers[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar.Text += numbers[index] + "; ";
+                            TextBlockRightVar.Text += _numbers[_index] + "; ";
                         }
                     }
                     else
                     {
 
-                        index = random.Next(vowelLetters.Length);
+                        _index = _random.Next(_vowelLetters.Length);
                         if (i == 4)
                         {
-                            TextBlockRightVar.Text += vowelLetters[index] + "";
+                            TextBlockRightVar.Text += _vowelLetters[_index] + "";
 
                         }
                         else
                         {
-                            TextBlockRightVar.Text += vowelLetters[index] + "; ";
+                            TextBlockRightVar.Text += _vowelLetters[_index] + "; ";
                         }
                     }
                     if (i == 4)
@@ -596,83 +596,83 @@ namespace MathSets.pages
 
 
         /// <summary>
-        /// метод длявывода рандомных ответов в задание 2
+        /// метод для вывода рандомных ответов в задание 2
         /// </summary>
         private void ShowRandomButton()
         {
-            int randomAnswerOptions = random.Next(3); // вывод рандомных вариантов ответа
-            int countButtonNumbers = random.Next(1, 7); // рандомное количество значений в ответе
+            int randomAnswerOptions = _random.Next(3); // вывод рандомных вариантов ответа
+            int countButtonNumbers = _random.Next(1, 7); // рандомное количество значений в ответе
             for (int i = 0; i <= countButtonNumbers; i++) // цикл для вывода формирования ответа для кнопки
             {
                 if (i == 0)
                 {
-                    strButton += "{";
+                    _strButton += "{";
                 }
-                index = random.Next(numbers.Length);
+                _index = _random.Next(_numbers.Length);
                 if (i == countButtonNumbers)
                 {
-                    strButton += numbers[index] + "";
+                    _strButton += _numbers[_index] + "";
                 }
                 else
                 {
-                    strButton += numbers[index] + "; ";
+                    _strButton += _numbers[_index] + "; ";
                 }
                 if (i == countButtonNumbers)
                 {
-                    strButton += "}";
+                    _strButton += "}";
                 }
             }
-            countButtonNumbers = random.Next(1, 7); // рандомное количество значений в ответе
+            countButtonNumbers = _random.Next(1, 7); // рандомное количество значений в ответе
             for (int i = 0; i <= countButtonNumbers; i++) // цикл для вывода формирования ответа для кнопки
             {
                 if (i == 0)
                 {
-                    strButtonTwo += "{";
+                    _strButtonTwo += "{";
                 }
-                index = random.Next(numbers.Length);
+                _index = _random.Next(_numbers.Length);
                 if (i == countButtonNumbers)
                 {
-                    strButtonTwo += numbers[index] + "";
+                    _strButtonTwo += _numbers[_index] + "";
                 }
                 else
                 {
-                    strButtonTwo += numbers[index] + "; ";
+                    _strButtonTwo += _numbers[_index] + "; ";
                 }
                 if (i == countButtonNumbers)
                 {
-                    strButtonTwo += "}";
+                    _strButtonTwo += "}";
                 }
             }
             for (int i = 0; i <= 1; i++) // цикл для вывода формирования ответа для кнопки
             {
                 if (i == 0)
                 {
-                    strButtonThree += "{";
+                    _strButtonThree += "{";
                 }
-                strButtonThree += " ";
+                _strButtonThree += " ";
                 if (i == 1)
                 {
-                    strButtonThree += "}";
+                    _strButtonThree += "}";
                 }
             }
 
             if (randomAnswerOptions == 0)
             {
-                OptionOne.Content = strButton;
-                OptionTwo.Content = strButtonTwo;
-                OptionThree.Content = strButtonThree;
+                OptionOne.Content = _strButton;
+                OptionTwo.Content = _strButtonTwo;
+                OptionThree.Content = _strButtonThree;
             }
             else if (randomAnswerOptions == 1)
             {
-                OptionOne.Content = strButtonTwo;
-                OptionTwo.Content = strButtonThree;
-                OptionThree.Content = strButton;
+                OptionOne.Content = _strButtonTwo;
+                OptionTwo.Content = _strButtonThree;
+                OptionThree.Content = _strButton;
             }
             else if (randomAnswerOptions == 2)
             {
-                OptionOne.Content = strButtonThree;
-                OptionTwo.Content = strButton;
-                OptionThree.Content = strButtonTwo;
+                OptionOne.Content = _strButtonThree;
+                OptionTwo.Content = _strButton;
+                OptionThree.Content = _strButtonTwo;
             }
         }
 
@@ -1082,7 +1082,7 @@ namespace MathSets.pages
         }
 
 
-        SolidColorBrush colorButton = new SolidColorBrush(Color.FromRgb(241, 76, 24)); // цвет для кнопок, в который они перекрасятся при нажатии
+        private SolidColorBrush _colorButton = new SolidColorBrush(Color.FromRgb(241, 76, 24)); // цвет для кнопок, в который они перекрасятся при нажатии
 
 
         private void BtnHint_Click_1(object sender, RoutedEventArgs e)
@@ -1119,9 +1119,9 @@ namespace MathSets.pages
 
                     break;
                 case 2:
-                    strButton = "";
-                    strButtonTwo = "";
-                    strButtonThree = "";
+                    _strButton = "";
+                    _strButtonTwo = "";
+                    _strButtonThree = "";
                     ShowRandomButton();
                     OptionThree.ClearValue(Button.BackgroundProperty);
                     OptionOne.ClearValue(Button.BackgroundProperty);
@@ -1135,7 +1135,7 @@ namespace MathSets.pages
         private void BtnResultTaskTwo_Click(object sender, RoutedEventArgs e)
         {
             string strAnswer = ""; // переменна для записи ответа, который выбрал пользователь
-            if (OptionOne.Background == colorButton)
+            if (OptionOne.Background == _colorButton)
             {
                 strAnswer = Convert.ToString(OptionOne.Content);
                 if (strAnswer == "{  }") // если пользователь выбрал правильный ответ
@@ -1150,7 +1150,7 @@ namespace MathSets.pages
                     resultSetAndElementsTasks.ShowDialog();
                 }
             }
-            else if (OptionTwo.Background == colorButton)
+            else if (OptionTwo.Background == _colorButton)
             {
                 strAnswer = Convert.ToString(OptionTwo.Content);
                 if (strAnswer == "{  }") // если пользователь выбрал правильный ответ
@@ -1165,7 +1165,7 @@ namespace MathSets.pages
                     resultSetAndElementsTasks.ShowDialog();
                 }
             }
-            else if (OptionThree.Background == colorButton)
+            else if (OptionThree.Background == _colorButton)
             {
                 strAnswer = Convert.ToString(OptionThree.Content);
                 if (strAnswer == "{  }") // если пользователь выбрал правильный ответ
@@ -1188,21 +1188,21 @@ namespace MathSets.pages
 
         private void OptionOne_Click(object sender, RoutedEventArgs e)
         {
-            OptionOne.Background = colorButton; // красим кнопку
+            OptionOne.Background = _colorButton; // красим кнопку
             OptionTwo.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             OptionThree.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
         }
 
         private void OptionTwo_Click(object sender, RoutedEventArgs e)
         {
-            OptionTwo.Background = colorButton; // красим кнопку
+            OptionTwo.Background = _colorButton; // красим кнопку
             OptionOne.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             OptionThree.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
         }
 
         private void OptionThree_Click(object sender, RoutedEventArgs e)
         {
-            OptionThree.Background = colorButton; // красим кнопку
+            OptionThree.Background = _colorButton; // красим кнопку
             OptionOne.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
             OptionTwo.ClearValue(Button.BackgroundProperty); // с остальных кнопок снимаем окрас
         }
