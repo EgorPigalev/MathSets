@@ -12,8 +12,8 @@ namespace MathSets.windows
     /// </summary>
     public partial class ResultCombiningSetsWindow : Window
     {
-        EllipseGeneration _ellipseGeneration = new EllipseGeneration();
-        Random _random = new Random();
+        private EllipseGeneration _ellipseGeneration = new EllipseGeneration();
+        private Random _random = new Random();
 
         /// <summary>
         /// Конструктор для задания 1
