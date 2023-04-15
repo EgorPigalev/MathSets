@@ -13,6 +13,7 @@ namespace MathSets.windows
     /// </summary>
     public partial class ResultLessonSix : Window
     {
+
         public ResultLessonSix(Grid grid, List<Geometry> figures)
         {
             InitializeComponent();

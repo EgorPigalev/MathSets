@@ -440,7 +440,7 @@ namespace MathSets.pages
         /// </summary>
         /// <param name="mas">Массив, который нужно показать в виде строки</param>
         /// <returns></returns>
-        private string ConvertMasInString(int[] mas)
+        public string ConvertMasInString(int[] mas)
         {
             string str = "";
             if (mas[0] == 0)

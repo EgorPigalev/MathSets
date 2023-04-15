@@ -8,9 +8,9 @@ using System.Windows.Shapes;
 
 namespace MathSets
 {
-    delegate Geometry CreateFiguresDelegate(int x, bool isUp); // Чтобы можно было сделать массив из функций для создания фигур.
+    public delegate Geometry CreateFiguresDelegate(int x, bool isUp); // Чтобы можно было сделать массив из функций для создания фигур.
 
-    internal class Figure
+    public class Figure
     {
         private static Random s_random = new Random();
         private int _heightContainer;
@@ -382,16 +382,21 @@ namespace MathSets
         /// </summary>
         /// <param name="IsUp">true - фигура располагается в верхней половине контейнера, false - в нижней</param>
         /// <returns>Координата Y крайней нижней точки фигуры</returns>
-        private int GetCoordinateY(bool IsUp)
+        public int GetCoordinateY(bool IsUp)
         {
-            if (IsUp)
+            if (_sizeFigures > 0 && _heightContainer > _sizeFigures * 2 + 2)
             {
-                return s_random.Next(_sizeFigures + 1, _heightContainer / 2);
+                if (IsUp)
+                {
+                    return s_random.Next(_sizeFigures + 1, _heightContainer / 2);
+                }
+                else
+                {
+                    return s_random.Next(_heightContainer / 2 + _sizeFigures + 1, _heightContainer);
+                }
             }
-            else
-            {
-                return s_random.Next(_heightContainer / 2 + _sizeFigures + 1, _heightContainer);
-            }
+
+            return 0;
         }
 
         /// <summary>
@@ -399,7 +404,7 @@ namespace MathSets
         /// </summary>
         /// <param name="points">коллекция точек для отрисовки фигуры</param>
         /// <returns>Фигура, созданная по заданным точкам</returns>
-        private Geometry GetGeometryFromPoints(PointCollection points)
+        public static Geometry GetGeometryFromPoints(PointCollection points)
         {
             Geometry geometry = new StreamGeometry();
 
@@ -419,7 +424,8 @@ namespace MathSets
         /// <returns>Отступ между фигурами</returns>
         public int GetOffset(int countFigures)
         {
-            if (countFigures >= 3 && _widthContainer > (countFigures % 2 == 0 ? countFigures / 2 : countFigures / 2 + 1) * _sizeFigures)
+            if (countFigures >= 3 && _sizeFigures > 0 &&
+                _widthContainer > (countFigures % 2 == 0 ? countFigures / 2 : countFigures / 2 + 1) * _sizeFigures)
             {
                 int offset;
 
