@@ -12,8 +12,8 @@ namespace MathSets.windows
     /// </summary>
     public partial class ResultCombiningSetsWindow : Window
     {
-        EllipseGeneration ellipseGeneration = new EllipseGeneration();
-        Random random = new Random();
+        EllipseGeneration _ellipseGeneration = new EllipseGeneration();
+        Random _random = new Random();
 
         /// <summary>
         /// Конструктор для задания 1
@@ -52,7 +52,7 @@ namespace MathSets.windows
             };
             newCanvas.Children.Add(ellipseTwoNew);
 
-            Path pathNew = ellipseGeneration.GetUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
+            Path pathNew = _ellipseGeneration.GetUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
             newCanvas.Children.Add(pathNew);
 
             TextBlock tbA = new TextBlock()
@@ -132,7 +132,7 @@ namespace MathSets.windows
             };
             newCanvas.Children.Add(ellipseTwoNew);
 
-            Path pathNew = ellipseGeneration.GetUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
+            Path pathNew = _ellipseGeneration.GetUnification(ellipseOneNew, ellipseTwoNew, GeometryCombineMode.Intersect);
             newCanvas.Children.Add(pathNew);
 
             AddElementsIncanvas(masOnlyA, 30, newCanvas);
@@ -156,7 +156,7 @@ namespace MathSets.windows
                 {
                     Figure figure = new Figure(28, 0, 0);
                     Geometry geometry = null;
-                    geometry = GetGeometryFromText(mas[i].ToString(), 50, marginLeft, random.Next(15, 60));
+                    geometry = GetGeometryFromText(mas[i].ToString(), 50, marginLeft, _random.Next(15, 60));
                     marginLeft += 30;
 
                     Path pathNumbers = new Path()
