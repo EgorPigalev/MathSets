@@ -59,10 +59,10 @@
                                 </MenuItem>
                             </Menu>
 
-                            <Button Style="{StaticResource ButtonMainStyle}"  Click="Option1_Click" Margin="50,10,50,0" Name="BtnOption1" Grid.Column="0" Grid.Row="1"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Click="Option2_Click" Grid.Column="1" Name="BtnOption2" Grid.Row="1" Margin="50,10,50,0"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Click="Option3_Click"  Grid.ColumnSpan="2" Name="BtnOption3" Grid.Row="2" Margin="150,10,150,0"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Grid.ColumnSpan="2" Name="BtnResult" Click="BtnResult_Click"  Grid.Row="3" Margin="0,30,0,10">Проверить</Button>
+                            <Button  Style="{StaticResource ButtonMainStyle}"  Click="Option1_Click" Margin="50,10,50,0" Name="BtnOption1" Grid.Column="0" Grid.Row="1"></Button>
+                            <Button  Style="{StaticResource ButtonMainStyle}" Click="Option2_Click" Grid.Column="1" Name="BtnOption2" Grid.Row="1" Margin="50,10,50,0"></Button>
+                            <Button  Style="{StaticResource ButtonMainStyle}" Click="Option3_Click"  Grid.ColumnSpan="2" Name="BtnOption3" Grid.Row="2" Margin="150,10,150,0"></Button>
+                            <Button HorizontalAlignment="Center" Style="{StaticResource ButtonMainStyle}" Grid.ColumnSpan="2" Name="BtnResult" Click="BtnResult_Click"  Grid.Row="3" Margin="0,30,0,10">Проверить</Button>
                         </Grid>
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
@@ -97,7 +97,7 @@
                             <Button Style="{StaticResource ButtonMainStyle}" Click="OptionOne_Click" Name="OptionOne"   Margin="50,10,50,0"  Grid.Column="0" Grid.Row="1"></Button>
                             <Button Style="{StaticResource ButtonMainStyle}" Click="OptionTwo_Click" Name="OptionTwo" Grid.Column="1"  Grid.Row="1" Margin="50,10,50,0"></Button>
                             <Button Style="{StaticResource ButtonMainStyle}" Click="OptionThree_Click" Name="OptionThree"  Grid.ColumnSpan="2"  Grid.Row="2" Margin="150,10,150,0"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Click="BtnCheck_Click" Name="BtnCheck" Grid.ColumnSpan="2"   Grid.Row="3" Margin="0,30,0,10">Проверить</Button>
+                            <Button HorizontalAlignment="Center" Style="{StaticResource ButtonMainStyle}" Click="BtnCheck_Click" Name="BtnCheck" Grid.ColumnSpan="2"   Grid.Row="3" Margin="0,30,0,10">Проверить</Button>
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>

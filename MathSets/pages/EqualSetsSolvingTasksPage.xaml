@@ -114,7 +114,7 @@
                             </Grid>
 
                             <StackPanel Grid.Row="4" Grid.ColumnSpan="2">
-                                <Button  Style="{StaticResource ButtonMainStyle}" Click="BtnCheck_Click" Name="BtnCheck" Margin="0,30,0,10">Проверить</Button>
+                                <Button  HorizontalAlignment="Center"  Style="{StaticResource ButtonMainStyle}" Click="BtnCheck_Click" Name="BtnCheck" Margin="0,30,0,10">Проверить</Button>
                             </StackPanel>
                         </Grid>
                         <Grid Margin="5">
@@ -150,7 +150,7 @@
                             <Button Style="{StaticResource ButtonMainStyle}" Click="OptionOne_Click"  Margin="50,10,50,0" Name="OptionOne" Grid.Column="0" Grid.Row="1"></Button>
                             <Button Style="{StaticResource ButtonMainStyle}" Click="OptionTwo_Click"  Grid.Column="1" Name="OptionTwo" Grid.Row="1" Margin="50,10,50,0"></Button>
                             <Button Style="{StaticResource ButtonMainStyle}" Click="OptionThree_Click"  Grid.ColumnSpan="2" Name="OptionThree" Grid.Row="2" Margin="150,10,150,0"></Button>
-                            <Button Style="{StaticResource ButtonMainStyle}" Grid.ColumnSpan="2" Name="BtnResultTaskTwo" Click="BtnResultTaskTwo_Click" Grid.Row="3" Margin="0,30,0,10">Проверить</Button>
+                            <Button HorizontalAlignment="Center" Style="{StaticResource ButtonMainStyle}" Grid.ColumnSpan="2" Name="BtnResultTaskTwo" Click="BtnResultTaskTwo_Click" Grid.Row="3" Margin="0,30,0,10">Проверить</Button>
 
                         </Grid>
                     </StackPanel>

@@ -4,12 +4,13 @@ namespace TestMathSets
 {
     public static class DebugFile
     {
-        public static List<string> TestMethods = new(); // Названия тестовых методов.
-        public static List<UnitTestOutcome> TestStatuses = new(); // Статусы выполнения тестов.
         private static string _path = Directory.GetParent // Путь к файлу  с отладочной информацией.
         (
             Directory.GetParent(Environment.CurrentDirectory).Parent.FullName
         ).Parent.FullName + "\\TestResult.txt";
+
+        public static List<string> TestMethods = new(); // Названия тестовых методов.
+        public static List<UnitTestOutcome> TestStatuses = new(); // Статусы выполнения тестов.
 
         /// <summary>
         /// Создаёт отладочный файл
