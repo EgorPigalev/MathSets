@@ -516,10 +516,10 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// 
+        /// Отображает условия для третьего задания
         /// </summary>
-        /// <param name="namesOfSets"></param>
-        /// <param name="count"></param>
+        /// <param name="namesOfSets">наименования множеств</param>
+        /// <param name="count">количество условий в одном столбце</param>
         private void ShowConditionsTaskThree(List<string> namesOfSets, int count)
         {
             List<StackPanel> stackPanels = new List<StackPanel>();
@@ -539,9 +539,17 @@ namespace MathSets.pages
                 stackPanels.Clear();
             }
 
-            foreach (StackPanel item in stackPanels)
+            for (int i = 0; i < stackPanels.Count; i++)
             {
-                SpCondition.Children.Add(item);
+                if (i == stackPanels.Count - 1)
+                {
+                    SpCondition.Children.Add(stackPanels[i]);
+                }
+                else
+                {
+                    stackPanels[i].Margin = new Thickness(0, 0, 30, 0);
+                    SpCondition.Children.Add(stackPanels[i]);
+                }
             }
         }
 
@@ -585,10 +593,10 @@ namespace MathSets.pages
         }
 
         /// <summary>
-        /// Создаёт условие для второго задания
+        /// Создаёт условия для третьего задания
         /// </summary>
         /// <param name="set">название множества</param>
-        /// <param name="count">общее количество элементов множеств</param>
+        /// <param name="count">количество условий</param>
         private StackPanel CreateConditionsTaskThree(string set, int count)
         {
             StackPanel spParent = new StackPanel();
