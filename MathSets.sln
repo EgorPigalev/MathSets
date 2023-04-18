@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathSets", "MathSets\MathSets.csproj", "{AEF8E8BE-69DF-4C83-A219-29EC71AEFE34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMathSets", "TestMathSets\TestMathSets.csproj", "{2220C1D8-3503-4AE8-BBF3-702B91C2987F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMathSets", "TestMathSets\TestMathSets.csproj", "{2220C1D8-3503-4AE8-BBF3-702B91C2987F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{5651E18B-DC44-423D-8BD7-721A40E2DBF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,8 @@ Global
 		{2220C1D8-3503-4AE8-BBF3-702B91C2987F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2220C1D8-3503-4AE8-BBF3-702B91C2987F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2220C1D8-3503-4AE8-BBF3-702B91C2987F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5651E18B-DC44-423D-8BD7-721A40E2DBF8}.Debug|Any CPU.ActiveCfg = Debug
+		{5651E18B-DC44-423D-8BD7-721A40E2DBF8}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

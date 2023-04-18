@@ -270,11 +270,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="resources\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\HintMenu.png" />
     <Resource Include="resources\UpdateMenu.png" />
+    <Resource Include="resources\Icon.ico" />
     <Content Include="video\CombiningSetsFirstTask.mkv" />
     <Content Include="video\CombiningSetsSecondTask.mkv" />
     <Content Include="video\CombiningSetsThirdTask.mkv" />

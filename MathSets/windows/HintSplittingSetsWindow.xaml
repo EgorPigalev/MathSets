@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MathSets.windows"
-        mc:Ignorable="d" Style="{StaticResource WindowMainStyle}" Icon="/resources/Icon.png"
+        mc:Ignorable="d" Style="{StaticResource WindowMainStyle}" Icon="/resources/Icon.ico"
         Title="Разбиение множеств на части по свойствам" Height="650" Width="1000" MinHeight="650" MinWidth="1000">
     <Grid>
         <Grid>
