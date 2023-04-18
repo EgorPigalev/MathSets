@@ -273,24 +273,30 @@
     <Resource Include="resources\HintMenu.png" />
     <Resource Include="resources\UpdateMenu.png" />
     <Resource Include="resources\Icon.ico" />
-    <Content Include="video\CombiningSetsFirstTask.mkv" />
-    <Content Include="video\CombiningSetsSecondTask.mkv" />
-    <Content Include="video\CombiningSetsThirdTask.mkv" />
-    <Content Include="video\EqualSetsFirstTask.mp4" />
-    <Content Include="video\EqualSetsSecondTask.mp4" />
-    <Content Include="video\IntersectionSetsFirstTask.mp4" />
-    <Content Include="video\IntersectionSetsFourTask.mp4" />
-    <Content Include="video\IntersectionSetsSecondTask.mp4" />
+    <Resource Include="video\CombiningSetsFirstTask.mkv" />
+    <Resource Include="video\CombiningSetsSecondTask.mkv" />
+    <Resource Include="video\CombiningSetsThirdTask.mkv" />
+    <Resource Include="video\EqualSetsFirstTask.mp4" />
+    <Resource Include="video\EqualSetsSecondTask.mp4" />
+    <Resource Include="video\IntersectionSetsFirstTask.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="video\IntersectionSetsFourTask.mp4" />
+    <Content Include="video\IntersectionSetsSecondTask.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="video\IntersectionSetsThreeTask.mp4" />
-    <Content Include="video\LessonFourAndFiveTaskFirst.mp4" />
-    <Content Include="video\LessonFourAndFiveTaskSecond.mp4" />
-    <Content Include="video\LessonFourAndFiveTaskThird.mp4" />
-    <Content Include="video\LessonSixTaskFirst.mp4" />
-    <Content Include="video\LessonSixTaskSecond.mp4" />
-    <Content Include="video\SetAndElementFirstTask.mp4" />
-    <Content Include="video\SetAndElementSecondTask.mp4" />
-    <Content Include="video\SplittingSetsFirstTask.mp4" />
-    <Content Include="video\SplittingSetsSecondTask.mp4" />
+    <None Include="video\LessonFourAndFiveTaskFirst.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Resource Include="video\LessonFourAndFiveTaskSecond.mp4" />
+    <Resource Include="video\LessonFourAndFiveTaskThird.mp4" />
+    <Resource Include="video\LessonSixTaskFirst.mp4" />
+    <Resource Include="video\LessonSixTaskSecond.mp4" />
+    <Resource Include="video\SetAndElementFirstTask.mp4" />
+    <Resource Include="video\SetAndElementSecondTask.mp4" />
+    <Resource Include="video\SplittingSetsFirstTask.mp4" />
+    <Resource Include="video\SplittingSetsSecondTask.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

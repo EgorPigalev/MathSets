@@ -16,7 +16,7 @@
         "Entry"
         {
         "MsmKey" = "8:_320A540701D4A8632C41B123718DEC33"
-        "OwnerKey" = "8:_8E2A510E87CE48E89CF8564D583DD36B"
+        "OwnerKey" = "8:_D7367F99E7F24FAAAAA43A8CBA180592"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -27,7 +27,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8E2A510E87CE48E89CF8564D583DD36B"
+        "MsmKey" = "8:_D7367F99E7F24FAAAAA43A8CBA180592"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -40,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8E2A510E87CE48E89CF8564D583DD36B"
+        "OwnerKey" = "8:_D7367F99E7F24FAAAAA43A8CBA180592"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -61,6 +61,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -77,6 +93,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -225,7 +249,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Интерактивный тренажёр"
         "ProductCode" = "8:{579A6C91-9E6D-444C-93D0-799D6A472CDB}"
-        "PackageCode" = "8:{2B9A311A-6F4A-4C82-95BF-D412178B15CF}"
+        "PackageCode" = "8:{0E7DAFD0-8CA4-4B6E-B2C8-5495A0C44AED}"
         "UpgradeCode" = "8:{0816F0C5-F7BF-40E2-8712-FD6C61FFCA69}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -345,7 +369,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4B120A48C69848BE9AB6B5CA0E024CCC"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_824634D84C06471994A880D8B221CE7A"
             {
             "Name" = "8:Интерактивный тренажёр"
             "Arguments" = "8:"
@@ -353,13 +377,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_8E2A510E87CE48E89CF8564D583DD36B"
+            "Target" = "8:_D7367F99E7F24FAAAAA43A8CBA180592"
             "Folder" = "8:_054CF8F21AFF467AB43E3BF87835FEB8"
             "WorkingFolder" = "8:_CD7E79A34A0B43F489A29E44B2EAC2A8"
             "Icon" = "8:_65D4EDF29A2045198C7E22242B8C8251"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4E316AEC94AE4D81BED7A9187E44F4C8"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A32B8B9F3FBF4597804ED64E90407BE1"
             {
             "Name" = "8:Интерактивный тренажёр"
             "Arguments" = "8:"
@@ -367,7 +391,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_8E2A510E87CE48E89CF8564D583DD36B"
+            "Target" = "8:_D7367F99E7F24FAAAAA43A8CBA180592"
             "Folder" = "8:_06189F008DB74DA4B05883CA2F647FB0"
             "WorkingFolder" = "8:_CD7E79A34A0B43F489A29E44B2EAC2A8"
             "Icon" = "8:_65D4EDF29A2045198C7E22242B8C8251"
@@ -772,7 +796,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8E2A510E87CE48E89CF8564D583DD36B"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D7367F99E7F24FAAAAA43A8CBA180592"
             {
             "SourcePath" = "8:..\\MathSets\\obj\\Debug\\MathSets.exe"
             "TargetName" = "8:"
