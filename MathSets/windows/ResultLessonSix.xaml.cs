@@ -40,14 +40,16 @@ namespace MathSets.windows
                 newCanvas.Children.RemoveAt(4);
             }
 
-            DeleteDuplicateIndexesFigures(ref indexesAnswersSetA, indexesAnswersSetB);
+            List<int> copyIndexesAnswersSetA = new List<int>();
+            copyIndexesAnswersSetA.AddRange(indexesAnswersSetA);
+            DeleteDuplicateIndexesFigures(ref copyIndexesAnswersSetA, indexesAnswersSetB);
 
             List<Geometry> figuresSetB = GetAnswersFiguresSetB(((System.Windows.Shapes.Path)newCanvas.Children[3]).Data, sizeFigures, indexesAnswersSetB);
             List<Geometry> figuresSetA = GetAnswersFiguresSetA
             (
                 ((System.Windows.Shapes.Path)newCanvas.Children[2]).Data,
                 sizeFigures,
-                indexesAnswersSetA,
+                copyIndexesAnswersSetA,
                 ((System.Windows.Shapes.Path)newCanvas.Children[3]).Data
             );
 
