@@ -293,7 +293,9 @@
     <Resource Include="video\LessonFourAndFiveTaskThird.mp4" />
     <Resource Include="video\LessonSixTaskFirst.mp4" />
     <Resource Include="video\LessonSixTaskSecond.mp4" />
-    <Resource Include="video\SetAndElementFirstTask.mp4" />
+    <Resource Include="video\SetAndElementFirstTask.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="video\SetAndElementSecondTask.mp4" />
     <Resource Include="video\SplittingSetsFirstTask.mp4" />
     <Resource Include="video\SplittingSetsSecondTask.mp4" />

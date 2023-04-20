@@ -18,7 +18,7 @@ namespace MathSets.windows
                 SpTasks.Visibility = Visibility.Visible;
                 TextBlock header = new TextBlock() // Заголовок
                 {
-                    Text =   $"Верный ответ - {str}",
+                    Text = $"Верный ответ - {str}",
                     HorizontalAlignment = HorizontalAlignment.Center,
                 };
                 SpTasks.Children.Add(header);
@@ -33,7 +33,7 @@ namespace MathSets.windows
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

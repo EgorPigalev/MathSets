@@ -277,8 +277,8 @@ namespace MathSets.windows
                     figures.Add(figure.GetGeometryFromText
                     (
                         (i + 1).ToString(),
-                        (int)centerSetIntersect.X - sizeFigures/3,
-                        Convert.ToInt32(centerSetIntersect.Y - setA.RadiusY *0.6 + countFiguresInSets[2] * (sizeFigures + 10))
+                        (int)centerSetIntersect.X - sizeFigures / 3,
+                        Convert.ToInt32(centerSetIntersect.Y - setA.RadiusY * 0.6 + countFiguresInSets[2] * (sizeFigures + 10))
                     ));
                     countFiguresInSets[2]++;
                 }

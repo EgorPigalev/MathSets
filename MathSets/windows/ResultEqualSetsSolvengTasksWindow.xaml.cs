@@ -42,7 +42,7 @@ namespace MathSets.windows
             }
         }
 
-        public ResultEqualSetsSolvengTasksWindow(string str, string str2, string str3, string str4,  string text1, string text2, string text11, string text22, string text3, string text33,
+        public ResultEqualSetsSolvengTasksWindow(string str, string str2, string str3, string str4, string text1, string text2, string text11, string text22, string text3, string text33,
              string text4, string text44)
         {
             InitializeComponent();
@@ -60,7 +60,7 @@ namespace MathSets.windows
             }
         }
 
-        public ResultEqualSetsSolvengTasksWindow(string str, string str2, string str3,  string text1, string text2, string text11, string text22, string text3, string text33)
+        public ResultEqualSetsSolvengTasksWindow(string str, string str2, string str3, string text1, string text2, string text11, string text22, string text3, string text33)
         {
             InitializeComponent();
             SpTasks.Children.Clear();
@@ -79,7 +79,7 @@ namespace MathSets.windows
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
