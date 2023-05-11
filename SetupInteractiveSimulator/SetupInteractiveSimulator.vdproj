@@ -45,12 +45,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_30A0D49DF3D645289F10A11280CDAAA1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_4440F508E1594BF6B7C749B3F64C9F1D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -105,6 +99,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D6F6015FA66342F7BC79D6959A090638"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D917BFBA65224236A24528C1C4E79032"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -142,13 +142,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0CAB38681C9E412D77C928C8F1E59A74"
+        "OwnerKey" = "8:_B11ED8132B1C47E282F670CFF25F0F95"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B11ED8132B1C47E282F670CFF25F0F95"
+        "OwnerKey" = "8:_0CAB38681C9E412D77C928C8F1E59A74"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -169,6 +169,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -185,6 +193,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -311,26 +327,6 @@
             "TargetName" = "8:SplittingSetsFirstTask.mp4"
             "Tag" = "8:"
             "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_30A0D49DF3D645289F10A11280CDAAA1"
-            {
-            "SourcePath" = "8:..\\MathSets\\resources\\Icon.ico"
-            "TargetName" = "8:Icon.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_D672E55C265F4D34976815A4C1070806"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -491,6 +487,26 @@
             "TargetName" = "8:IntersectionSetsThreeTask.mp4"
             "Tag" = "8:"
             "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6F6015FA66342F7BC79D6959A090638"
+            {
+            "SourcePath" = "8:..\\MathSets\\resources\\Icon.ico"
+            "TargetName" = "8:Icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_D672E55C265F4D34976815A4C1070806"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -710,7 +726,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_30A0D49DF3D645289F10A11280CDAAA1"
+        "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -813,7 +829,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_12C31F69C9E94596B9622117CF8F0D02"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1905D16043D84AB89A0FB337D5A2FB21"
             {
             "Name" = "8:Интерактивный тренажер"
             "Arguments" = "8:"
@@ -824,7 +840,7 @@
             "Target" = "8:_B11ED8132B1C47E282F670CFF25F0F95"
             "Folder" = "8:_D1670CBA0FCD4E1A83B9776B8BC96262"
             "WorkingFolder" = "8:_D672E55C265F4D34976815A4C1070806"
-            "Icon" = "8:_30A0D49DF3D645289F10A11280CDAAA1"
+            "Icon" = "8:_D6F6015FA66342F7BC79D6959A090638"
             "Feature" = "8:"
             }
         }
