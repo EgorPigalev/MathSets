@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:SetupInteractiveSimulator"
+"ProjectName" = "8:Setup"
 "LanguageId" = "3:1049"
 "CodePage" = "3:1251"
 "UILanguageId" = "3:1049"
@@ -15,140 +15,140 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0C66B541805146F4B59D1E18255AEBB3"
+        "MsmKey" = "8:_09FA080984ED45A99D6EE15484136F67"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0CAB38681C9E412D77C928C8F1E59A74"
-        "OwnerKey" = "8:_B11ED8132B1C47E282F670CFF25F0F95"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_104597F413F14995B12C2E137ECE4DC6"
+        "MsmKey" = "8:_0B4796C225C241538808D36B4635F7F4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_13CAD184EC19493691B116AF0C4AF443"
+        "MsmKey" = "8:_0C63120F201FEC04841F62CB369BF3DE"
+        "OwnerKey" = "8:_E98D9097FC074B1B8A780FE2E10C22E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0CCA01741D854788A64477135B7DB0B4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_20CE57EE56E24FDBBBE15338B9B7973B"
+        "MsmKey" = "8:_12DDCE0FB1FE42FFB63C36877313E52A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4440F508E1594BF6B7C749B3F64C9F1D"
+        "MsmKey" = "8:_3275D42DB5AD429895851A8BEDF8C1C0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5FF883B47F6444D4A288C1744EB8D4BC"
+        "MsmKey" = "8:_52410F4040B54F2290514155890BD364"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7B9327041A104B928FF01E66B654BDE1"
+        "MsmKey" = "8:_5BE11CB5C00143729D65C3C90D37F9C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9660BBDEC8F844C89E27A767F7485BC7"
+        "MsmKey" = "8:_6415F555BEBE4090BAA32A1558DB30E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_96EB95E954D6478DB66E6007544AFC93"
+        "MsmKey" = "8:_798FA9D6F4274876A015DA1F96714D4A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A2C9E77E74724B3E9DFDC358E47285CC"
+        "MsmKey" = "8:_8A3D7B3BA5B846D7AFBC5DD47321050B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B11ED8132B1C47E282F670CFF25F0F95"
+        "MsmKey" = "8:_970BE7B361EE4A9CA0F1348ADAC82B76"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BAE0FCC1F83E49498CAC91A2F41FA4A3"
+        "MsmKey" = "8:_9A9244E559174318955BA637C63079D2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BC6494AEEF5A4543B74659878377BD2B"
+        "MsmKey" = "8:_A698E33DC0D146348B99AFF1F9F3732D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D6F6015FA66342F7BC79D6959A090638"
+        "MsmKey" = "8:_C2B2F8239FD9470D88E5410C93DC8B52"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D917BFBA65224236A24528C1C4E79032"
+        "MsmKey" = "8:_CCC2BAEA3A78446F8E18B6445BA1E75A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D93ECFA959D24663B1CB759602ECA4EB"
+        "MsmKey" = "8:_D2189B540427436586009ADB5FF94C79"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DF2542807E214F54B761D9857F0D0AF4"
+        "MsmKey" = "8:_D58D8A029AF946EE9D8378F6F474F005"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E83A59A0B17E48A1AA05A1C963251D8E"
+        "MsmKey" = "8:_E0DBCADB3FAF4454B1F6216659EC2A8A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F1A259BC6D7D40B4A4DF96CCF8A737B8"
+        "MsmKey" = "8:_E8BC0D056D6D47EEAEC5E882645CAE45"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_FC02ED7D0FCC4358A2323ED8FB686176"
+        "MsmKey" = "8:_E98D9097FC074B1B8A780FE2E10C22E0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B11ED8132B1C47E282F670CFF25F0F95"
+        "OwnerKey" = "8:_0C63120F201FEC04841F62CB369BF3DE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0CAB38681C9E412D77C928C8F1E59A74"
+        "OwnerKey" = "8:_E98D9097FC074B1B8A780FE2E10C22E0"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -159,7 +159,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\SetupInteractiveSimulator.msi"
+        "OutputFilename" = "8:Debug\\Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -169,21 +169,13 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
-            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
-            {
-            "Enabled" = "11:TRUE"
-            "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
-            "Url" = "8:"
-            "ComponentsUrl" = "8:"
-            }
         }
         "Release"
         {
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\SetupInteractiveSimulator.msi"
+        "OutputFilename" = "8:Release\\Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -193,14 +185,6 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
-            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
-            {
-            "Enabled" = "11:TRUE"
-            "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
-            "Url" = "8:"
-            "ComponentsUrl" = "8:"
-            }
         }
     }
     "Deployable"
@@ -218,7 +202,7 @@
         {
             "LaunchCondition"
             {
-                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_5B8E54519E0647DEBBF9509CA40D4FA9"
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_E0D22E2941934AFCB667AB66C66608B7"
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
@@ -230,12 +214,12 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0C66B541805146F4B59D1E18255AEBB3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_09FA080984ED45A99D6EE15484136F67"
             {
-            "SourcePath" = "8:..\\MathSets\\video\\CombiningSetsFirstTask.mkv"
-            "TargetName" = "8:CombiningSetsFirstTask.mkv"
+            "SourcePath" = "8:..\\MathSets\\video\\SetAndElementFirstTask.mp4"
+            "TargetName" = "8:SetAndElementFirstTask.mp4"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -250,14 +234,34 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0CAB38681C9E412D77C928C8F1E59A74"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B4796C225C241538808D36B4635F7F4"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\SetAndElementSecondTask.mp4"
+            "TargetName" = "8:SetAndElementSecondTask.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0C63120F201FEC04841F62CB369BF3DE"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_0CAB38681C9E412D77C928C8F1E59A74"
+                    "_0C63120F201FEC04841F62CB369BF3DE"
                     {
                     "Name" = "8:System.Net.Http.dll"
                     "Attributes" = "3:512"
@@ -266,7 +270,7 @@
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_D672E55C265F4D34976815A4C1070806"
+            "Folder" = "8:_D81867238FE149449CC0E65252AC70E3"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -281,132 +285,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_104597F413F14995B12C2E137ECE4DC6"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\IntersectionSetsFourTask.mp4"
-            "TargetName" = "8:IntersectionSetsFourTask.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13CAD184EC19493691B116AF0C4AF443"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\CombiningSetsSecondTask.mkv"
-            "TargetName" = "8:CombiningSetsSecondTask.mkv"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20CE57EE56E24FDBBBE15338B9B7973B"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\SplittingSetsFirstTask.mp4"
-            "TargetName" = "8:SplittingSetsFirstTask.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4440F508E1594BF6B7C749B3F64C9F1D"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\EqualSetsSecondTask.mp4"
-            "TargetName" = "8:EqualSetsSecondTask.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5FF883B47F6444D4A288C1744EB8D4BC"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\LessonSixTaskSecond.mp4"
-            "TargetName" = "8:LessonSixTaskSecond.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B9327041A104B928FF01E66B654BDE1"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\LessonSixTaskFirst.mp4"
-            "TargetName" = "8:LessonSixTaskFirst.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9660BBDEC8F844C89E27A767F7485BC7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0CCA01741D854788A64477135B7DB0B4"
             {
             "SourcePath" = "8:..\\MathSets\\video\\IntersectionSetsSecondTask.mp4"
             "TargetName" = "8:IntersectionSetsSecondTask.mp4"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -421,112 +305,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_96EB95E954D6478DB66E6007544AFC93"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\SetAndElementSecondTask.mp4"
-            "TargetName" = "8:SetAndElementSecondTask.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2C9E77E74724B3E9DFDC358E47285CC"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\SplittingSetsSecondTask.mp4"
-            "TargetName" = "8:SplittingSetsSecondTask.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BAE0FCC1F83E49498CAC91A2F41FA4A3"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\LessonFourAndFiveTaskThird.mp4"
-            "TargetName" = "8:LessonFourAndFiveTaskThird.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BC6494AEEF5A4543B74659878377BD2B"
-            {
-            "SourcePath" = "8:..\\MathSets\\video\\IntersectionSetsThreeTask.mp4"
-            "TargetName" = "8:IntersectionSetsThreeTask.mp4"
-            "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6F6015FA66342F7BC79D6959A090638"
-            {
-            "SourcePath" = "8:..\\MathSets\\resources\\Icon.ico"
-            "TargetName" = "8:Icon.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_D672E55C265F4D34976815A4C1070806"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D917BFBA65224236A24528C1C4E79032"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_12DDCE0FB1FE42FFB63C36877313E52A"
             {
             "SourcePath" = "8:..\\MathSets\\video\\EqualSetsFirstTask.mp4"
             "TargetName" = "8:EqualSetsFirstTask.mp4"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -541,12 +325,112 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D93ECFA959D24663B1CB759602ECA4EB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3275D42DB5AD429895851A8BEDF8C1C0"
+            {
+            "SourcePath" = "8:..\\MathSets\\resources\\Icon.ico"
+            "TargetName" = "8:Icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_D81867238FE149449CC0E65252AC70E3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_52410F4040B54F2290514155890BD364"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\IntersectionSetsFourTask.mp4"
+            "TargetName" = "8:IntersectionSetsFourTask.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BE11CB5C00143729D65C3C90D37F9C1"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\IntersectionSetsThreeTask.mp4"
+            "TargetName" = "8:IntersectionSetsThreeTask.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6415F555BEBE4090BAA32A1558DB30E8"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\LessonSixTaskSecond.mp4"
+            "TargetName" = "8:LessonSixTaskSecond.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_798FA9D6F4274876A015DA1F96714D4A"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\SplittingSetsSecondTask.mp4"
+            "TargetName" = "8:SplittingSetsSecondTask.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A3D7B3BA5B846D7AFBC5DD47321050B"
             {
             "SourcePath" = "8:..\\MathSets\\video\\LessonFourAndFiveTaskSecond.mp4"
             "TargetName" = "8:LessonFourAndFiveTaskSecond.mp4"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -561,12 +445,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF2542807E214F54B761D9857F0D0AF4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_970BE7B361EE4A9CA0F1348ADAC82B76"
             {
-            "SourcePath" = "8:..\\MathSets\\video\\LessonFourAndFiveTaskFirst.mp4"
-            "TargetName" = "8:LessonFourAndFiveTaskFirst.mp4"
+            "SourcePath" = "8:..\\MathSets\\video\\EqualSetsSecondTask.mp4"
+            "TargetName" = "8:EqualSetsSecondTask.mp4"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -581,12 +465,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E83A59A0B17E48A1AA05A1C963251D8E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A9244E559174318955BA637C63079D2"
             {
-            "SourcePath" = "8:..\\MathSets\\video\\IntersectionSetsFirstTask.mp4"
-            "TargetName" = "8:IntersectionSetsFirstTask.mp4"
+            "SourcePath" = "8:..\\MathSets\\video\\CombiningSetsSecondTask.mkv"
+            "TargetName" = "8:CombiningSetsSecondTask.mkv"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -601,12 +485,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1A259BC6D7D40B4A4DF96CCF8A737B8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A698E33DC0D146348B99AFF1F9F3732D"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\LessonFourAndFiveTaskThird.mp4"
+            "TargetName" = "8:LessonFourAndFiveTaskThird.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C2B2F8239FD9470D88E5410C93DC8B52"
             {
             "SourcePath" = "8:..\\MathSets\\video\\CombiningSetsThirdTask.mkv"
             "TargetName" = "8:CombiningSetsThirdTask.mkv"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -621,12 +525,92 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC02ED7D0FCC4358A2323ED8FB686176"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CCC2BAEA3A78446F8E18B6445BA1E75A"
             {
-            "SourcePath" = "8:..\\MathSets\\video\\SetAndElementFirstTask.mp4"
-            "TargetName" = "8:SetAndElementFirstTask.mp4"
+            "SourcePath" = "8:..\\MathSets\\video\\LessonFourAndFiveTaskFirst.mp4"
+            "TargetName" = "8:LessonFourAndFiveTaskFirst.mp4"
             "Tag" = "8:"
-            "Folder" = "8:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D2189B540427436586009ADB5FF94C79"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\CombiningSetsFirstTask.mkv"
+            "TargetName" = "8:CombiningSetsFirstTask.mkv"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D58D8A029AF946EE9D8378F6F474F005"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\SplittingSetsFirstTask.mp4"
+            "TargetName" = "8:SplittingSetsFirstTask.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0DBCADB3FAF4454B1F6216659EC2A8A"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\LessonSixTaskFirst.mp4"
+            "TargetName" = "8:LessonSixTaskFirst.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E8BC0D056D6D47EEAEC5E882645CAE45"
+            {
+            "SourcePath" = "8:..\\MathSets\\video\\IntersectionSetsFirstTask.mp4"
+            "TargetName" = "8:IntersectionSetsFirstTask.mp4"
+            "Tag" = "8:"
+            "Folder" = "8:_CA9E4679C53642EA95634958B918812C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -647,18 +631,7 @@
         }
         "Folder"
         {
-            "{1525181F-901A-416C-8A58-119130FE478E}:_4CFED2286B3C4663A4DA33F991C913B1"
-            {
-            "Name" = "8:#1919"
-            "AlwaysCreate" = "11:FALSE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Property" = "8:ProgramMenuFolder"
-                "Folders"
-                {
-                }
-            }
-            "{1525181F-901A-416C-8A58-119130FE478E}:_D1670CBA0FCD4E1A83B9776B8BC96262"
+            "{1525181F-901A-416C-8A58-119130FE478E}:_2FB0AD58FBF24C1ABC98161B799C6A4C"
             {
             "Name" = "8:#1916"
             "AlwaysCreate" = "11:FALSE"
@@ -669,7 +642,18 @@
                 {
                 }
             }
-            "{3C67513D-01DD-4637-8A68-80971EB9504F}:_D672E55C265F4D34976815A4C1070806"
+            "{1525181F-901A-416C-8A58-119130FE478E}:_CF5A87B4AD8B4043B8221295198BB584"
+            {
+            "Name" = "8:#1919"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:ProgramMenuFolder"
+                "Folders"
+                {
+                }
+            }
+            "{3C67513D-01DD-4637-8A68-80971EB9504F}:_D81867238FE149449CC0E65252AC70E3"
             {
             "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
@@ -679,13 +663,13 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_0AD0C18FD25F47F681FC6A1D462E8F9F"
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_CA9E4679C53642EA95634958B918812C"
                     {
                     "Name" = "8:video"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
-                    "Property" = "8:_D7FCEFF7FF584B1FB4D70AA0C3431939"
+                    "Property" = "8:_AB0B57D799DF45FEAD526078D5A4A2A1"
                         "Folders"
                         {
                         }
@@ -708,9 +692,9 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Интерактивный тренажер"
-        "ProductCode" = "8:{A364DCF6-D51D-4B84-8339-A4E97F8026A7}"
-        "PackageCode" = "8:{1DD1EDE0-CD3C-4A31-BC91-A937648BD6F0}"
-        "UpgradeCode" = "8:{74489D30-8B9D-4427-88E3-90FFCDAFAC86}"
+        "ProductCode" = "8:{A1AF4C00-0BFD-44D2-B48E-CE7C6913A311}"
+        "PackageCode" = "8:{EF39600E-3471-4BFE-AABE-91A8C6A7F4C1}"
+        "UpgradeCode" = "8:{920685B3-B5CF-4351-9131-C843D47A73ED}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -726,7 +710,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_3275D42DB5AD429895851A8BEDF8C1C0"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -741,7 +725,7 @@
             {
                 "Keys"
                 {
-                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_E11F15CADFA74AC5A828064D84D9F87A"
+                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_59F2BC390E9A40ACADDD6B3DEEAD711B"
                     {
                     "Name" = "8:Software"
                     "Condition" = "8:"
@@ -750,7 +734,7 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_6F7B8A14FB5E433FAB3EE3DFDB7DE29F"
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_026ACADC2F7C40E8AA9F2FCAC44A457D"
                             {
                             "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
@@ -775,7 +759,7 @@
             {
                 "Keys"
                 {
-                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_3339CB71DD6F4A39A1DBF5349B016136"
+                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_8D044F4BA8CA478CB8CF74EEA229C05F"
                     {
                     "Name" = "8:Software"
                     "Condition" = "8:"
@@ -784,7 +768,7 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_CCEC319D2D23473FB7FEB1E540003FC1"
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_A95FD468FA654F10B08267D91E41C962"
                             {
                             "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
@@ -829,7 +813,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1905D16043D84AB89A0FB337D5A2FB21"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6A85D141A6954C5C836A5609AB746566"
             {
             "Name" = "8:Интерактивный тренажер"
             "Arguments" = "8:"
@@ -837,148 +821,23 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_B11ED8132B1C47E282F670CFF25F0F95"
-            "Folder" = "8:_D1670CBA0FCD4E1A83B9776B8BC96262"
-            "WorkingFolder" = "8:_D672E55C265F4D34976815A4C1070806"
-            "Icon" = "8:_D6F6015FA66342F7BC79D6959A090638"
+            "Target" = "8:_E98D9097FC074B1B8A780FE2E10C22E0"
+            "Folder" = "8:_2FB0AD58FBF24C1ABC98161B799C6A4C"
+            "WorkingFolder" = "8:_D81867238FE149449CC0E65252AC70E3"
+            "Icon" = "8:_3275D42DB5AD429895851A8BEDF8C1C0"
             "Feature" = "8:"
             }
         }
         "UserInterface"
         {
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_0B62E67957054B898BC2627E28F0A483"
-            {
-            "Name" = "8:#1902"
-            "Sequence" = "3:2"
-            "Attributes" = "3:3"
-                "Dialogs"
-                {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_14D0BCEDCF954087A0F07DF335C9FB4C"
-                    {
-                    "Sequence" = "3:100"
-                    "DisplayName" = "8:Готово"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFinishedDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                }
-            }
-            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_1AFC0105BA7D4ACF8E5E1CBB363991B9"
-            {
-            "UseDynamicProperties" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "SourcePath" = "8:<VsdDialogDir>\\VsdUserInterface.wim"
-            }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_1DE9A9EFB9E54D2BA84CA86CAE2DC91E"
-            {
-            "Name" = "8:#1902"
-            "Sequence" = "3:1"
-            "Attributes" = "3:3"
-                "Dialogs"
-                {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_CF7F5A85EAC84AC8B71E490420359967"
-                    {
-                    "Sequence" = "3:100"
-                    "DisplayName" = "8:Готово"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdFinishedDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "UpdateText"
-                            {
-                            "Name" = "8:UpdateText"
-                            "DisplayName" = "8:#1058"
-                            "Description" = "8:#1158"
-                            "Type" = "3:15"
-                            "ContextData" = "8:"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1258"
-                            "DefaultValue" = "8:#1258"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                }
-            }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_1F1856E347B14FE3BA71EC86BB002F8D"
-            {
-            "Name" = "8:#1901"
-            "Sequence" = "3:1"
-            "Attributes" = "3:2"
-                "Dialogs"
-                {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_571E8E7016074902A125A0FBEC590E31"
-                    {
-                    "Sequence" = "3:100"
-                    "DisplayName" = "8:Ход выполнения"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdProgressDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                            "ShowProgress"
-                            {
-                            "Name" = "8:ShowProgress"
-                            "DisplayName" = "8:#1009"
-                            "Description" = "8:#1109"
-                            "Type" = "3:5"
-                            "ContextData" = "8:1;True=1;False=0"
-                            "Attributes" = "3:0"
-                            "Setting" = "3:0"
-                            "Value" = "3:1"
-                            "DefaultValue" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                }
-            }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_4F5C048F376A4F6D9A903A8F6F78A2D8"
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_1DDAA7E8E7D049439CB1CF509A1C1104"
             {
             "Name" = "8:#1900"
             "Sequence" = "3:1"
             "Attributes" = "3:1"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_0D244B4DDDC640CEBB73EBA4BFC42BF1"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_24873A741DF3429BB67484ADF325CD87"
                     {
                     "Sequence" = "3:100"
                     "DisplayName" = "8:Добро пожаловать!"
@@ -1026,7 +885,7 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_0F8574CCF0A14ADA8B22A1EEDBB76FBA"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_35CC615768E244CAA0746A47DC47A5FD"
                     {
                     "Sequence" = "3:200"
                     "DisplayName" = "8:Папка установки"
@@ -1061,7 +920,7 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_4648B0CCD39B4090808115C044DA45B2"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_475E8653F36140218170BACE7BC3F3CC"
                     {
                     "Sequence" = "3:300"
                     "DisplayName" = "8:Подтверждение установки"
@@ -1085,20 +944,101 @@
                     }
                 }
             }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_A52151F7FD16427698CDC1990AD30C80"
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_31C6DE2680A3472A94EB501D4010E177"
+            {
+            "Name" = "8:#1902"
+            "Sequence" = "3:1"
+            "Attributes" = "3:3"
+                "Dialogs"
+                {
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_C01823F119EF4666962A3EC67DA60B72"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Готово"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdFinishedDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "UpdateText"
+                            {
+                            "Name" = "8:UpdateText"
+                            "DisplayName" = "8:#1058"
+                            "Description" = "8:#1158"
+                            "Type" = "3:15"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1258"
+                            "DefaultValue" = "8:#1258"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_4357FAD97AD745D4A047C88E805EDB36"
+            {
+            "UseDynamicProperties" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "SourcePath" = "8:<VsdDialogDir>\\VsdUserInterface.wim"
+            }
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_C3B9CCCB13F4497F95417F2158B5EC74"
+            {
+            "Name" = "8:#1902"
+            "Sequence" = "3:2"
+            "Attributes" = "3:3"
+                "Dialogs"
+                {
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_F9FFF3706F054E6CB04825209F1E8A93"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Готово"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFinishedDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_C4B76B26392E49BFBF4CAF1080DC2BA3"
             {
             "Name" = "8:#1901"
-            "Sequence" = "3:2"
+            "Sequence" = "3:1"
             "Attributes" = "3:2"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_8F4779FAD44742CD85D1FFB2C4A6484D"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_FAEFA1D1C870404581D04DA45E27EB90"
                     {
                     "Sequence" = "3:100"
                     "DisplayName" = "8:Ход выполнения"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminProgressDlg.wid"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdProgressDlg.wid"
                         "Properties"
                         {
                             "BannerBitmap"
@@ -1129,20 +1069,14 @@
                     }
                 }
             }
-            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_CDC41B24B67842B2A9A1D7156A18FD8B"
-            {
-            "UseDynamicProperties" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "SourcePath" = "8:<VsdDialogDir>\\VsdBasicDialogs.wim"
-            }
-            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_E161E1D97F3743C3A8AE009460110A5A"
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_DB760052644C4A5389D61D5CF5B807C5"
             {
             "Name" = "8:#1900"
             "Sequence" = "3:2"
             "Attributes" = "3:1"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_01F70338627140008EDC2F246872D2DD"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_2CC9A9B15D1E4ED396779402D3801BD0"
                     {
                     "Sequence" = "3:300"
                     "DisplayName" = "8:Подтверждение установки"
@@ -1164,29 +1098,7 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_766ED57ACA4F41E9B9C934FF041281B7"
-                    {
-                    "Sequence" = "3:200"
-                    "DisplayName" = "8:Папка установки"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFolderDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_CB4D4C6FF4304796B9358DCD2B44B672"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_5EE720A838954ECD85FCFD308EE11259"
                     {
                     "Sequence" = "3:100"
                     "DisplayName" = "8:Добро пожаловать!"
@@ -1234,6 +1146,78 @@
                             }
                         }
                     }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_FC67B3B49FB54B689DFDEA317A897E64"
+                    {
+                    "Sequence" = "3:200"
+                    "DisplayName" = "8:Папка установки"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFolderDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{2479F3F5-0309-486D-8047-8187E2CE5BA0}:_E36DCD08F18345CA9A656955427ACFF4"
+            {
+            "UseDynamicProperties" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "SourcePath" = "8:<VsdDialogDir>\\VsdBasicDialogs.wim"
+            }
+            "{DF760B10-853B-4699-99F2-AFF7185B4A62}:_FCE02B19BB614F16A02DB1167FC07ECD"
+            {
+            "Name" = "8:#1901"
+            "Sequence" = "3:2"
+            "Attributes" = "3:2"
+                "Dialogs"
+                {
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_10E7D8F5E2B6412FA980D5F148B6DE70"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Ход выполнения"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminProgressDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ShowProgress"
+                            {
+                            "Name" = "8:ShowProgress"
+                            "DisplayName" = "8:#1009"
+                            "Description" = "8:#1109"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:1"
+                            "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1242,12 +1226,12 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B11ED8132B1C47E282F670CFF25F0F95"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E98D9097FC074B1B8A780FE2E10C22E0"
             {
-            "SourcePath" = "8:..\\MathSets\\obj\\Debug\\MathSets.exe"
+            "SourcePath" = "8:..\\MathSets\\obj\\Release\\MathSets.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_D672E55C265F4D34976815A4C1070806"
+            "Folder" = "8:_D81867238FE149449CC0E65252AC70E3"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"

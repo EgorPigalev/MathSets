@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathSets", "MathSets\MathSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMathSets", "TestMathSets\TestMathSets.csproj", "{2220C1D8-3503-4AE8-BBF3-702B91C2987F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupInteractiveSimulator", "SetupInteractiveSimulator\SetupInteractiveSimulator.vdproj", "{AAE0BDC7-38A2-4203-B718-087401AE01A9}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{6E2E8DEC-CE15-4C68-9793-3ED2363C63DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{2220C1D8-3503-4AE8-BBF3-702B91C2987F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2220C1D8-3503-4AE8-BBF3-702B91C2987F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2220C1D8-3503-4AE8-BBF3-702B91C2987F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAE0BDC7-38A2-4203-B718-087401AE01A9}.Debug|Any CPU.ActiveCfg = Debug
-		{AAE0BDC7-38A2-4203-B718-087401AE01A9}.Release|Any CPU.ActiveCfg = Release
+		{6E2E8DEC-CE15-4C68-9793-3ED2363C63DE}.Debug|Any CPU.ActiveCfg = Debug
+		{6E2E8DEC-CE15-4C68-9793-3ED2363C63DE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
